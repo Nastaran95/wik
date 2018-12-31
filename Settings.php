@@ -6,7 +6,7 @@
  * Time: 7:57 PM
  */
 
-$connection = new mysqli("127.0.0.1", "root", "123456", "wikiderm");
+$connection = new mysqli("127.0.0.1", "root", "12345", "wikiderm");
 // Check connection
 if ($connection->connect_error) {
     die("Connection failed: " . $connection->connect_error);
