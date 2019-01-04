@@ -125,12 +125,17 @@ include 'headerMainpage.php';
         </div>
         <div class="cover_menu menu">
             <ul class="dark_text">
-                <a href="/" ><li>صفحه اصلی</li></a>
-                <a href="/" ><li>مقالات</li></a>
-                <a href="/" ><li>سلویک</li></a>
-                <a href="/" ><li>تماس با ما</li></a>
-                <a href="/" ><li>درباره ما</li></a>
-                <a href="/" ><li>آگهی</li></a>
+                <?php
+                $query = "SELECT * FROM menue;";
+                $result = $connection->query($query);
+                while ($row=$result->fetch_assoc()) {
+                    $link = $row['link'];
+                    $name = $row['name'];
+                    ?>
+                    <a href="<?php echo $link;?>" ><li><?php echo $name;?></li></a>
+                    <?php
+                }
+                ?>
             </ul>
         </div>
     </div>
@@ -230,7 +235,7 @@ include 'headerMainpage.php';
                         <h1> &#9830;
                             مقالات
                         </h1>
-                        <div class="col-md-10 col-md-offset-1 papsubbord"></div>
+                        <div class="col-md-10 col-md-offset-1 hrline"></div>
 
 
                         <div class="row">

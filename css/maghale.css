@@ -1,0 +1,80 @@
+.leftDiv{
+    width: 20%;
+    height: 100%;
+    float: right;
+    border-style: solid;
+    border-width: 0px 1px 0px 0px;
+    border-color: rgb(239,134,131);
+    margin: 10px 0px;
+}
+
+.mainDiv{
+    border-style: solid;
+    border-width: 0px 0px 0px 1px;
+    border-color: rgb(239,134,131);
+    height: 100%;
+    width: 80%;
+    margin: 10px 0px;
+    padding-top: 30px;
+    float: right;
+
+}
+
+.mainDiv h1{
+    color: rgb(239,134,131);
+}
+
+h1{
+    font-size: 22px;
+}
+
+.fontDiam{
+    font-size: 40px;
+}
+
+.nametime{
+    font-size: 14px;
+    color: rgb(87,87,87);
+    padding-bottom: 20px;
+}
+
+
+.pagination li{
+    width: 40px;
+    height: 40px;
+    position: relative;
+    float: left;
+    padding: 10px 12px;
+    margin-left: -1px;
+    line-height: 1.428571429;
+    text-decoration: none;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+}
+
+.paginationoldPapers1:hover , .paginationoldPapers2:hover{
+    background-color: rgb(255,100,100);
+    color: white;
+}
+
+.active{
+    background-color:  rgb(255,160,160) !important;
+    color: white !important;
+}
+
+.Paperdiv{
+    height: auto;
+    color: black;
+    text-align: justify;
+    margin: 20px 0;
+}
+
+.papname{
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+.summ{
+    color: rgb(129,125,124);
+    font-size: 14px;
+}

@@ -1,0 +1,29 @@
+.leftDiv{
+    height: 100%;
+    float: right;
+}
+
+.mainDiv{
+    border-style: solid;
+    border-width: 0px 0px 0px 2px;
+    border-color: rgb(239,134,131);
+    height: 100%;
+    margin: 10px 0px;
+    padding-top: 50px;
+    float: right;
+    color: rgb(239,134,131);
+}
+
+h1{
+    font-size: 22px;
+}
+
+.fontDiam{
+    font-size: 40px;
+}
+
+@media (max-width: 990px) {
+    .mainDiv{
+        border-width: 0;
+    }
+}

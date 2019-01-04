@@ -60,17 +60,24 @@ a :hover , a li:hover{
     width: 100%;
     display: table;
     margin: 0 auto;
+    padding: 0;
     height: 50px;
     line-height: 50px;
     text-align: center;
     top: 72px;
 }
+
+.header .menu{
+    top: 0px;
+}
+
 .header .cover_menu{
     background-color: rgba(243,130,120,0.6);
     position: relative;
 }
 .header .menu ul{
     margin: 0;
+    padding: 0;
 }
 .header  .menu li{
     list-style-type: none;
@@ -107,11 +114,10 @@ a :hover , a li:hover{
     /*margin-left: 40px;*/
 /*}*/
 
-.header .fixed{
+.header .headerall{
     width: 100%;
     max-width: 1600px;
     box-shadow: 0 5px 8px #888888;
-    position: fixed;
     z-index: 1000;
     /*top:0;*/
     background-color: white;
@@ -122,10 +128,13 @@ a :hover , a li:hover{
     font-size: 22px;
 }
 
+.fixed{
+    position: fixed;
+}
 
 
 .padding20_0{
-    padding:20px 0;
+    padding-top: 20px;
 }
 
 .paddleft0{
@@ -133,25 +142,18 @@ a :hover , a li:hover{
 }
 
 .headerH{
-    padding-top: 38px;
     padding-right: 0;
 }
 
 .log_reg_block{
-    padding-top: 67px;
+    padding-top: 40px;
 }
 
-.header .karasa {
-    display: inline-flex;
-    align-items: center;
-    width: 100%;
+.search{
+    font-size: 30px;
 }
 
-.header .karasa .title{
-    font-size: 20px;
-    margin: 4px 10px;
-    display: inline-block;
-}
+
 .header .side_menu{
     position: fixed;
     top:0;
@@ -208,9 +210,6 @@ a :hover , a li:hover{
 }
 
 
-.headerfix{
-    margin-bottom: 125px;
-}
 
 
 .hiddenme{
@@ -224,6 +223,144 @@ a :hover , a li:hover{
     display: flex;
 }
 
+.sb-search {
+    position: relative;
+    margin-top: 10px;
+    width: 20%;
+    min-width: 60px;
+    height: 60px;
+    overflow: hidden;
+    -webkit-transition: width 0.3s;
+    -moz-transition: width 0.3s;
+    transition: width 0.3s;
+    -webkit-backface-visibility: hidden;
+}
+
+.sb-search-input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    outline: none;
+    background: rgb(255,213,213);
+    width: 100%;
+    height: 60px;
+    margin: 0;
+    z-index: 10;
+    padding: 20px 20px 20px 65px;
+    font-size: 20px;
+    border-radius: 30px;
+}
+
+.sb-search-input::-webkit-input-placeholder {
+    color:  rgb(240,135,132);
+}
+
+.sb-search-input:-moz-placeholder {
+    color:  rgb(240,135,132);
+}
+
+.sb-search-input::-moz-placeholder {
+    color: rgb(240,135,132);
+}
+
+.sb-search-input:-ms-input-placeholder {
+    color:  rgb(240,135,132);
+}
+
+.sb-icon-search,
+.sb-search-submit  {
+    width: 60px;
+    height: 60px;
+    display: block;
+    position: relative;
+    right: 0;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    line-height: 60px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.sb-search-submit {
+    background: #fff; /* IE needs this */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; /* IE 8 */
+    filter: alpha(opacity=0); /* IE 5-7 */
+    opacity: 1;
+    color: transparent;
+    border: none;
+    outline: none;
+    z-index: -1;
+}
+
+.sb-icon-search {
+    color: #fff;
+    background: rgb(240,135,132);
+    z-index: 90;
+    font-size: 22px;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    border-radius: 50%;
+}
+
+
+/* Open state */
+.sb-search.sb-search-open,
+.no-js .sb-search {
+    width: 100%;
+}
+
+.sb-search.sb-search-open .sb-icon-search,
+.no-js .sb-search .sb-icon-search {
+    background:  rgb(240,135,132);
+    color: #fff;
+    z-index: 11;
+}
+
+.sb-search.sb-search-open .sb-search-submit,
+.no-js .sb-search .sb-search-submit {
+    z-index: 90;
+}
+
+.addSub{
+    color:  rgb(239,134,131);
+    border-style: solid;
+    border-width: 0px 0px 2px 0px;
+    border-color: rgb(239,134,131);
+    margin-bottom: 10px;
+}
+
+
+.add{
+    margin: 10px 0px 10px 0px;
+}
+
+.hrline{
+    border-style: solid;
+    border-width: 0px 0px 2px 0px;
+    border-color: rgb(239,134,131);
+    margin-bottom: 30px;
+    width: 92%;
+    margin-right: 4%;
+    margin-left: 4%;
+}
+
+.afterHr{
+    width: 92%;
+    margin-right: 4%;
+    margin-left: 4%;
+}
+
+.blackCol{
+    color: black;
+    font-size: 14px;
+    line-height: 20px;
+}
 
 /*mobile*/
 @media (max-width: 992px) {
@@ -232,9 +369,6 @@ a :hover , a li:hover{
     }
     .showme{
         display: block;
-    }
-    .headerfix{
-        margin-bottom: 40px;
     }
 }
 
@@ -246,5 +380,8 @@ a :hover , a li:hover{
         width: 90%;
         padding: 20px 5px;
         margin-left: 5%;
+    }
+    .sb-search {
+        width: 150px;
     }
 }

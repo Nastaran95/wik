@@ -50,3 +50,37 @@ INSERT INTO slider(image) VALUES
                   ('images/slider/shutterstock_61969534.jpg');
 INSERT INTO slider(image) VALUES
                   ('images/slider/laser-face-rejuvenation.jpg');
+
+DROP TABLE user_request;
+CREATE TABLE user_request(
+  ID int NOT NULL AUTO_INCREMENT,
+  name VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci,
+  subject VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci,
+  message VARCHAR(2000) CHARACTER SET utf8 COLLATE utf8_general_ci,
+  email VARCHAR(100),
+  status int default 0,
+  PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
+
+
+DROP TABLE menue;
+CREATE TABLE menue(
+  ID int NOT NULL AUTO_INCREMENT,
+  name VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci,
+  link VARCHAR(100),
+  active int default 0,
+  PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
+
+INSERT INTO menue(name,link) VALUES
+                  ('صفحه اصلی','index.php');
+INSERT INTO menue(name,link) VALUES
+                  ('مقالات','maghalat.php');
+INSERT INTO menue(name,link) VALUES
+                  ('سلویک','http://cellwik.ir/');
+INSERT INTO menue(name,link) VALUES
+                  ('تماس با ما','contactUs.php');
+INSERT INTO menue(name,link) VALUES
+                  ('درباره ما','aboutUs.php');
+INSERT INTO menue(name,link) VALUES
+                  ('آگهی','');
+
+

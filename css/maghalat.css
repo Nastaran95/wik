@@ -1,0 +1,104 @@
+.rightDiv {
+    width: 25%;
+    height: 100%;
+    float: right;
+    color: rgb(239,134,131);
+    padding-top: 20px;
+}
+
+.leftDiv{
+    width: 20%;
+    height: 100%;
+    float: right;
+}
+
+.mainDiv{
+    border-style: solid;
+    border-width: 0px 2px 0px 2px;
+    border-color: rgb(239,134,131);
+    height: 100%;
+    width: 55%;
+    margin: 10px 0px;
+    padding-top: 20px;
+    float: right;
+    color: rgb(239,134,131);
+}
+
+h1{
+    font-size: 22px;
+}
+
+.fontDiam{
+    font-size: 40px;
+}
+
+.pagination li{
+    width: 40px;
+    height: 40px;
+    position: relative;
+    float: left;
+    padding: 10px 12px;
+    margin-left: -1px;
+    line-height: 1.428571429;
+    text-decoration: none;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+}
+
+.paginationoldPapers:hover{
+    background-color: rgb(255,100,100);
+    color: white;
+}
+
+.active{
+    background-color:  rgb(255,160,160) !important;
+    color: white !important;
+}
+
+.Paperdiv{
+    height: auto;
+    color: black;
+    text-align: justify;
+    margin: 20px 0;
+}
+
+.papname{
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+.nametime{
+    font-size: 12px;
+    color: rgb(87,87,87);
+}
+
+.summ{
+    color: rgb(129,125,124);
+    font-size: 14px;
+}
+
+
+.cat , .srt{
+    color: black;
+    height: 50px;
+    /*line-height: 40px;*/
+    padding: 5px 20px;
+    font-size: 15px;
+    background-color: rgb(255,212,213);
+    margin-bottom: 20px;
+}
+
+.cat:hover , .srt:hover{
+    background-color: rgb(200,0,0);
+    color: white;
+}
+
+.srt{
+    line-height: 40px;
+}
+
+.cat-on , .srt-on{
+    background-color: rgb(240,135,132);
+}
+
+

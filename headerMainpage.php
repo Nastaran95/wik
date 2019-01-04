@@ -18,7 +18,7 @@
 
 <div class="header col-lg-12 col-md-12 ">
     <div class="hiddenthisxs">
-        <div class="fixed fix fixed1">
+        <div class="fixed fix fixed1 headerall">
             <div class="col-md-12">
                 <div class="pull-right padding20_0 col-md-9">
                     <div class="col-md-4 pull-right paddleft0">
@@ -40,7 +40,7 @@
 
         </div>
 
-        <div class="fixed fix fixed2 hide">
+        <div class="fixed fix fixed2 hide headerall">
             <div class="col-md-12">
                 <div class="pull-right padding20_0 col-md-9">
                     <div class="col-md-4 pull-right paddleft0">
@@ -60,12 +60,17 @@
             </div>
             <div class="menu">
                 <ul class="dark_text">
-                    <a href="/" ><li>صفحه اصلی</li></a>
-                    <a href="/" ><li>مقالات</li></a>
-                    <a href="/" ><li>سلویک</li></a>
-                    <a href="/" ><li>تماس با ما</li></a>
-                    <a href="/" ><li>درباره ما</li></a>
-                    <a href="/" ><li>آگهی</li></a>
+                    <?php
+                    $query = "SELECT * FROM menue;";
+                    $result = $connection->query($query);
+                    while ($row=$result->fetch_assoc()) {
+                        $link = $row['link'];
+                        $name = $row['name'];
+                        ?>
+                        <a href="<?php echo $link;?>" ><li><?php echo $name;?></li></a>
+                        <?php
+                    }
+                    ?>
                 </ul>
             </div>
 
