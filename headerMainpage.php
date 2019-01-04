@@ -19,19 +19,21 @@
 <div class="header col-lg-12 col-md-12 ">
     <div class="hiddenthisxs">
         <div class="fixed fix fixed1 headerall">
-            <div class="col-md-12">
-                <div class="pull-right padding20_0 col-md-9">
-                    <div class="col-md-4 pull-right paddleft0">
-                        <img src="images/wikiderm-logo-180-544--300x99.png" width="90%" height="90%" alt="logo">
-                    </div>
-                    <div class="col-md-8 headerH">
+            <div class="row">
+                <div class="float-right padding20_0 col-md-9 row">
+                    <div class="col-md-4 float-right paddleft0">
+                        <a href="/">
+                            <img src="/images/wikiderm-logo-180-544--300x99.png" width="90%" height="90%" alt="logo">
+                        </a>
+                        </div>
+                    <div class="col-md-8 headerH text-sm-right">
                         <h1 class="small">
                             سایت جامع اطلاعات پوست، مو و زیبایی و معرفی مشاغل مرتبط با پوست و مو
                         </h1>
                     </div>
                 </div>
 
-                <div class="col-md-3 log_reg_block">
+                <div class="col-md-3 log_reg_block row">
                     <div class="col-md-5">ورود</div>
                     <div class="col-md-5">عضویت</div>
                 </div>
@@ -40,20 +42,22 @@
 
         </div>
 
-        <div class="fixed fix fixed2 hide headerall">
-            <div class="col-md-12">
-                <div class="pull-right padding20_0 col-md-9">
-                    <div class="col-md-4 pull-right paddleft0">
-                        <img src="images/wikiderm-logo-180-544--300x99.png" width="90%" height="90%" alt="logo">
+        <div class="fixed fix fixed2 d-none headerall">
+            <div class="row">
+                <div class="float-right padding20_0 col-md-9 row">
+                    <div class="col-md-4 float-right paddleft0">
+                        <a href="/">
+                            <img src="/images/wikiderm-logo-180-544--300x99.png" width="90%" height="90%" alt="logo">
+                        </a>
                     </div>
-                    <div class="col-md-8 headerH">
+                    <div class="col-md-8 headerH text-sm-right">
                         <h1 class="small">
                             سایت جامع اطلاعات پوست، مو و زیبایی و معرفی مشاغل مرتبط با پوست و مو
                         </h1>
                     </div>
                 </div>
 
-                <div class="col-md-3 log_reg_block">
+                <div class="col-md-3 log_reg_block row">
                     <div class="col-md-5">ورود</div>
                     <div class="col-md-5">عضویت</div>
                 </div>

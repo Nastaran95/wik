@@ -17,8 +17,8 @@ $(document).ready(function () {
     //     // $('html, body').animate({
     //     //     scrollTop: $("div#main").offset().top
     //     // }, 100);
-    //     $(".fixed2").removeClass('hide');
-    //     $(".fixed1").addClass('hide');
+    //     $(".fixed2").removeClass('d-none');
+    //     $(".fixed1").addClass('d-none');
     //     // $(".home_main").css('top', '200px');
     // });
 
@@ -32,14 +32,14 @@ $(document).ready(function () {
 
         if((bottom_of_screen > top_of_element) && (top_of_screen < bottom_of_element)){
             // The element is visible, do something
-            $(".fixed2").addClass('hide');
-            $(".fixed1").removeClass('hide');
+            $(".fixed2").addClass('d-none');
+            $(".fixed1").removeClass('d-none');
             // $(".home_main").css('margin-top', '100');
             // $(".header").removeClass('headerfix');
         }
         else {
-            $(".fixed2").removeClass('hide');
-            $(".fixed1").addClass('hide');
+            $(".fixed2").removeClass('d-none');
+            $(".fixed1").addClass('d-none');
             // $(".home_main").css('margin-top', '125px');
             // $(".header").addClass('headerfix');
         }

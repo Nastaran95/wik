@@ -108,29 +108,29 @@ include 'header.php';
                         <span class="fontDiam"> &#9830; </span>
                         تماس با ما
                     </h1>
-                    <div class="col-md-10 col-md-offset-1 hrline"></div>
-                    <div class="col-md-10 col-md-offset-1  text-justify blackCol">
+                    <div class="col-md-10 offset-1 hrline"></div>
+                    <div class="col-md-10 offset-1  text-justify blackCol">
                         <p>
                             کاربر گرامی برای ارتباط با ویکی درم لطفا پیام خودتان را برای کارشناسان ما از طریق فرم زیر ارسال نمایید. کارشناسان ما در اسرع وقت با شما تماس میگیرند.
                         </p>
                     </div>
 
-                    <div class="col-md-10 col-md-offset-1  text-justify contctus">
+                    <div class="col-md-10 offset-1  text-justify contctus">
                         <div class="show_res hide">به موارد الزامی دقت کنید.</div>
                         <form action="contactUs.php?request=message" method="post" onsubmit="return validateForm()">
-                            <div class="form-group col-md-offset-1 col-md-10">
+                            <div class="form-group offset-1 col-md-10">
                                 <input type="text" class="form-control" id="name" placeholder="نام شما" name="name" >
                             </div>
-                            <div class="form-group col-md-offset-1 col-md-10">
+                            <div class="form-group offset-1 col-md-10">
                                 <input type="email" class="form-control" id="email" placeholder="ایمیل شما"  name="email">
                             </div>
-                            <div class="form-group col-md-offset-1 col-md-10">
+                            <div class="form-group offset-1 col-md-10">
                                 <input type="text" class="form-control" id="subject" placeholder="موضوع" name="subject">
                             </div>
-                            <div class="form-group col-md-offset-1 col-md-10">
+                            <div class="form-group offset-1 col-md-10">
                                 <textarea rows="10" placeholder="پیام شما" maxlength="1000" name="msg" id="msg"></textarea>
                             </div>
-                            <div class="col-md-offset-4 col-md-4 col-xs-12">
+                            <div class="offset-4 col-md-4 col-xs-12">
                                 <button type="submit" class="btn btn-default col-md-12 col-xs-12">ارسال</button>
                             </div>
                         </form>
@@ -144,7 +144,7 @@ include 'header.php';
             </div>
 
             <div class="leftDiv col-md-3 col-xs-12">
-                <div class="col-md-offset-1 col-md-10 text-center addSub">
+                <div class="offset-1 col-md-10 text-center addSub">
                     <h3>
                         تبلیغات
                     </h3>

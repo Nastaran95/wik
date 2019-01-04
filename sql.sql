@@ -71,7 +71,7 @@ CREATE TABLE menue(
   PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
 
 INSERT INTO menue(name,link) VALUES
-                  ('صفحه اصلی','index.php');
+                  ('صفحه اصلی','/');
 INSERT INTO menue(name,link) VALUES
                   ('مقالات','maghalat.php');
 INSERT INTO menue(name,link) VALUES

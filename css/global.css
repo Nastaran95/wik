@@ -4,7 +4,33 @@ body {
     margin: auto;
 }
 
-a :hover , a li:hover{
+@font-face {
+    font-family:'BYekan';/*تعریف یک نام برای فونت*/
+    src:url('../fonts/Yekan/Yekan.eot');/*اکسپلورر 9 به بعد*/
+    src:local('bYekan'),/*بررسی نصب بودن فونت در سیستم کاربر*/
+    local('b Yekan'),/*برای برخی از مرورگرها مانند سافاری*/
+    url('../fonts/Yekan/Yekan.eot?#iefix') format('embedded-opentype'),/*هک برای اکسپلورر 8 و ماقبل*/
+    url('../fonts/Yekan/Yekan.woff') format('woff'),/*مرورگر های جدید*/
+    url('../fonts/Yekan/Yekan.ttf') format('truetype'),/*تمام مرورگرها به جزء اکسپلورر*/
+    url('../fonts/Yekan/Yekan.svg#BYekan') format('svg');/*نسخه های قدیمی سیستم عامل iOS*/
+    font-style:normal;
+    font-weight:normal;
+}
+
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/IRANSansWeb.woff') format('woff');  /* All Major Browsers */
+}
+
+
+a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+a{
     text-decoration: none;
 }
 
@@ -14,7 +40,6 @@ a :hover , a li:hover{
 
 .footer{
     background-color: rgb(76,76,76);
-    /*padding: 40px;*/
     float: left;
     top: 100px;
 }
@@ -134,7 +159,7 @@ a :hover , a li:hover{
 
 
 .padding20_0{
-    padding-top: 20px;
+    padding-top: 10px;
 }
 
 .paddleft0{
@@ -142,15 +167,17 @@ a :hover , a li:hover{
 }
 
 .headerH{
+    padding-top: 20px;
     padding-right: 0;
 }
 
 .log_reg_block{
-    padding-top: 40px;
+    padding-top: 25px;
 }
 
 .search{
     font-size: 30px;
+    padding: 0 5%;
 }
 
 

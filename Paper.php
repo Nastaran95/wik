@@ -66,18 +66,18 @@ if (isset($_GET['ID'])) {
     <meta property="og:site_name" content="ویکی‌درم">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <link rel="icon" type="image/x-icon" href="images/wikiderm-icon--300x300.png" />
-    <link rel="stylesheet" href="css/bootstrap.css"/>
-    <script src="js/jQuery.js" ></script>
-    <script src="js/bootstrap.js" ></script>
-    <link rel="stylesheet" href="css/global.css"/>
-    <link rel="stylesheet" href="css/maghale.css"/>
+    <link rel="icon" type="image/x-icon" href="/images/wikiderm-icon--300x300.png" />
+    <link rel="stylesheet" href="/css/bootstrap.css"/>
+    <script src="/js/jQuery.js" ></script>
+    <script src="/js/bootstrap.js" ></script>
+    <link rel="stylesheet" href="/css/global.css"/>
+    <link rel="stylesheet" href="/css/maghale.css"/>
     <link rel="canonical" href="https://www.wikiderm.ir/">
     <link rel="alternate" href="https://www.wikiderm.ir/" hreflang="fa-IR" />
-    <link href="css/font-awesome/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/font-awesome/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <script src="js/modernizr.custom.js"></script>
-    <script src="js/maghale.js"></script>
+    <script src="/js/modernizr.custom.js"></script>
+    <script src="/js/maghale.js"></script>
 </head>
 <STYLE>A {text-decoration: none;} </STYLE>
 <body>
@@ -98,7 +98,7 @@ include 'header.php';
 
             <div class="mainDiv">
 
-                    <div class="col-md-12 pull-right col-xs-12" >
+                    <div class="col-md-12 float-right col-xs-12" >
                         <h1>
                             <span class="fontDiam"> &#9830; </span>
                             <?php echo $subj; ?>
@@ -157,15 +157,17 @@ include 'header.php';
                                         ?>
 
                                         <div class="col-md-12 Paperdiv col-xs-12 col-xs-12 ">
-                                            <div class="col-md-3 pull-right col-xs-12 ">
-                                                <img src="<?php echo $image; ?>" width="100%" height="100%"
-                                                     alt="paperimg">
+                                            <div class="col-md-3 float-right col-xs-12 ">
+                                                <a  href="<?php echo $link; ?> ">
+                                                    <img src="/<?php echo $image; ?>" width="100%" height="100%"
+                                                         alt="paperimg">
+                                                </a>
                                             </div>
 
-                                            <div class="col-md-9 PaperText pull-right col-xs-12 col-xs-12 ">
+                                            <div class="col-md-9 PaperText float-right col-xs-12 col-xs-12 ">
                                                 <div class="col-md-12 col-xs-12 ">
                                                     <h2 class="papname">
-                                                        <?php echo $name; ?>
+                                                        <a href="<?php echo $link; ?>"> <?php echo $name; ?> </a>
                                                     </h2>
                                                 </div>
 
@@ -192,7 +194,7 @@ include 'header.php';
 
                                     ?>
 
-                                    <div class="pagination-container pull-left">
+                                    <div class="pagination-container float-left">
                                         <ul class="pagination right">
                                             <li id="-1" class="PagedList-skipToNext paginationoldPapers1" rel="prev">
                                                 >>
@@ -272,15 +274,17 @@ include 'header.php';
                                         ?>
 
                                         <div class="col-md-12 Paperdiv col-xs-12 col-xs-12 ">
-                                            <div class="col-md-3 pull-right col-xs-12 ">
-                                                <img src="<?php echo $image; ?>" width="100%" height="100%"
-                                                     alt="paperimg">
+                                            <div class="col-md-3 float-right col-xs-12 ">
+                                                <a  href="<?php echo $link; ?> ">
+                                                    <img src="/<?php echo $image; ?>" width="100%" height="100%"
+                                                         alt="paperimg">
+                                                </a>
                                             </div>
 
-                                            <div class="col-md-9 PaperText pull-right col-xs-12 col-xs-12 ">
+                                            <div class="col-md-9 PaperText float-right col-xs-12 col-xs-12 ">
                                                 <div class="col-md-12 col-xs-12 ">
                                                     <h2 class="papname">
-                                                        <?php echo $name; ?>
+                                                        <a href="<?php echo $link; ?>"> <?php echo $name; ?> </a>
                                                     </h2>
                                                 </div>
 
@@ -307,7 +311,7 @@ include 'header.php';
 
                                     ?>
 
-                                    <div class="pagination-container pull-left">
+                                    <div class="pagination-container float-left">
                                         <ul class="pagination right">
                                             <li id="-1" class="PagedList-skipToNext paginationoldPapers2" rel="prev">
                                                 >>
@@ -355,16 +359,16 @@ include 'header.php';
             </div>
 
             <div class="leftDiv">
-                <div class="col-md-offset-1 col-md-10 text-center addSub">
+                <div class="offset-1 col-md-10 text-center addSub">
                     <h3>
                         تبلیغات
                     </h3>
                 </div>
                 <div class="col-md-12 add">
-                    <img src="images/tabliq.png" width="100%" height="100%" alt="">
+                    <img src="/images/tabliq.png" width="100%" height="100%" alt="">
                 </div>
                 <div class="col-md-12 add">
-                    <img src="images/tabliq.png" width="100%" height="100%" alt="">
+                    <img src="/images/tabliq.png" width="100%" height="100%" alt="">
                 </div>
             </div>
 
@@ -378,8 +382,8 @@ include 'header.php';
 <?php
 include 'footer.php';
 ?>
-<script src="js/classie.js"></script>
-<script src="js/uisearch.js"></script>
+<script src="/js/classie.js"></script>
+<script src="/js/uisearch.js"></script>
 <script>
     new UISearch( document.getElementById( 'sb-search' ) );
 </script>

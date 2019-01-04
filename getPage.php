@@ -35,32 +35,33 @@ if ($typ==1){
 
         ?>
 
-        <div class="col-md-12 Paperdiv">
-            <div class="col-md-3 pull-right">
-                <img src="<?php echo $image; ?>" width="100%" height="100%">
+        <div class="col-md-12 Paperdiv col-xs-12 float-left">
+            <div class="col-md-3 float-right col-xs-12 ">
+                <img src="<?php echo $image; ?>" width="100%" height="100%" alt="paperimg">
             </div>
 
-            <div class="col-md-9 PaperText pull-right">
-                <div class="col-md-12">
+            <div class="col-md-9 PaperText float-right col-xs-12">
+                <div class="col-md-12 col-xs-12 ">
                     <h2 class="papname">
                         <?php echo $name; ?>
                     </h2>
                 </div>
 
-                <div class="col-md-12 nametime">
-
-                    <div class="col-md-8">
-                        <?php echo $time; ?>
-                    </div>
-                    <div class="col-md-4">
+                <div class="col-md-12 nametime col-xs-12 row">
+                    <div class="col-md-4 col-xs-12 ">
                         <?php echo $writer; ?>
                     </div>
+                    <div class="col-md-8 col-xs-12 ">
+                        <?php echo $time; ?>
+                    </div>
+
 
                 </div>
-                <div class="col-md-12 summ">
+                <div class="col-md-12 summ col-xs-12 ">
                     <?php echo $mokhtasar; ?>
                 </div>
             </div>
+
         </div>
         <br>
 
@@ -68,7 +69,7 @@ if ($typ==1){
     }
     ?>
 
-    <div class="pagination-container pull-left">
+    <div class="pagination-container float-left">
         <ul class="pagination">
             <li id="-1" class="PagedList-skipToNext paginationoldPapers" rel="prev"> >> </li>
             <li id="1" class="paginationoldPapers <?php if (1==$page) echo "active" ?>">1</li>
@@ -90,13 +91,12 @@ if ($typ==1){
                 <?php
             }
             ?>
-
-
-
             <li id="-2" class="PagedList-skipToNext paginationoldPapers" rel="next"> << </li>
         </ul>
 
     </div>
+
+
     <?php
 }
 else if ($typ==2){
@@ -126,11 +126,11 @@ else if ($typ==2){
         ?>
 
         <div class="col-md-12 Paperdiv">
-            <div class="col-md-3 pull-right">
+            <div class="col-md-3 float-right">
                 <img src="<?php echo $image; ?>" width="100%" height="100%">
             </div>
 
-            <div class="col-md-9 PaperText pull-right">
+            <div class="col-md-9 PaperText float-right">
                 <div class="col-md-12">
                     <h2 class="papname">
                         <?php echo $name; ?>
@@ -158,7 +158,7 @@ else if ($typ==2){
     }
     ?>
 
-    <div class="pagination-container pull-left">
+    <div class="pagination-container float-left">
         <ul class="pagination">
             <li id="-1" class="PagedList-skipToNext paginationoldPapers1" rel="prev"> >> </li>
             <li id="1" class="paginationoldPapers1 <?php if (1==$page) echo "active" ?>">1</li>
@@ -215,11 +215,11 @@ else if ($typ==3){
         ?>
 
         <div class="col-md-12 Paperdiv">
-            <div class="col-md-3 pull-right">
+            <div class="col-md-3 float-right">
                 <img src="<?php echo $image; ?>" width="100%" height="100%">
             </div>
 
-            <div class="col-md-9 PaperText pull-right">
+            <div class="col-md-9 PaperText float-right">
                 <div class="col-md-12">
                     <h2 class="papname">
                         <?php echo $name; ?>
@@ -247,7 +247,7 @@ else if ($typ==3){
     }
     ?>
 
-    <div class="pagination-container pull-left">
+    <div class="pagination-container float-left">
         <ul class="pagination">
             <li id="-1" class="PagedList-skipToNext paginationoldPapers2" rel="prev"> >> </li>
             <li id="1" class="paginationoldPapers2 <?php if (1==$page) echo "active" ?>">1</li>

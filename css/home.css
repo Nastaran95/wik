@@ -8,7 +8,7 @@
     background-position: center center;
     /*height:82vh ;*/
     /*top: 16vh;*/
-    top:122px;
+    top:102px;
     border-right: 1px solid rgb(233,233,233);
     border-left: 1px solid rgb(233,233,233);
 }
@@ -21,17 +21,21 @@
     padding-bottom: 80px;
 }
 
-.carousel-inner > .item > img,
-.carousel-inner > .item > a > img {
+.carousel-inner > .carousel-item > img,
+.carousel-inner > .carousel-item > a > img {
     height: 82vh;
 }
 
+#myCarousel{
+    width: 100%;
+}
+
 .padding20_0{
-    padding: 20px 0;
+    padding: 10px 0;
 }
 
 .header .menu{
-    top: 72px;
+    top: 52px;
 }
 
 .headerH{
@@ -40,7 +44,7 @@
 }
 
 .log_reg_block{
-    padding-top: 67px;
+    padding-top: 35px;
 }
 
 .search{
@@ -67,7 +71,8 @@
 }
 
 .grayBox{
-    margin: 5%;
+    margin: 3%;
+    margin-top: 7%;
     height: 80px;
     line-height: 80px;
     background-color: rgb(233,231,232);
@@ -216,6 +221,9 @@
     /*color: rgb(221,227,232);*/
 /*}*/
 
+.pagination{
+    flex-direction: row-reverse;
+}
 
 .pagination li{
     width: 40px;
@@ -228,6 +236,7 @@
     text-decoration: none;
     background-color: #ffffff;
     border: 1px solid #dddddd;
+
 }
 
 .paginationoldPapers:hover{
@@ -238,6 +247,14 @@
 .active{
     background-color:  rgb(255,160,160) !important;
     color: white !important;
+}
+
+.fontDiam{
+    font-size: 40px;
+}
+
+.mainDiv h4{
+    font-size: 16px;
 }
 /*.hiddenthisoverxs{*/
     /*display: none;*/

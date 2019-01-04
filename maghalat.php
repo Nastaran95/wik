@@ -81,9 +81,9 @@ include 'header.php';
                             $idd = 'cat'.$id;
                             ?>
 
-                            <div class="col-md-12 cat pull-right col-xs-12 <?php if($x==1) echo 'cat-on';?>" id="<?php echo $idd;?>">
+                            <div class="col-md-12 cat float-right col-xs-12 <?php if($x==1) echo 'cat-on';?>" id="<?php echo $idd;?>">
                                 <?php echo $name; ?>
-                                <span class="pull-left">
+                                <span class="float-left">
                                     <?php
                                     $query2 = "SELECT * FROM Paper WHERE dastebandi=".$id.";" ;
                                     $result2 = $connection->query($query2);
@@ -96,9 +96,9 @@ include 'header.php';
                         }
                         ?>
 
-                        <div class="col-md-12 cat pull-right col-xs-12 " id="cat0">
+                        <div class="col-md-12 cat float-right col-xs-12 " id="cat0">
                             همه دسته‌ها
-                            <span class="pull-left">
+                            <span class="float-left">
                                 <?php
                                 $query2 = "SELECT * FROM Paper ;" ;
                                 $result2 = $connection->query($query2);
@@ -118,10 +118,10 @@ include 'header.php';
                         </h4>
                     </div>
                     <div class="col-md-11">
-                        <div class="col-md-12 srt pull-right text-center col-xs-12 " id="srt1">
+                        <div class="col-md-12 srt float-right text-center col-xs-12 " id="srt1">
                             محبوب‌ترین
                         </div>
-                        <div class="col-md-12 srt pull-right text-center srt-on col-xs-12 " id="srt2">
+                        <div class="col-md-12 srt float-right text-center srt-on col-xs-12 " id="srt2">
                             جدیدترین
                         </div>
                     </div>
@@ -134,7 +134,7 @@ include 'header.php';
                         <span class="fontDiam"> &#9830; </span>
                         مقالات
                     </h1>
-                    <div class="col-md-10 col-md-offset-1 hrline"></div>
+                    <div class="col-md-10 offset-1 hrline"></div>
                     <div class="row">
                         <div class="col-md-12">
 
@@ -156,11 +156,11 @@ include 'header.php';
                                     ?>
 
                                     <div class="col-md-12 Paperdiv col-xs-12 col-xs-12 ">
-                                        <div class="col-md-3 pull-right col-xs-12 ">
+                                        <div class="col-md-3 float-right col-xs-12 ">
                                             <img src="<?php echo $image; ?>" width="100%" height="100%" alt="paperimg">
                                         </div>
 
-                                        <div class="col-md-9 PaperText pull-right col-xs-12 col-xs-12 ">
+                                        <div class="col-md-9 PaperText float-right col-xs-12 col-xs-12 ">
                                             <div class="col-md-12 col-xs-12 ">
                                                 <h2 class="papname">
                                                     <?php echo $name; ?>
@@ -192,7 +192,7 @@ include 'header.php';
                                 $pagenum = $result->num_rows;
                                 ?>
 
-                                <div class="pagination-container pull-left">
+                                <div class="pagination-container float-left">
                                     <ul class="pagination right">
                                         <li id="-1" class="PagedList-skipToNext paginationoldPapers" rel="prev"> >> </li>
                                         <?php
@@ -230,7 +230,7 @@ include 'header.php';
             </div>
 
             <div class="leftDiv">
-                <div class="col-md-offset-1 col-md-10 text-center addSub">
+                <div class="offset-1 col-md-10 text-center addSub">
                     <h3>
                         تبلیغات
                     </h3>

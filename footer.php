@@ -16,7 +16,7 @@
     </div>
 
     <div class="col-md-12 col-sm-12 col-xs-12">
-        <img src="images/wikiderm-logo-180-544-invers--300x100.png" class="center-block">
+        <img src="images/wikiderm-logo-180-544-invers--300x100.png" class="d-block mx-auto">
     </div>
     <div class="footInfo col-md-12 col-sm-12 col-xs-12">
         <p class="text-center footCol">

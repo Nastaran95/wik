@@ -73,8 +73,8 @@ include 'header.php';
                         <span class="fontDiam"> &#9830; </span>
                         درباره ما
                     </h1>
-                    <div class="col-md-10 col-md-offset-1 hrline"></div>
-                    <div class="col-md-10 col-md-offset-1  text-justify blackCol">
+                    <div class="col-md-10 offset-1 hrline"></div>
+                    <div class="col-md-10 offset-1  text-justify blackCol">
                         <p>
                             دانشنامه پوست ، مو و زیبایی در نظر دارد منبعی را جهت بهره برداری علمی پزشکان، دانشجویان، اساتید و مراکز پوست و زیبایی و نیز به اشتراک گذاری دانش ضمنی آنان با همدیگر در جهت ارتقای دانش این حوزه و افزایش آگاهی عمومی در خصوص مشکلات و درمانهای پوست و زیبایی فراهم سازد. بدینوسیله از همه علاقه  مندان قلم فرسا در این زمینه دعوت به عمل می آید پس از عضویت و اخذ کد کاربری با انتشار مطالب با نام خودشان ما را در تکامل این منبع مشترک یاری نمایند. پیشاپیش از حسن همکاری شما کمال تشکر را داریم.
                         </p>
@@ -86,8 +86,8 @@ include 'header.php';
                         <span class="fontDiam"> &#9830; </span>
                         چشم انداز
                     </h1>
-                    <div class="col-md-10 col-md-offset-1 hrline"></div>
-                    <div class="col-md-10 col-md-offset-1  text-justify blackCol">
+                    <div class="col-md-10 offset-1 hrline"></div>
+                    <div class="col-md-10 offset-1  text-justify blackCol">
                         <p>
                             توسعه علم تنها مسیر رشد و تعالی بشر در طول تاریخ بوده و به نظر می رسد یکی از وظایف انسانی ما  توسعه علومی است که به هر شکل در ارتباط با  کار و زندگی ما قرار دارد و به نوعی با آن سروکار داریم تا هرکدام از ما، به مهره ای برای رسیدن به ابدیت روشن بشری بدل شویم. ابدیتی که همه چیز خدایی و انسان متکامل صاحب آن است و به جهانی فراتر از ابدیت می اندیشد.
                         </p>
@@ -96,7 +96,7 @@ include 'header.php';
             </div>
 
             <div class="leftDiv col-md-3 col-xs-12">
-                <div class="col-md-offset-1 col-md-10 text-center addSub">
+                <div class="offset-1 col-md-10 text-center addSub">
                     <h3>
                         تبلیغات
                     </h3>
