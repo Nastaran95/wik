@@ -5,7 +5,7 @@ $(document).ready(function () {
         page=event.target.id;
         var li = document.getElementById('replacepagination1');
         wr = li.className;
-        $.get("getPage.php", {page:page , typ:2 , writer: wr}, function (res) {
+        $.get("/getPage.php", {page:page , typ:2 , writer: wr}, function (res) {
             $("#replacepagination1").html(res);
         });
     });
@@ -15,7 +15,7 @@ $(document).ready(function () {
         page=event.target.id;
         var li = document.getElementById('replacepagination2');
         ds = li.className;
-        $.get("getPage.php", {page:page , typ:3 , daste: ds}, function (res) {
+        $.get("/getPage.php", {page:page , typ:3 , daste: ds}, function (res) {
             $("#replacepagination2").html(res);
         });
     });

@@ -61,33 +61,49 @@ include 'header.php';
 <div class="container">
 
 
-    <div  id="main" class="home_main">
+    <div  id="main" class="home_main row">
+
+        <div class="col-md-12 search hiddenthisoverxs">
+
+            <div id="sb-search2" class="sb-search">
+                <form class="float-left">
+                    <input class="sb-search-input" placeholder="جستجو" type="search" value="" name="search" id="search2">
+                    <button class="sb-search-submit sb-icon-search" type="submit" value=""><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="col-md-12 ">
+
+            <div class="mainDiv col-md-9 col-12 text-right">
+                <div class="col-md-12 ">
+
+                    <div class="col-md-12">
+                        <h1> <span class="fontDiam"> &#9830; </span>
+                            درباره ما
+                        </h1>
+                    </div>
 
 
 
-        <div class="col-md-12 test">
-
-            <div class="mainDiv col-md-9 col-xs-12">
-                <div class="col-md-12 aboutUs">
-                    <h1>
-                        <span class="fontDiam"> &#9830; </span>
-                        درباره ما
-                    </h1>
-                    <div class="col-md-10 offset-1 hrline"></div>
-                    <div class="col-md-10 offset-1  text-justify blackCol">
+                    <div class="text-justify blackCol box">
                         <p>
                             دانشنامه پوست ، مو و زیبایی در نظر دارد منبعی را جهت بهره برداری علمی پزشکان، دانشجویان، اساتید و مراکز پوست و زیبایی و نیز به اشتراک گذاری دانش ضمنی آنان با همدیگر در جهت ارتقای دانش این حوزه و افزایش آگاهی عمومی در خصوص مشکلات و درمانهای پوست و زیبایی فراهم سازد. بدینوسیله از همه علاقه  مندان قلم فرسا در این زمینه دعوت به عمل می آید پس از عضویت و اخذ کد کاربری با انتشار مطالب با نام خودشان ما را در تکامل این منبع مشترک یاری نمایند. پیشاپیش از حسن همکاری شما کمال تشکر را داریم.
                         </p>
                     </div>
                 </div>
 
-                <div class="col-md-12 overview">
-                    <h1>
-                        <span class="fontDiam"> &#9830; </span>
-                        چشم انداز
-                    </h1>
-                    <div class="col-md-10 offset-1 hrline"></div>
-                    <div class="col-md-10 offset-1  text-justify blackCol">
+                <div class="col-md-12 ">
+
+                    <div class="col-md-12">
+                        <h1> <span class="fontDiam"> &#9830; </span>
+                            چشم انداز
+                        </h1>
+                    </div>
+
+
+                    <div class="text-justify blackCol box">
                         <p>
                             توسعه علم تنها مسیر رشد و تعالی بشر در طول تاریخ بوده و به نظر می رسد یکی از وظایف انسانی ما  توسعه علومی است که به هر شکل در ارتباط با  کار و زندگی ما قرار دارد و به نوعی با آن سروکار داریم تا هرکدام از ما، به مهره ای برای رسیدن به ابدیت روشن بشری بدل شویم. ابدیتی که همه چیز خدایی و انسان متکامل صاحب آن است و به جهانی فراتر از ابدیت می اندیشد.
                         </p>
@@ -95,17 +111,17 @@ include 'header.php';
                 </div>
             </div>
 
-            <div class="leftDiv col-md-3 col-xs-12">
-                <div class="offset-1 col-md-10 text-center addSub">
+            <div class="leftDiv col-md-3 col-12">
+                <div class="col-md-12 text-center addSub float-left">
                     <h3>
                         تبلیغات
                     </h3>
                 </div>
                 <div class="col-md-12 add">
-                    <img src="images/tabliq.png" width="100%" height="100%" alt="">
+                    <img src="/images/tabliq.png" width="100%" height="100%" alt="">
                 </div>
                 <div class="col-md-12 add">
-                    <img src="images/tabliq.png" width="100%" height="100%" alt="">
+                    <img src="/images/tabliq.png" width="100%" height="100%" alt="">
                 </div>
             </div>
 
@@ -123,6 +139,7 @@ include 'footer.php';
 <script src="js/uisearch.js"></script>
 <script>
     new UISearch( document.getElementById( 'sb-search' ) );
+    new UISearch( document.getElementById( 'sb-search2' ) );
 </script>
 <script type="application/ld+json">
     {

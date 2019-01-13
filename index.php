@@ -59,7 +59,7 @@ include 'headerMainpage.php';
 
 
 <div class="container">
-    <div class="header coverMain">
+    <div class="header coverMain hiddenthisxs">
         <div class="cover ">
 
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -138,7 +138,7 @@ include 'headerMainpage.php';
         </div>
     </div>
 
-    <div  id="main" class="home_main text-right">
+    <div  id="main" class="home_main text-right row ">
 
         <div class="col-md-12 search">
 
@@ -149,20 +149,19 @@ include 'headerMainpage.php';
                 </form>
             </div>
         </div>
-
-        <div class="col-md-12 test row">
-            <div class="rightDiv">
-                <div class="col-md-11 grayBox"> سلویک </div>
-                <div class="col-md-11 grayBox"> </div>
-                <div class="col-md-11 grayBox"> </div>
-                <div class="col-md-11 grayBox"> </div>
-                <div class="col-md-11 grayBox"> </div>
-                <div class="col-md-11 grayBox"> </div>
-                <div class="col-md-11 grayBox"> </div>
+        <div class="col-md-12 test">
+            <div class="rightDiv  col-12">
+                <div class="col-md-11 grayBox col-10"> سلویک </div>
+                <div class="col-md-11 grayBox col-10"> </div>
+                <div class="col-md-11 grayBox col-10"> </div>
+                <div class="col-md-11 grayBox col-10"> </div>
+                <div class="col-md-11 grayBox col-10"> </div>
+                <div class="col-md-11 grayBox col-10"> </div>
+                <div class="col-md-11 grayBox col-10"> </div>
             </div>
 
-            <div class="mainDiv">
-                <div class="subjects col-md-12 float-left">
+            <div class="mainDiv  col-12">
+                <div class="subjects col-md-12 float-left ">
                     <div class="col-md-11 float-left">
                         <h4>
                             موضوعات
@@ -181,7 +180,7 @@ include 'headerMainpage.php';
                             $idd = 'cat'.$id;
                             ?>
 
-                            <div class="offset-1 col-md-5 cat float-right col-xs-12 <?php if($x==1) echo 'cat-on';?>" id="<?php echo $idd;?>">
+                            <div class="offset-1 col-md-5 cat float-right col-12 <?php if($x==1) echo 'cat-on';?>" id="<?php echo $idd;?>">
                                 <?php echo $name; ?>
                                 <span class="float-left">
                                     <?php
@@ -196,7 +195,7 @@ include 'headerMainpage.php';
                         }
                         ?>
 
-                        <div class="offset-1 col-md-5 cat float-right col-xs-12 " id="cat0">
+                        <div class="offset-1 col-md-5 cat float-right col-12 " id="cat0">
                             همه دسته‌ها
                             <span class="float-left">
                                 <?php
@@ -218,127 +217,113 @@ include 'headerMainpage.php';
                         </h4>
                     </div>
                     <div class="col-md-11 float-left">
-                        <div class="offset-1 col-md-5 srt float-right text-center col-xs-12 " id="srt1">
+                        <div class="offset-1 col-md-5 srt float-right text-center col-12 " id="srt1">
                             محبوب‌ترین
                         </div>
-                        <div class="offset-1 col-md-5 srt float-right text-center srt-on col-xs-12 " id="srt2">
+                        <div class="offset-1 col-md-5 srt float-right text-center srt-on col-12 " id="srt2">
                             جدیدترین
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-12 papers float-left">
-                    <div class="col-md-12 papsub row justify-content-between">
-                        <div class="col-md-11 float-left">
-                            <h1> <span class="fontDiam"> &#9830; </span>
-                                مقالات
-                            </h1>
-                        </div>
-
-
-                        <div class=" hrline"></div>
-
-
-                        <div class="col-md-12">
-
-                            <div id="replacepagination">
-
-                                <?php
-                                $page = 1;
-                                $a = ($page-1)*7;
-                                $query = "SELECT * FROM Paper LIMIT $a , 7;";
-                                $result = $connection->query($query);
-                                while ($row=$result->fetch_assoc()) {
-                                    $name = $row['name'];
-                                    $writer = $row['writer'];
-                                    $time = $row['realtime'];
-                                    $link = '/Paper/'.$row['post_name'];
-                                    $mokhtasar = $row['Mokhtasar'];
-                                    $image = $row['image'];
-                                    $image = substr($image,3);
-                                    ?>
-
-                                    <div class="col-md-12 Paperdiv col-xs-12 float-left">
-                                        <div class="col-md-3 float-right col-xs-12 ">
-                                            <a href="<?php echo $link;?>">
-                                                <img src="<?php echo $image; ?>" width="100%" height="100%" alt="paperimg">
-                                            </a>
-
-                                        </div>
-
-                                        <div class="col-md-9 PaperText float-right col-xs-12">
-                                            <div class="col-md-12 col-xs-12 ">
-                                                <h2 class="papname">
-                                                    <a href="<?php echo $link;?>">
-                                                        <?php echo $name; ?>
-                                                    </a>
-                                                </h2>
-                                            </div>
-
-                                            <div class="col-md-12 nametime col-xs-12 row">
-                                                <div class="col-md-4 col-xs-12 ">
-                                                    <?php echo $writer; ?>
-                                                </div>
-                                                <div class="col-md-8 col-xs-12 ">
-                                                    <?php echo $time; ?>
-                                                </div>
-
-
-                                            </div>
-                                            <div class="col-md-12 summ col-xs-12 ">
-                                                <?php echo $mokhtasar; ?>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <br>
-
-                                    <?php
-                                }
-                                $query = "SELECT * FROM Paper;" ;
-                                $result = $connection->query($query);
-                                $pagenum = $result->num_rows;
-                                ?>
-
-                                <div class="pagination-container float-left rt">
-                                    <ul class="pagination ">
-                                        <li id="-1" class="PagedList-skipToNext paginationoldPapers" rel="prev"> >> </li>
-                                        <?php
-                                        $x = ($pagenum+6) / 7 ;
-                                        for ($i=1 ; $i <= min($x,2) ; $i++){
-                                            ?>
-                                            <li id="<?php echo $i?>" class="paginationoldPapers <?php if ($i==1) echo "active" ?> "><?php echo $i?></li>
-                                            <?php
-
-                                        }
-                                        $i--;
-                                        if ($i<max(1,floor($x)-1))
-                                            echo "<li>...</li>";
-                                        if ($i<max(1,floor($x))){
-                                            ?>
-                                            <li id="<?php echo floor($x)?>" class="paginationoldPapers"><?php echo floor($x)?></li>
-                                            <?php
-                                        }
-
-                                        ?>
-
-                                        <li id="-2" class="PagedList-skipToNext paginationoldPapers" rel="next"> << </li>
-                                    </ul>
-
-                                </div>
-                            </div>
-
-                        </div>
-
-
-
+                <div class="col-md-12 float-left ">
+                    <div class="col-md-11 float-left">
+                        <h1> <span class="fontDiam"> &#9830; </span>
+                            مقالات
+                        </h1>
                     </div>
 
+                    <div class="hrline float-left"></div>
+
+                    <div id="replacepagination">
+
+                        <?php
+                        $page = 1;
+                        $a = ($page-1)*7;
+                        $query = "SELECT * FROM Paper LIMIT $a , 7;";
+                        $result = $connection->query($query);
+                        while ($row=$result->fetch_assoc()) {
+                            $name = $row['name'];
+                            $writer = $row['writer'];
+                            $time = $row['realtime'];
+                            $link = '/Paper/'.$row['post_name'];
+                            $mokhtasar = $row['Mokhtasar'];
+                            $image = $row['image'];
+                            $image = substr($image,3);
+                            ?>
+
+                            <div class="col-md-12 Paperdiv col-12 float-left">
+                                <div class="col-md-3 float-right col-12 ">
+                                    <a href="<?php echo $link;?>">
+                                        <img src="/<?php echo $image; ?>" width="100%" height="100%" alt="paperimg">
+                                    </a>
+                                </div>
+
+                                <div class="col-md-9 PaperText float-right col-12">
+                                    <div class="col-md-12 col-12 ">
+                                        <h2 class="papname">
+                                            <a href="<?php echo $link;?>">
+                                                <?php echo $name; ?>
+                                            </a>
+                                        </h2>
+                                    </div>
+
+                                    <div class="col-md-12 nametime col-12 row">
+                                        <div class="col-md-4 col-12 ">
+                                            <?php echo $writer; ?>
+                                        </div>
+                                        <div class="col-md-8 col-12 ">
+                                            <?php echo $time; ?>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="col-md-12 summ col-12 ">
+                                        <?php echo $mokhtasar; ?>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <br>
+
+                            <?php
+                        }
+                        $query = "SELECT * FROM Paper;" ;
+                        $result = $connection->query($query);
+                        $pagenum = $result->num_rows;
+                        ?>
+
+                        <div class="pagination-container float-left">
+                            <ul class="pagination ">
+                                <li id="-1" class="PagedList-skipToNext paginationoldPapers" rel="prev"> >> </li>
+                                <?php
+                                $x = ($pagenum+6) / 7 ;
+                                for ($i=1 ; $i <= min($x,2) ; $i++){
+                                    ?>
+                                    <li id="<?php echo $i?>" class="paginationoldPapers <?php if ($i==1) echo "active" ?> "><?php echo $i?></li>
+                                    <?php
+
+                                }
+                                $i--;
+                                if ($i<max(1,floor($x)-1))
+                                    echo "<li>...</li>";
+                                if ($i<max(1,floor($x))){
+                                    ?>
+                                    <li id="<?php echo floor($x)?>" class="paginationoldPapers"><?php echo floor($x)?></li>
+                                    <?php
+                                }
+
+                                ?>
+
+                                <li id="-2" class="PagedList-skipToNext paginationoldPapers" rel="next"> << </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="leftDiv">
-                <div class="offset-1 col-md-10 text-center addSub float-left">
+            <div class="leftDiv col-md-3 col-12">
+                <div class="col-md-12 text-center addSub float-left">
                     <h3>
                         تبلیغات
                     </h3>
@@ -350,6 +335,7 @@ include 'headerMainpage.php';
                     <img src="images/tabliq.png" width="100%" height="100%" alt="">
                 </div>
             </div>
+
         </div>
     </div>
 </div>

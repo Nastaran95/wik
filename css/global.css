@@ -172,11 +172,12 @@ a{
 }
 
 .log_reg_block{
-    padding-top: 25px;
+    /*padding-top: 25px;*/
+    font-size: 18px;
 }
 
 .search{
-    font-size: 30px;
+    font-size: 18px;
     padding: 0 5%;
 }
 
@@ -275,7 +276,7 @@ a{
     margin: 0;
     z-index: 10;
     padding: 20px 20px 20px 65px;
-    font-size: 20px;
+    font-size: 18px;
     border-radius: 30px;
 }
 
@@ -389,6 +390,83 @@ a{
     line-height: 20px;
 }
 
+.pagination {
+    flex-direction: row-reverse;
+}
+
+.addSub h3{
+    font-size: 18px;
+}
+
+.hiddenthisoverxs{
+    display: none;
+}
+
+
+
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Stay on top */
+    top: 0; /* Stay at the top */
+    right: 0;
+    background-color: rgba(255,200,200,0.9);
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    text-align: right;
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 8px 32px 8px 8px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.log_reg_block_mob{
+    font-size: 10px;
+    line-height: 3;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    left: 25px;
+    font-size: 36px;
+    margin-right: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+    transition: margin-left .5s;
+    padding: 20px 0;
+}
+
+.specialSpan{
+    text-shadow: 1px 2px 3px #FFFF00, 2px 1px 5px rgb(255,200,200);
+    color: rgb(255,100,100);
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+
+
+
 /*mobile*/
 @media (max-width: 992px) {
     .hiddenme{
@@ -397,6 +475,22 @@ a{
     .showme{
         display: block;
     }
+    .hiddenthisxs{
+        display: none;
+    }
+    .hiddenthisoverxs{
+        display: block;
+    }
+    .sb-search {
+        width: 150px;
+        top: 20px;
+    }
+
+    .header .cover_menu{
+        position: fixed;
+        display: block;
+        z-index: 95;
+    }
 }
 
 @media (max-width: 768px) {
@@ -404,11 +498,7 @@ a{
         max-width:50%;
     }
     .container{
-        width: 90%;
-        padding: 20px 5px;
-        margin-left: 5%;
+        max-width: 100%;
     }
-    .sb-search {
-        width: 150px;
-    }
+
 }

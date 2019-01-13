@@ -11,38 +11,38 @@ session_start();
 
 include 'Settings.php';
 
-if (isset($_GET['request']))
-    if($_GET['request']=='message') {
-        if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['msg']) && strlen($_POST['msg'])>0 ){
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            if(isset($_POST['subject'])){
-                $subject = $_POST['subject'];
-            }
-            $msg = $_POST['msg'];
-            $stmt  = $connection->prepare("INSERT INTO user_request (name,email,subject,message)  VALUES (?,?,?,?)");
-            $stmt->bind_param("ssss", $name, $email, $subject, $msg);
-            $result = $stmt->execute();
-            $stmt->store_result();
-            $result = $stmt->get_result();
+//if (isset($_GET['request']))
+//    if($_GET['request']=='message') {
+//        if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['msg']) && strlen($_POST['msg'])>0 ){
+//            $name = $_POST['name'];
+//            $email = $_POST['email'];
+//            if(isset($_POST['subject'])){
+//                $subject = $_POST['subject'];
+//            }
+//            $msg = $_POST['msg'];
+//            $stmt  = $connection->prepare("INSERT INTO user_request (name,email,subject,message)  VALUES (?,?,?,?)");
+//            $stmt->bind_param("ssss", $name, $email, $subject, $msg);
+//            $result = $stmt->execute();
+//            $stmt->store_result();
+//            $result = $stmt->get_result();
+//
+//            if ($connection->error) {
+//                echo $connection->error;
+//                die();
+//                echo "<script>alert('عملیات موفقیت آمیز نبود. لطفا دوباره امتحان کنید.');</script>";
+//                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=contactUs.php?result=عرsuccessful">';
+//            }else{
+//                echo "<script>alert('درخواست شما با موفقیت ثبت شد.');</script>";
+//                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=contactUs.php?result=successful">';
+//            }
+//        }
+//        else{
+//            echo "<script>alert('به موارد الزامی دقت کنید.');</script>";
+//            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=contactUs.php?result=unsuccessful">';
+//        }
+//    }
 
-            if ($connection->error) {
-                echo $connection->error;
-                die();
-                echo "<script>alert('عملیات موفقیت آمیز نبود. لطفا دوباره امتحان کنید.');</script>";
-                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=contactUs.php?result=عرsuccessful">';
-            }else{
-                echo "<script>alert('درخواست شما با موفقیت ثبت شد.');</script>";
-                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=contactUs.php?result=successful">';
-            }
-        }
-        else{
-            echo "<script>alert('به موارد الزامی دقت کنید.');</script>";
-            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=contactUs.php?result=unsuccessful">';
-        }
-    }
-
-$productXMLNAME = "XMLs/contactUs.xml";
+$productXMLNAME = "XMLs/register.xml";
 if (file_exists($productXMLNAME)) {
     $XMLFile = simplexml_load_file($productXMLNAME);
     $SEOdescription=$XMLFile->description;
@@ -75,13 +75,13 @@ if (file_exists($productXMLNAME)) {
     <script src="/js/jQuery.js" ></script>
     <script src="/js/bootstrap.js" ></script>
     <link rel="stylesheet" href="/css/global.css"/>
-    <link rel="stylesheet" href="/css/contactUs.css"/>
+    <link rel="stylesheet" href="/css/register.css"/>
     <link rel="canonical" href="https://www.wikiderm.ir/">
     <link rel="alternate" href="https://www.wikiderm.ir/" hreflang="fa-IR" />
     <link href="/css/font-awesome/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <script src="/js/modernizr.custom.js"></script>
-    <script src="/js/contact.js"></script>
+    <script src="/js/register.js"></script>
 </head>
 <STYLE>A {text-decoration: none;} </STYLE>
 <body>
@@ -113,34 +113,50 @@ include 'header.php';
 
                     <div class="col-md-12">
                         <h1> <span class="fontDiam"> &#9830; </span>
-                           تماس با ما
+                          عضویت
                         </h1>
                     </div>
 
                     <div class="text-justify blackCol box">
-                        <p>
-                            کاربر گرامی برای ارتباط با ویکی درم لطفا پیام خودتان را برای کارشناسان ما از طریق فرم زیر ارسال نمایید. کارشناسان ما در اسرع وقت با شما تماس میگیرند.
-                        </p>
                     </div>
 
                     <div class="col-md-12 float-left text-justify contctus text-center">
                         <div class="show_res d-none ">به موارد الزامی دقت کنید.</div>
                         <form action="contactUs.php?request=message" method="post" onsubmit="return validateForm()" class="row">
                             <div class="form-group col-md-10 m-auto">
-                                <input type="text" class="form-control" id="name" placeholder="نام شما" name="name" >
+                                <input type="text" class="form-control" id="name" placeholder="نام کاربری" name="name" >
                             </div>
                             <div class="form-group col-md-10 m-auto">
-                                <input type="email" class="form-control" id="email" placeholder="ایمیل شما"  name="email">
+                                <input type="text" class="form-control" id="name" placeholder="نام و نام خانوادگی" name="name" >
                             </div>
                             <div class="form-group col-md-10 m-auto">
-                                <input type="text" class="form-control" id="subject" placeholder="موضوع" name="subject">
+                                <input type="text" class="form-control" id="name" placeholder="شماره همراه" name="name" >
                             </div>
                             <div class="form-group col-md-10 m-auto">
-                                <textarea rows="10" placeholder="پیام شما" maxlength="1000" name="msg" id="msg"></textarea>
+                                <input type="email" class="form-control" id="email" placeholder="ایمیل"  name="email">
                             </div>
-                            <div class="offset-4 col-md-4 col-12 m-auto">
-                                <button type="submit" class="btn btn-default col-md-12 col-12">ارسال</button>
+                            <div class="form-group col-md-10 m-auto">
+                                <input type="text" class="form-control" id="subject" placeholder="آدرس" name="subject">
                             </div>
+                            <div class="form-group col-md-10 m-auto">
+                                <input type="text" class="form-control" id="name" placeholder="کلمه عبور" name="name" >
+                            </div>
+                            <div class="form-group col-md-10 m-auto">
+                                <input type="text" class="form-control" id="name" placeholder="تایید کلمه عبور" name="name" >
+                            </div>
+                            <div class="form-group col-md-10 m-auto">
+                                <input type="text" class="form-control" id="name" placeholder="دسته‌بندی" name="name" >
+                            </div>
+
+                            <div class="form-group col-md-10 m-auto row">
+                                <div class="offset-1 col-md-4 col-12 m-auto">
+                                    <button type="submit" class="btn btn-default col-md-12 col-12">ثبت نام</button>
+                                </div>
+                                <div class="offset-1 col-md-4 col-12 m-auto">
+                                    <button type="submit" class="btn btn-default col-md-12 col-12">ورود</button>
+                                </div>
+                            </div>
+
                         </form>
 
                     </div>
@@ -175,8 +191,8 @@ include 'header.php';
 <?php
 include 'footer.php';
 ?>
-<script src="js/classie.js"></script>
-<script src="js/uisearch.js"></script>
+<script src="/js/classie.js"></script>
+<script src="/js/uisearch.js"></script>
 <script>
     new UISearch( document.getElementById( 'sb-search' ) );
     new UISearch( document.getElementById( 'sb-search2' ) );

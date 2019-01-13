@@ -35,29 +35,34 @@ if ($typ==1){
 
         ?>
 
-        <div class="col-md-12 Paperdiv col-xs-12 float-left">
-            <div class="col-md-3 float-right col-xs-12 ">
-                <img src="<?php echo $image; ?>" width="100%" height="100%" alt="paperimg">
+        <div class="col-md-12 Paperdiv col-12 float-left">
+
+            <div class="col-md-3 float-right col-12 ">
+                <a href="<?php echo $link;?>">
+                    <img src="/<?php echo $image; ?>" width="100%" height="100%" alt="paperimg">
+                </a>
             </div>
 
-            <div class="col-md-9 PaperText float-right col-xs-12">
-                <div class="col-md-12 col-xs-12 ">
+            <div class="col-md-9 PaperText float-right col-12">
+                <div class="col-md-12 col-12 ">
                     <h2 class="papname">
-                        <?php echo $name; ?>
+                        <a href="<?php echo $link;?>">
+                            <?php echo $name; ?>
+                        </a>
                     </h2>
                 </div>
 
-                <div class="col-md-12 nametime col-xs-12 row">
-                    <div class="col-md-4 col-xs-12 ">
+                <div class="col-md-12 nametime col-12 row">
+                    <div class="col-md-4 col-12 ">
                         <?php echo $writer; ?>
                     </div>
-                    <div class="col-md-8 col-xs-12 ">
+                    <div class="col-md-8 col-12 ">
                         <?php echo $time; ?>
                     </div>
 
 
                 </div>
-                <div class="col-md-12 summ col-xs-12 ">
+                <div class="col-md-12 summ col-12 ">
                     <?php echo $mokhtasar; ?>
                 </div>
             </div>
@@ -125,32 +130,37 @@ else if ($typ==2){
 
         ?>
 
-        <div class="col-md-12 Paperdiv">
-            <div class="col-md-3 float-right">
-                <img src="<?php echo $image; ?>" width="100%" height="100%">
+        <div class="col-md-12 Paperdiv col-12 float-left ">
+            <div class="col-md-3 float-right col-12 ">
+                <a  href="<?php echo $link; ?> ">
+                    <img src="/<?php echo $image; ?>" width="100%" height="100%"
+                         alt="paperimg">
+                </a>
             </div>
 
-            <div class="col-md-9 PaperText float-right">
-                <div class="col-md-12">
+            <div class="col-md-9 PaperText float-right col-12 col-12 ">
+                <div class="col-md-12 col-12 ">
                     <h2 class="papname">
-                        <?php echo $name; ?>
+                        <a href="<?php echo $link; ?>">
+                            <?php echo $name; ?>
+                        </a>
                     </h2>
                 </div>
 
-                <div class="col-md-12 nametime">
-
-                    <div class="col-md-8">
-                        <?php echo $time; ?>
-                    </div>
-                    <div class="col-md-4">
+                <div class="col-md-12 nametime col-12 row">
+                    <div class="col-md-4 col-12 ">
                         <?php echo $writer; ?>
+                    </div>
+                    <div class="col-md-8 col-12 ">
+                        <?php echo $time; ?>
                     </div>
 
                 </div>
-                <div class="col-md-12 summ">
+                <div class="col-md-12 summ col-12 ">
                     <?php echo $mokhtasar; ?>
                 </div>
             </div>
+
         </div>
         <br>
 
@@ -214,32 +224,37 @@ else if ($typ==3){
 
         ?>
 
-        <div class="col-md-12 Paperdiv">
-            <div class="col-md-3 float-right">
-                <img src="<?php echo $image; ?>" width="100%" height="100%">
+        <div class="col-md-12 Paperdiv col-12 float-left ">
+            <div class="col-md-3 float-right col-12 ">
+                <a  href="<?php echo $link; ?> ">
+                    <img src="/<?php echo $image; ?>" width="100%" height="100%"
+                         alt="paperimg">
+                </a>
             </div>
 
-            <div class="col-md-9 PaperText float-right">
-                <div class="col-md-12">
+            <div class="col-md-9 PaperText float-right col-12 col-12 ">
+                <div class="col-md-12 col-12 ">
                     <h2 class="papname">
-                        <?php echo $name; ?>
+                        <a href="<?php echo $link; ?>">
+                            <?php echo $name; ?>
+                        </a>
                     </h2>
                 </div>
 
-                <div class="col-md-12 nametime">
-
-                    <div class="col-md-8">
-                        <?php echo $time; ?>
-                    </div>
-                    <div class="col-md-4">
+                <div class="col-md-12 nametime col-12 row">
+                    <div class="col-md-4 col-12 ">
                         <?php echo $writer; ?>
+                    </div>
+                    <div class="col-md-8 col-12 ">
+                        <?php echo $time; ?>
                     </div>
 
                 </div>
-                <div class="col-md-12 summ">
+                <div class="col-md-12 summ col-12 ">
                     <?php echo $mokhtasar; ?>
                 </div>
             </div>
+
         </div>
         <br>
 
@@ -257,7 +272,9 @@ else if ($typ==3){
             $x = ($pagenum+1) / 2 ;
             for ($i=max(2,$page-1) ; $i <= min($page+1,$x) ; $i++){
                 ?>
-                <li id="<?php echo $i?>" class="paginationoldPapers2 <?php if ($i==$page) echo "active" ?>"><?php echo $i?></li>
+                <li id="<?php echo $i?>" class="paginationoldPapers2 <?php if ($i==$page) echo "active" ?>">
+                    <?php echo $i?>
+                </li>
                 <?php
             }
             $i--;
