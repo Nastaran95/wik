@@ -17,6 +17,43 @@ CREATE TABLE Paper(ID int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
 
 
+DROP table userEshterak;
+CREATE TABLE userEshterak(ID int NOT NULL AUTO_INCREMENT,
+                  name VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci,
+                  image VARCHAR(1000),
+                  tozihat VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci,
+  PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
+
+drop TABLE users;
+CREATE TABLE users(ID int NOT NULL AUTO_INCREMENT,
+                  name VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci,
+                  address VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci,
+                  image VARCHAR(1000),
+                  mobile VARCHAR(300),
+                  email VARCHAR(300),
+                  categoryID int DEFAULT 0,
+                  eshterakID int DEFAULT 0,
+                  realtime VARCHAR(200),
+                  pass VARCHAR(100),
+                  verified int,
+                  verificationcode VARCHAR(100),
+                  codetime TIMESTAMP,
+                  attempt int,
+                  attemptgetpassword int DEFAULT 1,
+                  passwordtime TIMESTAMP,
+  FOREIGN KEY (categoryID) REFERENCES userCategory(ID),
+  FOREIGN KEY (eshterakID) REFERENCES userEshterak(ID),
+  PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
+
+  CREATE TABLE token(ID INT NOT NULL AUTO_INCREMENT,
+      token VARCHAR(100),
+      token2 VARCHAR(100),
+      PRIMARY KEY (ID));
+
+
+
+
+
 INSERT INTO Paper(XMLNAME, name,writer, Mokhtasar, image, time, realtime, mahbobiat, post_name, dastebandi) VALUES
   ('../XMLs/PaperXMLs/5b6d405a9a1fd5b6d405a9a222.xml','نام مقاله','اورهان پاموک','نام من سرخ (به ترکی استانبولی: Benim Adım Kırmızı) رمانی از اورهان پاموک است تحت تأثیر رمان مشهور ایتالیایی نام گل سرخ. نام من سرخ برنده جایزه نوبل..','../images/Papers/20-1.jpg','2018-08-09 22:40:55', '2018-08-09 22:40:55','0','namemansorkh','!');
 UPDATE Paper
@@ -83,4 +120,13 @@ INSERT INTO menue(name,link) VALUES
 INSERT INTO menue(name,link) VALUES
                   ('آگهی','');
 
+DROP table userCategory;
+CREATE TABLE userCategory(ID int NOT NULL AUTO_INCREMENT,
+                  name VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci,
+  PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
+
+INSERT INTO userCategory(name) VALUES ('دارویی');
+INSERT INTO userCategory(name) VALUES ('درمانی');
+INSERT INTO userCategory(name) VALUES ('آرایشی');
+INSERT INTO userCategory(name) VALUES ('تجاری');
 

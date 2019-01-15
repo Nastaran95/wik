@@ -124,7 +124,7 @@ include 'header.php';
                     </div>
 
                     <div class="col-md-12 float-left text-justify contctus text-center">
-                        <div class="show_res d-none ">به موارد الزامی دقت کنید.</div>
+                        <div class="show_res d-none  m-auto col-12">به موارد الزامی دقت کنید.</div>
                         <form action="contactUs.php?request=message" method="post" onsubmit="return validateForm()" class="row">
                             <div class="form-group col-md-10 m-auto">
                                 <input type="text" class="form-control" id="name" placeholder="نام شما" name="name" >

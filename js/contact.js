@@ -30,8 +30,7 @@ function validateForm(){
     }
 
     if(flag){
-        $(".karfarma_register").removeClass('hide');
-        $(".show_res").removeClass('hide');
+        $(".show_res").removeClass('d-none');
     }
     return !flag;
 }
