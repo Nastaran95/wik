@@ -37,8 +37,8 @@
             </div>
 
             <div class="col-md-2 log_reg_block row">
-                <div class="m-auto"><a class="dark_text" href="/loginRegister.php/request=login">ورود</a></div>
-                <div class="m-auto"><a class="dark_text" href="/loginRegister.php/request=register">عضویت<a/></div>
+                <div class="m-auto"><a class="dark_text" href="/loginRegister.php?request=login">ورود</a></div>
+                <div class="m-auto"><a class="dark_text" href="/loginRegister.php?request=register">عضویت<a/></div>
             </div>
         </div>
         <div class="row">
@@ -105,8 +105,8 @@
         <div class="row log_reg_block_mob">
             <i class="fa fa-bars side_menu_icon float-right" onclick="openNav()"></i>
             <img src="/images/wikiderm-logo-180-544--300x99.png" height="30px" alt="logo" class="d-block mx-auto">
-            <div class="d-block offset-1"><a class="dark_text" href="/loginRegister.php/request=login">ورود</a></div>
-            <div class="d-block offset-1"><a class="dark_text" href="/loginRegister.php/request=register">عضویت<a/></div>
+            <div class="d-block offset-1"><a class="dark_text" href="/loginRegister.php?request=login">ورود</a></div>
+            <div class="d-block offset-1"><a class="dark_text" href="/loginRegister.php?request=register">عضویت<a/></div>
         </div>
 
     </div>
