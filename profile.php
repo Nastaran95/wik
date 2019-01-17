@@ -166,9 +166,25 @@ else if($_GET['request']=='update'){
             $imagenames = "";
         }
     }
+    $tab=1;
 }
 else if($_GET['request']=='post') {
+    echo "1";
     if ((isset($_POST['editor1'])) && (isset($_POST['sum'])) && (isset($_POST['subject'])) && (isset($_POST['category1'])) && (strlen($_POST['editor1']) > 0) && (strlen($_POST['sum']) > 0) && (strlen($_POST['subject']) > 0) && (strlen($_POST['category1']) > 0)) {
+        echo "2";
+        if(isset($_GET['paper'])) {
+            echo "3";
+            $paperid = $_GET['paper'];
+            $query = "SELECT * FROM Paper WHERE ID = '$paperid'";
+            $result = $connection->query($query);
+            $row = $result->fetch_assoc();
+            $image = $row['image'];
+        }
+        else{
+            echo "4";
+            $image = "";
+        }
+
         $writer = new XMLWriter();
         $writer->openMemory();
         $writer->setIndent(true);
@@ -176,11 +192,22 @@ else if($_GET['request']=='post') {
         $writer->startElement('paper');
 //        $writer->writeElement('code', $name);
         $writer->writeElement('subject', $_POST['subject']);
-        $titleshould=$_POST['subject'];
-        $BBB = (string)uniqid();
-        $englishtopic = 'paper'.$BBB;
-        $englishtopic=str_replace(" ","-",$englishtopic);
-        $filename = 'XMLs/PaperXMLs/' . $englishtopic . '.xml';
+
+
+        if(isset($_GET['paper'])) {
+            $file = $row['XMLNAME'];
+            $englishtopic =  $row['post_name'];
+        }
+        else{
+            echo "5";
+            $BBB = (string)uniqid();
+            $englishtopic = 'paper'.$BBB;
+            $englishtopic=str_replace(" ","-",$englishtopic);
+            $filename = 'XMLs/PaperXMLs/' . $englishtopic . '.xml';
+        }
+
+
+
 
         $uploadOk = 0;
         $URL = "";
@@ -193,15 +220,15 @@ else if($_GET['request']=='post') {
 
         $datashould=$_POST['editor1'];
         $datashould2=$_POST['sum'];
-        $description="";
-        $topic = $_POST['subject'];
+        $titleshould=$_POST['subject'];
         $category = $_POST['category1'];
         date_default_timezone_set("Iran");
         $modified_time=date('Y-m-d H:i:s');
 
-
+        echo "6";
 
         if (isset($_FILES["imgPost"])) {
+            echo "7";
             $imagenames = $_FILES["imgPost"]["name"];
             $imagetempname = $_FILES["imgPost"]["tmp_name"];
             $uploadOk = 0;
@@ -245,37 +272,52 @@ else if($_GET['request']=='post') {
                         }
                     }
                 } else {
+                    echo "9";
                     $uploadOk = 0;
                     $imagetempname = "";
                     $imagenames = "";
-                    $target_file = "";
+                    $target_file = $image;
                 }
 
             }
         } else {
+            echo "8";
             $imagetempname = "";
             $imagenames = "";
-            $target_file = "";
+            $target_file = $image;
         }
 
         if (strlen($target_file)<1)
             $target_file = 'images/no-product-image-available.png';
-        $stmt  = $connection->prepare("INSERT INTO Paper (XMLNAME,name,post_name,writerID, realtime , dastebandi,Mokhtasar,image)  VALUES (?,?,?,?,?,?,?,?)");
-        $stmt->bind_param("ssssssss", $filename,$topic,$englishtopic,$_SESSION["mobile"], $modified_time,$category,$datashould2 ,$target_file);
 
+        if(isset($_GET['paper'])){
+            echo "10";
+            $paperid = $_GET['paper'];
+            $stmt = $connection->prepare("UPDATE Paper SET name=? , realtime=? , stat=0 ,dastebandi=? , Mokhtasar=? , image=?  WHERE (ID=? AND writerID=?)");
+            $stmt->bind_param("sssssss", $titleshould,$modified_time,$category,$datashould2,$target_file, $paperid ,$_SESSION["mobile"]);
+            echo "here";
+        }
+        else {
+            echo "11";
+            $stmt = $connection->prepare("INSERT INTO Paper (XMLNAME,name,post_name,writerID, realtime , dastebandi,Mokhtasar,image)  VALUES (?,?,?,?,?,?,?,?)");
+            $stmt->bind_param("ssssssss", $filename, $titleshould, $englishtopic, $_SESSION["mobile"], $modified_time, $category, $datashould2, $target_file);
+        }
 //        else {
 ////            echo "<script>window.alert('update db');</script>";
 //            $stmt  = $connection->prepare("UPDATE azmun SET xmlAdress=?,title=?,dateAzmun=?, dateKart=?,dateNatayej=?,dateNatayejNahayi=?,dateMosahebe=?,englishName=?,typ=?,state=?,realtime=?,ostan=? WHERE ID='$product'");
-//            $stmt->bind_param("ssssssssssss", $filename,$topic,$dateAzmun,$dateKart,$dateNatayej,$dateNatayejNahayi,$dateMosahebe,$englishtopic,$azmuntype,$state,$modified_time,$CITy);
+//            $stmt->bind_param("ssssssssssss", $filename,$titleshould,$dateAzmun,$dateKart,$dateNatayej,$dateNatayejNahayi,$dateMosahebe,$englishtopic,$azmuntype,$state,$modified_time,$CITy);
 //        }
         $result = $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
         $stmt->store_result();
         $result = $stmt->get_result();
+        echo $result;
+        echo $connection->error;
 //        if ($product === "all") {
 //            $product =$connection->insert_id;
 //        }
         $movafagh = 'عملیات مورد نظر با موفقیت انجام شد.';
         if ($connection->error) {
+            echo "12";
             $movafagh = 'عملیات مورد نظر موفق نبود. وارد کردن تمامی موارد الزامی است.';
             $product="namovafagh";
             if (isset($_POST['subject'])){
@@ -292,29 +334,62 @@ else if($_GET['request']=='post') {
             }
 
         }else{
+            echo "13";
             echo "<script>alert('عملیات مورد نظر موفقیت آمیز بود.');</script>";
             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/Paper/'.$englishtopic.'">';
 //            die();
         }
     }
+    else {
+        $titleshould = $_POST['subject'];
+        $datashould = $_POST['editor'];
+        $datashould2 = $_POST['sum'];
+        $category = $_POST['category1'];
+        echo "<script>alert('لطفااطلاعات خواسته شده را کامل کنید.');</script>";
+    }
+    $tab = 4;
 
 }
 
 else if(isset($_GET['requestEdit'])) {
-
+    $id = $_GET['requestEdit'];
+    $query = "SELECT * FROM Paper WHERE (ID = '$id' AND writerID='".$_SESSION["mobile"]."')";
+    $result = $connection->query($query);
+    echo "<script>window.alert('$query');</script>";
+    if( $row = $result->fetch_assoc() ) {
+        $titleshould = $row['name'];
+        $datashould2 = $row['Mokhtasar'];
+        $category = $row['dastebandi'];
+        $xmlAdress = $row['XMLNAME'];
+        if (file_exists($xmlAdress)) {
+            $XMLFile = simplexml_load_file($xmlAdress);
+            $datashould = $XMLFile->data;
+        } else {
+            $datashould = "";
+        }
+    }else{
+        $titleshould = "";
+        $datashould = "";
+        $datashould2 = "";
+        $category = "";
+        echo "<script>window.alert('دسترسی شما به این مقاله غیر مجاز است.');</script>";
+    }
+    $tab=4;
 }
 else if(isset($_GET['requestDelete'])) {
-    echo '1';
     $id = $_GET['requestDelete'];
-    $query = "SELECT * FROM Paper WHERE ID = '$id'";
+    $query = "SELECT * FROM Paper WHERE  (ID = '$id' AND writerID='".$_SESSION["mobile"]."')";
     $result = $connection->query($query);
-    $row = $result->fetch_assoc();
-    $name = $row['XMLNAME'];
-    echo $name;
-    unlink($name);
-    $query = "DELETE FROM Paper WHERE ID = '$id'";
-    $result = $connection->query($query);
-    echo $connection->error;
+    if( $row = $result->fetch_assoc() ) {
+        $name = $row['XMLNAME'];
+        unlink($name);
+        $query = "DELETE FROM Paper WHERE (ID = '$id' AND writerID='" . $_SESSION["mobile"] . "')";
+        $result = $connection->query($query);
+    }
+    else{
+        echo "<script>window.alert('دسترسی شما به حذف این مقاله غیر مجاز است.');</script>";
+    }
+    $tab = 3;
 }
 
 else{
@@ -322,7 +397,7 @@ else{
     $datashould = '';
     $datashould2 = '';
     $category = -1;
-
+    $tab = 1;
 }
 include 'header.php';
 ?>
@@ -380,13 +455,13 @@ include 'header.php';
 
 
                     <div class="tab">
-                        <button class="tablinks active" onclick="openCity(event, 'personal')">شخصی</button>
-                        <button class="tablinks" onclick="openCity(event, 'comments')">دیدگاه‌ها</button>
-                        <button class="tablinks" onclick="openCity(event, 'posts')">پست‌ها</button>
-                        <button class="tablinks" onclick="openCity(event, 'newPost')">پست جدید</button>
+                        <button class="tablinks <?php if($tab==1) echo "active";?>" onclick="openCity(event, 'personal')">شخصی</button>
+                        <button class="tablinks <?php if($tab==2) echo "active";?>"  onclick="openCity(event, 'comments')">دیدگاه‌ها</button>
+                        <button class="tablinks <?php if($tab==3) echo "active";?>" onclick="openCity(event, 'posts')">پست‌ها</button>
+                        <button class="tablinks <?php if($tab==4) echo "active";?>" onclick="openCity(event, 'newPost')">پست جدید</button>
                     </div>
 
-                    <div id="personal" class="tabcontent pt-4">
+                    <div id="personal" class="tabcontent pt-4 <?php if($tab==1) echo "d-block"; else echo "d-none";?>">
 
                         <form action="profile.php?request=update" method="post" class="row" id="userInfo" enctype="multipart/form-data">
                             <div class="form-group col-md-10 m-auto text-right">
@@ -440,12 +515,12 @@ include 'header.php';
                     </div>
 
 
-                    <div id="comments" class="tabcontent">
-                        <h3>Tokyo</h3>
-                        <p>Tokyo is the capital of Japan.</p>
+                    <div id="comments" class="tabcontent  <?php if($tab==2) echo "d-block"; else echo "d-none";?>">
+
+                        <p>سرویس کامنت فعلا در دسترس نمی‌باشد.</p>
                     </div>
 
-                    <div id="posts" class="tabcontent">
+                    <div id="posts" class="tabcontent  <?php if($tab==3) echo "d-block"; else echo "d-none";?>">
                         <?php
                         $query = "SELECT * FROM Paper WHERE writerID LIKE '".$_SESSION["mobile"]."'";
                         $result = $connection->query($query) ;
@@ -578,8 +653,8 @@ include 'header.php';
                         ?>
                     </div>
 
-                    <div id="newPost" class="tabcontent">
-                        <form action="profile.php?request=post" method="post" class="row pt-5" id="userInfo" enctype="multipart/form-data">
+                    <div id="newPost" class="tabcontent  <?php if($tab==4) echo "d-block"; else echo "d-none";?>">
+                        <form action="profile.php?request=post<?php if(isset($_GET['requestEdit'])) echo "&paper=".$_GET['requestEdit'] ;?>" method="post" class="row pt-5" id="userInfo" enctype="multipart/form-data">
                             <div class="form-group col-md-10 m-auto text-right">
                                 <label for="subject" class="dark_text"><b>عنوان مطلب</b></label>
                                 <input type="text" class="form-control" id="subject" value="<?php echo $titleshould;?>" name="subject">

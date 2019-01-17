@@ -100,6 +100,11 @@
                     <a href="/profile.php"><li>پروفایل کاربری</li></a>
                     <?php
                 }
+                if (isset($_SESSION["typ"]) && $_SESSION["typ"]>0) {
+                    ?>
+                    <a href="/Admin/admin.php"><li>منوی ادمین</li></a>
+                    <?php
+                }
                 while ($row=$result->fetch_assoc()) {
                     $link = $row['link'];
                     $name = $row['name'];
@@ -134,6 +139,11 @@
             <a href="/profile.php" >
                 پروفایل کاربری
             </a>
+            <?php
+        }
+        if (isset($_SESSION["typ"]) && $_SESSION["typ"]>0) {
+            ?>
+            <a href="/Admin/admin.php">منوی ادمین</a>
             <?php
         }
         while ($row=$result->fetch_assoc()) {

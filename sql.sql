@@ -52,6 +52,7 @@ CREATE TABLE users(ID int NOT NULL AUTO_INCREMENT,
                   attemptgetpassword int DEFAULT 1,
                   passwordtime int,
                   stat int DEFAULT 0,
+                  typ int DEFAULT 0,
   FOREIGN KEY (categoryID) REFERENCES userCategory(ID),
   FOREIGN KEY (eshterakID) REFERENCES userEshterak(ID),
   PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;

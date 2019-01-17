@@ -311,9 +311,7 @@
     </column>
     <column id="83" parent="21" name="codetime">
       <Position>13</Position>
-      <DataType>timestamp|0</DataType>
-      <NotNull>1</NotNull>
-      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+      <DataType>int(11)|0</DataType>
     </column>
     <column id="84" parent="21" name="attempt">
       <Position>14</Position>
@@ -333,32 +331,37 @@
       <DataType>int(11)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <index id="88" parent="21" name="categoryID">
+    <column id="88" parent="21" name="typ">
+      <Position>18</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <index id="89" parent="21" name="categoryID">
       <ColNames>categoryID</ColNames>
     </index>
-    <index id="89" parent="21" name="eshterakID">
+    <index id="90" parent="21" name="eshterakID">
       <ColNames>eshterakID</ColNames>
     </index>
-    <index id="90" parent="21" name="mobile">
+    <index id="91" parent="21" name="mobile">
       <ColNames>mobile</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="91" parent="21" name="PRIMARY">
+    <key id="92" parent="21" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="92" parent="21" name="mobile">
+    <key id="93" parent="21" name="mobile">
       <ColNames>mobile</ColNames>
       <UnderlyingIndexName>mobile</UnderlyingIndexName>
     </key>
-    <foreign-key id="93" parent="21" name="users_ibfk_1">
+    <foreign-key id="94" parent="21" name="users_ibfk_1">
       <ColNames>categoryID</ColNames>
       <RefSchemaName>wikiderm</RefSchemaName>
       <RefTableName>userCategory</RefTableName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <foreign-key id="94" parent="21" name="users_ibfk_2">
+    <foreign-key id="95" parent="21" name="users_ibfk_2">
       <ColNames>eshterakID</ColNames>
       <RefSchemaName>wikiderm</RefSchemaName>
       <RefTableName>userEshterak</RefTableName>

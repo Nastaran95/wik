@@ -294,7 +294,7 @@ if (file_exists($productXMLNAME)) {
                     } else {
                         $rememberME = 'off';
                     }
-                    $stmt = $connection->prepare("SELECT name, mobile, eshterakID ,verified FROM Users WHERE (mobile=? AND pass=?)");
+                    $stmt = $connection->prepare("SELECT name, mobile, eshterakID ,verified,typ FROM Users WHERE (mobile=? AND pass=?)");
                     $stmt->bind_param("ss", $mobile, $password);
                     $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
                     $result = $stmt->get_result();
@@ -304,12 +304,14 @@ if (file_exists($productXMLNAME)) {
                         $name = $row["name"];
                         $eshterak = $row["eshterakID"];
                         $verified = $row["verified"];
+                        $typ = $row["typ"];
                         if ($verified) {
                             $_SESSION["mobile"] = $mobile;
                             $_SESSION["logged_in"] = true;
                             $_SESSION["name"] = $name;
                             $_SESSION["eshterak"] = $eshterak;
                             $_SESSION["remember"] = $rememberME;
+                            $_SESSION["typ"] = $typ;
                             if ($rememberME == 'on') {
                                 $token = generateToken2();
                                 setcookie("token2", $mobile, time() + (10 * 365 * 24 * 60 * 60));
@@ -426,17 +428,19 @@ if (file_exists($productXMLNAME)) {
         }else if (isset($_POST['verifymobile'])){
             $verifymobile=$_POST['verifymobile'];
             $CODE=$_POST['CODE'];
-            $stmt  = $connection->prepare("SELECT email,name,eshterakID,attempt FROM Users WHERE (mobile=? AND verificationcode=? AND verified=0)");
+            $stmt  = $connection->prepare("SELECT email,name,eshterakID,attempt,typ FROM Users WHERE (mobile=? AND verificationcode=? AND verified=0)");
             $stmt->bind_param("ss", $verifymobile,$CODE);
             $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
             $result = $stmt->get_result();
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
+                $typ = $row["typ"];
                 $result = $connection->query("UPDATE Users SET verified=1 WHERE (mobile='$verifymobile' AND verified=0)");
                 $_SESSION["mobile"] = $verifymobile;
                 $_SESSION["logged_in"] = true;
                 $_SESSION["name"] = $row['name'];
                 $_SESSION["remember"] = 'off';
+                $_SESSION["typ"] = $typ;
 
                 echo "<meta http-equiv=\"refresh\" content=\"0;url=/\">";
                 exit();

@@ -28,6 +28,7 @@ if (isset($_GET['ID'])) {
     $result = $connection->query($query);
 //    echo $connection->error;
     if ($row = $result->fetch_assoc()) {
+        $id = $row['ID'];
         $subj = $row['name'];
         $writerID = $row['writerID'];
         $q = "SELECT * FROM users WHERE mobile=".$writerID.";";
@@ -118,6 +119,15 @@ include 'header.php';
                         <div class="col-md-12 float-left">
                             <h1> <span class="fontDiam"> &#9830; </span>
                                 <?php echo $subj; ?>
+
+                            <?php
+                            if (isset($_SESSION["logged_in"]) && $_SESSION['logged_in']==true && $_SESSION["mobile"]==$writerID) {
+                                ?>
+                                <a href="/profile.php?requestEdit=<?php echo $id;?>" class="edit"><i class="fas fa-edit"></i></a>
+                                <a  href="/profile.php?requestDelete=<?php echo $id;?>" class="delete"><i class="fas fa-trash-alt"></i></a>
+                            <?php
+                            }
+                            ?>
                             </h1>
                         </div>
                         <div class="float-left hrline"></div>

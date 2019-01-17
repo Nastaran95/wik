@@ -8,7 +8,10 @@ jQuery(document).ready(function($) {
     $(".btn-success").click(function () {
         if (confirm('آیا از انجام این کار مطمئین هستید؟')) {
             $("#editor122").val($('#edit').froalaEditor('html.get'));
+            return true;
         }
+        else
+            return false;
     });
 
     $(document).on('click touchstart',".paginationoldPapers1",function (event) {
@@ -33,13 +36,19 @@ function openCity(evt, cityName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
+        // tabcontent[i].style.display = "none";
+        tabcontent[i].classList.remove("d-block");
+        tabcontent[i].classList.add("d-none");
     }
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
-    document.getElementById(cityName).style.display = "block";
+    // document.getElementById(cityName).style.display = "block";
+
+    document.getElementById(cityName).classList.add("d-block");
+    document.getElementById(cityName).classList.remove("d-none");
+
     evt.currentTarget.className += " active";
 }
 

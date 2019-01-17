@@ -57,14 +57,14 @@ h1{
 
 /* Style the tab content */
 .tabcontent {
-    display: none;
+    /*display: none;*/
     padding: 6px 12px;
     border: 1px solid #ccc;
     border-top: none;
 }
 
 #personal{
-    display: block;
+    /*display: block;*/
 }
 
 
@@ -171,6 +171,10 @@ h1{
 .summ{
     color: rgb(129,125,124);
     font-size: 14px;
+}
+
+.fr-wrapper div:first-child{
+    display: none !important;
 }
 
 
