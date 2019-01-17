@@ -63,6 +63,10 @@ h1{
     border-top: none;
 }
 
+#personal{
+    display: block;
+}
+
 
 .userDiv {
     position: relative;
@@ -106,6 +110,67 @@ h1{
     padding: 16px 32px;
     font-size: 22px;
     color: black;
+    border-radius: 50%;
+}
+
+ input ,  select{
+    border: 2px solid rgb(238,149,143);
+    margin-bottom: 20px;
+    height: 50px !important;
+    color: black;
+}
+
+ button {
+    background-color: rgb(240,135,132);
+    height: 50px;
+    color: black;
+}
+
+.nametime{
+    font-size: 14px;
+    color: rgb(87,87,87);
+    padding-bottom: 20px;
+}
+
+
+.pagination li{
+    width: 40px;
+    height: 40px;
+    position: relative;
+    float: left;
+    padding: 10px 12px;
+    margin-left: -1px;
+    line-height: 1.428571429;
+    text-decoration: none;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+}
+
+.paginationoldPapers1:hover{
+    background-color: rgb(255,100,100);
+    color: white;
+}
+
+.active{
+    background-color:  rgb(255,160,160) !important;
+    color: white !important;
+}
+
+.Paperdiv{
+    height: auto;
+    color: black;
+    text-align: justify;
+    margin: 20px 0;
+}
+
+.papname{
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+.summ{
+    color: rgb(129,125,124);
+    font-size: 14px;
 }
 
 

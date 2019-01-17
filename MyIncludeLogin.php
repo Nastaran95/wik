@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="form-group col-md-10 m-auto text-right">
                                     <label for="category" class="dark_text"><b>دسته‌بندی</b></label>
-                                    <select name="category" form="carform" class="form-control required" id="category">
+                                    <select name="category" class="form-control required" id="category">
                                         <?php
                                         $query = "SELECT * FROM userCategory;";
                                         $result = $connection->query($query);
@@ -94,7 +94,7 @@
                                         <button type="submit" class="btn btn-default col-md-12 col-12" id="register">ثبت نام</button>
                                     </div>
                                     <div class="col-md-5 col-12 mt-2 ml-auto mr-auto">
-                                        <div class="btn btn-default col-md-12 col-12" id="login" onclick="loginPage()">ورود</div>
+                                        <div class="btn btn-default col-md-12 col-12 lowCol" onclick="loginPage()">ورود</div>
                                     </div>
                                 </div>
 
@@ -112,7 +112,7 @@
 
                 <?php
             }
-            else if($_GET['request']=='login'){
+            else {
                 ?>
                 <div class="mainDiv col-md-9 col-12 text-right">
 
@@ -136,16 +136,18 @@
                                     <input type="number" class="form-control" id="mobileLogin" placeholder="شماره همراه"  name="mobileLogin">
                                 </div>
                                 <div class="form-group col-md-10 m-auto text-right">
-                                    <label for="pass" class="dark_text"><b>کلمه عبور</b></label>
-                                    <input type="password" class="form-control" id="pass" placeholder="کلمه عبور" name="pass" >
+                                    <label for="passLogin" class="dark_text"><b>کلمه عبور</b></label>
+                                    <input type="password" class="form-control" id="passLogin" placeholder="کلمه عبور" name="passLogin" >
                                 </div>
-
+                                <div class="m-auto">
+                                    <div class="g-recaptcha" data-sitekey="6LdBvYkUAAAAAM4dmGD1D36TXX1fwssNLGnoz8j9"></div>
+                                </div>
                                 <div class="form-group col-md-10 row mt-4 ml-auto mr-auto">
                                     <div class="col-md-5 col-12 mt-2 ml-auto mr-auto">
                                         <button type="submit" class="btn btn-default col-md-12 col-12" id="register">ورود</button>
                                     </div>
                                     <div class="col-md-5 col-12 mt-2 ml-auto mr-auto" onclick="registerPage()">
-                                        <div class="btn btn-default col-md-12 col-12" id="login" >ثبت نام</div>
+                                        <div class="btn btn-default col-md-12 col-12 lowCol"  >ثبت نام</div>
                                     </div>
                                 </div>
 

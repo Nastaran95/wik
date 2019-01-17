@@ -4,14 +4,8 @@ include 'header.php';
 ?>
 <div class="container paddingtop">
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="panel panel-login">
-                <div class="row">
-                    <div class="col-11">
-                        <?php echo $payam;?>
-                    </div>
-                </div>
-            </div>
+        <div class="m-auto text-right">
+            <?php echo $payam;?>
         </div>
     </div>
     <div class="row">

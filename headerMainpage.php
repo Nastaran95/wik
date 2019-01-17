@@ -37,8 +37,19 @@
             </div>
 
             <div class="col-md-2 log_reg_block row">
-                <div class="m-auto"><a class="dark_text" href="/loginRegister.php?request=login">ورود</a></div>
-                <div class="m-auto"><a class="dark_text" href="/loginRegister.php?request=register">عضویت<a/></div>
+                <?php
+                if (!isset($_SESSION["logged_in"]) || $_SESSION['logged_in']!=true) {
+                    ?>
+                    <div class="m-auto"><a class="dark_text" href="/loginRegister.php?request=login">ورود</a></div>
+                    <div class="m-auto"><a class="dark_text" href="/loginRegister.php?request=register">عضویت<a/></div>
+                    <?php
+                }
+                else{
+                    ?>
+                    <div class="m-auto"><a class="dark_text" href="/Logout.php">خروج</a></div>
+                    <?php
+                }
+                ?>
             </div>
         </div>
 
@@ -65,8 +76,18 @@
             </div>
 
             <div class="col-md-2 log_reg_block row">
-                <div class="m-auto"><a class="dark_text" href="/loginRegister.php?request=login">ورود</a></div>
-                <div class="m-auto"><a class="dark_text" href="/loginRegister.php?request=register">عضویت<a/></div>
+                <?php
+                if (!isset($_SESSION["logged_in"]) || $_SESSION['logged_in']!=true) {
+                    ?>
+                    <div class="m-auto"><a class="dark_text" href="/loginRegister.php?request=login">ورود</a></div>
+                    <div class="m-auto"><a class="dark_text" href="/loginRegister.php?request=register">عضویت<a/></div>
+                    <?php
+                }else{
+                    ?>
+                    <div class="m-auto"><a class="dark_text" href="/Logout.php">خروج</a></div>
+                    <?php
+                }
+                ?>
             </div>
         </div>
         <div class="menu">
@@ -74,6 +95,11 @@
                 <?php
                 $query = "SELECT * FROM menue;";
                 $result = $connection->query($query);
+                if (isset($_SESSION["logged_in"]) && $_SESSION['logged_in']==true) {
+                    ?>
+                    <a href="/profile.php"><li>پروفایل کاربری</li></a>
+                    <?php
+                }
                 while ($row=$result->fetch_assoc()) {
                     $link = $row['link'];
                     $name = $row['name'];
@@ -103,6 +129,13 @@
         <?php
         $query = "SELECT * FROM menue;";
         $result = $connection->query($query);
+        if (isset($_SESSION["logged_in"]) && $_SESSION['logged_in']==true) {
+            ?>
+            <a href="/profile.php" >
+                پروفایل کاربری
+            </a>
+            <?php
+        }
         while ($row=$result->fetch_assoc()) {
             $link = $row['link'];
             $name = $row['name'];
@@ -120,8 +153,20 @@
         <div class="row log_reg_block_mob">
             <i class="fa fa-bars side_menu_icon float-right" onclick="openNav()"></i>
             <img src="/images/wikiderm-logo-180-544--300x99.png" height="30px" alt="logo" class="d-block mx-auto">
-            <div class="d-block offset-1"><a class="dark_text" href="/loginRegister.php?request=login">ورود</a></div>
-            <div class="d-block offset-1"><a class="dark_text" href="/loginRegister.php?request=register">عضویت<a/></div>
+            <?php
+            if (!isset($_SESSION["logged_in"]) || $_SESSION['logged_in']!=true) {
+                ?>
+                <div class="d-block offset-1"><a class="dark_text" href="/loginRegister.php?request=login">ورود</a>
+                </div>
+                <div class="d-block offset-1"><a class="dark_text" href="/loginRegister.php?request=register">عضویت<a/>
+                </div>
+                <?php
+            }else{
+                ?>
+                <div class="d-block offset-1"><a class="dark_text" href="/Logout.php">خروج<a/></div>
+                <?php
+            }
+            ?>
         </div>
 
     </div>

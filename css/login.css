@@ -34,7 +34,7 @@ h1{
     color: black;
 }
 
-#login{
+.lowCol{
     background-color: rgb(255,212,213);
     height: 50px;
     color: black;

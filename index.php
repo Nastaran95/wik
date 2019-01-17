@@ -126,6 +126,11 @@ include 'headerMainpage.php';
                 <?php
                 $query = "SELECT * FROM menue;";
                 $result = $connection->query($query);
+                if (isset($_SESSION["logged_in"]) && $_SESSION['logged_in']==true) {
+                    ?>
+                    <a href="/profile.php"><li>پروفایل کاربری</li></a>
+                    <?php
+                }
                 while ($row=$result->fetch_assoc()) {
                     $link = $row['link'];
                     $name = $row['name'];
@@ -240,16 +245,22 @@ include 'headerMainpage.php';
                         <?php
                         $page = 1;
                         $a = ($page-1)*7;
-                        $query = "SELECT * FROM Paper LIMIT $a , 7;";
+                        $query = "SELECT * FROM Paper ORDER by ID DESC  LIMIT $a , 7;";
                         $result = $connection->query($query);
                         while ($row=$result->fetch_assoc()) {
                             $name = $row['name'];
-                            $writer = $row['writer'];
+                            $writerID = $row['writerID'];
+                            $q = "SELECT * FROM users WHERE mobile=".$writerID.";";
+                            $res = $connection->query($q);
+                            if($rw=$res->fetch_assoc())
+                                $writer = $rw['name'];
+                            else
+                                $writer = 'ناشناس';
                             $time = $row['realtime'];
                             $link = '/Paper/'.$row['post_name'];
                             $mokhtasar = $row['Mokhtasar'];
                             $image = $row['image'];
-                            $image = substr($image,3);
+//                            $image = substr($image,3);
                             ?>
 
                             <div class="col-md-12 Paperdiv col-12 float-left">

@@ -5,7 +5,6 @@
  * Date: 8/2/18
  * Time: 7:57 PM
  */
-
 $connection = new mysqli("127.0.0.1", "root", "12345", "wikiderm");
 //$connection = new mysqli("127.0.0.1", "root", "a@bdermiwikiSAN135", "wikiderm");
 // Check connection

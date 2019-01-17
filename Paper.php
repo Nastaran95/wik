@@ -29,11 +29,17 @@ if (isset($_GET['ID'])) {
 //    echo $connection->error;
     if ($row = $result->fetch_assoc()) {
         $subj = $row['name'];
-        $writer = $row['writer'];
+        $writerID = $row['writerID'];
+        $q = "SELECT * FROM users WHERE mobile=".$writerID.";";
+        $res = $connection->query($q);
+        if($rw=$res->fetch_assoc())
+            $writer = $rw['name'];
+        else
+            $writer = 'ناشناس';
         $time = $row['realtime'];
         $dastebandi = $row['dastebandi'];
         $xmlAdress = $row['XMLNAME'];
-        $xmlAdress = substr($xmlAdress,3);
+//        $xmlAdress = substr($xmlAdress,3);
         if (file_exists($xmlAdress)) {
             $XMLFile = simplexml_load_file($xmlAdress);
             $Description=$XMLFile->data;
@@ -70,6 +76,7 @@ if (isset($_GET['ID'])) {
     <link rel="stylesheet" href="/css/bootstrap.css"/>
     <script src="/js/jQuery.js" ></script>
     <script src="/js/bootstrap.js" ></script>
+
     <link rel="stylesheet" href="/css/global.css"/>
     <link rel="stylesheet" href="/css/maghale.css"/>
     <link rel="canonical" href="https://www.wikiderm.ir/">
@@ -78,8 +85,9 @@ if (isset($_GET['ID'])) {
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <script src="/js/modernizr.custom.js"></script>
     <script src="/js/maghale.js"></script>
+    <link rel="stylesheet" href="/froala/css/froala_style.css">
+
 </head>
-<STYLE>A {text-decoration: none;} </STYLE>
 <body>
 
 <?php
@@ -124,15 +132,16 @@ include 'header.php';
                                 </div>
 
                             </div>
-                            <div class="col-md-12 col-12 text-justify">
+                            <div id="text_1" class="fr-element fr-view bar_text ">
                                 <?php echo $Description; ?>
                             </div>
+
                         </div>
 
                     </div>
 
                 <?php
-                $query = "SELECT * FROM Paper WHERE writer LIKE '%$writer%'";
+                $query = "SELECT * FROM Paper WHERE writerID LIKE '%$writerID%'";
                 $result = $connection->query($query) ;
                 $pagenum = $result->num_rows;
                 if($pagenum>0) {
@@ -148,21 +157,27 @@ include 'header.php';
                         </div>
                         <div class="hrline float-left"></div>
                         <div class="afterHr row">
-                            <div id="replacepagination1" class="<?php echo $writer;?>">
+                            <div id="replacepagination1" class="<?php echo $writerID;?>">
 
                                 <?php
                                 $page = 1;
                                 $a = ($page - 1) * 2;
-                                $query = "SELECT * FROM Paper WHERE writer LIKE '%$writer%' LIMIT $a , 2;";
+                                $query = "SELECT * FROM Paper WHERE writerID LIKE '%$writerID%' ORDER by ID DESC LIMIT $a , 2;";
                                 $result = $connection->query($query);
                                 while ($row = $result->fetch_assoc()) {
                                     $name = $row['name'];
-                                    $writer = $row['writer'];
+                                    $writerID = $row['writerID'];
+                                    $q = "SELECT * FROM users WHERE mobile=".$writerID.";";
+                                    $res = $connection->query($q);
+                                    if($rw=$res->fetch_assoc())
+                                        $writer = $rw['name'];
+                                    else
+                                        $writer = 'ناشناس';
                                     $time = $row['realtime'];
                                     $link = '/Paper/' . $row['post_name'];
                                     $mokhtasar = $row['Mokhtasar'];
                                     $image = $row['image'];
-                                    $image = substr($image, 3);
+//                                    $image = substr($image, 3);
                                     ?>
 
                                     <div class="col-md-12 Paperdiv col-12 float-left ">
@@ -267,16 +282,22 @@ include 'header.php';
                                 <?php
                                 $page = 1;
                                 $a = ($page - 1) * 2;
-                                $query = "SELECT * FROM Paper WHERE dastebandi='$dastebandi' LIMIT $a , 2;";
+                                $query = "SELECT * FROM Paper WHERE dastebandi='$dastebandi' ORDER by ID DESC LIMIT $a , 2;";
                                 $result = $connection->query($query);
                                 while ($row = $result->fetch_assoc()) {
                                     $name = $row['name'];
-                                    $writer = $row['writer'];
+                                    $writerID = $row['writerID'];
+                                    $q = "SELECT * FROM users WHERE mobile=".$writerID.";";
+                                    $res = $connection->query($q);
+                                    if($rw=$res->fetch_assoc())
+                                        $writer = $rw['name'];
+                                    else
+                                        $writer = 'ناشناس';
                                     $time = $row['realtime'];
                                     $link = '/Paper/' . $row['post_name'];
                                     $mokhtasar = $row['Mokhtasar'];
                                     $image = $row['image'];
-                                    $image = substr($image, 3);
+//                                    $image = substr($image, 3);
                                     ?>
 
                                     <div class="col-md-12 Paperdiv col-12 float-left ">

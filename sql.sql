@@ -6,7 +6,6 @@ DROP table Paper;
 CREATE TABLE Paper(ID int NOT NULL AUTO_INCREMENT,
                   XMLNAME VARCHAR(300),
                   name VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci,
-                  writer VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci,
                   Mokhtasar VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci,
                   image VARCHAR(1000),
                   time TIMESTAMP,
@@ -14,6 +13,9 @@ CREATE TABLE Paper(ID int NOT NULL AUTO_INCREMENT,
                   mahbobiat int DEFAULT 0,
                   post_name VARCHAR(300) DEFAULT "",
                   dastebandi VARCHAR(300),
+                  writerID VARCHAR(100),
+                  stat int DEFAULT 0,
+  FOREIGN KEY (writerID) REFERENCES users(mobile),
   PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
 
 
@@ -24,12 +26,20 @@ CREATE TABLE userEshterak(ID int NOT NULL AUTO_INCREMENT,
                   tozihat VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci,
   PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
 
+  INSERT INTO userEshterak(name) VALUES
+                  ('یک ماهه');
+
+  INSERT INTO userEshterak(name) VALUES
+                  ('سه ماهه');
+
+  INSERT INTO userEshterak(name) VALUES
+                  ('یک ساله');
 drop TABLE users;
 CREATE TABLE users(ID int NOT NULL AUTO_INCREMENT,
+                  mobile VARCHAR(100) UNIQUE ,
                   name VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci,
                   address VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci,
                   image VARCHAR(1000),
-                  mobile VARCHAR(300),
                   email VARCHAR(300),
                   categoryID int DEFAULT 0,
                   eshterakID int DEFAULT 0,
@@ -40,7 +50,8 @@ CREATE TABLE users(ID int NOT NULL AUTO_INCREMENT,
                   codetime TIMESTAMP,
                   attempt int,
                   attemptgetpassword int DEFAULT 1,
-                  passwordtime TIMESTAMP,
+                  passwordtime int,
+                  stat int DEFAULT 0,
   FOREIGN KEY (categoryID) REFERENCES userCategory(ID),
   FOREIGN KEY (eshterakID) REFERENCES userEshterak(ID),
   PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
@@ -54,11 +65,9 @@ CREATE TABLE users(ID int NOT NULL AUTO_INCREMENT,
 
 
 
-INSERT INTO Paper(XMLNAME, name,writer, Mokhtasar, image, time, realtime, mahbobiat, post_name, dastebandi) VALUES
-  ('../XMLs/PaperXMLs/5b6d405a9a1fd5b6d405a9a222.xml','نام مقاله','اورهان پاموک','نام من سرخ (به ترکی استانبولی: Benim Adım Kırmızı) رمانی از اورهان پاموک است تحت تأثیر رمان مشهور ایتالیایی نام گل سرخ. نام من سرخ برنده جایزه نوبل..','../images/Papers/20-1.jpg','2018-08-09 22:40:55', '2018-08-09 22:40:55','0','namemansorkh','!');
-UPDATE Paper
-SET dastebandi = 1
-WHERE dastebandi = '!';
+INSERT INTO Paper(XMLNAME, name,writerID, Mokhtasar, image, time, realtime, mahbobiat, post_name, dastebandi) VALUES
+  ('../XMLs/PaperXMLs/5b6d405a9a1fd5b6d405a9a222.xml','نام مقاله','09196487205','نام من سرخ (به ترکی استانبولی: Benim Adım Kırmızı) رمانی از اورهان پاموک است تحت تأثیر رمان مشهور ایتالیایی نام گل سرخ. نام من سرخ برنده جایزه نوبل..','../images/Papers/20-1.jpg','2018-08-09 22:40:55', '2018-08-09 22:40:55','0','namemansorkh','1');
+
 
 DROP table category;
 CREATE TABLE category(ID int NOT NULL AUTO_INCREMENT,

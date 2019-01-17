@@ -254,6 +254,7 @@ function loadCity(province){
 
 
 function regValidateForm(){
+
     flag = false;
 
     if(document.getElementById('name').value.length==0){
@@ -263,11 +264,11 @@ function regValidateForm(){
         $("#name").removeClass('colorBorder');
     }
 
-    if(document.getElementById('phone').value.length==0){
-        $("#phone").addClass('colorBorder');
+    if(document.getElementById('mobile').value.length==0){
+        $("#mobile").addClass('colorBorder');
         flag=true;
     }else{
-        $("#phone").removeClass('colorBorder');
+        $("#mobile").removeClass('colorBorder');
     }
 
     if(document.getElementById('email').value.length==0){
@@ -320,25 +321,25 @@ function regValidateForm(){
 }
 
 function loginPage() {
-    window.location.href = "/login.php";
+    window.location.href = "/loginRegister.php?request=login";
 }
 
 
 function loginValidateForm(){
     flag = false;
 
-    if(document.getElementById('emailLogin').value.length==0){
-        $("#emailLogin").addClass('colorBorder');
+    if(document.getElementById('mobileLogin').value.length==0){
+        $("#mobileLogin").addClass('colorBorder');
         flag=true;
     }else{
-        $("#emailLogin").removeClass('colorBorder');
+        $("#mobileLogin").removeClass('colorBorder');
     }
 
-    if(document.getElementById('pass').value.length==0){
-        $("#pass").addClass('colorBorder');
+    if(document.getElementById('passLogin').value.length==0){
+        $("#passLogin").addClass('colorBorder');
         flag=true;
     }else{
-        $("#pass").removeClass('colorBorder');
+        $("#passLogin").removeClass('colorBorder');
     }
 
     if(flag){
@@ -348,6 +349,5 @@ function loginValidateForm(){
 }
 
 function registerPage() {
-    alert('helooo');
-    window.location.href = "/loginRegister.php";
+    window.location.href = "/loginRegister.php?request=register";
 }
