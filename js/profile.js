@@ -25,7 +25,7 @@ jQuery(document).ready(function($) {
         return (confirm('آیا از انجام این کار مطمئین هستید؟'));
     });
 
-    
+
 });
 
 
