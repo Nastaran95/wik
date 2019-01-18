@@ -45,7 +45,7 @@ if (($_SESSION['typ']>0)) {
                                 class="fa fa-dedent"></i> مدیریت تعرفه آگهی </a></li>
                 <li class="<?php if ($which == 11) echo "selected"; ?>"><a href="allmosahebe.php"><i
                                 class="fa fa-dedent"></i> مدیریت آگهی‌ها </a></li>
-                <li class="<?php if ($which == 14) echo "selected"; ?>"><a href="allUsersRequest.php"><i
+                <li class="<?php if ($which == 14) echo "selected"; ?>"><a href="allUsersRequest.php?nocache=<?php echo generateRandomString(10)?>"><i
                                 class="fa fa-dedent"></i> همه درخواست های کاربران </a></li>
 <!--                <li class="--><?php //if ($which == 15) echo "selected"; ?><!--"><a href="allKarjooRequest.php"><i-->
 <!--                                class="fa fa-dedent"></i> همه نظرات کارجویان </a></li>-->
@@ -60,8 +60,17 @@ if (($_SESSION['typ']>0)) {
     <?php
 }
 else{
+
     header('Location:../');
 
 }
-
+function generateRandomString($length = 5) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
 ?>

@@ -106,6 +106,8 @@ CREATE TABLE user_request(
   message VARCHAR(2000) CHARACTER SET utf8 COLLATE utf8_general_ci,
   email VARCHAR(100),
   status int default 0,
+  realtime VARCHAR(200),
+
   PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
 
 

@@ -134,7 +134,8 @@ if(isset($_GET) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERV
                                     <th><span>موضوع</span></th>
                                     <th><span>ایمیل</span></th>
                                     <th><span>وضعیت</span></th>
-                                    <th><span>متن پیام</span></th>                                 
+                                    <th><span>زمان پیام</span></th>
+                                    <th><span>متن پیام</span></th>            
                                 </tr>
                                 </thead>';
     echo '<tbody>';
@@ -170,6 +171,9 @@ if(isset($_GET) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERV
                 </select>
             </td>
             <?php
+            echo "<td dir='ltr' style=\"width: 10%;\">                                                                                                               
+                                        <span>".$row['realtime']."</span>
+                                    </td>";
             echo "   
                                     <td dir='rtl' style=\"width: 40%;\">                                                                                                               
                                         <span>".$row['message']."</span>

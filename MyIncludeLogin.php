@@ -44,30 +44,31 @@
 
                         <div class="col-md-12 float-left text-justify reg text-center">
                             <div class="show_res d-none m-auto col-12">به موارد الزامی دقت کنید.</div>
+                            <div class="errmsg d-none m-auto col-12">لطفا فقط عدد انگلیسی وارد کنید.</div>
                             <form action="loginRegister.php?request=register" method="post" onsubmit="return regValidateForm()" class="row">
                                 <div class="form-group col-md-10 m-auto text-right">
                                     <label for="name" class="dark_text"><b>نام و نام خانوادگی</b></label>
-                                    <input type="text" class="form-control" id="name" placeholder="نام و نام خانوادگی" name="name" >
+                                    <input type="text" maxlength="200" class="form-control" id="name" placeholder="نام و نام خانوادگی" name="name" >
                                 </div>
                                 <div class="form-group col-md-10 m-auto text-right">
                                     <label for="mobile" class="dark_text"><b>شماره همراه</b></label>
-                                    <input type="text" class="form-control" id="mobile" placeholder="شماره همراه" name="mobile" >
+                                    <input type="text" maxlength="11" pattern="\d*" class="form-control" id="mobile" placeholder="شماره همراه" name="mobile" >
                                 </div>
                                 <div class="form-group col-md-10 m-auto text-right">
                                     <label for="email" class="dark_text"><b>ایمیل</b></label>
-                                    <input type="email" class="form-control" id="email" placeholder="ایمیل"  name="email">
+                                    <input type="email" maxlength="200" class="form-control" id="email" placeholder="ایمیل"  name="email">
                                 </div>
                                 <div class="form-group col-md-10 m-auto text-right">
                                     <label for="address" class="dark_text"><b>آدرس</b></label>
-                                    <input type="text" class="form-control" id="address" placeholder="آدرس" name="address">
+                                    <input type="text" maxlength="900" class="form-control" id="address" placeholder="آدرس" name="address">
                                 </div>
                                 <div class="form-group col-md-10 m-auto text-right">
                                     <label for="pass" class="dark_text"><b>کلمه عبور</b></label>
-                                    <input type="password" class="form-control" id="pass" placeholder="کلمه عبور" name="pass" >
+                                    <input type="password" maxlength="90" class="form-control" id="pass" placeholder="کلمه عبور" name="pass" >
                                 </div>
                                 <div class="form-group col-md-10 m-auto text-right">
                                     <label for="repass" class="dark_text"><b>تایید کلمه عبور</b></label>
-                                    <input type="password" class="form-control" id="repass" placeholder="تایید کلمه عبور" name="repass" >
+                                    <input type="password" maxlength="90" class="form-control" id="repass" placeholder="تایید کلمه عبور" name="repass" >
                                 </div>
                                 <div class="form-group col-md-10 m-auto text-right">
                                     <label for="category" class="dark_text"><b>دسته‌بندی</b></label>
@@ -130,10 +131,11 @@
 
                         <div class="col-md-12 float-left text-justify reg text-center">
                             <div class="show_res d-none  m-auto col-12">به موارد الزامی دقت کنید.</div>
+                            <div class="errmsg2 d-none m-auto col-12">لطفا فقط عدد انگلیسی وارد کنید.</div>
                             <form action="loginRegister.php?request=login" method="post" onsubmit="return loginValidateForm()" class="row">
                                 <div class="form-group col-md-10 m-auto text-right">
                                     <label for="mobileLogin" class="dark_text"><b>شماره همراه</b></label>
-                                    <input type="number" class="form-control" id="mobileLogin" placeholder="شماره همراه"  name="mobileLogin">
+                                    <input type="text" maxlength="11" pattern="\d*" class="form-control" id="mobileLogin" placeholder="شماره همراه"  name="mobileLogin">
                                 </div>
                                 <div class="form-group col-md-10 m-auto text-right">
                                     <label for="passLogin" class="dark_text"><b>کلمه عبور</b></label>

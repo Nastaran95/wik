@@ -1,4 +1,5 @@
 
+
 function validateForm(){
     flag = false;
     if(document.getElementById('name').value.length==0){
@@ -33,4 +34,5 @@ function validateForm(){
         $(".show_res").removeClass('d-none');
     }
     return !flag;
+
 }

@@ -15,37 +15,39 @@ jQuery(document).ready(function($) {
         e.preventDefault();
     });
 
-    $('#phoneNo').keypress(function (e) {
+    $(document).on('keypress',"#mobile",function (e){
         //if the letter is not digit then display error and don't type anything
         if (e.which !== 8 && e.which !== 0 && (e.which < 48 || e.which > 57)) {
             //display error message
-            $("#errmsg1").html("لطفا فقط عدد انگلیسی وارد کنید.").show().fadeOut("slow");
+            $(".errmsg").removeClass('d-none');
             return false;
+        }
+        else{
+            $(".errmsg").addClass('d-none');
+            return true;
         }
     });
 
-    $('#MobileNo').keypress(function (e) {
+    $(document).on('keypress',"#mobileLogin",function (e){
         //if the letter is not digit then display error and don't type anything
         if (e.which !== 8 && e.which !== 0 && (e.which < 48 || e.which > 57)) {
             //display error message
-            $("#errmsg2").html("لطفا فقط عدد انگلیسی وارد کنید.").show().fadeOut("slow");
+            $(".errmsg2").removeClass('d-none');
             return false;
+        }
+        else{
+            $(".errmsg2").addClass('d-none');
+            return true;
         }
     });
 
-    $('#zipcode').keypress(function (e) {
-        //if the letter is not digit then display error and don't type anything
-        if (e.which !== 8 && e.which !== 0 && (e.which < 48 || e.which > 57)) {
-            //display error message
-            $("#errmsg3").html("لطفا فقط عدد انگلیسی وارد کنید.").show().fadeOut("slow");
-            return false;
-        }
-    });
     loadprovince();
     $(".province").change(function(){
         $(".city").addClass( "TEMPSHAHR" );
         loadCity($(this).val());
     });
+
+
 });
 
 function validateEmail(email) {
