@@ -13,14 +13,14 @@ $typ = $_GET['typ'];
 if ($typ==1){
     if ($page==-1)
         $page = 1;
-    $query = "SELECT * FROM Paper  ORDER by ID DESC " ;
+    $query = "SELECT * FROM Paper WHERE stat>0  ORDER by ID DESC " ;
     $result = $connection->query($query);
     $pagenum = $result->num_rows;
     if ($page==-2)
         $page = floor(($pagenum+6) / 7);
 
     $a = ($page-1)*7;
-    $query = "SELECT * FROM Paper  ORDER by ID DESC LIMIT $a , 7;";
+    $query = "SELECT * FROM Paper WHERE stat>0  ORDER by ID DESC LIMIT $a , 7;";
     $result = $connection->query($query);
 
 
@@ -114,14 +114,14 @@ else if ($typ==2){
     $writerID = $_GET['writer'];
     if ($page==-1)
         $page = 1;
-    $query = "SELECT * FROM Paper WHERE writerID LIKE '%$writerID%' ORDER by ID DESC " ;
+    $query = "SELECT * FROM Paper WHERE (writerID LIKE '%$writerID%' and stat>0 ) ORDER by ID DESC " ;
     $result = $connection->query($query);
     $pagenum = $result->num_rows;
     if ($page==-2)
         $page = floor(($pagenum+1) / 2);
 
     $a = ($page-1)*2;
-    $query = "SELECT * FROM Paper WHERE writerID LIKE '%$writerID%' ORDER by ID DESC LIMIT $a , 2;";
+    $query = "SELECT * FROM Paper WHERE (writerID LIKE '%$writerID%' and stat>0 ) ORDER by ID DESC LIMIT $a , 2;";
     $result = $connection->query($query);
 
 
@@ -213,7 +213,7 @@ else if ($typ==3){
     $dastebandi = $_GET['daste'];
     if ($page==-1)
         $page = 1;
-    $query = "SELECT * FROM Paper WHERE dastebandi='$dastebandi' ORDER by ID DESC " ;
+    $query = "SELECT * FROM Paper WHERE (dastebandi='$dastebandi' and stat>0 ) ORDER by ID DESC " ;
     $result = $connection->query($query);
     $pagenum = $result->num_rows;
     if ($page==-2)
@@ -221,7 +221,7 @@ else if ($typ==3){
 
     $a = ($page-1)*2;
 
-    $query = "SELECT * FROM Paper WHERE dastebandi='$dastebandi' ORDER by ID DESC  LIMIT $a , 2;";
+    $query = "SELECT * FROM Paper WHERE (dastebandi='$dastebandi' and stat>0 ) ORDER by ID DESC  LIMIT $a , 2;";
     $result = $connection->query($query);
 
 
@@ -313,14 +313,14 @@ else if ($typ==4){
     $writerID = $_GET['writer'];
     if ($page==-1)
         $page = 1;
-    $query = "SELECT * FROM Paper WHERE writerID LIKE '%$writerID%' ORDER by ID DESC " ;
+    $query = "SELECT * FROM Paper WHERE (writerID LIKE '%$writerID%' and stat>0 ) ORDER by ID DESC " ;
     $result = $connection->query($query);
     $pagenum = $result->num_rows;
     if ($page==-2)
         $page = floor(($pagenum+1) / 2);
 
     $a = ($page-1)*2;
-    $query = "SELECT * FROM Paper WHERE writerID LIKE '%$writerID%' ORDER by ID DESC LIMIT $a , 2;";
+    $query = "SELECT * FROM Paper WHERE (writerID LIKE '%$writerID%' and stat>0 ) ORDER by ID DESC LIMIT $a , 2;";
     $result = $connection->query($query);
 
 

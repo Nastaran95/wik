@@ -26,12 +26,15 @@ if ($_SESSION['typ']>8) {
         <title>افزودن آزمون</title>
 
         <link rel="stylesheet" href="../css/oldcss.css">
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+<!--        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />-->
         <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
         <link rel="stylesheet" type="text/css" href="css/local.css" />
 
-        <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<!--        <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>-->
+<!--        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>-->
+        <link rel="stylesheet" href="/css/bootstrap.css"/>
+        <script src="/js/jQuery.js" ></script>
+        <script src="/js/bootstrap.js" ></script>
         <link rel="stylesheet" href="../froala/css/froala_editor.css">
         <link rel="stylesheet" href="../froala/css/froala_style.css">
         <link rel="stylesheet" href="../froala/css/plugins/code_view.css">

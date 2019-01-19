@@ -194,7 +194,7 @@ include 'headerMainpage.php';
                                 <?php echo $name; ?>
                                 <span class="float-left">
                                     <?php
-                                    $query2 = "SELECT * FROM Paper WHERE dastebandi=".$id.";" ;
+                                    $query2 = "SELECT * FROM Paper WHERE (dastebandi=".$id." and stat>0);" ;
                                     $result2 = $connection->query($query2);
                                     $num = $result2->num_rows;
                                     echo $num;
@@ -209,7 +209,7 @@ include 'headerMainpage.php';
                             همه دسته‌ها
                             <span class="float-left">
                                 <?php
-                                $query2 = "SELECT * FROM Paper ;" ;
+                                $query2 = "SELECT * FROM Paper WHERE stat>0;" ;
                                 $result2 = $connection->query($query2);
                                 $num = $result2->num_rows;
                                 echo $num;
@@ -250,7 +250,7 @@ include 'headerMainpage.php';
                         <?php
                         $page = 1;
                         $a = ($page-1)*7;
-                        $query = "SELECT * FROM Paper ORDER by ID DESC  LIMIT $a , 7;";
+                        $query = "SELECT * FROM Paper WHERE stat>0 ORDER by ID DESC  LIMIT $a , 7;";
                         $result = $connection->query($query);
                         while ($row=$result->fetch_assoc()) {
                             $name = $row['name'];
@@ -304,7 +304,7 @@ include 'headerMainpage.php';
 
                             <?php
                         }
-                        $query = "SELECT * FROM Paper;" ;
+                        $query = "SELECT * FROM Paper  WHERE stat>0;" ;
                         $result = $connection->query($query);
                         $pagenum = $result->num_rows;
                         ?>

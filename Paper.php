@@ -24,7 +24,7 @@ if (file_exists($productXMLNAME)) {
 
 if (isset($_GET['ID'])) {
     $ID = $_GET['ID'];
-    $query = "SELECT * FROM Paper WHERE post_name='$ID';";
+    $query = "SELECT * FROM Paper WHERE (post_name='$ID' and stat>0);";
     $result = $connection->query($query);
 //    echo $connection->error;
     if ($row = $result->fetch_assoc()) {
@@ -151,7 +151,7 @@ include 'header.php';
                     </div>
 
                 <?php
-                $query = "SELECT * FROM Paper WHERE writerID LIKE '%$writerID%'";
+                $query = "SELECT * FROM Paper WHERE (writerID LIKE '%$writerID%' and stat>0)";
                 $result = $connection->query($query) ;
                 $pagenum = $result->num_rows;
                 if($pagenum>0) {
@@ -172,7 +172,7 @@ include 'header.php';
                                 <?php
                                 $page = 1;
                                 $a = ($page - 1) * 2;
-                                $query = "SELECT * FROM Paper WHERE writerID LIKE '%$writerID%' ORDER by ID DESC LIMIT $a , 2;";
+                                $query = "SELECT * FROM Paper WHERE (writerID LIKE '%$writerID%' and stat>0) ORDER by ID DESC LIMIT $a , 2;";
                                 $result = $connection->query($query);
                                 while ($row = $result->fetch_assoc()) {
                                     $name = $row['name'];
@@ -271,7 +271,7 @@ include 'header.php';
                 ?>
 
                 <?php
-                $query = "SELECT * FROM Paper WHERE dastebandi='$dastebandi';";
+                $query = "SELECT * FROM Paper WHERE (dastebandi='$dastebandi' and stat>0);";
                 $result = $connection->query($query) ;
                 $pagenum = $result->num_rows;
                 if($pagenum>0) {
@@ -292,7 +292,7 @@ include 'header.php';
                                 <?php
                                 $page = 1;
                                 $a = ($page - 1) * 2;
-                                $query = "SELECT * FROM Paper WHERE dastebandi='$dastebandi' ORDER by ID DESC LIMIT $a , 2;";
+                                $query = "SELECT * FROM Paper WHERE (dastebandi='$dastebandi' and stat>0) ORDER by ID DESC LIMIT $a , 2;";
                                 $result = $connection->query($query);
                                 while ($row = $result->fetch_assoc()) {
                                     $name = $row['name'];
