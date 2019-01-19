@@ -23,18 +23,20 @@ if ($_SESSION['typ']>8) {
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>افزودن آزمون</title>
+        <title>افزودن مقاله</title>
 
-        <link rel="stylesheet" href="../css/oldcss.css">
+
+        <link rel="stylesheet" href="/css/bootstrap.css"/>
+        <script src="/js/jQuery.js" ></script>
+        <script src="/js/bootstrap.js" ></script>
+        <link rel="stylesheet" href="css/oldcss.css">
 <!--        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />-->
         <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
         <link rel="stylesheet" type="text/css" href="css/local.css" />
 
 <!--        <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>-->
 <!--        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>-->
-        <link rel="stylesheet" href="/css/bootstrap.css"/>
-        <script src="/js/jQuery.js" ></script>
-        <script src="/js/bootstrap.js" ></script>
+
         <link rel="stylesheet" href="../froala/css/froala_editor.css">
         <link rel="stylesheet" href="../froala/css/froala_style.css">
         <link rel="stylesheet" href="../froala/css/plugins/code_view.css">
@@ -282,7 +284,7 @@ if ($_SESSION['typ']>8) {
 
         ?>
         <div class="m-auto col-12" id="showerror"></div>
-        <form action="<?php echo $URL ?>" method="post" enctype="multipart/form-data" onsubmit="return validateFormdata(1)" class="row">
+        <form action="<?php echo $URL ?>" method="post" enctype="multipart/form-data" onsubmit="return validateFormdata(1)" class="form-row">
             <div class="form-group col-md-10 floatright m-auto text-right">
                 <label for="subject" class="dark_text"><b>عنوان مطلب</b></label>
                 <input type="text" class="form-control" id="subject" value="<?php echo $titleshould;?>" name="subject">

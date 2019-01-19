@@ -1,0 +1,103 @@
+div#editor {
+     /*width: 81%;*/
+     margin: 30px;
+    font-family: "B Nazanin";
+ }
+div#editor2,div#editor3,div#editor4 {
+    width: 81%;
+    margin: 30px;
+    font-family: "B Nazanin";
+}
+.width700{
+    width: 500px;
+}
+.class1 {
+    border-radius: 10%;
+    border: 2px solid #efefef;
+}
+
+.class2 {
+    opacity: 0.5;
+}
+
+#editor122{
+    visibility: hidden;
+    font-family: "B Nazanin";
+}
+
+.inlineblock{
+    display: inline-block;
+}
+.bottommargin{
+    margin-bottom: 20px;
+    float: right;
+    margin-right: 250px;
+    width: 100%;
+}
+
+.floatright{
+    float: right;
+}
+.editor122{
+    visibility: hidden;
+}
+
+.seo {
+    border: 2px solid black;
+    margin-right: 30px;
+}
+
+.marginright{
+    margin-right: 30px;
+}
+
+@media (max-width: 768px) {
+
+    .bottommargin {
+        margin-right: 0;
+    }
+}
+
+.floatleft{
+    float: left;
+}
+
+.block{
+    display: block;
+}
+
+.aligncenter {
+    display: block;
+    margin: 5px auto 5px auto;
+}
+.size-full,.size-medium{
+    display: block;
+    margin: 5px auto 5px auto;
+}
+
+.fr-view img.fr-dii {
+    margin: 5px auto;
+    display: block;
+    float: none;
+    vertical-align: top;
+}
+.imageblock{
+    display: block;
+    margin: 5px auto 5px auto;
+}
+.BORDERCOLOR,#englishtopicerror{
+    border-color: red;
+    color: red;
+}
+
+input{
+    color: black
+}
+
+.fr-toolbar{
+    margin-top: 40px;
+}
+
+.btn-successaddazmun{
+    background: lightseagreen;
+}

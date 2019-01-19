@@ -1,12 +1,10 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: maryam
- * Date: 8/11/2018
- * Time: 2:35 AM
+ * User: Nastaran
+ * Date: 8/10/2018
+ * Time: 10:59 AM
  */
-
-
 session_start();
 if (($_SESSION['typ']>0)) {
     if (isset($_REQUEST['cat1']))
@@ -27,23 +25,22 @@ if (($_SESSION['typ']>0)) {
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>همه درخواست‌های کاربران</title>
+        <title>همه کاربرها</title>
 
         <link rel="stylesheet" href="/css/bootstrap.css"/>
         <script src="/js/jQuery.js" ></script>
         <script src="/js/bootstrap.js" ></script>
-        <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
         <link rel="stylesheet" type="text/css" href="css/local.css" />
         <link href="css/allproduct.css" rel="stylesheet">
         <link href="css/addblog.css" rel="stylesheet">
-        <script src="js/allUsersRequest.js"></script>
-
+        <script src="js/allUsers.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
     </head>
     <body dir="rtl">
     <div id="wrapper">
         <?php
-        $which=14;
+        $which=5;
         include 'adminmenue.php';
         ?>
         <div id="page-wrapper">

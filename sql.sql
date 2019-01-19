@@ -42,7 +42,7 @@ CREATE TABLE users(ID int NOT NULL AUTO_INCREMENT,
                   image VARCHAR(1000),
                   email VARCHAR(300),
                   categoryID int DEFAULT 0,
-                  eshterakID int DEFAULT 0,
+                  eshterakID int DEFAULT 4,
                   realtime VARCHAR(200),
                   pass VARCHAR(100),
                   verified int,
@@ -61,7 +61,6 @@ CREATE TABLE users(ID int NOT NULL AUTO_INCREMENT,
       token VARCHAR(100),
       token2 VARCHAR(100),
       PRIMARY KEY (ID));
-
 
 
 

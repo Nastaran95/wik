@@ -294,7 +294,7 @@ if (file_exists($productXMLNAME)) {
                     } else {
                         $rememberME = 'off';
                     }
-                    $stmt = $connection->prepare("SELECT name, mobile, eshterakID ,verified,typ FROM Users WHERE (mobile=? AND pass=?)");
+                    $stmt = $connection->prepare("SELECT name, mobile, eshterakID ,verified,typ FROM users WHERE (mobile=? AND pass=?)");
                     $stmt->bind_param("ss", $mobile, $password);
                     $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
                     $result = $stmt->get_result();
@@ -428,14 +428,14 @@ if (file_exists($productXMLNAME)) {
         }else if (isset($_POST['verifymobile'])){
             $verifymobile=$_POST['verifymobile'];
             $CODE=$_POST['CODE'];
-            $stmt  = $connection->prepare("SELECT email,name,eshterakID,attempt,typ FROM Users WHERE (mobile=? AND verificationcode=? AND verified=0)");
+            $stmt  = $connection->prepare("SELECT email,name,eshterakID,attempt,typ FROM users WHERE (mobile=? AND verificationcode=? AND verified=0)");
             $stmt->bind_param("ss", $verifymobile,$CODE);
             $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
             $result = $stmt->get_result();
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 $typ = $row["typ"];
-                $result = $connection->query("UPDATE Users SET verified=1 WHERE (mobile='$verifymobile' AND verified=0)");
+                $result = $connection->query("UPDATE users SET verified=1 WHERE (mobile='$verifymobile' AND verified=0)");
                 $_SESSION["mobile"] = $verifymobile;
                 $_SESSION["logged_in"] = true;
                 $_SESSION["name"] = $row['name'];
@@ -450,7 +450,7 @@ if (file_exists($productXMLNAME)) {
             }
         }else if (isset($_POST['getcode'])){
             $mobile=$_POST['getcode'];
-            $stmt  = $connection->prepare("SELECT email,name,eshterakID,attempt,verificationcode,UNIX_TIMESTAMP(CURRENT_TIMESTAMP)-UNIX_TIMESTAMP(codetime) as codetime FROM Users WHERE (mobile=? AND verified=0)");
+            $stmt  = $connection->prepare("SELECT email,name,eshterakID,attempt,verificationcode,UNIX_TIMESTAMP(CURRENT_TIMESTAMP)-UNIX_TIMESTAMP(codetime) as codetime FROM users WHERE (mobile=? AND verified=0)");
             $stmt->bind_param("s", $mobile);
             $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
             $result = $stmt->get_result();
@@ -468,7 +468,7 @@ if (file_exists($productXMLNAME)) {
                         $Code=$verificationcode;
                         // your text messages
 //                        include 'SMS/SmsIR_VerificationCode.php';
-                        $result = $connection->query("UPDATE Users SET attempt=attempt+1 WHERE (mobile='$mobile' AND verified=0)");
+                        $result = $connection->query("UPDATE users SET attempt=attempt+1 WHERE (mobile='$mobile' AND verified=0)");
                         $payam="<h4>کد فعال سازی با موفقیت برای شما ارسال شد.</h4>";
                         include 'Verifyregister.php';
                     }else {
@@ -485,7 +485,7 @@ if (file_exists($productXMLNAME)) {
                         $Code=$verificationcode;
                         // your text messages
 //                        include 'SMS/SmsIR_VerificationCode.php';
-                        $result = $connection->query("UPDATE Users SET attempt=attempt+1 WHERE (mobile='$mobile' AND verified=0)");
+                        $result = $connection->query("UPDATE users SET attempt=attempt+1 WHERE (mobile='$mobile' AND verified=0)");
                         $payam="<h4>کد فعال سازی با موفقیت برای شما ارسال شد.</h4>";
                         include 'Verifyregister.php';
                     }else {
@@ -502,7 +502,7 @@ if (file_exists($productXMLNAME)) {
                         $Code=$verificationcode;
                         // your text messages
 //                        include 'SMS/SmsIR_VerificationCode.php';
-                        $result = $connection->query("UPDATE Users SET attempt=attempt+1 WHERE (mobile='$mobile' AND verified=0)");
+                        $result = $connection->query("UPDATE users SET attempt=attempt+1 WHERE (mobile='$mobile' AND verified=0)");
                         $payam="<h4>کد فعال سازی با موفقیت برای شما ارسال شد.</h4>";
                         include 'Verifyregister.php';
                     }else {
@@ -519,7 +519,7 @@ if (file_exists($productXMLNAME)) {
                         $Code=$verificationcode;
                         // your text messages
 //                        include 'SMS/SmsIR_VerificationCode.php';
-                        $result = $connection->query("UPDATE Users SET attempt=attempt+1 WHERE (mobile='$mobile' AND verified=0)");
+                        $result = $connection->query("UPDATE users SET attempt=attempt+1 WHERE (mobile='$mobile' AND verified=0)");
                         $payam="<h4>کد فعال سازی با موفقیت برای شما ارسال شد.</h4>";
                         include 'Verifyregister.php';
                     }else {
@@ -536,7 +536,7 @@ if (file_exists($productXMLNAME)) {
                         $Code=$verificationcode;
                         // your text messages
 //                        include 'SMS/SmsIR_VerificationCode.php';
-                        $result = $connection->query("UPDATE Users SET attempt=attempt+1 WHERE (mobile='$mobile' AND verified=0)");
+                        $result = $connection->query("UPDATE users SET attempt=attempt+1 WHERE (mobile='$mobile' AND verified=0)");
                         $payam="<h4>کد فعال سازی با موفقیت برای شما ارسال شد.</h4>";
                         include 'Verifyregister.php';
                     }else {
@@ -554,7 +554,7 @@ if (file_exists($productXMLNAME)) {
             include 'notgetcode.php';
         }else if (isset($_POST['sendpassword'])){
             $mobile=$_POST['sendpassword'];
-            $stmt  = $connection->prepare("SELECT PASSWORD ,attemptgetpassword,UNIX_TIMESTAMP(CURRENT_TIMESTAMP)-UNIX_TIMESTAMP(passwordtime) as time FROM Users WHERE (mobile=?)");
+            $stmt  = $connection->prepare("SELECT pass ,attemptgetpassword,UNIX_TIMESTAMP(CURRENT_TIMESTAMP)-UNIX_TIMESTAMP(passwordtime) as time FROM users WHERE (mobile=?)");
             $stmt->bind_param("s", $mobile);
             $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
             $result = $stmt->get_result();
@@ -565,7 +565,7 @@ if (file_exists($productXMLNAME)) {
                     // your text messages
                     $Messages = array("پسورد شما در سایت ویکی‌درم:".$row['Password']);
 //                    include 'SMS/SendMessage.php';
-                    $result = $connection->query("UPDATE Users SET passwordtime=current_timestamp WHERE (mobile='$mobile')");
+                    $result = $connection->query("UPDATE users SET passwordtime=current_timestamp WHERE (mobile='$mobile')");
                     include 'header.php';
                     ?>
                     <div class="container paddingtop">

@@ -27,15 +27,11 @@ if (($_SESSION['typ']>0)) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>همه مقاله‌ها</title>
 
-<!--        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />-->
-<!--        <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />-->
-        <link rel="stylesheet" type="text/css" href="css/local.css" />
-        <link href="css/allproduct.css" rel="stylesheet">
-<!--        <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>-->
-<!--        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>-->
         <link rel="stylesheet" href="/css/bootstrap.css"/>
         <script src="/js/jQuery.js" ></script>
         <script src="/js/bootstrap.js" ></script>
+        <link rel="stylesheet" type="text/css" href="css/local.css" />
+        <link href="css/allproduct.css" rel="stylesheet">
         <link href="css/addblog.css" rel="stylesheet">
         <script src="js/allPosts.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">

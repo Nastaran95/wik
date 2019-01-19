@@ -8,7 +8,7 @@ if (isset($payam)){
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-login">
                 <div class="row">
-                    <div class="col-xs-11"><?php echo $payam2;?>
+                    <div class="col-11"><?php echo $payam2;?>
                     </div>
                 </div>
             </div>

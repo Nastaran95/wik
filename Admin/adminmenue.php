@@ -7,7 +7,7 @@
  */
 if (($_SESSION['typ']>0)) {
     ?>
-    <nav class="navbar navbar-inverse navbar-fixed-top pull-right" role="navigation">
+    <nav class="navbar navbar-inverse navbar-fixed-top " role="navigation">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                 <span class="sr-only">منو</span>
@@ -25,9 +25,9 @@ if (($_SESSION['typ']>0)) {
                         افزودن مقاله </a></li>
                 <li class="<?php if ($which == 3) echo "selected"; ?>"><a href="allPosts.php?nocache=<?php echo generateRandomString(10)?>"><i class="fa fa-tasks"></i>
                         همه مقاله‌ها </a></li>
-                <li class="<?php if ($which == 4) echo "selected"; ?>"><a href="addbook.php"><i class="fa fa-globe"></i>
+                <li class="<?php if ($which == 4) echo "selected"; ?>"><a href="addUser.php"><i class="fa fa-globe"></i>
                         افزودن کاربر </a></li>
-                <li class="<?php if ($which == 5) echo "selected"; ?>"><a href="allbook.php"><i class="fa fa-globe"></i>
+                <li class="<?php if ($which == 5) echo "selected"; ?>"><a href="allUsers.php"><i class="fa fa-globe"></i>
                         مدیریت کاربران </a></li>
                 <li class="<?php if ($which == 6) echo "selected"; ?>"><a href="addPost.php"><i
                                 class="fa fa-list-ol"></i>مدیریت منو</a></li>

@@ -20,10 +20,60 @@ if ($_SESSION['typ'] >0) {
             return "1";
         }
     }
-    if ( isset($_REQUEST['orderID']) && isset($_REQUEST['typ']) && $_REQUEST['typ']==2) {
+    else if ( isset($_REQUEST['orderID']) && isset($_REQUEST['typ']) && $_REQUEST['typ']==2) {
         $product = $_REQUEST['orderID'];
         $status= $_REQUEST['status'];
         $query = "update Paper set stat=".$status." WHERE ID = ".$product;
+        $result = $connection->query($query);
+        if($connection->error){
+            return "0";
+        }
+        else{
+            return "1";
+        }
+    }
+    else if ( isset($_REQUEST['orderID']) && isset($_REQUEST['typ']) && $_REQUEST['typ']==3) {
+        $product = $_REQUEST['orderID'];
+        $status= $_REQUEST['status'];
+        $query = "update users set stat=".$status." WHERE ID = ".$product;
+        $result = $connection->query($query);
+        if($connection->error){
+            return "0";
+        }
+        else{
+            return "1";
+        }
+    }
+    else if ( isset($_REQUEST['orderID']) && isset($_REQUEST['typ']) && $_REQUEST['typ']==4) {
+        $product = $_REQUEST['orderID'];
+        $status= $_REQUEST['status'];
+        $query = "update users set verified=".$status." WHERE ID = ".$product;
+        $result = $connection->query($query);
+        if($connection->error){
+            return "0";
+        }
+        else{
+            return "1";
+        }
+    }
+
+    else if ( isset($_REQUEST['orderID']) && isset($_REQUEST['typ']) && $_REQUEST['typ']==5) {
+        $product = $_REQUEST['orderID'];
+        $status= $_REQUEST['status'];
+        $query = "update users set categoryID=".$status." WHERE ID = ".$product;
+        $result = $connection->query($query);
+        if($connection->error){
+            return "0";
+        }
+        else{
+            return "1";
+        }
+    }
+
+    else if ( isset($_REQUEST['orderID']) && isset($_REQUEST['typ']) && $_REQUEST['typ']==6) {
+        $product = $_REQUEST['orderID'];
+        $status= $_REQUEST['status'];
+        $query = "update users set eshterakID=".$status." WHERE ID = ".$product;
         $result = $connection->query($query);
         if($connection->error){
             return "0";
