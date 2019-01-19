@@ -21,17 +21,17 @@ if (($_SESSION['typ']>0)) {
             <ul id="active" class="nav navbar-nav side-nav">
                 <li class="<?php if ($which == 1) echo "selected"; ?>"><a href="admin.php"><i
                                 class="fa fa-bullseye"></i> داشبورد </a></li>
-                <li class="<?php if ($which == 2) echo "selected"; ?>"><a href="addblog.php"><i class="fa fa-tasks"></i>
+                <li class="<?php if ($which == 2) echo "selected"; ?>"><a href="addPost.php"><i class="fa fa-tasks"></i>
                         افزودن مقاله </a></li>
-                <li class="<?php if ($which == 3) echo "selected"; ?>"><a href="allblog.php"><i class="fa fa-tasks"></i>
+                <li class="<?php if ($which == 3) echo "selected"; ?>"><a href="allPosts.php?nocache=<?php echo generateRandomString(10)?>"><i class="fa fa-tasks"></i>
                         همه مقاله‌ها </a></li>
                 <li class="<?php if ($which == 4) echo "selected"; ?>"><a href="addbook.php"><i class="fa fa-globe"></i>
                         افزودن کاربر </a></li>
                 <li class="<?php if ($which == 5) echo "selected"; ?>"><a href="allbook.php"><i class="fa fa-globe"></i>
                         مدیریت کاربران </a></li>
-                <li class="<?php if ($which == 6) echo "selected"; ?>"><a href="addAzmun.php"><i
+                <li class="<?php if ($which == 6) echo "selected"; ?>"><a href="addPost.php"><i
                                 class="fa fa-list-ol"></i>مدیریت منو</a></li>
-                <li class="<?php if ($which == 7) echo "selected"; ?>"><a href="allAzmun.php"><i
+                <li class="<?php if ($which == 7) echo "selected"; ?>"><a href="allPosts.php"><i
                                 class="fa fa-list-ol"></i> مدیریت دسته بندی کاربران </a></li>
                 <li class="<?php if ($which == 8) echo "selected"; ?>"><a href="addNews.php"><i
                                 class="fa fa-list-alt"></i> مدیریت دسته بندی مقالات </a></li>

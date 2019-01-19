@@ -195,7 +195,7 @@ else if($_GET['request']=='post') {
 
 
         if(isset($_GET['paper'])) {
-            $file = $row['XMLNAME'];
+            $filename = $row['XMLNAME'];
             $englishtopic =  $row['post_name'];
         }
         else{
@@ -205,9 +205,6 @@ else if($_GET['request']=='post') {
             $englishtopic=str_replace(" ","-",$englishtopic);
             $filename = 'XMLs/PaperXMLs/' . $englishtopic . '.xml';
         }
-
-
-
 
         $uploadOk = 0;
         $URL = "";
@@ -222,8 +219,19 @@ else if($_GET['request']=='post') {
         $datashould2=$_POST['sum'];
         $titleshould=$_POST['subject'];
         $category = $_POST['category1'];
+
         date_default_timezone_set("Iran");
-        $modified_time=date('Y-m-d H:i:s');
+        $DATE = date('Y-m-d H:i:s');
+        list($date, $time) = explode(" ", $DATE);
+        list($year, $month, $day) = explode("-", $date);
+        list($jyear, $jmonth, $jday) = gregorian_to_jalali($year, $month, $day);
+        if (strlen($jmonth) == 1) {
+            $jmonth = "0" . $jmonth;
+        }
+        if (strlen($jday) == 1) {
+            $jday = "0" . $jday;
+        }
+        $modified_time = $jyear . '/' . $jmonth . '/' . $jday.' '.$time;
 
         echo "6";
 
@@ -293,8 +301,8 @@ else if($_GET['request']=='post') {
         if(isset($_GET['paper'])){
             echo "10";
             $paperid = $_GET['paper'];
-            $stmt = $connection->prepare("UPDATE Paper SET name=? , realtime=? , stat=0 ,dastebandi=? , Mokhtasar=? , image=?  WHERE (ID=? AND writerID=?)");
-            $stmt->bind_param("sssssss", $titleshould,$modified_time,$category,$datashould2,$target_file, $paperid ,$_SESSION["mobile"]);
+            $stmt = $connection->prepare("UPDATE Paper SET name=? ,  stat=0 ,dastebandi=? , Mokhtasar=? , image=?  WHERE (ID=? AND writerID=?)");
+            $stmt->bind_param("ssssss", $titleshould,$category,$datashould2,$target_file, $paperid ,$_SESSION["mobile"]);
             echo "here";
         }
         else {
@@ -742,6 +750,39 @@ include 'header.php';
 
 <?php
 include 'footer.php';
+function gregorian_to_jalali($gy,$gm,$gd,$mod=''){
+    list($gy,$gm,$gd)=explode('_',tr_num($gy.'_'.$gm.'_'.$gd));/* <= Extra :اين سطر ، جزء تابع اصلي نيست */
+    $g_d_m=array(0,31,59,90,120,151,181,212,243,273,304,334);
+    if($gy > 1600){
+        $jy=979;
+        $gy-=1600;
+    }else{
+        $jy=0;
+        $gy-=621;
+    }
+    $gy2=($gm > 2)?($gy+1):$gy;
+    $days=(365*$gy) +((int)(($gy2+3)/4)) -((int)(($gy2+99)/100)) +((int)(($gy2+399)/400)) -80 +$gd +$g_d_m[$gm-1];
+    $jy+=33*((int)($days/12053));
+    $days%=12053;
+    $jy+=4*((int)($days/1461));
+    $days%=1461;
+    $jy+=(int)(($days-1)/365);
+    if($days > 365)$days=($days-1)%365;
+    if($days < 186){
+        $jm=1+(int)($days/31);
+        $jd=1+($days%31);
+    }else{
+        $jm=7+(int)(($days-186)/30);
+        $jd=1+(($days-186)%30);
+    }
+    return($mod==='')?array($jy,$jm,$jd):$jy .$mod .$jm .$mod .$jd;
+}
+
+function tr_num($str,$mod='en',$mf='٫'){
+    $num_a=array('0','1','2','3','4','5','6','7','8','9','.');
+    $key_a=array('۰','۱','۲','۳','۴','۵','۶','۷','۸','۹',$mf);
+    return($mod=='fa')?str_replace($num_a,$key_a,$str):str_replace($key_a,$num_a,$str);
+}
 ?>
 <script src="/js/classie.js"></script>
 <script src="/js/uisearch.js"></script>

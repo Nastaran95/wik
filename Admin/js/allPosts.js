@@ -2,7 +2,7 @@ var range, page, category;
 $(document).ready(function() {
     range = $("#limit").find(":selected").text();
     type=$("input[name='type']").val();
-    $.get("allUsersRequestPagination.php", {page:1, limit:range,type:type,query:"=====+++=====",category:"all"}, function (data, status) {
+    $.get("allPostsPagination.php", {page:1, limit:range,type:type,query:"=====+++=====",category:"all", TMP:makeid()}, function (data, status) {
         $("#results").html(data);
     });
     //executes code below when user click on pagination links
@@ -10,7 +10,7 @@ $(document).ready(function() {
         e.preventDefault();
         $(".loading-div").show(); //show loading element
         page = $(this).attr("data-page"); //get page number from link
-        $.get("allUsersRequestPagination.php", {page:page, limit:range,type:type,query:"=====+++=====",category:"all"}, function (data, status) {
+        $.get("allPostsPagination.php", {page:page, limit:range,type:type,query:"=====+++=====",category:"all", TMP:makeid()}, function (data, status) {
             $(".loading-div").hide(); //show loading element
             $("#results").html(data);
         });
@@ -20,7 +20,7 @@ $(document).ready(function() {
         e.preventDefault();
         $(".loading-div").show(); //show loading element
         range = $("#limit").find(":selected").text();
-        $.get("allUsersRequestPagination.php", {page:1, limit:range,type:type,query:"=====+++=====",category:"all"}, function (data, status) {
+        $.get("allPostsPagination.php", {page:1, limit:range,type:type,query:"=====+++=====",category:"all", TMP:makeid()}, function (data, status) {
             $(".loading-div").hide(); //show loading element
             $("#results").html(data);
         });
@@ -34,7 +34,7 @@ $(document).ready(function() {
         e.preventDefault();
         $(".loading-div").show(); //show loading element
         range = $("#limit").find(":selected").text();
-        $.get("allUsersRequestPagination.php", {page:1, limit:range,type:type,query:searchdata,category:"all"}, function (data, status) {
+        $.get("allPostsPagination.php", {page:1, limit:range,type:type,query:searchdata,category:"all", TMP:makeid()}, function (data, status) {
             $(".loading-div").hide(); //show loading element
             $("#results").html(data);
         });
@@ -45,17 +45,19 @@ $(document).ready(function() {
             $(this).trigger("enterKey");
         }
     });
-    $(document).on('change','.status',function(e){
+
+    $(document).on('click','#changestatusOk',function(e){
         e.preventDefault();
-        status = $(this).find(":selected").val();
-        statustemp=status;
-        orderID = $(this).find(":selected").attr('class');
-        if (confirm('از تغییر استیت این کامنت مطمعنید؟')){
-            $.get("changestatus.php", {orderID:orderID, status:status , typ:1}, function (data, status) {
+        orderID = $(this).attr("class");
+        if (confirm('از تغییر استیت این مقاله مطمعنید؟')){
+            $.get("changestatus.php", {orderID:orderID, status:1 , typ:2}, function (data, status) {
                 if (data=="0"){
                     alert("عملیات مورد نظر انجام نشد.");
                 }
                 else{
+                    str = '.status' + orderID;
+                    $(str, document).html('تایید شده');
+                    $(str, document).css({'color':'green'});
                     alert("عملیات مورد نظر با موفقیت انجام شد.");
                 }
             });
@@ -65,4 +67,13 @@ $(document).ready(function() {
 
 function confirming() {
     return confirm('آیا از حذف این مورد مطمعن هستید؟');
+}
+function makeid() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < 5; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
 }

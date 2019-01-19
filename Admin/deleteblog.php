@@ -13,7 +13,7 @@ if (($_SESSION['typ'] == 10) || ($_SESSION['typ'] == 9)) {
         $product = $_REQUEST['product'];
         $type = $_REQUEST['type'];
         if ($type == 1)
-            $query = "SELECT * FROM blog WHERE ID = $product";
+            $query = "SELECT * FROM Paper WHERE ID = $product";
         else if($type == 2)
             $query = "SELECT * FROM book WHERE ID = $product";
         else if($type == 3)
@@ -50,11 +50,11 @@ if (($_SESSION['typ'] == 10) || ($_SESSION['typ'] == 9)) {
             $query = "DELETE FROM karjoo_request WHERE ID = $product";
         $result = $connection->query($query);
         if ($type == 1)
-            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/allblog.php?nocache='.generateRandomString(10).'">';
+            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/allPosts.php?nocache='.generateRandomString(10).'">';
         else if($type == 2)
             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/allbook.php?nocache='.generateRandomString(10).'">';
         else if($type == 3)
-            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/allAzmun.php?nocache='.generateRandomString(10).'">';
+            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/allPosts.php?nocache='.generateRandomString(10).'">';
         else if($type == 4)
             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/allNews.php?nocache='.generateRandomString(10).'">';
         else if($type == 5)
