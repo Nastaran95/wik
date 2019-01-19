@@ -63,6 +63,23 @@ $(document).ready(function() {
             });
         }
     });
+    $(document).on('click','#changestatusNO',function(e){
+        e.preventDefault();
+        orderID = $(this).attr("class");
+        if (confirm('از تغییر استیت این مقاله مطمعنید؟')){
+            $.get("changestatus.php", {orderID:orderID, status:0 , typ:2}, function (data, status) {
+                if (data=="0"){
+                    alert("عملیات مورد نظر انجام نشد.");
+                }
+                else{
+                    str = '.status' + orderID;
+                    $(str, document).html('تایید نشده');
+                    $(str, document).css({'color':'red'});
+                    alert("عملیات مورد نظر با موفقیت انجام شد.");
+                }
+            });
+        }
+    });
 });
 
 function confirming() {

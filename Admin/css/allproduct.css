@@ -1,0 +1,111 @@
+.user-list tbody td>img {
+    display: inline-block;
+    float: right;
+    position: relative;
+    max-width: 50px;
+    margin-left: 15px;
+}
+
+.table a.table-link.danger {
+    color: #e74c3c;
+}
+.pagination {
+    direction: ltr;
+    margin: 0;
+    padding: 0;
+}
+.pagination li.active {
+    background: #F0F0F0;
+    color: #333;
+}
+.pagination li {
+    display: inline;
+    padding: 6px 10px 6px 10px;
+    border: 1px solid #ddd;
+    margin-right: -1px;
+    font: 15px/20px Arial, Helvetica, sans-serif;
+    background: #FFFFFF;
+    box-shadow: inset 1px 1px 5px #F4F4F4;
+}
+.pagination li.last {
+    border-radius: 0px 5px 5px 0px;
+}
+.pagination li>div {
+    display: inline-block;
+}
+.pagination li a {
+    text-decoration: none;
+    color: rgb(89, 141, 235);
+}
+a {
+    color: #3498db;
+    outline: none!important;
+}
+div.dataTables_length label {
+    display: block;
+    text-align: right;
+    font-weight: normal;
+}
+@media (min-width: 768px) {
+    .form-control {
+        display: inline-block;
+        width: auto;
+        vertical-align: middle;
+    }
+}
+.user-list tbody td .user-link {
+    display: block;
+    font-size: 1.25em;
+    padding-top: 3px;
+    margin-left: 10px;
+}
+.table tbody tr td {
+    font-size: 0.875em;
+    vertical-align: middle;
+    border-top: 1px solid #e7ebee;
+    padding: 12px 8px;
+}
+
+.user-list tbody td>.info {
+    display: inline-block;
+}
+
+@media (max-width: 967px)
+{
+    .table-responsive>.table>thead>tr>th, .table-responsive>.table>tbody>tr>th, .table-responsive>.table>tfoot>tr>th, .table-responsive>.table>thead>tr>td, .table-responsive>.table>tbody>tr>td, .table-responsive>.table>tfoot>tr>td {
+        white-space: nowrap;
+    }
+    .table-responsive {
+        width: 100%;
+        margin-bottom: 15px;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        border: 1px solid #ddd;
+    }
+}
+.width50{
+    width: 50%;
+}
+
+select.input-lg {
+    height: 52px;
+    line-height: 52px;
+}
+
+.bluecolor{
+    color: #1e88e5;
+}
+
+.greencolor{
+    color: #1CB94A;
+}
+
+.specialcolor{
+    color: mediumvioletred;
+}
+
+.table-responsive{
+    overflow-x: inherit;
+}

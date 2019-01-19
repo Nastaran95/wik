@@ -218,6 +218,13 @@
                                             </span>
                                         </a>
                                         
+                                        <a  href='allPosts.php' class=\"" . $row['ID'] . "\" id='changestatusNO'>
+                                            <span class=\"fa-stack\">
+                                                <i class=\"fa fa-square fa-stack-2x specialcolor \"></i>
+                                                <i class=\"fas fa-times fa-stack-1x fa-inverse\"></i>
+                                            </span>
+                                        </a>
+                                        
                                     </td>";
             echo '</tr>';
         }
