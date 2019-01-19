@@ -116,6 +116,7 @@ $(document).ready(function() {
         }
     });
 
+
     $(document).on('change','#category',function(e){
         e.preventDefault();
         status = $(this).find(":selected").val();
@@ -149,6 +150,24 @@ $(document).ready(function() {
             });
         }
     });
+
+    $(document).on('click','#deleteImage',function(e){
+        e.preventDefault();
+        orderID = $(this).attr("class");
+        if (confirm('از حذف این تصویر مطمعنید؟')){
+            $.get("changestatus.php", {orderID:orderID, typ:7}, function (data, status) {
+                if (data=="0"){
+                    alert("عملیات مورد نظر انجام نشد.");
+                }
+                else{
+                    str = '.img' + orderID;
+                    $(str).attr("src","../images/no-photo.png");
+                    alert("عملیات مورد نظر با موفقیت انجام شد.");
+                }
+            });
+        }
+    });
+
 
 });
 

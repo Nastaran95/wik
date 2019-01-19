@@ -83,6 +83,18 @@ if ($_SESSION['typ'] >0) {
         }
     }
 
+    else if ( isset($_REQUEST['orderID']) && isset($_REQUEST['typ']) && $_REQUEST['typ']==7) {
+        $product = $_REQUEST['orderID'];
+        $query = "update users set image='images/no-photo.png'  WHERE ID = ".$product;
+        $result = $connection->query($query);
+        if($connection->error){
+            return "0";
+        }
+        else{
+            return "1";
+        }
+    }
+
 }else {
     header('Location:/');
 }

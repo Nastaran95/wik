@@ -281,7 +281,7 @@ if ($_SESSION['typ']>8) {
             </div>
             <div class="form-group col-md-10 m-auto text-right">
                 <label for="mobile" class="dark_text"><b>شماره همراه</b></label>
-                <input type="text" maxlength="11" pattern="\d*" class="form-control" id="mobile" placeholder="شماره همراه" name="mobile"  value="<?php echo $mobile;?>" >
+                <input type="text" maxlength="11" pattern="\d*" class="form-control" id="mobile" placeholder="شماره همراه" name="mobile"  value="<?php echo $mobile;?>" <?php if ($product !== "all") echo "readonly";?> >
             </div>
             <div class="form-group col-md-10 m-auto text-right">
                 <label for="email" class="dark_text"><b>ایمیل</b></label>

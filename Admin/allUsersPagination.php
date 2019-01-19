@@ -170,9 +170,18 @@ if (isset($_GET) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SER
                                         <input type=\"checkbox\"/>
                                     </td>
                                     <td>                                                                                                               
-                                        <span> <img src=\"../".$img."\" width='50px' height='50px'></span>
-                                    </td>
-                                    <td>
+                                        <span> <img src=\"../".$img."\" width='50px' height='50px' class='img" .$IDOA . "' ></span>
+                                        <a onClick=\"return confirming();\"  href='allUsers.php' class=\"" . $IDOA . "\" id='deleteImage'>
+                                            <span class=\"fa-stack\">
+                                                <i class=\"fa fa-square fa-stack-2x text-danger\" ></i>
+                                                <i class=\"far fa-trash-alt fa-stack-1x fa-inverse\"></i>
+                                            </span>
+                                        </a>
+                                    </td>";
+
+
+
+            echo "                  <td>
                                         <div class=\"info\">
                                             <a target='_blank' href='/' class=\"user-link\">" . $name . "</a>
                                         </div>
@@ -215,7 +224,7 @@ if (isset($_GET) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SER
             <td >
                 <select id="category" name="category" class="status form-control input-lg">
                     <?php
-                    $query = "SELECT * FROM category;";
+                    $query = "SELECT * FROM userCategory;";
                     $result = $connection->query($query);
                     while ($row = $result->fetch_assoc()) {
                         $name = $row['name'];
