@@ -29,7 +29,7 @@ if (($_SESSION['typ']>0)) {
                         افزودن کاربر </a></li>
                 <li class="<?php if ($which == 5) echo "selected"; ?>"><a href="allUsers.php"><i class="fa fa-globe"></i>
                         مدیریت کاربران </a></li>
-                <li class="<?php if ($which == 6) echo "selected"; ?>"><a href="addPost.php"><i
+                <li class="<?php if ($which == 6) echo "selected"; ?>"><a href="manageMenue.php"><i
                                 class="fa fa-list-ol"></i>مدیریت منو</a></li>
                 <li class="<?php if ($which == 7) echo "selected"; ?>"><a href="allPosts.php"><i
                                 class="fa fa-list-ol"></i> مدیریت دسته بندی کاربران </a></li>

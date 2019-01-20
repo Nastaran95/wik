@@ -95,6 +95,7 @@ if ($_SESSION['typ'] >0) {
         }
     }
 
+
 }else {
     header('Location:/');
 }

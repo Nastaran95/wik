@@ -17,7 +17,7 @@ if (($_SESSION['typ'] == 10) || ($_SESSION['typ'] == 9)) {
         else if($type == 2)
             $query = "SELECT * FROM users WHERE ID = $product";
         else if($type == 3)
-            $query = "SELECT * FROM azmun WHERE ID = $product";
+            $query = "SELECT * FROM menue WHERE ID = $product";
         else if($type == 4)
             $query = "SELECT * FROM news WHERE ID = $product";
         else if($type == 5)
@@ -37,7 +37,7 @@ if (($_SESSION['typ'] == 10) || ($_SESSION['typ'] == 9)) {
         else if($type == 2)
             $query = "DELETE FROM users WHERE ID = $product";
         else if($type == 3)
-            $query = "DELETE FROM azmun WHERE ID = $product";
+            $query = "DELETE FROM menue WHERE ID = $product";
         else if($type == 4)
             $query = "DELETE FROM news WHERE ID = $product";
         else if($type == 5)
@@ -54,7 +54,7 @@ if (($_SESSION['typ'] == 10) || ($_SESSION['typ'] == 9)) {
         else if($type == 2)
             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/allUsers.php?nocache='.generateRandomString(10).'">';
         else if($type == 3)
-            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/allPosts.php?nocache='.generateRandomString(10).'">';
+            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/manageMenue.php?nocache='.generateRandomString(10).'">';
         else if($type == 4)
             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/allNews.php?nocache='.generateRandomString(10).'">';
         else if($type == 5)
