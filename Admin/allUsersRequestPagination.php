@@ -181,7 +181,7 @@ if(isset($_GET) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERV
         }
         echo "                                                                      
                                     <td style=\"width: 3%;\">
-                                        <a onClick=\"return confirming();\"  href='deleteblog.php?type=7&product=".$row['ID']."' class=\"table-link danger\">
+                                        <a onClick=\"return confirming();\"  href='deleteblog.php?type=8&product=".$row['ID']."' class=\"table-link danger\">
                                             <span class=\"fa-stack\">
                                                 <i class=\"fa fa-square fa-stack-2x\"></i>
                                                 <i class=\"fa fa-trash-o fa-stack-1x fa-inverse\"></i>

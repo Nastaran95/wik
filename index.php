@@ -5,7 +5,6 @@
  * Date: 12/23/18
  * Time: 2:14 PM
  */
-
 session_start();
 
 include 'Settings.php'; //harja khasti DB estefade koni ino bezan faghat
@@ -173,13 +172,24 @@ include 'headerMainpage.php';
         </div>
         <div class="col-md-12 test">
             <div class="rightDiv  col-12">
-                <div class="col-md-11 grayBox col-10"> سلویک </div>
-                <div class="col-md-11 grayBox col-10"> </div>
-                <div class="col-md-11 grayBox col-10"> </div>
-                <div class="col-md-11 grayBox col-10"> </div>
-                <div class="col-md-11 grayBox col-10"> </div>
-                <div class="col-md-11 grayBox col-10"> </div>
-                <div class="col-md-11 grayBox col-10"> </div>
+                <?php
+                $query = "SELECT * FROM grayBox;";
+                $result = $connection->query($query);
+                while ($row=$result->fetch_assoc()) {
+                    $name = $row['name'];
+                    $Mokhtasar = $row['Mokhtasar'];
+                    $id = $row['ID'];
+                    $link = $row['link'];
+                    $act = $row['active'];
+                    if($act>0) {
+                        ?>
+                        <a href="<?php echo $link?>">
+                            <div class="col-md-11 grayBox col-10"><?php echo $name;?></div>
+                        </a>
+                        <?php
+                    }
+                }
+                ?>
             </div>
 
             <div class="mainDiv  col-12">

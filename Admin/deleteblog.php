@@ -25,9 +25,9 @@ if (($_SESSION['typ'] == 10) || ($_SESSION['typ'] == 9)) {
         else if($type == 6)
             $query = "SELECT * FROM slider WHERE ID = $product";
         else if($type == 7)
-            $query = "SELECT * FROM user_request WHERE ID = $product";
+            $query = "SELECT * FROM grayBox WHERE ID = $product";
         else if($type == 8)
-            $query = "SELECT * FROM karjoo_request WHERE ID = $product";
+            $query = "SELECT * FROM user_request WHERE ID = $product";
         $result = $connection->query($query);
         $row = $result->fetch_assoc();
         $name = $row['XMLNAME'];
@@ -45,9 +45,9 @@ if (($_SESSION['typ'] == 10) || ($_SESSION['typ'] == 9)) {
         else if($type == 6)
             $query = "DELETE FROM slider WHERE ID = $product";
         else if($type == 7)
-            $query = "DELETE FROM user_request WHERE ID = $product";
+            $query = "DELETE FROM grayBox WHERE ID = $product";
         else if($type == 8)
-            $query = "DELETE FROM karjoo_request WHERE ID = $product";
+            $query = "DELETE FROM user_request WHERE ID = $product";
         $result = $connection->query($query);
         if($connection->error){
             echo '<script> alert("بدلایل امنیتی دسترسی به حذف داده نشد'.$connection->error.'."); </script> ';
@@ -66,9 +66,9 @@ if (($_SESSION['typ'] == 10) || ($_SESSION['typ'] == 9)) {
         else if($type == 6)
             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/manageSlider.php?nocache='.generateRandomString(10).'">';
         else if($type == 7)
-            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/manageSlider.php?nocache='.generateRandomString(10).'">';
+            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/manageGrayBox.php?nocache='.generateRandomString(10).'">';
         else if($type == 8)
-            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/allKarjooRequest.php?nocache='.generateRandomString(10).'">';
+            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/allUsersRequest.php?nocache='.generateRandomString(10).'">';
 
 
     }

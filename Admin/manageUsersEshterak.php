@@ -101,7 +101,7 @@ if (($_SESSION['typ']>0)) {
                                 </td>
                                 <td  style="width: 40%;">
                                     <div dir="rtl" >
-                                        <textarea rows="10" maxlength="300" name="tozihat" class="form-control w-100" form="<?php echo $id;?>"><?php echo $tozih; ?> </textarea>
+                                        <textarea rows="5" maxlength="300" name="tozihat" class="form-control w-100" form="<?php echo $id;?>"><?php echo $tozih; ?> </textarea>
                                     </div>
                                 </td>
 

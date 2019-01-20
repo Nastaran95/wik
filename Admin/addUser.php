@@ -39,6 +39,8 @@ if ($_SESSION['typ']>8) {
         <link href="css/addblog.css" rel="stylesheet">
         <script src="js/addblog.js"></script>
         <script src="js/kamadatepicker.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
         <style>
             table{
                 color: #000000;}

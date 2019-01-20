@@ -39,14 +39,15 @@ if (($_SESSION['typ']>0)) {
                                 class="fa fa-file"></i> مدیریت اشتراک عضویت </a></li>
                 <li class="<?php if ($which == 10) echo "selected"; ?>"><a href="manageSlider.php"><i
                                 class="fa fa-list-alt"></i> اسلایدر صفحه اصلی </a></li>
-                <li class="<?php if ($which == 11) echo "selected"; ?>"><a href=""><i
+                <li class="<?php if ($which == 11) echo "selected"; ?>"><a href="manageGrayBox.php"><i
                                 class="fa fa-file"></i> مدیریت مربع‌های طوسی </a></li>
-                <li class="<?php if ($which == 12) echo "selected"; ?>"><a href=""><i
-                                class="fa fa-dedent"></i> مدیریت تعرفه آگهی </a></li>
+                <li class="<?php if ($which == 12) echo "selected"; ?>"><a href="allUsersRequest.php?nocache=<?php echo generateRandomString(10)?>">
+                        <i class="fas fa-question-circle"></i> همه درخواست های کاربران </a></li>
                 <li class="<?php if ($which == 13) echo "selected"; ?>"><a href=""><i
+                                class="fa fa-dedent"></i> مدیریت تعرفه آگهی </a></li>
+                <li class="<?php if ($which == 14) echo "selected"; ?>"><a href=""><i
                                 class="fa fa-dedent"></i> مدیریت آگهی‌ها </a></li>
-                <li class="<?php if ($which == 14) echo "selected"; ?>"><a href="allUsersRequest.php?nocache=<?php echo generateRandomString(10)?>"><i
-                                class="fa fa-dedent"></i> همه درخواست های کاربران </a></li>
+
 <!--                <li class="--><?php //if ($which == 15) echo "selected"; ?><!--"><a href="allKarjooRequest.php"><i-->
 <!--                                class="fa fa-dedent"></i> همه نظرات کارجویان </a></li>-->
             </ul>

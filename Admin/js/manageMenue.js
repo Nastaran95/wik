@@ -2,25 +2,66 @@ var range, page, category;
 $(document).ready(function() {
 
 
-    // $(document).on('click','#add',function(e){
-    //     e.preventDefault();
-    //     orderID = $(this).attr("class");
-    //     if (orderID==-1)
-    //         typ = 8;
-    //     else
-    //         typ = 9;
-    //
-    //     if (confirm('از اضافه شدن این مورد به DB مطمعنید؟')){
-    //         $.get("changestatus.php", {orderID:orderID, typ:typ}, function (data, status) {
-    //             if (data=="0"){
-    //                 alert("عملیات مورد نظر انجام نشد.");
-    //             }
-    //             else{
-    //                 alert("عملیات مورد نظر با موفقیت انجام شد.");
-    //             }
-    //         });
-    //     }
-    // });
+    $(document).on('change keyup','.back',function(e){
+        e.preventDefault();
+        orderID = $(this).attr("class");
+        r = document.getElementById("backR").value;
+        g = document.getElementById("backG").value;
+        b = document.getElementById("backB").value;
+        str = 'rgb('+r+','+g+','+b+')';
+        // alert(str);
+        $('.grayBox').css('background-color', str);
+    });
+
+    $(document).on('change keyup','.text',function(e){
+        e.preventDefault();
+        orderID = $(this).attr("class");
+        r = document.getElementById("textR").value;
+        g = document.getElementById("textG").value;
+        b = document.getElementById("textB").value;
+        str = 'rgb('+r+','+g+','+b+')';
+        // alert(str);
+        $('.grayBox').css('color', str);
+    });
+
+    $(document).on('change keyup','.border',function(e){
+        e.preventDefault();
+        orderID = $(this).attr("class");
+        r = document.getElementById("borderR").value;
+        g = document.getElementById("borderG").value;
+        b = document.getElementById("borderB").value;
+        str = 'rgb('+r+','+g+','+b+')';
+        // alert(str);
+        $(".grayBox").hover(function() {
+            $(this).css("border-color",str)
+        });
+    });
+
+    $(document).on('change keyup','.hover',function(e){
+        e.preventDefault();
+        orderID = $(this).attr("class");
+        r = document.getElementById("hoverR").value;
+        g = document.getElementById("hoverG").value;
+        b = document.getElementById("hoverB").value;
+        str = 'rgb('+r+','+g+','+b+')';
+        // alert(str);
+        $(".grayBox").hover(function() {
+            $(this).css("background-color",str)
+        });
+    });
+
+    $(document).on('change keyup','.texthover',function(e){
+        e.preventDefault();
+        orderID = $(this).attr("class");
+        r = document.getElementById("texthoverR").value;
+        g = document.getElementById("texthoverG").value;
+        b = document.getElementById("texthoverB").value;
+        str = 'rgb('+r+','+g+','+b+')';
+        // alert(str);
+        $(".grayBox").hover(function() {
+            $(this).css("color",str)
+        });
+    });
 
 
 });
@@ -128,7 +169,7 @@ function myFunction4() {
         "                                </td>\n" +
         "                                <td  style=\"width: 40%;\">\n" +
         "                                    <div dir=\"rtl\" >\n" +
-        "                                        <textarea rows=\"10\" maxlength=\"300\" name=\"tozihat\" class=\"form-control w-100\" form=\""+x+"\">  </textarea>\n" +
+        "                                        <textarea rows=\"5\" maxlength=\"300\" name=\"tozihat\" class=\"form-control w-100\" form=\""+x+"\">  </textarea>\n" +
         "                                    </div>\n" +
         "                                </td>\n" +
         "\n" +
@@ -206,6 +247,57 @@ function myFunction5() {
 }
 
 
+function myFunction6() {
+    x++;
+    y++;
+    var table = document.getElementById("menuTable");
+    var row = table.insertRow(y);
+    row.innerHTML = "<form action=\"manageGrayBox.php?request=-1\" method=\"post\"  class=\"form-row mt-5\" id=\""+x+"\" enctype=\"multipart/form-data\" >\n" +
+        "\n" +
+        "                                <td  >\n" +
+        "                                    <div dir=\"rtl\" >\n" +
+        "                                        <input type=\"text\" maxlength=\"100\" class=\"form-control w-100\"\n" +
+        "                                               name=\"name\"  form=\""+x+"\">\n" +
+        "                                    </div>\n" +
+        "                                </td>\n" +
+        "                                <td  >\n" +
+        "                                    <div dir=\"rtl\" >\n" +
+        "                                        <textarea rows=\"8\" maxlength=\"300\" name=\"tozihat\" class=\"form-control w-100\" form=\""+x+"\">  </textarea>\n" +
+        "                                    </div>\n" +
+        "                                </td>\n" +
+        "\n" +
+        "                                <td  >\n" +
+        "                                    <div dir=\"rtl\" >\n" +
+        "                                        <input type=\"text\" maxlength=\"100\" class=\"form-control w-100\"\n" +
+        "                                               name=\"link\"  form=\""+x+"\">\n" +
+        "                                    </div>\n" +
+        "                                </td>\n" +
+        "\n" +
+        "                                <td >\n" +
+        "                                    <div class=\"form-check-inline\">\n" +
+        "                                        <label class=\"form-check-label\">\n" +
+        "                                            <input type=\"radio\" class=\"form-check-input\" name=\"status\" value=\"0\" checked form=\""+x+"\">غیر فعال\n" +
+        "                                        </label>\n" +
+        "                                    </div>\n" +
+        "                                    <div class=\"form-check-inline\">\n" +
+        "                                        <label class=\"form-check-label\">\n" +
+        "                                            <input type=\"radio\" class=\"form-check-input\" name=\"status\" value=\"1\"  form=\""+x+"\">فعال\n" +
+        "                                        </label>\n" +
+        "                                    </div>\n" +
+        "                                </td>\n" +
+        "\n" +
+        "                                <td style=\"width: 5%;\">\n" +
+        "                                    <div class=\"d-flex\">\n" +
+        "                                        <button type=\"submit\" class=\"btn p-0 m-0 \" onclick=\"return confirming2();\" form=\""+x+"\" >\n" +
+        "                                            <span class=\"fa-stack\">\n" +
+        "                                                <i class=\"fa fa-square fa-stack-2x text-success\"></i>\n" +
+        "                                                <i class=\"far fa-check-square fa-stack-1x fa-inverse\"></i>\n" +
+        "                                            </span>\n" +
+        "                                        </button>\n" +
+        "                                    </div>\n" +
+        "                                </td>\n" +
+        "                            </form>";
+}
 
 
 function confirming() {

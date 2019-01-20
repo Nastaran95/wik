@@ -143,3 +143,12 @@ INSERT INTO userCategory(name) VALUES ('درمانی');
 INSERT INTO userCategory(name) VALUES ('آرایشی');
 INSERT INTO userCategory(name) VALUES ('تجاری');
 
+
+DROP TABLE grayBox;
+CREATE TABLE grayBox(
+  ID int NOT NULL AUTO_INCREMENT,
+  name VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci,
+  Mokhtasar VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci  DEFAULT "",
+  link VARCHAR(100),
+  active int default 0,
+  PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
