@@ -19,11 +19,11 @@ if (($_SESSION['typ'] == 10) || ($_SESSION['typ'] == 9)) {
         else if($type == 3)
             $query = "SELECT * FROM menue WHERE ID = $product";
         else if($type == 4)
-            $query = "SELECT * FROM news WHERE ID = $product";
+            $query = "SELECT * FROM userCategory WHERE ID = $product";
         else if($type == 5)
-            $query = "SELECT * FROM customers WHERE ID = $product";
+            $query = "SELECT * FROM userEshterak WHERE ID = $product";
         else if($type == 6)
-            $query = "SELECT * FROM mosahebe WHERE ID = $product";
+            $query = "SELECT * FROM slider WHERE ID = $product";
         else if($type == 7)
             $query = "SELECT * FROM user_request WHERE ID = $product";
         else if($type == 8)
@@ -39,16 +39,20 @@ if (($_SESSION['typ'] == 10) || ($_SESSION['typ'] == 9)) {
         else if($type == 3)
             $query = "DELETE FROM menue WHERE ID = $product";
         else if($type == 4)
-            $query = "DELETE FROM news WHERE ID = $product";
+            $query = "DELETE FROM userCategory WHERE ID = $product";
         else if($type == 5)
-            $query = "DELETE FROM customers WHERE ID = $product";
+            $query = "DELETE FROM userEshterak WHERE ID = $product";
         else if($type == 6)
-            $query = "DELETE FROM mosahebe WHERE ID = $product";
+            $query = "DELETE FROM slider WHERE ID = $product";
         else if($type == 7)
             $query = "DELETE FROM user_request WHERE ID = $product";
         else if($type == 8)
             $query = "DELETE FROM karjoo_request WHERE ID = $product";
         $result = $connection->query($query);
+        if($connection->error){
+            echo '<script> alert("بدلایل امنیتی دسترسی به حذف داده نشد'.$connection->error.'."); </script> ';
+        }
+
         if ($type == 1)
             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/allPosts.php?nocache='.generateRandomString(10).'">';
         else if($type == 2)
@@ -56,15 +60,16 @@ if (($_SESSION['typ'] == 10) || ($_SESSION['typ'] == 9)) {
         else if($type == 3)
             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/manageMenue.php?nocache='.generateRandomString(10).'">';
         else if($type == 4)
-            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/allNews.php?nocache='.generateRandomString(10).'">';
+            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/manageUsersCategory.php?nocache='.generateRandomString(10).'">';
         else if($type == 5)
-            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/allCustomer.php?nocache='.generateRandomString(10).'">';
+            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/manageUsersEshterak.php?nocache='.generateRandomString(10).'">';
         else if($type == 6)
-            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/allmosahebe.php?nocache='.generateRandomString(10).'">';
+            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/manageSlider.php?nocache='.generateRandomString(10).'">';
         else if($type == 7)
-            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/allUsersRequest.php?nocache='.generateRandomString(10).'">';
+            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/manageSlider.php?nocache='.generateRandomString(10).'">';
         else if($type == 8)
             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/allKarjooRequest.php?nocache='.generateRandomString(10).'">';
+
 
     }
 }else {

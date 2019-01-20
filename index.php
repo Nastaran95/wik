@@ -72,11 +72,15 @@ include 'headerMainpage.php';
                     $result2 = $connection->query($query2);
                     $num = $result2->num_rows;
                     $x = 0;
-                    while ($x<$num){
-                        ?>
-                        <li data-target="#myCarousel" data-slide-to="<?php echo $x;?>" class="<?php if($x==0) echo'active';?>"></li>
-                        <?php
-                        $x = $x + 1;
+                    while ($row=$result2->fetch_assoc()){
+                        $act = $row['active'];
+                        if($act>0) {
+                            ?>
+                            <li data-target="#myCarousel" data-slide-to="<?php echo $x; ?>"
+                                class="<?php if ($x == 0) echo 'active'; ?>"></li>
+                            <?php
+                            $x = $x + 1;
+                        }
                     }
                     ?>
                 </ul>
@@ -93,16 +97,19 @@ include 'headerMainpage.php';
                         $mokhtasar = $row['Mokhtasar'];
                         $img = $row['image'];
                         $alt = $row['alt'];
-                        ?>
-                        <div class="carousel-item <?php if($x==0) echo'active';?>">
-                            <img src="<?php echo $img; ?>" alt="<?php echo $alt; ?>" width="100%">
-                            <div class="carousel-caption">
-                                <h3><?php echo $name; ?></h3>
-                                <p><?php echo $mokhtasar; ?></p>
+                        $act = $row['active'];
+                        if($act>0) {
+                            ?>
+                            <div class="carousel-item <?php if ($x == 0) echo 'active'; ?>">
+                                <img src="<?php echo $img; ?>" alt="<?php echo $alt; ?>" width="100%">
+                                <div class="carousel-caption">
+                                    <h3><?php echo $name; ?></h3>
+                                    <p><?php echo $mokhtasar; ?></p>
+                                </div>
                             </div>
-                        </div>
-                        <?php
-                        $x = $x+1;
+                            <?php
+                            $x = $x + 1;
+                        }
                     }
                     ?>
 
@@ -139,9 +146,14 @@ include 'headerMainpage.php';
                 while ($row=$result->fetch_assoc()) {
                     $link = $row['link'];
                     $name = $row['name'];
-                    ?>
-                    <a href="<?php echo $link;?>" ><li><?php echo $name;?></li></a>
-                    <?php
+                    $act = $row['active'];
+                    if($act>0) {
+                        ?>
+                        <a href="<?php echo $link; ?>">
+                            <li><?php echo $name; ?></li>
+                        </a>
+                        <?php
+                    }
                 }
                 ?>
             </ul>

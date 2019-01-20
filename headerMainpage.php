@@ -108,9 +108,14 @@
                 while ($row=$result->fetch_assoc()) {
                     $link = $row['link'];
                     $name = $row['name'];
-                    ?>
-                    <a href="<?php echo $link;?>" ><li><?php echo $name;?></li></a>
-                    <?php
+                    $act = $row['active'];
+                    if($act>0) {
+                        ?>
+                        <a href="<?php echo $link; ?>">
+                            <li><?php echo $name; ?></li>
+                        </a>
+                        <?php
+                    }
                 }
                 ?>
             </ul>
@@ -149,11 +154,14 @@
         while ($row=$result->fetch_assoc()) {
             $link = $row['link'];
             $name = $row['name'];
-            ?>
-            <a href="<?php echo $link;?>" >
-                <?php echo $name;?>
-            </a>
-            <?php
+            $act = $row['active'];
+            if($act>0) {
+                ?>
+                <a href="<?php echo $link; ?>">
+                    <?php echo $name; ?>
+                </a>
+                <?php
+            }
         }
         ?>
     </div>

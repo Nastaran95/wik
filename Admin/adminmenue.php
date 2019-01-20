@@ -31,19 +31,19 @@ if (($_SESSION['typ']>0)) {
                         مدیریت کاربران </a></li>
                 <li class="<?php if ($which == 6) echo "selected"; ?>"><a href="manageMenue.php"><i
                                 class="fa fa-list-ol"></i>مدیریت منو</a></li>
-                <li class="<?php if ($which == 7) echo "selected"; ?>"><a href="allPosts.php"><i
+                <li class="<?php if ($which == 7) echo "selected"; ?>"><a href="manageUsersCategory.php"><i
                                 class="fa fa-list-ol"></i> مدیریت دسته بندی کاربران </a></li>
-                <li class="<?php if ($which == 8) echo "selected"; ?>"><a href="addNews.php"><i
+                <li class="<?php if ($which == 8) echo "selected"; ?>"><a href="managePapersCategory.php"><i
                                 class="fa fa-list-alt"></i> مدیریت دسته بندی مقالات </a></li>
-                <li class="<?php if ($which == 9) echo "selected"; ?>"><a href="allNews.php"><i
-                                class="fa fa-list-alt"></i> اسلایدر صفحه اصلی </a></li>
-                <li class="<?php if ($which == 12) echo "selected"; ?>"><a href="addCustomer.php"><i
-                                class="fa fa-file"></i> مدیریت مربع‌های طوسی </a></li>
-                <li class="<?php if ($which == 13) echo "selected"; ?>"><a href="allCustomer.php"><i
+                <li class="<?php if ($which == 9) echo "selected"; ?>"><a href="manageUsersEshterak.php"><i
                                 class="fa fa-file"></i> مدیریت اشتراک عضویت </a></li>
-                <li class="<?php if ($which == 10) echo "selected"; ?>"><a href="addmosahebe.php"><i
+                <li class="<?php if ($which == 10) echo "selected"; ?>"><a href="manageSlider.php"><i
+                                class="fa fa-list-alt"></i> اسلایدر صفحه اصلی </a></li>
+                <li class="<?php if ($which == 11) echo "selected"; ?>"><a href=""><i
+                                class="fa fa-file"></i> مدیریت مربع‌های طوسی </a></li>
+                <li class="<?php if ($which == 12) echo "selected"; ?>"><a href=""><i
                                 class="fa fa-dedent"></i> مدیریت تعرفه آگهی </a></li>
-                <li class="<?php if ($which == 11) echo "selected"; ?>"><a href="allmosahebe.php"><i
+                <li class="<?php if ($which == 13) echo "selected"; ?>"><a href=""><i
                                 class="fa fa-dedent"></i> مدیریت آگهی‌ها </a></li>
                 <li class="<?php if ($which == 14) echo "selected"; ?>"><a href="allUsersRequest.php?nocache=<?php echo generateRandomString(10)?>"><i
                                 class="fa fa-dedent"></i> همه درخواست های کاربران </a></li>

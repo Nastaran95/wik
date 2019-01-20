@@ -12,10 +12,11 @@ CREATE TABLE Paper(ID int NOT NULL AUTO_INCREMENT,
                   realtime VARCHAR(200),
                   mahbobiat int DEFAULT 0,
                   post_name VARCHAR(300) DEFAULT "",
-                  dastebandi VARCHAR(300),
+                  dastebandi INT ,
                   writerID VARCHAR(100),
                   stat int DEFAULT 0,
   FOREIGN KEY (writerID) REFERENCES users(mobile),
+  FOREIGN KEY (dastebandi) REFERENCES category(ID),
   PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
 
 
@@ -88,6 +89,7 @@ CREATE TABLE slider(ID int NOT NULL AUTO_INCREMENT,
                   image VARCHAR(1000),
                   link VARCHAR(300) DEFAULT "",
                   alt  VARCHAR(300) DEFAULT "",
+                  active int DEFAULT 0,
   PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
 
 INSERT INTO slider(headerName,Mokhtasar,image) VALUES
