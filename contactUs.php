@@ -8,7 +8,17 @@
 session_start();
 
 include 'Settings.php';
-
+$productXMLNAME = "XMLs/contactUs.xml";
+if (file_exists($productXMLNAME)) {
+    $XMLFile = simplexml_load_file($productXMLNAME);
+    $SEOdescription=$XMLFile->description;
+    $SEOKEYWORDS=$XMLFile->kewords;
+    $SEOTITLE=$XMLFile->seotitle;
+}else{
+    $SEOdescription="";
+    $SEOKEYWORDS="";
+    $SEOTITLE="";
+}
 ?>
 
 <!DOCTYPE html>

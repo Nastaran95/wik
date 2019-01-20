@@ -43,9 +43,9 @@ if (($_SESSION['typ']>0)) {
                                 class="fa fa-file"></i> مدیریت مربع‌های طوسی </a></li>
                 <li class="<?php if ($which == 12) echo "selected"; ?>"><a href="allUsersRequest.php?nocache=<?php echo generateRandomString(10)?>">
                         <i class="fas fa-question-circle"></i> همه درخواست های کاربران </a></li>
-                <li class="<?php if ($which == 13) echo "selected"; ?>"><a href=""><i
+                <li class="<?php if ($which == 13) echo "selected"; ?>"><a href="admin.php"><i
                                 class="fa fa-dedent"></i> مدیریت تعرفه آگهی </a></li>
-                <li class="<?php if ($which == 14) echo "selected"; ?>"><a href=""><i
+                <li class="<?php if ($which == 14) echo "selected"; ?>"><a href="admin.php"><i
                                 class="fa fa-dedent"></i> مدیریت آگهی‌ها </a></li>
 
 <!--                <li class="--><?php //if ($which == 15) echo "selected"; ?><!--"><a href="allKarjooRequest.php"><i-->

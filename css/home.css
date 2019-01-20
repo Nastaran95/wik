@@ -168,7 +168,7 @@
     text-decoration: none;
     background-color: #ffffff;
     border: 1px solid #dddddd;
-
+    cursor: pointer;
 }
 
 .paginationoldPapers:hover{

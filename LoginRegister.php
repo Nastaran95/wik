@@ -184,7 +184,7 @@ if (file_exists($productXMLNAME)) {
                             // your text messages
                             $Code = $verificationcode;
                             $img = 'images/no-photo.png' ;
-//                            include 'SMS/SmsIR_VerificationCode.php';
+                            include 'SMS/SmsIR_VerificationCode.php';
                             $stmt  = $connection->prepare("INSERT INTO users (name,address,mobile,email,categoryID,pass,eshterakID,verified,verificationcode,codetime,attempt,passwordtime,image)  VALUES (?,?,?,?,?,?,4,0,?,CURRENT_TIMESTAMP,1,CURRENT_TIMESTAMP,?)");
                             $stmt->bind_param("ssssssss", $name,$address,$mobile,$mail,$category,$pass,$verificationcode,$img);
                             $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
@@ -467,7 +467,7 @@ if (file_exists($productXMLNAME)) {
                         $MobileNumber=$mobile;
                         $Code=$verificationcode;
                         // your text messages
-//                        include 'SMS/SmsIR_VerificationCode.php';
+                        include 'SMS/SmsIR_VerificationCode.php';
                         $result = $connection->query("UPDATE users SET attempt=attempt+1 WHERE (mobile='$mobile' AND verified=0)");
                         $payam="<h4>کد فعال سازی با موفقیت برای شما ارسال شد.</h4>";
                         include 'Verifyregister.php';
@@ -484,7 +484,7 @@ if (file_exists($productXMLNAME)) {
                         $MobileNumber=$mobile;
                         $Code=$verificationcode;
                         // your text messages
-//                        include 'SMS/SmsIR_VerificationCode.php';
+                        include 'SMS/SmsIR_VerificationCode.php';
                         $result = $connection->query("UPDATE users SET attempt=attempt+1 WHERE (mobile='$mobile' AND verified=0)");
                         $payam="<h4>کد فعال سازی با موفقیت برای شما ارسال شد.</h4>";
                         include 'Verifyregister.php';
@@ -501,7 +501,7 @@ if (file_exists($productXMLNAME)) {
                         $MobileNumber=$mobile;
                         $Code=$verificationcode;
                         // your text messages
-//                        include 'SMS/SmsIR_VerificationCode.php';
+                        include 'SMS/SmsIR_VerificationCode.php';
                         $result = $connection->query("UPDATE users SET attempt=attempt+1 WHERE (mobile='$mobile' AND verified=0)");
                         $payam="<h4>کد فعال سازی با موفقیت برای شما ارسال شد.</h4>";
                         include 'Verifyregister.php';
@@ -518,7 +518,7 @@ if (file_exists($productXMLNAME)) {
                         $MobileNumber=$mobile;
                         $Code=$verificationcode;
                         // your text messages
-//                        include 'SMS/SmsIR_VerificationCode.php';
+                        include 'SMS/SmsIR_VerificationCode.php';
                         $result = $connection->query("UPDATE users SET attempt=attempt+1 WHERE (mobile='$mobile' AND verified=0)");
                         $payam="<h4>کد فعال سازی با موفقیت برای شما ارسال شد.</h4>";
                         include 'Verifyregister.php';
@@ -535,7 +535,7 @@ if (file_exists($productXMLNAME)) {
                         $MobileNumber=$mobile;
                         $Code=$verificationcode;
                         // your text messages
-//                        include 'SMS/SmsIR_VerificationCode.php';
+                        include 'SMS/SmsIR_VerificationCode.php';
                         $result = $connection->query("UPDATE users SET attempt=attempt+1 WHERE (mobile='$mobile' AND verified=0)");
                         $payam="<h4>کد فعال سازی با موفقیت برای شما ارسال شد.</h4>";
                         include 'Verifyregister.php';
@@ -564,7 +564,7 @@ if (file_exists($productXMLNAME)) {
                     $MobileNumbers = array($mobile);
                     // your text messages
                     $Messages = array("پسورد شما در سایت ویکی‌درم:".$row['Password']);
-//                    include 'SMS/SendMessage.php';
+                    include 'SMS/SendMessage.php';
                     $result = $connection->query("UPDATE users SET passwordtime=current_timestamp WHERE (mobile='$mobile')");
                     include 'header.php';
                     ?>
