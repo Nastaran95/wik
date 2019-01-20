@@ -167,6 +167,12 @@ function myFunction4() {
         "                                                name=\"name\"  form=\""+x+"\">\n" +
         "                                    </div>\n" +
         "                                </td>\n" +
+        "<td  style=\"width: 40%;\">\n" +
+        "                                    <div dir=\"rtl\" >\n" +
+        "                                        <input type=\"text\" maxlength=\"100\" class=\"form-control w-100\"\n" +
+        "                                               name=\"qeimat\" form=\""+x+"\">\n" +
+        "                                    </div>\n" +
+        "                                </td>"+
         "                                <td  style=\"width: 40%;\">\n" +
         "                                    <div dir=\"rtl\" >\n" +
         "                                        <textarea rows=\"5\" maxlength=\"300\" name=\"tozihat\" class=\"form-control w-100\" form=\""+x+"\">  </textarea>\n" +

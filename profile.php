@@ -400,6 +400,190 @@ else if(isset($_GET['requestDelete'])) {
     $tab = 3;
 }
 
+else if(isset($_GET['request']) && $_GET['request']=='deleteEshterak'){
+    $stmt = $connection->prepare("SELECT name, mobile , categoryID , address , email FROM Users WHERE (mobile=? )");
+    $stmt->bind_param("s", $_SESSION["mobile"]);
+    $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $stmt->close();
+        $x = '4';
+        $y = '';
+        $stmt = $connection->prepare("UPDATE Users SET eshterakID=?, startTime=?,endTime=? WHERE (mobile=? )");
+        $stmt->bind_param("ssss", $x ,$y,$y, $_SESSION["mobile"]);
+        $stmt->execute();
+        $_SESSION["eshterak"] = $x;
+    }
+    $tab=5;
+}
+else if(isset($_GET['request']) && $_GET['request']=='buyEshterak') {
+    $id = $_GET['ID'];
+    $stmt = $connection->prepare("SELECT qeimat,name FROM userEshterak WHERE (ID=? )");
+    $stmt->bind_param("s", $_GET['ID']);
+    $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
+    $res = $stmt->get_result();
+    if( $row = $res->fetch_assoc()){
+        $qeimat = $row['qeimat'];
+        $name = $row['name'];
+    }
+    else{
+        echo "<script>alert('بسته نا معتبر است. لطفا دوباره تلاش کنید.')</script>>";
+        die();
+    }
+
+    $stmt = $connection->prepare("INSERT INTO pardakht (mobile, userEshterakID)  VALUES (?,?)");
+    $stmt->bind_param("ss",$_SESSION["mobile"],$id );
+    $stmt->execute();
+    $stmt->close();
+
+    if ($connection->error) {
+        echo "<script>alert('خطایی رخ داد. لطفا دوباره تلاش کنید.')</script>>";
+        die();
+    }
+
+
+    $MerchantID = '3c5b10c6-6c1f-11e6-9549-005056a205be'; //Required
+    $Amount = $qeimat/10; //Amount will be based on Toman - Required
+//    $Amount = 100;
+    $_SESSION['amount'] = $Amount;
+    $Description = 'خرید بسته اشتراک '.$name.' ویکی‌درم'; // Required
+//    $Email = 'UserEmail@Mail.Com'; // Optional
+    $Mobile = $_SESSION["mobile"]; // Optional
+    $CallbackURL = 'http://www.wikidermi.com/profile.php?request=backZarrin'; // Required
+
+    $client = new SoapClient('https://www.zarinpal.com/pg/services/WebGate/wsdl', ['encoding' => 'UTF-8']);
+
+    $result = $client->PaymentRequest(
+        [
+            'MerchantID' => $MerchantID,
+            'Amount' => $Amount,
+            'Description' => $Description,
+            'Email' => $Email,
+            'Mobile' => $Mobile,
+            'CallbackURL' => $CallbackURL,
+        ]
+    );
+
+//Redirect to URL You can do it also by creating a form
+    if ($result->Status == 100) {
+        Header('Location: https://www.zarinpal.com/pg/StartPay/'.$result->Authority);
+//برای استفاده از زرین گیت باید ادرس به صورت زیر تغییر کند:
+//Header('Location: https://www.zarinpal.com/pg/StartPay/'.$result->Authority.'/ZarinGate');
+    } else {
+        $str = 'خطا: '.$result->Status.'لطفا دوباره تلاش کنید.';
+        echo '<script>alert('.$str.')</script>';
+    }
+    $tab=5;
+
+}
+else if(isset($_GET['request']) && $_GET['request']=='backZarrin') {
+
+    $stmt = $connection->prepare("SELECT * FROM pardakht WHERE (mobile=? )");
+    $stmt->bind_param("s",$_SESSION["mobile"] );
+    $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
+    $res = $stmt->get_result();
+    if( $row = $res->fetch_assoc()){
+        $id = $row['userEshterakID'];
+        $stmt = $connection->prepare("SELECT * FROM userEshterak WHERE (ID=? )");
+        $stmt->bind_param("s",$id );
+        $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
+        $res = $stmt->get_result();
+        $row = $res->fetch_assoc();
+        $qeimat = $row['qeimat'];
+    }else{
+        echo "<script>alert('دسترسی غیر مجاز.')</script>>";
+        die();
+    }
+
+
+    $MerchantID = '3c5b10c6-6c1f-11e6-9549-005056a205be';
+    $Amount = $qeimat/10; //Amount will be based on Toman
+//    $Amount = 100;
+
+    $Authority = $_GET['Authority'];
+
+    if ($_GET['Status'] == 'OK') {
+
+        $client = new SoapClient('https://www.zarinpal.com/pg/services/WebGate/wsdl', ['encoding' => 'UTF-8']);
+
+        $result = $client->PaymentVerification(
+            [
+                'MerchantID' => $MerchantID,
+                'Authority' => $Authority,
+                'Amount' => $Amount,
+            ]
+        );
+
+        if ($result->Status == 100) { //successfull
+            echo 'با تشکر از شما . سفارش شما با موفقیت پرداخت شد. شماره پیگیری: '.$result->RefID;
+            $stmt = $connection->prepare("INSERT INTO allpardakht (mobile, userEshterakID,amount,status,code)  VALUES (?,?,?,2,?)");
+            $stmt->bind_param("ssss",$_SESSION["mobile"],$id,$Amount,$result->RefID );
+            $stmt->execute();
+            $stmt->close();
+
+            date_default_timezone_set("Iran");
+            $DATE = date('Y-m-d H:i:s');
+            list($date, $time) = explode(" ", $DATE);
+            list($year, $month, $day) = explode("-", $date);
+            list($jyear, $jmonth, $jday) = gregorian_to_jalali($year, $month, $day);
+            if (strlen($jmonth) == 1) {
+                $jmonth = "0" . $jmonth;
+            }
+            if (strlen($jday) == 1) {
+                $jday = "0" . $jday;
+            }
+            $start = $jyear . '/' . $jmonth . '/' . $jday . ' ' . $time;
+
+            if($id==1){
+                $jmonth = $jmonth + 1;
+            }
+            else if($id==2){
+                $jmonth = $jmonth + 3;
+            }else if($id==3){
+                $jyear = $jyear + 1;
+            }
+
+            if ($jmonth>12){
+                $jyear = $jyear + 1;
+                $jmonth = $jmonth - 12;
+            }
+
+            $end = $jyear . '/' . $jmonth . '/' . $jday . ' ' . $time;
+
+            echo $start.'    '.$end;
+
+            $stmt = $connection->prepare("UPDATE users SET eshterakID=? , startTime=? , endTime=? WHERE (mobile=?)");
+            $stmt->bind_param("ssss", $id,$start, $end,$_SESSION["mobile"] );
+            $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
+            $stmt->close();
+
+        } else { //onsuccesful
+            $x=$result->Status;
+            echo 'پرداخت شما ناموفق بوده است . لطفا مجددا تلاش نمایید یا در صورت بروز اشکال با مدیر سایت تماس بگیرید. وضعیت:'.$result->Status;
+            $stmt = $connection->prepare("INSERT INTO allpardakht (mobile, userEshterakID,amount,status,code)  VALUES (?,?,?,1,?)");
+            $stmt->bind_param("ssss",$_SESSION["mobile"],$id,$Amount ,$x);
+            $stmt->execute();
+            $stmt->close();
+        }
+    } else { //canceled
+        $x='cancel';
+        echo 'پرداخت توسط شما لغو گردید.';
+        $stmt = $connection->prepare("INSERT INTO allpardakht (mobile, userEshterakID,amount,status,code)  VALUES (?,?,?,0,?)");
+        $stmt->bind_param("ssss",$_SESSION["mobile"],$id,$Amount ,$x);
+        $stmt->execute();
+        $stmt->close();
+    }
+    $stmt = $connection->prepare("Delete FROM pardakht WHERE (mobile=? )");
+    $stmt->bind_param("s",$_SESSION["mobile"] );
+    $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
+    $result = $stmt->get_result();
+    echo '<a href="/profile.php">بازگشت به صفحه پروفایل </a>';
+
+
+
+    die();
+}
 else{
     $titleshould='';
     $datashould = '';
@@ -426,7 +610,7 @@ include 'header.php';
         <div class="col-md-12">
 
             <?php
-            $stmt = $connection->prepare("SELECT name, mobile, eshterakID , categoryID , address , image, email FROM Users WHERE (mobile=? )");
+            $stmt = $connection->prepare("SELECT name, mobile, eshterakID , categoryID , address , image, email , startTime , endTime FROM Users WHERE (mobile=? )");
             $stmt->bind_param("s", $_SESSION["mobile"]);
             $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
             $result = $stmt->get_result();
@@ -439,7 +623,10 @@ include 'header.php';
                 $eshterak = $row["eshterakID"];
                 $cat = $row["categoryID"];
                 $img = $row["image"];
-
+                $startTime = $row["startTime"];
+                $endTime = $row["endTime"];
+//                echo '<script>alert('.$startTime.')</script>';
+//                echo '<script>alert('.$endTime.')</script>';
 
                 ?>
 
@@ -467,6 +654,7 @@ include 'header.php';
                         <button class="tablinks <?php if($tab==2) echo "active";?>"  onclick="openCity(event, 'comments')">دیدگاه‌ها</button>
                         <button class="tablinks <?php if($tab==3) echo "active";?>" onclick="openCity(event, 'posts')">پست‌ها</button>
                         <button class="tablinks <?php if($tab==4) echo "active";?>" onclick="openCity(event, 'newPost')">پست جدید</button>
+                        <button class="tablinks <?php if($tab==5) echo "active";?>" onclick="openCity(event, 'eshterak')">مدیریت اشتراک</button>
                     </div>
 
                     <div id="personal" class="tabcontent pt-4 <?php if($tab==1) echo "d-block"; else echo "d-none";?>">
@@ -721,6 +909,62 @@ include 'header.php';
 
                         </form>
 
+                    </div>
+
+                    <div id="eshterak" class="tabcontent  <?php if($tab==5) echo "d-block"; else echo "d-none";?>">
+                        <div class="row">
+
+
+                        <?php
+                        if($eshterak==4){
+                            ?>
+                            <div class="p-2 text-info text-center col-md-12">
+                                شما در حال حاضر هیچ بسته فعالی ندارید.
+                            </div>
+                            <?php
+                        }else{
+                            $query = "SELECT * FROM userEshterak WHERE ID=".$eshterak.";";
+                            $result = $connection->query($query);
+                            $row = $result->fetch_assoc();
+                            $eshtName = $row['name'];
+                            ?>
+                            <div class="p-2 text-info text-center col-md-12">
+                                شما یک بسته اشتراک
+                                <?php echo $eshtName;?>
+                                در تاریخ
+                                <?php echo $startTime;?>
+                                فعال کرده‌اید و تا تاریخ
+                                <?php echo $endTime;?>
+                                می‌توانید استفاده کنید.
+
+                            </div>
+
+                            <a onclick="return confirming();" href="profile.php?request=deleteEshterak"  class="btn col-md-5 col-10  btn-danger mt-3 mb-5 mr-auto ml-auto">لغو بسته</a>
+
+                        <?php
+                        }
+
+                        ?>
+                        <div class="col-md-12">
+                            <div class="p-2 mt-3 mr-auto ml-auto">بسته‌ها</div>
+                            <?php
+                            $query = "SELECT * FROM userEshterak WHERE ID !=4;";
+                            $result = $connection->query($query);
+                            while($row = $result->fetch_assoc()){
+                                $eshtName = 'بسته اشتراک '.$row['name'];
+                                $qeimat = $row['qeimat'].' ریال';
+                                $id = $row['ID'];
+                                ?>
+                                <div class="col-md-5 col-10 mb-4 mr-auto ml-auto">
+                                    <div class="col-md-12 text-center bg-dark text-light p-2"><?php echo $eshtName;?></div>
+                                    <div class="col-md-12 text-center bg-dark text-light font-weight-bold p-2"><?php echo $qeimat;?></div>
+                                    <a onclick="return confirming2();" href="profile.php?request=buyEshterak&ID=<?php echo $id;?>" class="col-md-12 text-center  btn btn-outline-success  p-2">خرید</a>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                        </div>
                     </div>
                 </div>
                 <?php

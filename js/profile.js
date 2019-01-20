@@ -75,3 +75,11 @@ function makeid() {
 
     return text;
 }
+
+function confirming() {
+    return confirm('آیا از حذف بسته خود مطمعن هستید؟(حذف این مورد غیر قابل بازگشت است)');
+}
+
+function confirming2() {
+    return confirm('آیا از درست بودن بسته اشتراک انتخابی اطمینان دارد؟ در صورت تایید اگر در حال حاضر بسته فعالی دارید غیر فعال خواهد شد.');
+}

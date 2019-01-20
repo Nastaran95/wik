@@ -16,16 +16,17 @@ if (($_SESSION['typ']>0)) {
 
     if (isset($_GET['request'])){
         $name = $_POST['name'];
+        $qeimat = $_POST['qeimat'];
         $tozih = $_POST['tozihat'];
         if($_GET['request']>=0) {
             $id = $_GET['request'];
-            $stmt = $connection->prepare("UPDATE userEshterak SET name=? ,tozihat=?  WHERE (ID=?)");
-            $stmt->bind_param("sss", $name,$tozih, $id);
+            $stmt = $connection->prepare("UPDATE userEshterak SET name=? ,tozihat=? ,qeimat=? WHERE (ID=?)");
+            $stmt->bind_param("ssss", $name,$tozih,$qeimat, $id);
 
         }
         else if( $_GET['request']==-1){
-            $stmt = $connection->prepare("INSERT INTO userEshterak (name,tozihat) VALUES (?,?)");
-            $stmt->bind_param("ss", $name, $tozih);
+            $stmt = $connection->prepare("INSERT INTO userEshterak (name,tozihat,qeimat) VALUES (?,?)");
+            $stmt->bind_param("sss", $name, $tozih,$qeimat);
         }
         $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
         $stmt->close();
@@ -74,7 +75,9 @@ if (($_SESSION['typ']>0)) {
                 <thead>
                 <tr>
                     <th class="text-center"><span>عنوان</span></th>
+                    <th class="text-center"><span>قیمت(ریال)</span></th>
                     <th class="text-center"><span>توضیحات</span></th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -87,6 +90,7 @@ if (($_SESSION['typ']>0)) {
             echo "<script>x=0; y =0;</script>";
                 while ($row=$result->fetch_assoc()) {
                     $name = $row['name'];
+                    $qeimat = $row['qeimat'];
                     $tozih = $row['tozihat'];
                     $id = $row['ID'];
                     echo "<script>count(".$id.");</script>";
@@ -101,17 +105,23 @@ if (($_SESSION['typ']>0)) {
                                 </td>
                                 <td  style="width: 40%;">
                                     <div dir="rtl" >
+                                        <input type="text" maxlength="100" class="form-control w-100"
+                                               name="qeimat" value="<?php echo $qeimat; ?>"  form="<?php echo $id;?>">
+                                    </div>
+                                </td>
+                                <td  style="width: 40%;">
+                                    <div dir="rtl" >
                                         <textarea rows="5" maxlength="300" name="tozihat" class="form-control w-100" form="<?php echo $id;?>"><?php echo $tozih; ?> </textarea>
                                     </div>
                                 </td>
 
                                 <td style="width: 5%;">
-                                    <a onclick="return confirming();" href="deleteblog.php?type=5&product=<?php echo $id?>">
-                                        <span class="fa-stack">
-                                            <i class="fa fa-square fa-stack-2x text-danger"></i>
-                                            <i class="far fa-trash-alt fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
+<!--                                    <a onclick="return confirming();" href="deleteblog.php?type=5&product=--><?php //echo $id?><!--">-->
+<!--                                        <span class="fa-stack">-->
+<!--                                            <i class="fa fa-square fa-stack-2x text-danger"></i>-->
+<!--                                            <i class="far fa-trash-alt fa-stack-1x fa-inverse"></i>-->
+<!--                                        </span>-->
+<!--                                    </a>-->
                                     <div class="m-auto">
                                         <button type="submit" class="btn btn-default " onclick="return confirming2();" form="<?php echo $id;?>" >ذخیره</button>
                                     </div>

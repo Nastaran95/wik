@@ -23,6 +23,7 @@ CREATE TABLE Paper(ID int NOT NULL AUTO_INCREMENT,
 DROP table userEshterak;
 CREATE TABLE userEshterak(ID int NOT NULL AUTO_INCREMENT,
                   name VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci,
+                  qeimat VARCHAR(100),
                   image VARCHAR(1000),
                   tozihat VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci,
   PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
@@ -35,7 +36,28 @@ CREATE TABLE userEshterak(ID int NOT NULL AUTO_INCREMENT,
 
   INSERT INTO userEshterak(name) VALUES
                   ('یک ساله');
-drop TABLE users;
+
+drop TABLE pardakht;
+CREATE TABLE pardakht(ID int NOT NULL AUTO_INCREMENT,
+                   mobile VARCHAR(100) ,
+  userEshterakID int NOT NULL,
+  FOREIGN KEY (mobile) REFERENCES users(mobile),
+  FOREIGN KEY (userEshterakID) REFERENCES userEshterak(ID),
+  PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
+
+
+drop table allpardakht;
+CREATE TABLE allpardakht(ID int NOT NULL AUTO_INCREMENT,
+                         mobile VARCHAR(100) ,
+                         userEshterakID int NOT NULL,
+                         amount  VARCHAR(100) ,
+                         status INT,
+  code  VARCHAR(100) ,
+  FOREIGN KEY (mobile) REFERENCES users(mobile),
+  FOREIGN KEY (userEshterakID) REFERENCES userEshterak(ID),
+  PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
+
+                   drop TABLE users;
 CREATE TABLE users(ID int NOT NULL AUTO_INCREMENT,
                   mobile VARCHAR(100) UNIQUE ,
                   name VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci,
@@ -44,6 +66,8 @@ CREATE TABLE users(ID int NOT NULL AUTO_INCREMENT,
                   email VARCHAR(300),
                   categoryID int DEFAULT 0,
                   eshterakID int DEFAULT 4,
+                  startTime VARCHAR(200),
+                  endTime VARCHAR(200),
                   realtime VARCHAR(200),
                   pass VARCHAR(100),
                   verified int,
@@ -57,6 +81,8 @@ CREATE TABLE users(ID int NOT NULL AUTO_INCREMENT,
   FOREIGN KEY (categoryID) REFERENCES userCategory(ID),
   FOREIGN KEY (eshterakID) REFERENCES userEshterak(ID),
   PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
+
+
 
   CREATE TABLE token(ID INT NOT NULL AUTO_INCREMENT,
       token VARCHAR(100),
