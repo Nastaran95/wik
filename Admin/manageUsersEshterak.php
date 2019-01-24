@@ -75,7 +75,7 @@ if (($_SESSION['typ']>0)) {
                 <thead>
                 <tr>
                     <th class="text-center"><span>عنوان</span></th>
-                    <th class="text-center"><span>قیمت(ریال)</span></th>
+                    <th class="text-center"><span>قیمت(تومان)</span></th>
                     <th class="text-center"><span>توضیحات</span></th>
 
                 </tr>

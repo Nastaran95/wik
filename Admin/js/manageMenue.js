@@ -337,3 +337,15 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+function validateFormdata(tab) {
+    var time = 0;
+
+    if (tab == 1) {
+        $("#editor122").val($('#edit').froalaEditor('html.get'));
+        $("#editor123").val($('#edit2').froalaEditor('html.get'));
+    }
+    else if (tab == 2) {
+        $("#editor122").val($('#edit').froalaEditor('html.get'));
+    }
+}

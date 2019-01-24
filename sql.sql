@@ -134,6 +134,7 @@ CREATE TABLE user_request(
   email VARCHAR(100),
   status int default 0,
   realtime VARCHAR(200),
+  mobile VARCHAR(45) DEFAULT 0,
 
   PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
 

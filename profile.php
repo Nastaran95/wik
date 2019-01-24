@@ -169,11 +169,8 @@ else if($_GET['request']=='update'){
     $tab=1;
 }
 else if($_GET['request']=='post') {
-    echo "1";
     if ((isset($_POST['editor1'])) && (isset($_POST['sum'])) && (isset($_POST['subject'])) && (isset($_POST['category1'])) && (strlen($_POST['editor1']) > 0) && (strlen($_POST['sum']) > 0) && (strlen($_POST['subject']) > 0) && (strlen($_POST['category1']) > 0)) {
-        echo "2";
         if(isset($_GET['paper'])) {
-            echo "3";
             $paperid = $_GET['paper'];
             $query = "SELECT * FROM Paper WHERE ID = '$paperid'";
             $result = $connection->query($query);
@@ -181,7 +178,6 @@ else if($_GET['request']=='post') {
             $image = $row['image'];
         }
         else{
-            echo "4";
             $image = "";
         }
 
@@ -436,6 +432,7 @@ else if(isset($_GET['request']) && $_GET['request']=='buyEshterak') {
     $stmt->bind_param("ss",$_SESSION["mobile"],$id );
     $stmt->execute();
     $stmt->close();
+    $insertID = $connection->insert_id;
 
     if ($connection->error) {
         echo "<script>alert('خطایی رخ داد. لطفا دوباره تلاش کنید.')</script>>";
@@ -444,13 +441,13 @@ else if(isset($_GET['request']) && $_GET['request']=='buyEshterak') {
 
 
     $MerchantID = '3c5b10c6-6c1f-11e6-9549-005056a205be'; //Required
-    $Amount = $qeimat/10; //Amount will be based on Toman - Required
+    $Amount = $qeimat; //Amount will be based on Toman - Required
 //    $Amount = 100;
     $_SESSION['amount'] = $Amount;
     $Description = 'خرید بسته اشتراک '.$name.' ویکی‌درم'; // Required
 //    $Email = 'UserEmail@Mail.Com'; // Optional
     $Mobile = $_SESSION["mobile"]; // Optional
-    $CallbackURL = 'http://www.wikidermi.com/profile.php?request=backZarrin'; // Required
+    $CallbackURL = 'http://www.wikidermi.com/profile.php?request=backZarrin&zarrin='.$insertID; // Required
 
     $client = new SoapClient('https://www.zarinpal.com/pg/services/WebGate/wsdl', ['encoding' => 'UTF-8']);
 
@@ -478,9 +475,9 @@ else if(isset($_GET['request']) && $_GET['request']=='buyEshterak') {
 
 }
 else if(isset($_GET['request']) && $_GET['request']=='backZarrin') {
-
-    $stmt = $connection->prepare("SELECT * FROM pardakht WHERE (mobile=? )");
-    $stmt->bind_param("s",$_SESSION["mobile"] );
+    $insertID = $_GET['zarrin'];
+    $stmt = $connection->prepare("SELECT * FROM pardakht WHERE (ID=? )");
+    $stmt->bind_param("s",$insertID );
     $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
     $res = $stmt->get_result();
     if( $row = $res->fetch_assoc()){
@@ -498,7 +495,7 @@ else if(isset($_GET['request']) && $_GET['request']=='backZarrin') {
 
 
     $MerchantID = '3c5b10c6-6c1f-11e6-9549-005056a205be';
-    $Amount = $qeimat/10; //Amount will be based on Toman
+    $Amount = $qeimat; //Amount will be based on Toman
 //    $Amount = 100;
 
     $Authority = $_GET['Authority'];
@@ -559,23 +556,23 @@ else if(isset($_GET['request']) && $_GET['request']=='backZarrin') {
             $stmt->close();
 
         } else { //onsuccesful
-            $x=$result->Status;
+            $code = get_error($result->Status);
             echo 'پرداخت شما ناموفق بوده است . لطفا مجددا تلاش نمایید یا در صورت بروز اشکال با مدیر سایت تماس بگیرید. وضعیت:'.$result->Status;
             $stmt = $connection->prepare("INSERT INTO allpardakht (mobile, userEshterakID,amount,status,code)  VALUES (?,?,?,1,?)");
-            $stmt->bind_param("ssss",$_SESSION["mobile"],$id,$Amount ,$x);
+            $stmt->bind_param("ssss",$_SESSION["mobile"],$id,$Amount ,$code);
             $stmt->execute();
             $stmt->close();
         }
     } else { //canceled
-        $x='cancel';
+        $code = 'canceled';
         echo 'پرداخت توسط شما لغو گردید.';
         $stmt = $connection->prepare("INSERT INTO allpardakht (mobile, userEshterakID,amount,status,code)  VALUES (?,?,?,0,?)");
-        $stmt->bind_param("ssss",$_SESSION["mobile"],$id,$Amount ,$x);
+        $stmt->bind_param("ssss",$_SESSION["mobile"],$id,$Amount ,$code);
         $stmt->execute();
         $stmt->close();
     }
-    $stmt = $connection->prepare("Delete FROM pardakht WHERE (mobile=? )");
-    $stmt->bind_param("s",$_SESSION["mobile"] );
+    $stmt = $connection->prepare("Delete FROM pardakht WHERE (ID=? )");
+    $stmt->bind_param("s",$insertID );
     $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
     $result = $stmt->get_result();
     echo '<a href="/profile.php">بازگشت به صفحه پروفایل </a>';
@@ -952,7 +949,7 @@ include 'header.php';
                             $result = $connection->query($query);
                             while($row = $result->fetch_assoc()){
                                 $eshtName = 'بسته اشتراک '.$row['name'];
-                                $qeimat = $row['qeimat'].' ریال';
+                                $qeimat = $row['qeimat'].' تومان';
                                 $id = $row['ID'];
                                 ?>
                                 <div class="col-md-5 col-10 mb-4 mr-auto ml-auto">
@@ -1004,7 +1001,7 @@ function gregorian_to_jalali($gy,$gm,$gd,$mod=''){
         $jy=0;
         $gy-=621;
     }
-    $gy2=($gm > 2)?($gy+1):$gy;
+                                                                                                                                                                                                                                                                    $gy2=($gm > 2)?($gy+1):$gy;
     $days=(365*$gy) +((int)(($gy2+3)/4)) -((int)(($gy2+99)/100)) +((int)(($gy2+399)/400)) -80 +$gd +$g_d_m[$gm-1];
     $jy+=33*((int)($days/12053));
     $days%=12053;
@@ -1026,6 +1023,61 @@ function tr_num($str,$mod='en',$mf='٫'){
     $num_a=array('0','1','2','3','4','5','6','7','8','9','.');
     $key_a=array('۰','۱','۲','۳','۴','۵','۶','۷','۸','۹',$mf);
     return($mod=='fa')?str_replace($num_a,$key_a,$str):str_replace($key_a,$num_a,$str);
+}
+function get_error($id){
+    switch ($id) {
+        case '-1':
+            return 'اطلاعات ارسال شده ناقص است.';
+            break;
+        case '-2':
+            return 'آی پی یا مرچنت کد پذیرنده صحیح نیست';
+            break;
+        case '-3':
+            return 'با توجه به محدودیت های شاپرک امکان پرداخت با رقم درخواست شده میسر نمی باشد.';
+            break;
+        case '-4':
+            return 'سطح تایید پذیرنده پایین تر از صطح نقره ای است.';
+            break;
+        case '-11':
+            return 'درخواست مورد نظر یافت نشد.';
+            break;
+        case '-12':
+            return 'امکان ویرایش درخواست میسر نمی باشد.';
+            break;
+        case '-21':
+            return 'هیچ نوع عملیات مالی برای این تراکنش یافت نشد.';
+            break;
+        case '-22':
+            return 'تراکنش نا موفق می باشد.';
+            break;
+        case '-33':
+            return 'رقم تراکنش با رقم پرداخت شده مطابقت ندارد.';
+            break;
+        case '-34':
+            return 'سقف تقسیم تراکنش از لحاظ تعداد با رقم عبور نموده است.';
+            break;
+        case '-40':
+            return 'اجازه دسترسی به متد مربوطه وجود ندارد.';
+            break;
+        case '-41':
+            return 'اطلاعات ارسال شده مربوط به AdditionalData غیر معتر می باشد.';
+            break;
+        case '-42':
+            return 'مدت زمان معتبر طول عمر شناسه پرداخت بین 30 دقیقه تا 40 روز می باشد.';
+            break;
+        case '-54':
+            return 'درخواست مورد نظر آرشیو شده است.';
+            break;
+        case '100':
+            return 'عملیات با موفقیت انجام گردیده است.';
+            break;
+        case '101':
+            return 'عملیات پرداخت موفق بوده و قبلا Payment Verification تراکنش انجام شده است';
+            break;
+        default:
+            return $id;
+            break;
+    }
 }
 ?>
 <script src="/js/classie.js"></script>

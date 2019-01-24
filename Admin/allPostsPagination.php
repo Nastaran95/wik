@@ -179,13 +179,30 @@
                     $tp = "تایید نشده ";
                     echo "<td dir='ltr'>                                                                                                               
                                         <span class='status" . $row['ID'] . "' style=\"color: red;\" >" . $tp . "</span>
-                                    </td>";
+                                    ";
                 } else {
                     $tp = "تایید شده ";
                     echo "<td dir='ltr'>                                                                                                               
                                         <span class='status" . $row['ID'] . "' style=\"color: green;\" >" . $tp . "</span>
-                                    </td>";
+                                    ";
                 }
+
+                echo "
+                                        <a  href='allPosts.php' class=\"" . $row['ID'] . "\" id='changestatusOk'>
+                                            <span class=\"fa-stack\">
+                                                <i class=\"fa fa-square fa-stack-2x greencolor\"></i>
+                                                <i class=\"far fa-check-square fa-stack-1x fa-inverse\"></i>
+                                            </span>
+                                        </a>
+                                        
+                                        <a  href='allPosts.php' class=\"" . $row['ID'] . "\" id='changestatusNO'>
+                                            <span class=\"fa-stack\">
+                                                <i class=\"fa fa-square fa-stack-2x specialcolor \"></i>
+                                                <i class=\"fas fa-times fa-stack-1x fa-inverse\"></i>
+                                            </span>
+                                        </a>
+                                        </td>
+                ";
 
 
                 echo "<td dir='ltr'>                                                                                                               
@@ -211,19 +228,7 @@
                                             </span>
                                         </a>
                                         
-                                        <a  href='allPosts.php' class=\"" . $row['ID'] . "\" id='changestatusOk'>
-                                            <span class=\"fa-stack\">
-                                                <i class=\"fa fa-square fa-stack-2x greencolor\"></i>
-                                                <i class=\"far fa-check-square fa-stack-1x fa-inverse\"></i>
-                                            </span>
-                                        </a>
-                                        
-                                        <a  href='allPosts.php' class=\"" . $row['ID'] . "\" id='changestatusNO'>
-                                            <span class=\"fa-stack\">
-                                                <i class=\"fa fa-square fa-stack-2x specialcolor \"></i>
-                                                <i class=\"fas fa-times fa-stack-1x fa-inverse\"></i>
-                                            </span>
-                                        </a>
+                                     
                                         
                                     </td>";
             echo '</tr>';

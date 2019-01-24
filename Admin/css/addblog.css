@@ -4,7 +4,7 @@ div#editor {
     font-family: "B Nazanin";
  }
 div#editor2,div#editor3,div#editor4 {
-    width: 81%;
+    /*width: 81%;*/
     margin: 30px;
     font-family: "B Nazanin";
 }
@@ -100,4 +100,10 @@ input{
 
 .btn-successaddazmun{
     background: lightseagreen;
+}
+
+select{
+    height: 40px !important;
+    padding: 0px !important;
+    padding-right: 5px !important;
 }

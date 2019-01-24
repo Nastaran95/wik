@@ -41,7 +41,7 @@
                 if (!isset($_SESSION["logged_in"]) || $_SESSION['logged_in']!=true) {
                     ?>
                     <div class="m-auto"><a class="dark_text" href="/loginRegister.php?request=login">ورود</a></div>
-                    <div class="m-auto"><a class="dark_text" href="/loginRegister.php?request=register">عضویت<a/></div>
+                    <div class="m-auto"><a class="dark_text" href="/loginRegister.php?request=register">عضویت</a></div>
                     <?php
                 }
                 else{
@@ -80,7 +80,7 @@
                 if (!isset($_SESSION["logged_in"]) || $_SESSION['logged_in']!=true) {
                     ?>
                     <div class="m-auto"><a class="dark_text" href="/loginRegister.php?request=login">ورود</a></div>
-                    <div class="m-auto"><a class="dark_text" href="/loginRegister.php?request=register">عضویت<a/></div>
+                    <div class="m-auto"><a class="dark_text" href="/loginRegister.php?request=register">عضویت</a></div>
                     <?php
                 }else{
                     ?>
@@ -176,12 +176,12 @@
                 ?>
                 <div class="d-block offset-1"><a class="dark_text" href="/loginRegister.php?request=login">ورود</a>
                 </div>
-                <div class="d-block offset-1"><a class="dark_text" href="/loginRegister.php?request=register">عضویت<a/>
+                <div class="d-block offset-1"><a class="dark_text" href="/loginRegister.php?request=register">عضویت</a>
                 </div>
                 <?php
             }else{
                 ?>
-                <div class="d-block offset-1"><a class="dark_text" href="/Logout.php">خروج<a/></div>
+                <div class="d-block offset-1"><a class="dark_text" href="/Logout.php">خروج</a></div>
                 <?php
             }
             ?>

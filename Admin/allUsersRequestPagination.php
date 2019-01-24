@@ -133,6 +133,7 @@ if(isset($_GET) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERV
                                     <th><span>نام کاربر</span></th>
                                     <th><span>موضوع</span></th>
                                     <th><span>ایمیل</span></th>
+                                    <th><span>شماره تماس</span></th>
                                     <th><span>وضعیت</span></th>
                                     <th><span>زمان پیام</span></th>
                                     <th><span>متن پیام</span></th>            
@@ -155,6 +156,9 @@ if(isset($_GET) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERV
                                     </td>";
             echo "<td dir='ltr' style=\"width: 10%;\">                                                                                                               
                                         <span>".$row['email']."</span>
+                                    </td>";
+            echo "<td dir='ltr' style=\"width: 10%;\">                                                                                                               
+                                        <span>".$row['mobile']."</span>
                                     </td>";
             ?>
             <td style="width: 8%;">

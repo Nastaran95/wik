@@ -5,7 +5,6 @@
  * Date: 1/3/19
  * Time: 5:01 PM
  */
-
 session_start();
 
 include 'Settings.php'; //harja khasti DB estefade koni ino bezan faghat
@@ -50,7 +49,7 @@ if (file_exists($productXMLNAME)) {
     <script src="/js/modernizr.custom.js"></script>
     <script src="/js/maghalat.js"></script>
 </head>
-<STYLE>A {text-decoration: none;} </STYLE>
+
 <body>
 
 <?php
@@ -60,8 +59,8 @@ include 'header.php';
 
 <div class="container">
     <div  id="main" class="home_main text-right row">
-        <div class="col-md-12 search hiddenthisoverxs">
 
+        <div class="col-md-12 search hiddenthisoverxs">
             <div id="sb-search2" class="sb-search">
                 <form class="float-left">
                     <input class="sb-search-input" placeholder="جستجو" type="search" value="" name="search" id="search2">
@@ -69,6 +68,7 @@ include 'header.php';
                 </form>
             </div>
         </div>
+
         <div class="col-md-12">
             <div class="rightDiv col-12">
                 <div class="col-md-12 subjects float-left">

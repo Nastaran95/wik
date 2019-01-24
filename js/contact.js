@@ -9,6 +9,13 @@ function validateForm(){
         $("#name").removeClass('colorBorder');
     }
 
+    if(document.getElementById('mobile').value.length==0){
+        $("#mobile").addClass('colorBorder');
+        flag=true;
+    }else{
+        $("#mobile").removeClass('colorBorder');
+    }
+
     if(document.getElementById('email').value.length==0){
         $("#email").addClass('colorBorder');
         flag=true;

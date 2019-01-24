@@ -43,10 +43,21 @@ if (($_SESSION['typ']>0)) {
                                 class="fa fa-file"></i> مدیریت مربع‌های طوسی </a></li>
                 <li class="<?php if ($which == 12) echo "selected"; ?>"><a href="allUsersRequest.php?nocache=<?php echo generateRandomString(10)?>">
                         <i class="fas fa-question-circle"></i> همه درخواست های کاربران </a></li>
-                <li class="<?php if ($which == 13) echo "selected"; ?>"><a href="admin.php"><i
-                                class="fa fa-dedent"></i> مدیریت تعرفه آگهی </a></li>
-                <li class="<?php if ($which == 14) echo "selected"; ?>"><a href="admin.php"><i
-                                class="fa fa-dedent"></i> مدیریت آگهی‌ها </a></li>
+
+                <li class="<?php if ($which == 13) echo "selected"; ?>"><a href="allPardakht.php">
+                        <i class="fas fa-hand-holding-usd"></i>تراکنش‌ها </a></li>
+
+                <li class="<?php if ($which == 14) echo "selected"; ?>"><a href="aboutUsSetting.php">
+                        <i class="fas fa-cogs"></i>تنظیمات در باره ما </a></li>
+
+                <li class="<?php if ($which == 15) echo "selected"; ?>"><a href="contactUsSetting.php">
+                        <i class="fas fa-cogs"></i>تنظیمات تماس‌ با ما </a></li>
+
+
+                <!--                <li class="--><?php //if ($which == 14) echo "selected"; ?><!--"><a href="admin.php"><i-->
+<!--                                class="fa fa-dedent"></i> مدیریت تعرفه آگهی </a></li>-->
+<!--                <li class="--><?php //if ($which == 15) echo "selected"; ?><!--"><a href="admin.php"><i-->
+<!--                                class="fa fa-dedent"></i> مدیریت آگهی‌ها </a></li>-->
 
 <!--                <li class="--><?php //if ($which == 15) echo "selected"; ?><!--"><a href="allKarjooRequest.php"><i-->
 <!--                                class="fa fa-dedent"></i> همه نظرات کارجویان </a></li>-->

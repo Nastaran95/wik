@@ -14,10 +14,12 @@ if (file_exists($productXMLNAME)) {
     $SEOdescription=$XMLFile->description;
     $SEOKEYWORDS=$XMLFile->kewords;
     $SEOTITLE=$XMLFile->seotitle;
+    $datashould = $XMLFile->data1;
 }else{
     $SEOdescription="";
     $SEOKEYWORDS="";
     $SEOTITLE="";
+    $datashould = "";
 }
 ?>
 
@@ -113,9 +115,15 @@ if (isset($_GET['request'])) {
             if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['msg']) && strlen($_POST['msg']) > 0) {
                 $name = $_POST['name'];
                 $email = $_POST['email'];
+
                 if (isset($_POST['subject'])) {
                     $subject = $_POST['subject'];
                 }
+                if (isset($_POST['mobile'])) {
+                    $mobile = $_POST['mobile'];
+                }
+                else
+                    $mobile = "";
                 $msg = $_POST['msg'];
 
                 date_default_timezone_set("Iran");
@@ -131,8 +139,8 @@ if (isset($_GET['request'])) {
                 }
                 $modified_time = $jyear . '/' . $jmonth . '/' . $jday.' '.$time;
 
-                $stmt = $connection->prepare("INSERT INTO user_request (name,email,subject,message,realtime)  VALUES (?,?,?,?,?)");
-                $stmt->bind_param("sssss", $name, $email, $subject, $msg,$modified_time);
+                $stmt = $connection->prepare("INSERT INTO user_request (name,email,subject,message,realtime,mobile)  VALUES (?,?,?,?,?,?)");
+                $stmt->bind_param("ssssss", $name, $email, $subject, $msg,$modified_time,$mobile);
                 $result = $stmt->execute();
                 $stmt->store_result();
                 $result = $stmt->get_result();
@@ -201,9 +209,7 @@ if (file_exists($productXMLNAME)) {
                     </div>
 
                     <div class="text-justify blackCol box">
-                        <p>
-                            کاربر گرامی برای ارتباط با ویکی درم لطفا پیام خودتان را برای کارشناسان ما از طریق فرم زیر ارسال نمایید. کارشناسان ما در اسرع وقت با شما تماس میگیرند.
-                        </p>
+                        <?php echo $datashould;?>
                     </div>
 
                     <div class="col-md-12 float-left text-justify contctus text-center">
@@ -211,6 +217,9 @@ if (file_exists($productXMLNAME)) {
                         <form action="contactUs.php?request=message" method="post" onsubmit="return validateForm()" class="">
                             <div class="form-group col-md-10 m-auto">
                                 <input type="text" class="form-control" id="name" placeholder="نام شما" name="name" >
+                            </div>
+                            <div class="form-group col-md-10 m-auto">
+                                <input type="text" class="form-control" id="mobile" placeholder="شماره تماس"  name="mobile">
                             </div>
                             <div class="form-group col-md-10 m-auto">
                                 <input type="email" class="form-control" id="email" placeholder="ایمیل شما"  name="email">
