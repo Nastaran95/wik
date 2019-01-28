@@ -357,7 +357,8 @@ else if($_GET['request']=='post') {
 
 else if(isset($_GET['requestEdit'])) {
     $id = $_GET['requestEdit'];
-    $query = "SELECT * FROM Paper WHERE (ID = '$id' AND writerID='".$_SESSION["mobile"]."')";
+    $mob = $_SESSION["mobile"];
+    $query = "SELECT * FROM Paper WHERE (ID = '$id' AND writerID='$mob')";
     $result = $connection->query($query);
     echo "<script>window.alert('$query');</script>";
     if( $row = $result->fetch_assoc() ) {

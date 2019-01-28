@@ -20,12 +20,12 @@
     <div class="fixed fix fixed1 headerall">
         <div class="row">
             <div class="float-right padding20_0 col-md-10 row">
-                <div class="col-md-4 float-right paddleft0">
+                <div class="col-md-2 ml-3 mr-3 float-right paddleft0">
                     <a href="/">
                         <img src="/images/wikiderm-logo-180-544--300x99.png" width="90%" height="90%" alt="logo">
                     </a>
                     </div>
-                <div class="col-md-8 headerH text-sm-right">
+                <div class="col-md-9 headerH text-sm-right">
                     <h1 class="small">
                         سایت جامع اطلاعات  پوست،  مو و زیبایی و معرفی مشاغل
                         <span class="specialSpan">
@@ -59,12 +59,12 @@
     <div class="fixed fix fixed2 d-none headerall">
         <div class="row">
             <div class="float-right padding20_0 col-md-10 row">
-                <div class="col-md-4 float-right paddleft0">
+                <div class="col-md-2 ml-3 mr-3 float-right paddleft0">
                     <a href="/">
                         <img src="/images/wikiderm-logo-180-544--300x99.png" width="90%" height="90%" alt="logo">
                     </a>
                 </div>
-                <div class="col-md-8 headerH text-sm-right">
+                <div class="col-md-9 headerH text-sm-right">
                     <h1 class="small">
                         سایت جامع اطلاعات  پوست،  مو و زیبایی و معرفی مشاغل
                         <span class="specialSpan">

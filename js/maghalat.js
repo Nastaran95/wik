@@ -3,7 +3,8 @@ $(document).ready(function () {
     $(document).on('click touchstart',".paginationoldPapers",function (event) {
         // alert(event.target.id);
         page=event.target.id;
-        $.get("getPage.php", {page:page , typ:1}, function (res) {
+        var category='1,2,3,4,5,6,7,8,9,10,11';
+        $.get("getPage.php", {page:page , typ:1,cat:category}, function (res) {
             $("#replacepagination").html(res);
             window.scrollTo(0, 1000);
         });

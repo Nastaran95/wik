@@ -20,7 +20,7 @@
     <div class="headerall">
         <div class="row">
             <div class="float-right padding20_0 col-md-10 row">
-                <div class="col-md-3 float-right paddleft0">
+                <div class="col-md-2 ml-3 mr-3 float-right paddleft0">
                     <a href="/">
                         <img src="/images/wikiderm-logo-180-544--300x99.png" width="90%" height="90%" alt="logo">
                     </a>

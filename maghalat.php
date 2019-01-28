@@ -153,7 +153,7 @@ include 'header.php';
                             <?php
                             $page = 1;
                             $a = ($page-1)*7;
-                            $query = "SELECT * FROM Paper WHERE stat>0 ORDER by ID DESC  LIMIT $a , 7;";
+                            $query = "SELECT * FROM Paper WHERE stat>0 ORDER by realtime DESC  LIMIT $a , 7;";
                             $result = $connection->query($query);
                             while ($row=$result->fetch_assoc()) {
                                 $name = $row['name'];
@@ -210,33 +210,39 @@ include 'header.php';
                             $query = "SELECT * FROM Paper WHERE stat>0;" ;
                             $result = $connection->query($query);
                             $pagenum = $result->num_rows;
+                            if ($pagenum>7) {
+                                ?>
+
+                                <div class="pagination-container float-left">
+                                    <ul class="pagination">
+                                        <li id="-1" class="PagedList-skipToNext paginationoldPapers" rel="prev"> >></li>
+                                        <?php
+                                        $x = ($pagenum + 6) / 7;
+                                        for ($i = 1; $i <= min($x, 2); $i++) {
+                                            ?>
+                                            <li id="<?php echo $i ?>"
+                                                class="paginationoldPapers <?php if ($i == 1) echo "active" ?> "><?php echo $i ?></li>
+                                            <?php
+
+                                        }
+                                        $i--;
+                                        if ($i < max(1, floor($x) - 1))
+                                            echo "<li>...</li>";
+                                        if ($i < max(1, floor($x))) {
+                                            ?>
+                                            <li id="<?php echo floor($x) ?>"
+                                                class="paginationoldPapers"><?php echo floor($x) ?></li>
+                                            <?php
+                                        }
+
+                                        ?>
+
+                                        <li id="-2" class="PagedList-skipToNext paginationoldPapers" rel="next"> <<</li>
+                                    </ul>
+                                </div>
+                                <?php
+                            }
                             ?>
-
-                            <div class="pagination-container float-left">
-                                <ul class="pagination">
-                                    <li id="-1" class="PagedList-skipToNext paginationoldPapers" rel="prev"> >> </li>
-                                    <?php
-                                    $x = ($pagenum+6) / 7 ;
-                                    for ($i=1 ; $i <= min($x,2) ; $i++){
-                                        ?>
-                                        <li id="<?php echo $i?>" class="paginationoldPapers <?php if ($i==1) echo "active" ?> "><?php echo $i?></li>
-                                        <?php
-
-                                    }
-                                    $i--;
-                                    if ($i<max(1,floor($x)-1))
-                                        echo "<li>...</li>";
-                                    if ($i<max(1,floor($x))){
-                                        ?>
-                                        <li id="<?php echo floor($x)?>" class="paginationoldPapers"><?php echo floor($x)?></li>
-                                        <?php
-                                    }
-
-                                    ?>
-
-                                    <li id="-2" class="PagedList-skipToNext paginationoldPapers" rel="next"> << </li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </div>

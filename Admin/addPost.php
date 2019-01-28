@@ -193,15 +193,16 @@ if ($_SESSION['typ']>8) {
             $imagenames = "";
             $target_file = $image;
         }
-
+        if (strlen($target_file)<1)
+            $target_file = 'images/no-product-image-available.png';
 
         if ($product === "all") {
 //            echo "<script>window.alert('insert db');</script>";
-            $stmt = $connection->prepare("INSERT INTO Paper (XMLNAME,name,post_name,writerID, realtime , dastebandi,Mokhtasar,image)  VALUES (?,?,?,?,?,?,?,?)");
+            $stmt = $connection->prepare("INSERT INTO Paper (XMLNAME,name,post_name,writerID, realtime , dastebandi,Mokhtasar,image,stat)  VALUES (?,?,?,?,?,?,?,?,1)");
             $stmt->bind_param("ssssssss", $filename, $titleshould, $englishtopic, $_SESSION["mobile"], $modified_time, $category, $datashould2, $target_file);
         } else {
-            $stmt = $connection->prepare("UPDATE Paper SET name=? ,  stat=0 ,dastebandi=? , Mokhtasar=? , image=?  WHERE (ID=?)");
-            $stmt->bind_param("sssss", $titleshould,$category,$datashould2,$target_file, $product );
+            $stmt = $connection->prepare("UPDATE Paper SET name=? ,  stat=1 ,dastebandi=? , Mokhtasar=? , image=? ,realtime=? WHERE (ID=?)");
+            $stmt->bind_param("ssssss", $titleshould,$category,$datashould2,$target_file, $modified_time,$product );
         }
         $result = $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
         $stmt->store_result();

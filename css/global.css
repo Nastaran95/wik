@@ -41,7 +41,7 @@ a{
 .footer{
     background-color: rgb(76,76,76);
     float: left;
-    top: 100px;
+    /*top: 100px;*/
 }
 
 .social{
@@ -167,7 +167,7 @@ a{
 }
 
 .headerH{
-    padding-top: 20px;
+    padding-top: 10px;
     padding-right: 0;
 }
 

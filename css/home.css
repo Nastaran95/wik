@@ -8,7 +8,7 @@
     background-position: center center;
     /*height:82vh ;*/
     /*top: 16vh;*/
-    top:102px;
+    top:64px;
     border-right: 1px solid rgb(233,233,233);
     border-left: 1px solid rgb(233,233,233);
 }
@@ -35,11 +35,11 @@
 }
 
 .header .menu{
-    top: 52px;
+    top: 13px;
 }
 
 .headerH{
-    padding-top: 38px;
+    /*padding-top: 38px;*/
     padding-right: 0;
 }
 
@@ -49,7 +49,7 @@
 }
 
 .search{
-    top: 72px;
+    /*top: 72px;*/
     font-size: 30px;
     padding: 20px;
 }
@@ -150,7 +150,7 @@
 }
 
 .test{
-    top:72px;
+    /*top:72px;*/
 }
 
 .pagination{

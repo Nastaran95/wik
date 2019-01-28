@@ -31,10 +31,10 @@
         if ($query === "=====+++=====") {
             if ($dastebandi == 'all') {
                 if ($type == 1)
-                    $results = $connection->query("SELECT COUNT(*) FROM Paper");
+                    $results = $connection->query("SELECT COUNT(*) FROM Paper ORDER BY realtime DESC ");
             } else {
                 if ($type == 1)
-                    $results = $connection->query("SELECT COUNT(*) FROM Paper WHERE dastebandi='$dastebandi'");
+                    $results = $connection->query("SELECT COUNT(*) FROM Paper WHERE dastebandi='$dastebandi'  ORDER BY realtime DESC");
             }
         } else {
             $D = 0;
@@ -56,18 +56,18 @@
             if ($D === 0) {
                 if ($dastebandi == 'all') {
                     if ($type == 1)
-                        $results = $connection->query("SELECT COUNT(*) FROM Paper");
+                        $results = $connection->query("SELECT COUNT(*) FROM Paper  ORDER BY realtime DESC");
                 } else {
                     if ($type == 1)
-                        $results = $connection->query("SELECT COUNT(*) FROM Paper WHERE dastebandi='$dastebandi'");
+                        $results = $connection->query("SELECT COUNT(*) FROM Paper WHERE dastebandi='$dastebandi'  ORDER BY realtime DESC");
                 }
             } else {
                 if ($dastebandi == 'all') {
                     if ($type == 1)
-                        $results = $connection->query("SELECT COUNT(*) FROM Paper " . $command);
+                        $results = $connection->query("SELECT COUNT(*) FROM Paper " . $command." ORDER BY realtime DESC");
                 } else {
                     if ($type == 1)
-                        $results = $connection->query("SELECT COUNT(*) FROM Paper " . $command . " and dastebandi='$dastebandi'");
+                        $results = $connection->query("SELECT COUNT(*) FROM Paper " . $command . " and dastebandi='$dastebandi'  ORDER BY realtime DESC");
                 }
             }
         }
@@ -83,10 +83,10 @@
             $D = 1;
             if ($dastebandi == 'all') {
                 if ($type == 1)
-                    $results = $connection->query("SELECT * FROM Paper ORDER BY ID DESC  LIMIT $page_position, $item_per_page ");
+                    $results = $connection->query("SELECT * FROM Paper ORDER BY realtime DESC  LIMIT $page_position, $item_per_page  ");
             } else {
                 if ($type == 1)
-                    $results = $connection->query("SELECT * FROM Paper WHERE dastebandi='$dastebandi' ORDER BY ID DESC  LIMIT $page_position, $item_per_page ");
+                    $results = $connection->query("SELECT * FROM Paper WHERE dastebandi='$dastebandi' ORDER BY realtime DESC  LIMIT $page_position, $item_per_page ");
             }
         } else {
             $command = "WHERE";
@@ -107,18 +107,18 @@
             if ($D === 0) {
                 if ($dastebandi == 'all') {
                     if ($type == 1)
-                        $results = $connection->query("SELECT * FROM Paper ORDER BY ID DESC  LIMIT $page_position, $item_per_page ");
+                        $results = $connection->query("SELECT * FROM Paper ORDER BY realtime DESC  LIMIT $page_position, $item_per_page ");
                 } else {
                     if ($type == 1)
-                        $results = $connection->query("SELECT * FROM Paper  WHERE dastebandi='$dastebandi' ORDER BY ID DESC  LIMIT $page_position, $item_per_page ");
+                        $results = $connection->query("SELECT * FROM Paper  WHERE dastebandi='$dastebandi' ORDER BY realtime DESC  LIMIT $page_position, $item_per_page ");
                 }
             } else {
                 if ($dastebandi == 'all') {
                     if ($type == 1)
-                        $results = $connection->query("SELECT * FROM Paper " . $command . " ORDER BY ID DESC LIMIT $page_position, $item_per_page ");
+                        $results = $connection->query("SELECT * FROM Paper " . $command . " ORDER BY realtime DESC LIMIT $page_position, $item_per_page ");
                 } else {
                     if ($type == 1)
-                        $results = $connection->query("SELECT * FROM Paper " . $command . "and dastebandi='$dastebandi'" . " ORDER BY ID DESC LIMIT $page_position, $item_per_page ");
+                        $results = $connection->query("SELECT * FROM Paper " . $command . "and dastebandi='$dastebandi'" . " ORDER BY realtime DESC LIMIT $page_position, $item_per_page ");
                 }
             }
         }
