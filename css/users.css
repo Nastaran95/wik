@@ -1,0 +1,84 @@
+.leftDiv{
+    float: right;
+    padding-top: 20px;
+}
+
+.mainDiv{
+    border-style: solid;
+    border-width: 0px 0px 0px 2px;
+    border-color: rgb(239,134,131);
+    margin: 10px 0px;
+    padding-top: 50px;
+    float: right;
+    color: rgb(239,134,131);
+}
+
+.box{
+    border-style: solid;
+    border-width: 2px 0px 0px 0px;
+    border-color: rgb(239,134,131);
+    margin-bottom: 30px;
+    width: 92%;
+    margin-right: 4%;
+    margin-left: 4%;
+    padding: 25px;
+}
+
+a{
+    color: inherit;
+}
+
+h1{
+    font-size: 22px;
+}
+
+.fontDiam{
+    font-size: 40px;
+}
+
+/**
+ * Profile image component
+ */
+.profile-header-container{
+    margin: 0 auto;
+    text-align: center;
+}
+
+.profile-header-img {
+    /*padding: 54px;*/
+}
+
+.profile-header-img > img.img-circle {
+    width: 120px;
+    height: 120px;
+    border: 2px solid rgb(1,100,150);
+    border-radius: 50%;
+}
+
+.profile-header {
+    margin-top: 43px;
+}
+
+/**
+ * Ranking component
+ */
+.rank-label-container {
+    margin-top: -19px;
+    /* z-index: 1000; */
+    text-align: center;
+}
+
+.label.label-default.rank-label {
+    background-color: rgb(1,100,150);
+    padding: 2px 10px 5px 2px;
+    border-radius: 27px;
+    color: ghostwhite;
+}
+
+@media (max-width: 990px) {
+    .mainDiv{
+        border-width: 0;
+        padding: 0;
+        top: 20px;
+    }
+}

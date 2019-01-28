@@ -90,7 +90,7 @@ include 'header.php';
                             $idd = 'cat'.$id;
                             ?>
 
-                            <div class="col-md-12 cat float-right col-12 <?php if($x==1) echo 'cat-on';?>" id="<?php echo $idd;?>">
+                            <div class="col-md-12 cat float-right col-12 cat-on" id="<?php echo $idd;?>">
                                 <?php echo $name; ?>
                                 <span class="float-left">
                                     <?php
@@ -105,7 +105,7 @@ include 'header.php';
                         }
                         ?>
 
-                        <div class="col-md-12 cat float-right col-12 " id="cat0">
+                        <div class="col-md-12 cat float-right col-12 cat-on" id="cat0">
                             همه دسته‌ها
                             <span class="float-left">
                                 <?php

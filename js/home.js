@@ -76,32 +76,33 @@ $(document).ready(function () {
     });
 
     $(document).on('click touchstart',".cat",function (event) {
-        // alert(event.target.id);
         iddd = event.target.id;
         idd= iddd.substr(3);
-        // alert(idd);
         el=event.target.classList;
         if(el.contains('cat-on')){
             $(event.target).removeClass('cat-on');
-            if(event.target.id=='cat0'){
+            if(event.target.id=='cat0' ){
                 $('.cat').removeClass('cat-on');
                 $('#cat1').addClass('cat-on');
                 cat = [1];
             }
             else {
-                for (var i = 0; i < cat.length - 1; i++) {
-                    // alert(i);
+                for (var i = 0; i < cat.length ; i++) {
                     if (cat[i] == idd) {
                         cat.splice(i, 1);
-                        // alert('yess');
                     }
                 }
+            }
+            if(cat.length==0){
+                $('#cat1').addClass('cat-on');
+                cat = [1];
             }
             var category = cat.join();
             $.get("/getPage.php", {page:1 , typ:1 , cat :category }, function (res) {
                 $("#replacepagination").html(res);
                 window.scrollTo(0, 1000);
             });
+
         }else if(el.contains('cat')){
             $(event.target).addClass('cat-on');
             if(event.target.id=='cat0'){
@@ -116,9 +117,9 @@ $(document).ready(function () {
                 window.scrollTo(0, 1000);
             });
         }
-        // alert(cat);
 
     });
+
 
 
 
