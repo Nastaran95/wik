@@ -76,7 +76,7 @@ if (!isset($_SESSION["logged_in"]) || !$_SESSION["logged_in"]){
     exit();
 }
 else if($_GET['request']=='update'){
-    $stmt = $connection->prepare("SELECT name, mobile , categoryID , address , email FROM Users WHERE (mobile=? )");
+    $stmt = $connection->prepare("SELECT name, mobile , categoryID , address , email,showMobile FROM Users WHERE (mobile=? )");
     $stmt->bind_param("s", $_SESSION["mobile"]);
     $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
     $result = $stmt->get_result();
@@ -87,6 +87,7 @@ else if($_GET['request']=='update'){
         $email = $row["email"];
         $address = $row["address"];
         $cat = $row["categoryID"];
+        $showMobile = $row["showMobile"];
 
         if ((isset($_POST['name'])) && $_POST['name'] != $name) {
             $stmt = $connection->prepare("UPDATE Users SET name=? , stat=0 WHERE (mobile=? )");
@@ -105,8 +106,14 @@ else if($_GET['request']=='update'){
             $stmt->execute();
         }
         if ((isset($_POST['category'])) && $_POST['category'] != $cat) {
-            $stmt = $connection->prepare("UPDATE Users SET categoryID=? , stat=0 WHERE (mobile=? )");
+            $stmt = $connection->prepare("UPDATE Users SET categoryID=?  WHERE (mobile=? )");
             $stmt->bind_param("ss", $_POST['category'], $_SESSION["mobile"]);
+            $stmt->execute();
+        }
+
+        if ((isset($_POST['showMobile'])) && $_POST['showMobile'] != $showMobile) {
+            $stmt = $connection->prepare("UPDATE Users SET showMobile=?  WHERE (mobile=? )");
+            $stmt->bind_param("ss", $_POST['showMobile'], $_SESSION["mobile"]);
             $stmt->execute();
         }
 
@@ -608,7 +615,7 @@ include 'header.php';
         <div class="col-md-12">
 
             <?php
-            $stmt = $connection->prepare("SELECT name, mobile, eshterakID , categoryID , address , image, email , startTime , endTime FROM Users WHERE (mobile=? )");
+            $stmt = $connection->prepare("SELECT name, mobile, eshterakID , categoryID , address , image, email , startTime , endTime,showMobile FROM Users WHERE (mobile=? )");
             $stmt->bind_param("s", $_SESSION["mobile"]);
             $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
             $result = $stmt->get_result();
@@ -623,6 +630,7 @@ include 'header.php';
                 $img = $row["image"];
                 $startTime = $row["startTime"];
                 $endTime = $row["endTime"];
+                $show = $row["showMobile"];
 //                echo '<script>alert('.$startTime.')</script>';
 //                echo '<script>alert('.$endTime.')</script>';
 
@@ -667,6 +675,13 @@ include 'header.php';
                                 <label for="mobile" class="dark_text"><b>شماره همراه</b></label>
                                 <input type="text" class="form-control" id="mobile"
                                        value="<?php echo $_SESSION["mobile"]; ?>" name="mobile" readonly>
+                            </div>
+                            <div class="form-group col-md-10 m-auto text-right">
+                                <label for="showMobile" class="dark_text"><b>نمایش شماره همراه در پروفایل شخصی (قابل رویت برای تمامی کاربران سایت)</b></label>
+                                <select name="showMobile" class="form-control required" id="showMobile">
+                                    <option value="0" <?php if ($show == 0) echo "selected=\"selected\""; ?> >خیر</option>
+                                    <option value="1" <?php if ($show == 1) echo "selected=\"selected\""; ?> >بله</option>
+                                </select>
                             </div>
                             <div class="form-group col-md-10 m-auto text-right">
                                 <label for="email" class="dark_text"><b>ایمیل</b></label>

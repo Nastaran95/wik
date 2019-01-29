@@ -67,6 +67,7 @@ if ($_SESSION['typ']>8) {
             $pass = $_POST["pass"];
             $confpass = $_POST["repass"];
             $eshterak = 0;
+            $showMobile = $_POST["showMobile"];
 
             $mobile = str_replace("۰", "0", $mobile);
             $mobile = str_replace("۱", "1", $mobile);
@@ -146,11 +147,11 @@ if ($_SESSION['typ']>8) {
                     $Code = $verificationcode;
                     $img = 'images/no-photo.png';
                     if ($product === "all") {
-                        $stmt = $connection->prepare("INSERT INTO users (name,address,mobile,email,categoryID,pass,eshterakID,verified,verificationcode,codetime,attempt,passwordtime,image,realtime)  VALUES (?,?,?,?,?,?,4,0,?,CURRENT_TIMESTAMP,1,CURRENT_TIMESTAMP,?,?)");
-                        $stmt->bind_param("sssssssss", $name, $address, $mobile, $mail, $category, $pass, $verificationcode, $img, $modified_time);
+                        $stmt = $connection->prepare("INSERT INTO users (name,address,mobile,email,categoryID,pass,eshterakID,verified,verificationcode,codetime,attempt,passwordtime,image,realtime,showMobile,stat)  VALUES (?,?,?,?,?,?,4,0,?,CURRENT_TIMESTAMP,1,CURRENT_TIMESTAMP,?,?,?,1)");
+                        $stmt->bind_param("ssssssssss", $name, $address, $mobile, $mail, $category, $pass, $verificationcode, $img, $modified_time,$showMobile);
                     } else {
-                        $stmt = $connection->prepare("UPDATE users SET name=? ,  stat=0 ,address=? , email=? , categoryID=? , pass=? WHERE (ID=?)");
-                        $stmt->bind_param("ssssss", $name, $address, $mail, $category,$pass, $product);
+                        $stmt = $connection->prepare("UPDATE users SET name=? ,  stat=1 ,address=? , email=? , categoryID=? , pass=?,showMobile=? WHERE (ID=?)");
+                        $stmt->bind_param("sssssss", $name, $address, $mail, $category,$pass,$showMobile, $product);
                     }
 
 
@@ -174,6 +175,7 @@ if ($_SESSION['typ']>8) {
                         $address = $_POST["address"];
                         $pass = $_POST["pass"];
                         $confpass = $_POST["repass"];
+                        $show = $_POST["showMobile"];
                         if (isset($_POST["category"]))
                             $category = $_POST["category"];
                         else
@@ -263,6 +265,7 @@ if ($_SESSION['typ']>8) {
         $pass = $row["pass"];
         $confpass = $row["repass"];
         $category = $row["categoryID"];
+        $show = $row["showMobile"];
 
 
     } else {
@@ -273,6 +276,7 @@ if ($_SESSION['typ']>8) {
         $pass = "";
         $confpass = "";
         $category = "";
+        $show=0;
     }
     ?>
         <div class="m-auto col-12" id="showerror"></div>
@@ -284,6 +288,13 @@ if ($_SESSION['typ']>8) {
             <div class="form-group col-md-10 m-auto text-right">
                 <label for="mobile" class="dark_text"><b>شماره همراه</b></label>
                 <input type="text" maxlength="11" pattern="\d*" class="form-control" id="mobile" placeholder="شماره همراه" name="mobile"  value="<?php echo $mobile;?>" <?php if ($product !== "all") echo "readonly";?> >
+            </div>
+            <div class="form-group col-md-10 m-auto text-right">
+                <label for="showMobile" class="dark_text"><b>نمایش شماره همراه در پروفایل شخصی (قابل رویت برای تمامی کاربران سایت)</b></label>
+                <select name="showMobile" class="form-control required" id="showMobile">
+                    <option value="0" <?php if ($show == 0) echo "selected=\"selected\""; ?> >خیر</option>
+                    <option value="1" <?php if ($show == 1) echo "selected=\"selected\""; ?> >بله</option>
+                </select>
             </div>
             <div class="form-group col-md-10 m-auto text-right">
                 <label for="email" class="dark_text"><b>ایمیل</b></label>

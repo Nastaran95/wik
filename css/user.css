@@ -8,7 +8,7 @@
     border-width: 0px 0px 0px 2px;
     border-color: rgb(239,134,131);
     margin: 10px 0px;
-    padding-top: 50px;
+    /*padding-top: 50px;*/
     float: right;
     color: rgb(239,134,131);
 }
@@ -42,6 +42,7 @@ h1{
 .profile-header-container{
     margin: 0 auto;
     text-align: center;
+    background-color: rgb(225,222,223);
 }
 
 .profile-header-img {
@@ -51,7 +52,7 @@ h1{
 .profile-header-img > img.img-circle {
     width: 120px;
     height: 120px;
-    border: 2px solid rgb(1,100,150);
+    border: 2px solid rgb(216,92,92);
     border-radius: 50%;
 }
 
@@ -69,11 +70,58 @@ h1{
 }
 
 .label.label-default.rank-label {
-    background-color: rgb(1,100,150);
+    background-color: rgb(216,92,92);
     padding: 2px 10px 5px 2px;
     border-radius: 27px;
-    color: ghostwhite;
+    color: black;
 }
+
+
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color:  rgb(255,212,213);
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: inherit;
+    float: right;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: rgb(239,134,131);
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: rgb(216,92,92);
+}
+
+/* Style the tab content */
+.tabcontent {
+    /*display: none;*/
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+
+
+.nametime{
+    font-size: 14px;
+    color: rgb(87,87,87);
+    padding-bottom: 20px;
+}
+
 
 .pagination li{
     width: 40px;
@@ -88,7 +136,7 @@ h1{
     border: 1px solid #dddddd;
 }
 
-.paginationoldPapers:hover {
+.paginationoldPapers1:hover , .paginationoldPapers2:hover{
     background-color: rgb(255,100,100);
     color: white;
 }
@@ -96,6 +144,28 @@ h1{
 .active{
     background-color:  rgb(255,160,160) !important;
     color: white !important;
+}
+
+.Paperdiv{
+    height: auto;
+    color: black;
+    text-align: justify;
+    margin: 20px 0;
+}
+
+.papname{
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+.summ{
+    color: rgb(129,125,124);
+    font-size: 14px;
+}
+
+.NameInfo{
+    border-bottom: solid 2px #eee;
+    padding-bottom: 4px;
 }
 
 @media (max-width: 990px) {

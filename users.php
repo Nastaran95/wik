@@ -51,6 +51,8 @@ if (file_exists($productXMLNAME)) {
     <link href="css/font-awesome/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <script src="js/modernizr.custom.js"></script>
+    <script src="js/users.js" ></script>
+
 </head>
 <STYLE>A {text-decoration: none;} </STYLE>
 <body>
@@ -90,13 +92,15 @@ include 'header.php';
 
 
                     <div class="box">
-                        <div id="replacepagination">
 
+                        <div id="replacepagination">
+                            <div class="row">
                             <?php
                             $page = 1;
                             $a = ($page-1)*18;
                             $query = "SELECT * FROM users WHERE stat>0 ORDER by name ASC LIMIT $a , 18;";
                             $result = $connection->query($query);
+
                             while ($row=$result->fetch_assoc()) {
                                 $name = $row['name'];
                                 $img = $row['image'];
@@ -128,6 +132,10 @@ include 'header.php';
 
                                 <?php
                             }
+                            ?>
+                            </div>
+                            <?php
+
                             $query = "SELECT * FROM users WHERE stat>0;" ;
                             $result = $connection->query($query);
                             $pagenum = $result->num_rows;
