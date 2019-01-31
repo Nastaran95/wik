@@ -1,0 +1,88 @@
+.leftDiv{
+    float: right;
+    padding-top: 20px;
+}
+
+.mainDiv{
+    border-style: solid;
+    border-width: 0px 0px 0px 2px;
+    border-color: rgb(239,134,131);
+    margin: 10px 0px;
+    padding-top: 50px;
+    float: right;
+    color: rgb(239,134,131);
+}
+
+h1{
+    font-size: 22px;
+}
+
+.fontDiam{
+    font-size: 40px;
+}
+
+.contctus input{
+    background-color: rgb(255,212,213);
+    margin-top: 20px;
+    height: 50px;
+    color: black;
+}
+
+.contctus textarea {
+    background-color: rgb(255, 212, 213);
+    width: 100%;
+    /*margin-top: 20px;*/
+    padding: 5px;
+    color: black;
+}
+
+.contctus button , .imgBtn{
+    background-color: rgb(240,135,132);
+    height: 50px;
+}
+
+.colorBorder{
+    border: 2px solid red;
+}
+
+.show_res{
+    color: red;
+    font-size:16px;
+}
+
+.box{
+    border-style: solid;
+    border-width: 2px 0px 0px 0px;
+    border-color: rgb(239,134,131);
+    margin-bottom: 30px;
+    width: 92%;
+    margin-right: 4%;
+    margin-left: 4%;
+    /*padding: 25px;*/
+}
+
+
+
+
+.typeTable th{
+    border: 1px solid rgb(233,144,139);
+    width: 33%;
+    height: 50px;
+}
+
+.chooseType{
+    background-color: rgb(240,135,132);
+    color: white;
+    border-color: whitesmoke !important;
+
+}
+
+
+
+@media (max-width: 990px) {
+    .mainDiv{
+        border-width: 0;
+        padding: 0;
+        top: 20px;
+    }
+}

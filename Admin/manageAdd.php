@@ -17,16 +17,16 @@ if (($_SESSION['typ']>0)) {
     if (isset($_GET['request'])){
         $name = $_POST['name'];
         $qeimat = $_POST['qeimat'];
-        $tozih = $_POST['tozihat'];
+        $time = $_POST['time'];
         if($_GET['request']>=0) {
             $id = $_GET['request'];
-            $stmt = $connection->prepare("UPDATE userEshterak SET name=? ,tozihat=? ,qeimat=? WHERE (ID=?)");
-            $stmt->bind_param("ssss", $name,$tozih,$qeimat, $id);
+            $stmt = $connection->prepare("UPDATE addCategory SET name=? ,time=? ,qeimat=? WHERE (ID=?)");
+            $stmt->bind_param("ssss", $name,$time,$qeimat, $id);
 
         }
         else if( $_GET['request']==-1){
-            $stmt = $connection->prepare("INSERT INTO userEshterak (name,tozihat,qeimat) VALUES (?,?,?)");
-            $stmt->bind_param("sss", $name, $tozih,$qeimat);
+            $stmt = $connection->prepare("INSERT INTO addCategory (name,time,qeimat) VALUES (?,?,?)");
+            $stmt->bind_param("sss", $name, $time,$qeimat);
         }
         $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
         $stmt->close();
@@ -46,7 +46,7 @@ if (($_SESSION['typ']>0)) {
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>مدیریت بسته‌های اشتراک</title>
+        <title>مدیریت تعرفه‌های اگهی</title>
 
 
         <link rel="stylesheet" href="/css/bootstrap.css"/>
@@ -64,7 +64,7 @@ if (($_SESSION['typ']>0)) {
     <body dir="rtl">
     <div id="wrapper">
         <?php
-        $which=9;
+        $which=16;
         include 'adminmenue.php';
         ?>
         <div id="page-wrapper">
@@ -76,7 +76,7 @@ if (($_SESSION['typ']>0)) {
                 <tr>
                     <th class="text-center"><span>عنوان</span></th>
                     <th class="text-center"><span>قیمت(تومان)</span></th>
-                    <th class="text-center"><span>توضیحات</span></th>
+                    <th class="text-center"><span>زمان (روز)</span></th>
 
                 </tr>
                 </thead>
@@ -85,18 +85,18 @@ if (($_SESSION['typ']>0)) {
 
 
             <?php
-                $query = "SELECT * FROM userEshterak;";
+                $query = "SELECT * FROM addCategory;";
                 $result = $connection->query($query);
             echo "<script>x=0; y =0;</script>";
                 while ($row=$result->fetch_assoc()) {
                     $name = $row['name'];
                     $qeimat = $row['qeimat'];
-                    $tozih = $row['tozihat'];
+                    $time = $row['time'];
                     $id = $row['ID'];
                     echo "<script>count(".$id.");</script>";
                     ?>
                         <tr class="<?php echo $id;?>">
-                            <form action="manageUsersEshterak.php?request=<?php echo $id;?>" method="post"  class="form-row mt-5" id="<?php echo $id;?>">
+                            <form action="manageAdd.php?request=<?php echo $id;?>" method="post"  class="form-row mt-5" id="<?php echo $id;?>">
                                 <td  style="width: 40%;">
                                     <div dir="rtl" >
                                         <input type="text" maxlength="100" class="form-control w-100"
@@ -111,19 +111,25 @@ if (($_SESSION['typ']>0)) {
                                 </td>
                                 <td  style="width: 40%;">
                                     <div dir="rtl" >
-                                        <textarea rows="5" maxlength="300" name="tozihat" class="form-control w-100" form="<?php echo $id;?>"><?php echo $tozih; ?> </textarea>
+                                        <input type="text" maxlength="100" class="form-control w-100"
+                                               name="time" value="<?php echo $time; ?>"  form="<?php echo $id;?>">
                                     </div>
                                 </td>
 
                                 <td style="width: 5%;">
-<!--                                    <a onclick="return confirming();" href="deleteblog.php?type=5&product=--><?php //echo $id?><!--">-->
-<!--                                        <span class="fa-stack">-->
-<!--                                            <i class="fa fa-square fa-stack-2x text-danger"></i>-->
-<!--                                            <i class="far fa-trash-alt fa-stack-1x fa-inverse"></i>-->
-<!--                                        </span>-->
-<!--                                    </a>-->
+                                    <a onclick="return confirming();" href="deleteblog.php?type=9&product=<?php echo $id?>">
+                                        <span class="fa-stack">
+                                            <i class="fa fa-square fa-stack-2x text-danger"></i>
+                                            <i class="far fa-trash-alt fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
                                     <div class="m-auto">
-                                        <button type="submit" class="btn btn-default " onclick="return confirming2();" form="<?php echo $id;?>" >ذخیره</button>
+                                        <button type="submit" class="btn p-0 m-0" onclick="return confirming2();" form="<?php echo $id;?>" >
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x text-success"></i>
+                                                <i class="far fa-check-square fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </button>
                                     </div>
                                 </td>
                             </form>
@@ -136,7 +142,7 @@ if (($_SESSION['typ']>0)) {
             </table>
             <div class="form-group col-md-10 row mt-4 ml-auto mr-auto">
                 <div class="col-md-5 col-12 mt-2 ml-auto mr-auto">
-                    <div class="btn btn-default col-md-12 col-12" onclick="myFunction4()">اضافه کردن</div>
+                    <div class="btn btn-default col-md-12 col-12" onclick="myFunction7()">اضافه کردن</div>
                 </div>
             </div>
 

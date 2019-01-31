@@ -305,6 +305,44 @@ function myFunction6() {
         "                            </form>";
 }
 
+function myFunction7() {
+    x++;
+    y++;
+    var table = document.getElementById("menuTable");
+    var row = table.insertRow(y);
+    row.innerHTML = "<form action=\"manageAdd.php?request=-1\" method=\"post\"  class=\"form-row mt-5\" id=\""+x+"\">\n" +
+        "                                <td  style=\"width: 40%;\">\n" +
+        "                                    <div dir=\"rtl\" >\n" +
+        "                                        <input type=\"text\" maxlength=\"100\" class=\"form-control w-100\"\n" +
+        "                                                name=\"name\"  form=\""+x+"\">\n" +
+        "                                    </div>\n" +
+        "                                </td>\n" +
+        "                                <td  style=\"width: 40%;\">\n" +
+        "                                    <div dir=\"rtl\" >\n" +
+        "                                        <input type=\"text\" maxlength=\"100\" class=\"form-control w-100\"\n" +
+        "                                               name=\"qeimat\"  form=\""+x+"\">\n" +
+        "                                    </div>\n" +
+        "                                </td>\n" +
+        "                                <td  style=\"width: 40%;\">\n" +
+        "                                    <div dir=\"rtl\" >\n" +
+        "                                        <input type=\"text\" maxlength=\"100\" class=\"form-control w-100\"\n" +
+        "                                               name=\"time\"  form=\""+x+"\">\n" +
+        "                                    </div>\n" +
+        "                                </td>\n" +
+        "\n" +
+        "                                <td style=\"width: 5%;\">\n" +
+        "                                    <div class=\"m-auto\">\n" +
+        "                                        <button type=\"submit\" class=\"btn p-0 m-0 \" onclick=\"return confirming2();\" form=\""+x+"\" >\n" +
+        "                                            <span class=\"fa-stack\">\n" +
+        "                                                <i class=\"fa fa-square fa-stack-2x text-success\"></i>\n" +
+        "                                                <i class=\"far fa-check-square fa-stack-1x fa-inverse\"></i>\n" +
+        "                                            </span>\n" +
+        "                                        </button>\n" +
+        "                                    </div>\n" +
+        "                                </td>\n" +
+        "                            </form>";
+}
+
 
 function confirming() {
     return confirm('آیا از حذف این مورد مطمعن هستید؟(حذف این مورد غیر قابل بازگشت است)');

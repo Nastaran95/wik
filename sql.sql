@@ -19,6 +19,26 @@ CREATE TABLE Paper(ID int NOT NULL AUTO_INCREMENT,
   FOREIGN KEY (dastebandi) REFERENCES category(ID),
   PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
 
+DROP TABLE advertisement;
+CREATE TABLE advertisement(ID int NOT NULL AUTO_INCREMENT,
+                   name VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci,
+                   matn VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci,
+                   number VARCHAR(20) DEFAULT "",
+                   link VARCHAR(100) DEFAULT "",
+                   address VARCHAR(300) DEFAULT "",
+                   image VARCHAR(1000),
+                   time TIMESTAMP,
+                   startTime VARCHAR(200),
+                   endTime VARCHAR(200),
+                   active int ,
+                   mahbobiat int DEFAULT 0,
+                   addType int ,
+                   stat int DEFAULT 0,
+                   writerID VARCHAR(100),
+                    pardakht int DEFAULT 0,
+  FOREIGN KEY (addType) REFERENCES addCategory(ID),
+  PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
+
 
 DROP table userEshterak;
 CREATE TABLE userEshterak(ID int NOT NULL AUTO_INCREMENT,
@@ -36,6 +56,22 @@ CREATE TABLE userEshterak(ID int NOT NULL AUTO_INCREMENT,
 
   INSERT INTO userEshterak(name) VALUES
                   ('یک ساله');
+
+DROP table addCategory;
+CREATE TABLE addCategory(ID int NOT NULL AUTO_INCREMENT,
+                      name VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci,
+                      time int NOT NULL ,
+                      qeimat VARCHAR(100),
+  PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
+
+INSERT INTO category(name) VALUES ('هفت روزه');
+INSERT INTO category(name) VALUES ('یک ماهه');
+INSERT INTO category(name) VALUES ('سه ماهه');
+INSERT INTO category(name) VALUES ('شش ماهه');
+INSERT INTO category(name) VALUES ('یک ساله');
+
+
+
 
 drop TABLE pardakht;
 CREATE TABLE pardakht(ID int NOT NULL AUTO_INCREMENT,
@@ -55,6 +91,18 @@ CREATE TABLE allpardakht(ID int NOT NULL AUTO_INCREMENT,
   code  VARCHAR(100) ,
   FOREIGN KEY (mobile) REFERENCES users(mobile),
   FOREIGN KEY (userEshterakID) REFERENCES userEshterak(ID),
+  PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
+
+drop table allpardakhtAdd;
+CREATE TABLE allpardakhtAdd(ID int NOT NULL AUTO_INCREMENT,
+                         mobile VARCHAR(100) ,
+                         addType int NOT NULL,
+                         amount  VARCHAR(100) ,
+                         status INT,
+                         code  VARCHAR(100) ,
+                         addID int ,
+  FOREIGN KEY (addType) REFERENCES addCategory(ID),
+  FOREIGN KEY (addID) REFERENCES advertisement(ID),
   PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
 
                    drop TABLE users;

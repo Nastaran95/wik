@@ -95,6 +95,19 @@ if ($_SESSION['typ'] >0) {
         }
     }
 
+    else if ( isset($_REQUEST['orderID']) && isset($_REQUEST['typ']) && $_REQUEST['typ']==8) {
+        $product = $_REQUEST['orderID'];
+        $status= $_REQUEST['status'];
+        $query = "update advertisement set stat=".$status." WHERE ID = ".$product;
+        $result = $connection->query($query);
+        if($connection->error){
+            return "0";
+        }
+        else{
+            return "1";
+        }
+    }
+
 
 }else {
     header('Location:/');

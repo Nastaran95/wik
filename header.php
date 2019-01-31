@@ -45,6 +45,7 @@
                     <?php
                 }else{
                     ?>
+                    <div class="m-auto"><a class="dark_text" href="/profile.php">پروفایل کاربری</a></div>
                     <div class="m-auto"><a class="dark_text" href="/Logout.php">خروج</a></div>
                     <?php
                 }
@@ -67,12 +68,6 @@
                 <?php
                 $query = "SELECT * FROM menue;";
                 $result = $connection->query($query);
-                if (isset($_SESSION["logged_in"]) && $_SESSION['logged_in']==true) {
-                    ?>
-                    <a href="/profile.php"><li>پروفایل کاربری</li></a>
-                    <?php
-                }
-
                 if (isset($_SESSION["typ"]) && $_SESSION["typ"]>0) {
                     ?>
                     <a href="/Admin/admin.php"><li>منوی ادمین</li></a>
@@ -113,13 +108,6 @@
             <?php
             $query = "SELECT * FROM menue;";
             $result = $connection->query($query);
-            if (isset($_SESSION["logged_in"]) && $_SESSION['logged_in']==true) {
-                ?>
-                <a href="/profile.php" >
-                    پروفایل کاربری
-                </a>
-                <?php
-            }
             if (isset($_SESSION["typ"]) && $_SESSION["typ"]>0) {
                 ?>
                 <a href="/Admin/admin.php" >
@@ -157,9 +145,9 @@
                 </div>
                 <?php
             }else{
-                ?>
-                <div class="d-block offset-1"><a class="dark_text" href="/Logout.php">خروج</a>
-                </div>
+                    ?>
+                <div class="d-block offset-1"><a class="dark_text" href="/profile.php"> پروفایل کاربری</a></div>
+                <div class="d-block offset-1"><a class="dark_text" href="/Logout.php">خروج</a></div>
                 <?php
             }
             ?>

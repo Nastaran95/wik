@@ -436,10 +436,23 @@ else if(isset($_GET['request']) && $_GET['request']=='buyEshterak') {
         die();
     }
 
-    $stmt = $connection->prepare("INSERT INTO pardakht (mobile, userEshterakID)  VALUES (?,?)");
-    $stmt->bind_param("ss",$_SESSION["mobile"],$id );
+//    $stmt = $connection->prepare("INSERT INTO pardakht (mobile, userEshterakID)  VALUES (?,?)");
+//    $stmt->bind_param("ss",$_SESSION["mobile"],$id );
+//    $stmt->execute();
+//    $stmt->close();
+
+
+
+
+    $MerchantID = '3c5b10c6-6c1f-11e6-9549-005056a205be'; //Required
+    $Amount = $qeimat; //Amount will be based on Toman - Required
+
+
+    $stmt = $connection->prepare("INSERT INTO allpardakht (mobile, userEshterakID,amount,status,code)  VALUES (?,?,?,3,'pending')");
+    $stmt->bind_param("sss",$_SESSION["mobile"],$id,$Amount);
     $stmt->execute();
     $stmt->close();
+
     $insertID = $connection->insert_id;
 
     if ($connection->error) {
@@ -447,9 +460,6 @@ else if(isset($_GET['request']) && $_GET['request']=='buyEshterak') {
         die();
     }
 
-
-    $MerchantID = '3c5b10c6-6c1f-11e6-9549-005056a205be'; //Required
-    $Amount = $qeimat; //Amount will be based on Toman - Required
 //    $Amount = 100;
     $_SESSION['amount'] = $Amount;
     $Description = 'خرید بسته اشتراک '.$name.' ویکی‌درم'; // Required
@@ -484,18 +494,13 @@ else if(isset($_GET['request']) && $_GET['request']=='buyEshterak') {
 }
 else if(isset($_GET['request']) && $_GET['request']=='backZarrin') {
     $insertID = $_GET['zarrin'];
-    $stmt = $connection->prepare("SELECT * FROM pardakht WHERE (ID=? )");
+    $stmt = $connection->prepare("SELECT * FROM allpardakht WHERE (ID=? )");
     $stmt->bind_param("s",$insertID );
     $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
     $res = $stmt->get_result();
     if( $row = $res->fetch_assoc()){
+        $qeimat = $row['amount'];
         $id = $row['userEshterakID'];
-        $stmt = $connection->prepare("SELECT * FROM userEshterak WHERE (ID=? )");
-        $stmt->bind_param("s",$id );
-        $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
-        $res = $stmt->get_result();
-        $row = $res->fetch_assoc();
-        $qeimat = $row['qeimat'];
     }else{
         echo "<script>alert('دسترسی غیر مجاز.')</script>>";
         die();
@@ -522,8 +527,8 @@ else if(isset($_GET['request']) && $_GET['request']=='backZarrin') {
 
         if ($result->Status == 100) { //successfull
             echo 'با تشکر از شما . سفارش شما با موفقیت پرداخت شد. شماره پیگیری: '.$result->RefID;
-            $stmt = $connection->prepare("INSERT INTO allpardakht (mobile, userEshterakID,amount,status,code)  VALUES (?,?,?,2,?)");
-            $stmt->bind_param("ssss",$_SESSION["mobile"],$id,$Amount,$result->RefID );
+            $stmt = $connection->prepare("update  allpardakht set status=2 , code=?  where ID=?");
+            $stmt->bind_param("ss",$result->RefID , $insertID);
             $stmt->execute();
             $stmt->close();
 
@@ -539,6 +544,7 @@ else if(isset($_GET['request']) && $_GET['request']=='backZarrin') {
                 $jday = "0" . $jday;
             }
             $start = $jyear . '/' . $jmonth . '/' . $jday . ' ' . $time;
+
 
             if($id==1){
                 $jmonth = $jmonth + 1;
@@ -566,23 +572,23 @@ else if(isset($_GET['request']) && $_GET['request']=='backZarrin') {
         } else { //onsuccesful
             $code = get_error($result->Status);
             echo 'پرداخت شما ناموفق بوده است . لطفا مجددا تلاش نمایید یا در صورت بروز اشکال با مدیر سایت تماس بگیرید. وضعیت:'.$result->Status;
-            $stmt = $connection->prepare("INSERT INTO allpardakht (mobile, userEshterakID,amount,status,code)  VALUES (?,?,?,1,?)");
-            $stmt->bind_param("ssss",$_SESSION["mobile"],$id,$Amount ,$code);
+            $stmt = $connection->prepare("update  allpardakht set status=1 ,code=? where ID=?");
+            $stmt->bind_param("ss",$code,$insertID);
             $stmt->execute();
             $stmt->close();
         }
     } else { //canceled
         $code = 'canceled';
         echo 'پرداخت توسط شما لغو گردید.';
-        $stmt = $connection->prepare("INSERT INTO allpardakht (mobile, userEshterakID,amount,status,code)  VALUES (?,?,?,0,?)");
-        $stmt->bind_param("ssss",$_SESSION["mobile"],$id,$Amount ,$code);
+        $stmt = $connection->prepare("update allpardakht set status=0 ,code=?  where ID=?");
+        $stmt->bind_param("ss",$code,$insertID);
         $stmt->execute();
         $stmt->close();
     }
-    $stmt = $connection->prepare("Delete FROM pardakht WHERE (ID=? )");
-    $stmt->bind_param("s",$insertID );
-    $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
-    $result = $stmt->get_result();
+//    $stmt = $connection->prepare("Delete FROM pardakht WHERE (ID=? )");
+//    $stmt->bind_param("s",$insertID );
+//    $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
+//    $result = $stmt->get_result();
     echo '<a href="/profile.php">بازگشت به صفحه پروفایل </a>';
 
 
@@ -929,6 +935,7 @@ include 'header.php';
 
 
                         <?php
+//                        echo $eshterak;
                         if($eshterak==4){
                             ?>
                             <div class="p-2 text-info text-center col-md-12">
@@ -936,6 +943,7 @@ include 'header.php';
                             </div>
                             <?php
                         }else{
+
                             $query = "SELECT * FROM userEshterak WHERE ID=".$eshterak.";";
                             $result = $connection->query($query);
                             $row = $result->fetch_assoc();

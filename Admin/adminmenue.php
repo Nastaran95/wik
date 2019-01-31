@@ -54,6 +54,19 @@ if (($_SESSION['typ']>0)) {
                         <i class="fas fa-cogs"></i>تنظیمات تماس‌ با ما </a></li>
 
 
+                <li class="<?php if ($which == 16) echo "selected"; ?>"><a href="manageAdd.php"><i
+                                class="fa fa-file"></i> مدیریت تعرفه‌های آگهی </a></li>
+
+                <li class="<?php if ($which == 17) echo "selected"; ?>"><a href="allPardakhtAdd.php">
+                        <i class="fas fa-hand-holding-usd"></i>تراکنش‌های تبلیغاتی </a></li>
+
+                <li class="<?php if ($which == 18) echo "selected"; ?>"><a href="addAdvertisement.php"><i class="fa fa-tasks"></i>
+                        افزودن آگهی </a></li>
+
+                <li class="<?php if ($which == 19) echo "selected"; ?>"><a href="allAdvertisement.php"><i class="fa fa-tasks"></i>
+                        همه آگهی‌ها </a></li>
+
+
                 <!--                <li class="--><?php //if ($which == 14) echo "selected"; ?><!--"><a href="admin.php"><i-->
 <!--                                class="fa fa-dedent"></i> مدیریت تعرفه آگهی </a></li>-->
 <!--                <li class="--><?php //if ($which == 15) echo "selected"; ?><!--"><a href="admin.php"><i-->

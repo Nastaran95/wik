@@ -28,6 +28,10 @@ if (($_SESSION['typ'] == 10) || ($_SESSION['typ'] == 9)) {
             $query = "SELECT * FROM grayBox WHERE ID = $product";
         else if($type == 8)
             $query = "SELECT * FROM user_request WHERE ID = $product";
+        else if($type == 9)
+            $query = "SELECT * FROM addCategory WHERE ID = $product";
+        else if($type == 10)
+            $query = "SELECT * FROM advertisement WHERE ID = $product";
         $result = $connection->query($query);
         $row = $result->fetch_assoc();
         $name = $row['XMLNAME'];
@@ -48,6 +52,10 @@ if (($_SESSION['typ'] == 10) || ($_SESSION['typ'] == 9)) {
             $query = "DELETE FROM grayBox WHERE ID = $product";
         else if($type == 8)
             $query = "DELETE FROM user_request WHERE ID = $product";
+        else if($type == 9)
+            $query = "DELETE FROM addCategory WHERE ID = $product";
+        else if($type == 10)
+            $query = "DELETE FROM advertisement WHERE ID = $product";
         $result = $connection->query($query);
         if($connection->error){
             echo '<script> alert("بدلایل امنیتی دسترسی به حذف داده نشد'.$connection->error.'."); </script> ';
@@ -69,6 +77,10 @@ if (($_SESSION['typ'] == 10) || ($_SESSION['typ'] == 9)) {
             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/manageGrayBox.php?nocache='.generateRandomString(10).'">';
         else if($type == 8)
             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/allUsersRequest.php?nocache='.generateRandomString(10).'">';
+        else if($type == 9)
+            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/manageAdd.php?nocache='.generateRandomString(10).'">';
+        else if($type == 10)
+            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/allAdvertisement.php?nocache='.generateRandomString(10).'">';
 
 
     }

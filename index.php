@@ -132,11 +132,6 @@ include 'headerMainpage.php';
                 <?php
                 $query = "SELECT * FROM menue;";
                 $result = $connection->query($query);
-                if (isset($_SESSION["logged_in"]) && $_SESSION['logged_in']==true) {
-                    ?>
-                    <a href="/profile.php"><li>پروفایل کاربری</li></a>
-                    <?php
-                }
                 if (isset($_SESSION["typ"]) && $_SESSION["typ"]>0) {
                     ?>
                     <a href="/Admin/admin.php"><li>منوی ادمین</li></a>
