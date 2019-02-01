@@ -388,7 +388,7 @@ if (isset($_GET['request']) && $_GET['request']=='message') {
 //    $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
 //    $result = $stmt->get_result();
     echo '<a href="/index.php">بازگشت به صفحه اصلی </a>';
-
+    die();
 
 }
 else{
@@ -534,12 +534,9 @@ if (file_exists($productXMLNAME)) {
                         تبلیغات
                     </h3>
                 </div>
-                <div class="col-md-12 add">
-                    <img src="images/tabliq.png" width="100%" height="100%" alt="">
-                </div>
-                <div class="col-md-12 add">
-                    <img src="images/tabliq.png" width="100%" height="100%" alt="">
-                </div>
+                <?php
+                include 'showAdd.php';
+                ?>
             </div>
 
         </div>

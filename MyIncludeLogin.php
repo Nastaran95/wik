@@ -174,12 +174,9 @@
                         تبلیغات
                     </h3>
                 </div>
-                <div class="col-md-12 add">
-                    <img src="images/tabliq.png" width="100%" height="100%" alt="">
-                </div>
-                <div class="col-md-12 add">
-                    <img src="images/tabliq.png" width="100%" height="100%" alt="">
-                </div>
+                <?php
+                include 'showAdd.php';
+                ?>
             </div>
 
         </div>

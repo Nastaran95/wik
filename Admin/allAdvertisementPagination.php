@@ -215,12 +215,12 @@
                 if ($row['pardakht'] == 0) {
                     $tp = "پرداخت نشده ";
                     echo "<td dir='ltr'>                                                                                                               
-                                        <span class='status" . $row['ID'] . "' style=\"color: red;\" >" . $tp . "</span>
+                                        <span  style=\"color: red;\" >" . $tp . "</span>
                                    </td> ";
                 } else {
                     $tp = "پرداخت شده ";
                     echo "<td dir='ltr'>                                                                                                               
-                                        <span class='status" . $row['ID'] . "' style=\"color: green;\" >" . $tp . "</span>
+                                        <span  style=\"color: green;\" >" . $tp . "</span>
                                    </td> ";
                 }
 
