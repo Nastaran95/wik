@@ -388,9 +388,7 @@ include 'headerMainpage.php';
 
 
 <?php
-
-
-
+include 'footer.php';
 ?>
 <script src="/js/classie.js"></script>
 <script src="/js/uisearch.js"></script>
