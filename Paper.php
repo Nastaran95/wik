@@ -5,8 +5,6 @@
  * Date: 1/3/19
  * Time: 8:16 PM
  */
-
-
 session_start();
 
 include 'Settings.php'; //harja khasti DB estefade koni ino bezan faghat
@@ -31,10 +29,13 @@ if (isset($_GET['ID'])) {
         $id = $row['ID'];
         $subj = $row['name'];
         $writerID = $row['writerID'];
+        $mokh = $row['Mokhtasar'];
         $q = "SELECT * FROM users WHERE mobile=".$writerID.";";
         $res = $connection->query($q);
-        if($rw=$res->fetch_assoc())
+        if($rw=$res->fetch_assoc()) {
             $writer = $rw['name'];
+            $eshterak = $rw["eshterakID"];
+        }
         else
             $writer = 'ناشناس';
         $time = $row['realtime'];
@@ -114,20 +115,62 @@ include 'header.php';
         <div class="col-md-12 test">
 
             <div class="mainDiv col-md-9 col-12">
-
-                    <div class="col-md-12 float-right col-12 text-right" >
+                <?php
+                if($eshterak==4) {
+                    ?>
+                    <div class="col-md-12 float-right col-12 text-right">
                         <div class="col-md-12 float-left">
-                            <h1> <span class="fontDiam"> &#9830; </span>
+                            <h1><span class="fontDiam"> &#9830; </span>
+                                <?php echo $subj; ?>
+                            </h1>
+                        </div>
+                        <div class="float-left hrline"></div>
+                        <div class="afterHr">
+                            <div class="text-dark col-md-12 summ col-12 text-right">
+                                <?php echo $mokh; ?> ...
+                            </div>
+                            <div class="text-dark col-md-12">
+                                <?php
+                                $xxxx = $Description;
+                                $tmp = preg_replace('#<[^>]+>#', ' ', $xxxx);
+
+                                if(strlen($tmp)<=500){
+                                    $pr = $tmp;
+                                }
+                                else {
+                                    $x = 500;
+                                    while ($tmp[$x++] != ' ' && $x<strlen($tmp)) {
+                                    }
+                                    $pr = substr($tmp, 0, $x);
+                                }
+                                echo $pr;
+                                ?>...
+                            </div>
+
+                            <div class="p-5 text-danger text-center col-md-12"><b>
+                                با توجه به نداشتن اشتراک فعال این نویسنده، ادامه محتوای این پست قابل نمایش نیست.
+                                </b></div>
+                        </div>
+                    </div>
+                    <?php
+                }
+                else {
+                    ?>
+                    <div class="col-md-12 float-right col-12 text-right">
+                        <div class="col-md-12 float-left">
+                            <h1><span class="fontDiam"> &#9830; </span>
                                 <?php echo $subj; ?>
 
-                            <?php
-                            if (isset($_SESSION["logged_in"]) && $_SESSION['logged_in']==true && $_SESSION["mobile"]==$writerID) {
+                                <?php
+                                if (isset($_SESSION["logged_in"]) && $_SESSION['logged_in'] == true && $_SESSION["mobile"] == $writerID) {
+                                    ?>
+                                    <a href="/profile.php?requestEdit=<?php echo $id; ?>" class="edit"><i
+                                                class="fas fa-edit"></i></a>
+                                    <a href="/profile.php?requestDelete=<?php echo $id; ?>" class="delete"><i
+                                                class="fas fa-trash-alt"></i></a>
+                                    <?php
+                                }
                                 ?>
-                                <a href="/profile.php?requestEdit=<?php echo $id;?>" class="edit"><i class="fas fa-edit"></i></a>
-                                <a  href="/profile.php?requestDelete=<?php echo $id;?>" class="delete"><i class="fas fa-trash-alt"></i></a>
-                            <?php
-                            }
-                            ?>
                             </h1>
                         </div>
                         <div class="float-left hrline"></div>
@@ -150,123 +193,124 @@ include 'header.php';
 
                     </div>
 
-                <?php
-                $query = "SELECT * FROM Paper WHERE (writerID LIKE '%$writerID%' and stat>0)";
-                $result = $connection->query($query) ;
-                $pagenum = $result->num_rows;
-                if($pagenum>0) {
+                    <?php
+                    $query = "SELECT * FROM Paper WHERE (writerID LIKE '%$writerID%' and stat>0)";
+                    $result = $connection->query($query);
+                    $pagenum = $result->num_rows;
+                    if ($pagenum > 0) {
 
 
-                    ?>
+                        ?>
 
-                    <div class="col-md-12 float-left text-right">
-                        <div class="col-md-12 float-left">
-                            <h1> <span class="fontDiam"> &#9830; </span>
-                                دیگر مقالات از این نویسنده
-                            </h1>
-                        </div>
-                        <div class="hrline float-left"></div>
-                        <div class="afterHr row">
-                            <div id="replacepagination1" class="<?php echo $writerID;?>">
-
-                                <?php
-                                $page = 1;
-                                $a = ($page - 1) * 2;
-                                $query = "SELECT * FROM Paper WHERE (writerID LIKE '%$writerID%' and stat>0) ORDER by ID DESC LIMIT $a , 2;";
-                                $result = $connection->query($query);
-                                while ($row = $result->fetch_assoc()) {
-                                    $name = $row['name'];
-                                    $writerID = $row['writerID'];
-                                    $q = "SELECT * FROM users WHERE mobile=".$writerID.";";
-                                    $res = $connection->query($q);
-                                    if($rw=$res->fetch_assoc())
-                                        $writer = $rw['name'];
-                                    else
-                                        $writer = 'ناشناس';
-                                    $time = $row['realtime'];
-                                    $link = '/Paper/' . $row['post_name'];
-                                    $mokhtasar = $row['Mokhtasar'];
-                                    $image = $row['image'];
-//                                    $image = substr($image, 3);
-                                    ?>
-
-                                    <div class="col-md-12 Paperdiv col-12 float-left ">
-                                        <div class="col-md-3 float-right col-12 ">
-                                            <a  href="<?php echo $link; ?> ">
-                                                <img src="/<?php echo $image; ?>" width="100%" height="100%"
-                                                     alt="paperimg">
-                                            </a>
-                                        </div>
-
-                                        <div class="col-md-9 PaperText float-right col-12 col-12 ">
-                                            <div class="col-md-12 col-12 ">
-                                                <h2 class="papname">
-                                                    <a href="<?php echo $link; ?>">
-                                                        <?php echo $name; ?>
-                                                    </a>
-                                                </h2>
-                                            </div>
-
-                                            <div class="col-md-12 nametime col-12 row">
-                                                <div class="col-md-4 col-12 ">
-                                                    <?php echo $writer; ?>
-                                                </div>
-                                                <div class="col-md-8 col-12 ">
-                                                    <?php echo $time; ?>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-md-12 summ col-12 ">
-                                                <?php echo $mokhtasar; ?>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <br>
+                        <div class="col-md-12 float-left text-right">
+                            <div class="col-md-12 float-left">
+                                <h1><span class="fontDiam"> &#9830; </span>
+                                    دیگر مقالات از این نویسنده
+                                </h1>
+                            </div>
+                            <div class="hrline float-left"></div>
+                            <div class="afterHr row">
+                                <div id="replacepagination1" class="<?php echo $writerID; ?>">
 
                                     <?php
-                                }
-
-                                ?>
-
-                                <div class="pagination-container float-left">
-                                    <ul class="pagination">
-                                        <li id="-1" class="PagedList-skipToNext paginationoldPapers1" rel="prev">
-                                            >>
-                                        </li>
-                                        <?php
-                                        $x = ($pagenum + 1) / 2;
-                                        for ($i = 1; $i <= min($x, 2); $i++) {
-                                            ?>
-                                            <li id="<?php echo $i ?>"
-                                                class="paginationoldPapers1 <?php if ($i == 1) echo "active" ?> "><?php echo $i ?></li>
-                                            <?php
-
-                                        }
-                                        $i--;
-                                        if ($i < max(1, floor($x) - 1))
-                                            echo "<li>...</li>";
-                                        if ($i < max(1, floor($x))) {
-                                            ?>
-                                            <li id="<?php echo floor($x) ?>"
-                                                class="paginationoldPapers1"><?php echo floor($x) ?></li>
-                                            <?php
-                                        }
-
+                                    $page = 1;
+                                    $a = ($page - 1) * 2;
+                                    $query = "SELECT * FROM Paper WHERE (writerID LIKE '%$writerID%' and stat>0) ORDER by ID DESC LIMIT $a , 2;";
+                                    $result = $connection->query($query);
+                                    while ($row = $result->fetch_assoc()) {
+                                        $name = $row['name'];
+                                        $writerID = $row['writerID'];
+                                        $q = "SELECT * FROM users WHERE mobile=" . $writerID . ";";
+                                        $res = $connection->query($q);
+                                        if ($rw = $res->fetch_assoc())
+                                            $writer = $rw['name'];
+                                        else
+                                            $writer = 'ناشناس';
+                                        $time = $row['realtime'];
+                                        $link = '/Paper/' . $row['post_name'];
+                                        $mokhtasar = $row['Mokhtasar'];
+                                        $image = $row['image'];
+//                                    $image = substr($image, 3);
                                         ?>
 
-                                        <li id="-2" class="PagedList-skipToNext paginationoldPapers1" rel="next">
-                                            <<
-                                        </li>
-                                    </ul>
+                                        <div class="col-md-12 Paperdiv col-12 float-left ">
+                                            <div class="col-md-3 float-right col-12 ">
+                                                <a href="<?php echo $link; ?> ">
+                                                    <img src="/<?php echo $image; ?>" width="100%" height="100%"
+                                                         alt="paperimg">
+                                                </a>
+                                            </div>
 
+                                            <div class="col-md-9 PaperText float-right col-12 col-12 ">
+                                                <div class="col-md-12 col-12 ">
+                                                    <h2 class="papname">
+                                                        <a href="<?php echo $link; ?>">
+                                                            <?php echo $name; ?>
+                                                        </a>
+                                                    </h2>
+                                                </div>
+
+                                                <div class="col-md-12 nametime col-12 row">
+                                                    <div class="col-md-4 col-12 ">
+                                                        <?php echo $writer; ?>
+                                                    </div>
+                                                    <div class="col-md-8 col-12 ">
+                                                        <?php echo $time; ?>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-12 summ col-12 ">
+                                                    <?php echo $mokhtasar; ?>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <br>
+
+                                        <?php
+                                    }
+
+                                    ?>
+
+                                    <div class="pagination-container float-left">
+                                        <ul class="pagination">
+                                            <li id="-1" class="PagedList-skipToNext paginationoldPapers1" rel="prev">
+                                                >>
+                                            </li>
+                                            <?php
+                                            $x = ($pagenum + 1) / 2;
+                                            for ($i = 1; $i <= min($x, 2); $i++) {
+                                                ?>
+                                                <li id="<?php echo $i ?>"
+                                                    class="paginationoldPapers1 <?php if ($i == 1) echo "active" ?> "><?php echo $i ?></li>
+                                                <?php
+
+                                            }
+                                            $i--;
+                                            if ($i < max(1, floor($x) - 1))
+                                                echo "<li>...</li>";
+                                            if ($i < max(1, floor($x))) {
+                                                ?>
+                                                <li id="<?php echo floor($x) ?>"
+                                                    class="paginationoldPapers1"><?php echo floor($x) ?></li>
+                                                <?php
+                                            }
+
+                                            ?>
+
+                                            <li id="-2" class="PagedList-skipToNext paginationoldPapers1" rel="next">
+                                                <<
+                                            </li>
+                                        </ul>
+
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                    </div>
-                    <?php
+                        </div>
+                        <?php
+                    }
                 }
                 ?>
 

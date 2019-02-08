@@ -138,7 +138,10 @@ CREATE TABLE users(ID int NOT NULL AUTO_INCREMENT,
       token2 VARCHAR(100),
       PRIMARY KEY (ID));
 
-
+CREATE TABLE introducer(ID INT NOT NULL AUTO_INCREMENT,
+                   mobile1 VARCHAR(100)  ,
+                   mobile2 VARCHAR(100),
+  PRIMARY KEY (ID));
 
 
 INSERT INTO Paper(XMLNAME, name,writerID, Mokhtasar, image, time, realtime, mahbobiat, post_name, dastebandi) VALUES

@@ -17,16 +17,17 @@ if (($_SESSION['typ']>0)) {
     if (isset($_GET['request'])){
         $name = $_POST['name'];
         $qeimat = $_POST['qeimat'];
+        $time = $_POST['time'];
         $tozih = $_POST['tozihat'];
         if($_GET['request']>=0) {
             $id = $_GET['request'];
-            $stmt = $connection->prepare("UPDATE userEshterak SET name=? ,tozihat=? ,qeimat=? WHERE (ID=?)");
-            $stmt->bind_param("ssss", $name,$tozih,$qeimat, $id);
+            $stmt = $connection->prepare("UPDATE userEshterak SET name=? ,tozihat=? ,qeimat=? , time=? WHERE (ID=?)");
+            $stmt->bind_param("sssss", $name,$tozih,$qeimat,$time, $id);
 
         }
         else if( $_GET['request']==-1){
-            $stmt = $connection->prepare("INSERT INTO userEshterak (name,tozihat,qeimat) VALUES (?,?,?)");
-            $stmt->bind_param("sss", $name, $tozih,$qeimat);
+            $stmt = $connection->prepare("INSERT INTO userEshterak (name,tozihat,qeimat,time) VALUES (?,?,?,?)");
+            $stmt->bind_param("ssss", $name, $tozih,$qeimat,$time);
         }
         $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
         $stmt->close();
@@ -76,6 +77,7 @@ if (($_SESSION['typ']>0)) {
                 <tr>
                     <th class="text-center"><span>عنوان</span></th>
                     <th class="text-center"><span>قیمت(تومان)</span></th>
+                    <th class="text-center"><span>زمان (روز)</span></th>
                     <th class="text-center"><span>توضیحات</span></th>
 
                 </tr>
@@ -91,6 +93,7 @@ if (($_SESSION['typ']>0)) {
                 while ($row=$result->fetch_assoc()) {
                     $name = $row['name'];
                     $qeimat = $row['qeimat'];
+                    $time = $row['time'];
                     $tozih = $row['tozihat'];
                     $id = $row['ID'];
                     echo "<script>count(".$id.");</script>";
@@ -107,6 +110,12 @@ if (($_SESSION['typ']>0)) {
                                     <div dir="rtl" >
                                         <input type="text" maxlength="100" class="form-control w-100"
                                                name="qeimat" value="<?php echo $qeimat; ?>"  form="<?php echo $id;?>">
+                                    </div>
+                                </td>
+                                <td  style="width: 40%;">
+                                    <div dir="rtl" >
+                                        <input type="text" maxlength="100" class="form-control w-100"
+                                               name="time" value="<?php echo $time; ?>"  form="<?php echo $id;?>">
                                     </div>
                                 </td>
                                 <td  style="width: 40%;">

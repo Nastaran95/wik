@@ -423,13 +423,14 @@ else if(isset($_GET['request']) && $_GET['request']=='deleteEshterak'){
 }
 else if(isset($_GET['request']) && $_GET['request']=='buyEshterak') {
     $id = $_GET['ID'];
-    $stmt = $connection->prepare("SELECT qeimat,name FROM userEshterak WHERE (ID=? )");
+    $stmt = $connection->prepare("SELECT qeimat,name,time FROM userEshterak WHERE (ID=? )");
     $stmt->bind_param("s", $_GET['ID']);
     $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
     $res = $stmt->get_result();
     if( $row = $res->fetch_assoc()){
         $qeimat = $row['qeimat'];
         $name = $row['name'];
+        $t = $row['time'];
     }
     else{
         echo "<script>alert('بسته نا معتبر است. لطفا دوباره تلاش کنید.')</script>>";
@@ -442,52 +443,89 @@ else if(isset($_GET['request']) && $_GET['request']=='buyEshterak') {
 //    $stmt->close();
 
 
+    if($qeimat>99) {
+
+        $MerchantID = '3c5b10c6-6c1f-11e6-9549-005056a205be'; //Required
+        $Amount = $qeimat; //Amount will be based on Toman - Required
 
 
-    $MerchantID = '3c5b10c6-6c1f-11e6-9549-005056a205be'; //Required
-    $Amount = $qeimat; //Amount will be based on Toman - Required
+        $stmt = $connection->prepare("INSERT INTO allpardakht (mobile, userEshterakID,amount,status,code)  VALUES (?,?,?,3,'pending')");
+        $stmt->bind_param("sss", $_SESSION["mobile"], $id, $Amount);
+        $stmt->execute();
+        $stmt->close();
 
+        $insertID = $connection->insert_id;
 
-    $stmt = $connection->prepare("INSERT INTO allpardakht (mobile, userEshterakID,amount,status,code)  VALUES (?,?,?,3,'pending')");
-    $stmt->bind_param("sss",$_SESSION["mobile"],$id,$Amount);
-    $stmt->execute();
-    $stmt->close();
-
-    $insertID = $connection->insert_id;
-
-    if ($connection->error) {
-        echo "<script>alert('خطایی رخ داد. لطفا دوباره تلاش کنید.')</script>>";
-        die();
-    }
+        if ($connection->error) {
+            echo "<script>alert('خطایی رخ داد. لطفا دوباره تلاش کنید.')</script>>";
+            die();
+        }
 
 //    $Amount = 100;
-    $_SESSION['amount'] = $Amount;
-    $Description = 'خرید بسته اشتراک '.$name.' ویکی‌درم'; // Required
+        $_SESSION['amount'] = $Amount;
+        $Description = 'خرید بسته اشتراک ' . $name . ' ویکی‌درم'; // Required
 //    $Email = 'UserEmail@Mail.Com'; // Optional
-    $Mobile = $_SESSION["mobile"]; // Optional
-    $CallbackURL = 'http://www.wikidermi.com/profile.php?request=backZarrin&zarrin='.$insertID; // Required
+        $Mobile = $_SESSION["mobile"]; // Optional
+        $CallbackURL = 'http://www.wikidermi.com/profile.php?request=backZarrin&zarrin=' . $insertID; // Required
 
-    $client = new SoapClient('https://www.zarinpal.com/pg/services/WebGate/wsdl', ['encoding' => 'UTF-8']);
+        $client = new SoapClient('https://www.zarinpal.com/pg/services/WebGate/wsdl', ['encoding' => 'UTF-8']);
 
-    $result = $client->PaymentRequest(
-        [
-            'MerchantID' => $MerchantID,
-            'Amount' => $Amount,
-            'Description' => $Description,
-            'Email' => $Email,
-            'Mobile' => $Mobile,
-            'CallbackURL' => $CallbackURL,
-        ]
-    );
+        $result = $client->PaymentRequest(
+            [
+                'MerchantID' => $MerchantID,
+                'Amount' => $Amount,
+                'Description' => $Description,
+                'Email' => $Email,
+                'Mobile' => $Mobile,
+                'CallbackURL' => $CallbackURL,
+            ]
+        );
 
 //Redirect to URL You can do it also by creating a form
-    if ($result->Status == 100) {
-        Header('Location: https://www.zarinpal.com/pg/StartPay/'.$result->Authority);
+        if ($result->Status == 100) {
+            Header('Location: https://www.zarinpal.com/pg/StartPay/' . $result->Authority);
 //برای استفاده از زرین گیت باید ادرس به صورت زیر تغییر کند:
 //Header('Location: https://www.zarinpal.com/pg/StartPay/'.$result->Authority.'/ZarinGate');
-    } else {
-        $str = 'خطا: '.$result->Status.'لطفا دوباره تلاش کنید.';
-        echo '<script>alert('.$str.')</script>';
+        } else {
+            $str = 'خطا: ' . $result->Status . 'لطفا دوباره تلاش کنید.';
+            echo '<script>alert(' . $str . ')</script>';
+        }
+    }
+    else if ($id==1){
+
+        date_default_timezone_set("Iran");
+        $DATE = date('Y-m-d H:i:s');
+        list($date, $time) = explode(" ", $DATE);
+        list($year, $month, $day) = explode("-", $date);
+        list($jyear, $jmonth, $jday) = gregorian_to_jalali($year, $month, $day);
+        if (strlen($jmonth) == 1) {
+            $jmonth = "0" . $jmonth;
+        }
+        if (strlen($jday) == 1) {
+            $jday = "0" . $jday;
+        }
+        $start = $jyear . '/' . $jmonth . '/' . $jday . ' ' . $time;
+
+
+        date_default_timezone_set("Iran");
+        $str = "+".$t." days";
+        $DATE2 = date('Y-m-d H:i:s' , strtotime($str));
+        list($date, $time) = explode(" ", $DATE2);
+        list($year, $month, $day) = explode("-", $date);
+        list($jyear, $jmonth, $jday) = gregorian_to_jalali($year, $month, $day);
+        if (strlen($jmonth) == 1) {
+            $jmonth = "0" . $jmonth;
+        }
+        if (strlen($jday) == 1) {
+            $jday = "0" . $jday;
+        }
+        $modified_time = $jyear . '/' . $jmonth . '/' . $jday . ' ' . $time;
+        $end = $modified_time;
+
+        $stmt = $connection->prepare("UPDATE users SET eshterakID=? , startTime=? , endTime=?,useFreeEshterak=1 WHERE (mobile=?)");
+        $stmt->bind_param("ssss", $id,$start, $end,$_SESSION["mobile"] );
+        $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
+        $stmt->close();
     }
     $tab=5;
 
@@ -501,6 +539,17 @@ else if(isset($_GET['request']) && $_GET['request']=='backZarrin') {
     if( $row = $res->fetch_assoc()){
         $qeimat = $row['amount'];
         $id = $row['userEshterakID'];
+        $stmt = $connection->prepare("SELECT time FROM userEshterak WHERE (ID=? )");
+        $stmt->bind_param("s", $id);
+        $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
+        $res = $stmt->get_result();
+        if( $row = $res->fetch_assoc()){
+            $t = $row['time'];
+        }
+        else{
+            echo "<script>alert('دسترسی غیر مجاز.')</script>>";
+            die();
+        }
     }else{
         echo "<script>alert('دسترسی غیر مجاز.')</script>>";
         die();
@@ -546,23 +595,22 @@ else if(isset($_GET['request']) && $_GET['request']=='backZarrin') {
             $start = $jyear . '/' . $jmonth . '/' . $jday . ' ' . $time;
 
 
-            if($id==1){
-                $jmonth = $jmonth + 1;
+            date_default_timezone_set("Iran");
+            $str = "+".$t." days";
+            $DATE2 = date('Y-m-d H:i:s' , strtotime($str));
+            list($date, $time) = explode(" ", $DATE2);
+            list($year, $month, $day) = explode("-", $date);
+            list($jyear, $jmonth, $jday) = gregorian_to_jalali($year, $month, $day);
+            if (strlen($jmonth) == 1) {
+                $jmonth = "0" . $jmonth;
             }
-            else if($id==2){
-                $jmonth = $jmonth + 3;
-            }else if($id==3){
-                $jyear = $jyear + 1;
+            if (strlen($jday) == 1) {
+                $jday = "0" . $jday;
             }
+            $modified_time = $jyear . '/' . $jmonth . '/' . $jday . ' ' . $time;
+            $end = $modified_time;
 
-            if ($jmonth>12){
-                $jyear = $jyear + 1;
-                $jmonth = $jmonth - 12;
-            }
-
-            $end = $jyear . '/' . $jmonth . '/' . $jday . ' ' . $time;
-
-            echo $start.'    '.$end;
+            echo $start.'<br>'.$end.'<br>';
 
             $stmt = $connection->prepare("UPDATE users SET eshterakID=? , startTime=? , endTime=? WHERE (mobile=?)");
             $stmt->bind_param("ssss", $id,$start, $end,$_SESSION["mobile"] );
@@ -621,7 +669,7 @@ include 'header.php';
         <div class="col-md-12">
 
             <?php
-            $stmt = $connection->prepare("SELECT name, mobile, eshterakID , categoryID , address , image, email , startTime , endTime,showMobile FROM Users WHERE (mobile=? )");
+            $stmt = $connection->prepare("SELECT * FROM Users WHERE (mobile=? )");
             $stmt->bind_param("s", $_SESSION["mobile"]);
             $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
             $result = $stmt->get_result();
@@ -637,6 +685,7 @@ include 'header.php';
                 $startTime = $row["startTime"];
                 $endTime = $row["endTime"];
                 $show = $row["showMobile"];
+                $useFree = $row["useFreeEshterak"];
 //                echo '<script>alert('.$startTime.')</script>';
 //                echo '<script>alert('.$endTime.')</script>';
 
@@ -869,64 +918,89 @@ include 'header.php';
                     </div>
 
                     <div id="newPost" class="tabcontent  <?php if($tab==4) echo "d-block"; else echo "d-none";?>">
-                        <form action="profile.php?request=post<?php if(isset($_GET['requestEdit'])) echo "&paper=".$_GET['requestEdit'] ;?>" method="post" class="row pt-5" id="userInfo" enctype="multipart/form-data">
-                            <div class="form-group col-md-10 m-auto text-right">
-                                <label for="subject" class="dark_text"><b>عنوان مطلب</b></label>
-                                <input type="text" class="form-control" id="subject" value="<?php echo $titleshould;?>" name="subject">
+                        <?php
+                        if($eshterak==4){
+                            ?>
+                            <div class="p-2 text-danger text-center col-md-12">
+                             برای ارسال پست باید از تب مدیریت اشتراک، بسته مورد نظر خود را فعال کنید.
                             </div>
+                            <?php
+                            if($useFree!=1){
+                                ?>
+                                <div class="p-2 text-danger text-center col-md-12">
+                                   شما برای بار اول می‌توانید از بسته دو ماهه رایگان استفاده کنید. برای فعال سازی به تب مدیریت اشتراک مراجعه کنید.
+                                </div>
+                                <?php
+                            }
+                        }else {
+                            ?>
 
-                            <div class="form-group col-md-10 m-auto text-right" >
-                                <label for="imgPost" class="dark_text"><b>درج تصویر</b></label>
-                                <input name="imgPost"
-                                       accept="image/jpeg,image/gif,image/png"
-                                       id="imgPost" class="filestyle form-control" type="file" data-icon="false" value="">
-                            </div>
+                            <form action="profile.php?request=post<?php if (isset($_GET['requestEdit'])) echo "&paper=" . $_GET['requestEdit']; ?>"
+                                  method="post" class="row pt-5" id="userInfo" enctype="multipart/form-data">
+                                <div class="form-group col-md-10 m-auto text-right">
+                                    <label for="subject" class="dark_text"><b>عنوان مطلب</b></label>
+                                    <input type="text" class="form-control" id="subject"
+                                           value="<?php echo $titleshould; ?>" name="subject">
+                                </div>
 
-                            <div class="form-group col-md-10 m-auto text-right">
-                                <label for="category1" class="dark_text"><b>انتخاب دسته</b></label>
-                                <select name="category1" class="form-control required" id="category1">
-                                    <?php
-                                    $query = "SELECT * FROM category;";
-                                    $result = $connection->query($query);
-                                    while ($row = $result->fetch_assoc()) {
-                                        $name = $row['name'];
-                                        $id = $row['ID'];
-                                        ?>
-                                        <option value="<?php echo $id; ?>" <?php if ($category == $id) echo "selected=\"selected\""; ?> ><?php echo $name; ?></option>
+                                <div class="form-group col-md-10 m-auto text-right">
+                                    <label for="imgPost" class="dark_text"><b>درج تصویر</b></label>
+                                    <input name="imgPost"
+                                           accept="image/jpeg,image/gif,image/png"
+                                           id="imgPost" class="filestyle form-control" type="file" data-icon="false"
+                                           value="">
+                                </div>
 
+                                <div class="form-group col-md-10 m-auto text-right">
+                                    <label for="category1" class="dark_text"><b>انتخاب دسته</b></label>
+                                    <select name="category1" class="form-control required" id="category1">
                                         <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
+                                        $query = "SELECT * FROM category;";
+                                        $result = $connection->query($query);
+                                        while ($row = $result->fetch_assoc()) {
+                                            $name = $row['name'];
+                                            $id = $row['ID'];
+                                            ?>
+                                            <option value="<?php echo $id; ?>" <?php if ($category == $id) echo "selected=\"selected\""; ?> ><?php echo $name; ?></option>
 
-
-
-                            <div class="form-group col-md-10 m-auto text-right pt-5" >
-                                <label for="sum" class="dark_text"><b>خلاصه مطلب(به اندازه ۲۰۰ کاراکتر)</b></label>
-                                <textarea rows="10"  maxlength="200" name="sum" id="sum" class="form-control"><?php echo $datashould2; ?> </textarea>
-
-                            </div>
-
-
-                            <div class="form-group col-md-10 m-auto text-right pt-5" >
-                                <label for="editor1" class="dark_text"><b>متن مقاله</b></label>
-                                <div id="editor">
-                                    <div id='edit' style="margin-top: 30px;"><?php echo $datashould; ?></div>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
-                                <input name="editor1" id="editor122" class="form-control input-lg ckeditor d-none"
-                                       type="text"/>
-                            </div>
 
 
-                            <div class="form-group col-md-10 row mt-4 ml-auto mr-auto">
-                                <div class="col-md-5 col-12 mt-2 ml-auto mr-auto">
-                                    <button type="submit" class="btn btn-default col-md-12 col-12 btn-success" id="sendpost">ارسال</button>
+                                <div class="form-group col-md-10 m-auto text-right pt-5">
+                                    <label for="sum" class="dark_text"><b>خلاصه مطلب(به اندازه ۲۰۰ کاراکتر)</b></label>
+                                    <textarea rows="10" maxlength="200" name="sum" id="sum"
+                                              class="form-control"><?php echo $datashould2; ?> </textarea>
+
                                 </div>
-                            </div>
 
 
-                        </form>
+                                <div class="form-group col-md-10 m-auto text-right pt-5">
+                                    <label for="editor1" class="dark_text"><b>متن مقاله</b></label>
+                                    <div id="editor">
+                                        <div id='edit' style="margin-top: 30px;"><?php echo $datashould; ?></div>
+                                    </div>
+                                    <input name="editor1" id="editor122" class="form-control input-lg ckeditor d-none"
+                                           type="text"/>
+                                </div>
+
+
+                                <div class="form-group col-md-10 row mt-4 ml-auto mr-auto">
+                                    <div class="col-md-5 col-12 mt-2 ml-auto mr-auto">
+                                        <button type="submit" class="btn btn-default col-md-12 col-12 btn-success"
+                                                id="sendpost">ارسال
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                            </form>
+                            <?php
+                        }
+                        ?>
 
                     </div>
 
@@ -975,13 +1049,17 @@ include 'header.php';
                                 $eshtName = 'بسته اشتراک '.$row['name'];
                                 $qeimat = $row['qeimat'].' تومان';
                                 $id = $row['ID'];
-                                ?>
-                                <div class="col-md-5 col-10 mb-4 mr-auto ml-auto">
-                                    <div class="col-md-12 text-center bg-dark text-light p-2"><?php echo $eshtName;?></div>
-                                    <div class="col-md-12 text-center bg-dark text-light font-weight-bold p-2"><?php echo $qeimat;?></div>
-                                    <a onclick="return confirming2();" href="profile.php?request=buyEshterak&ID=<?php echo $id;?>" class="col-md-12 text-center  btn btn-outline-success  p-2">خرید</a>
-                                </div>
-                                <?php
+                                if($id!=1 || $useFree!=1 ) {
+                                    ?>
+                                    <div class="col-md-5 col-10 mb-4 mr-auto ml-auto">
+                                        <div class="col-md-12 text-center bg-dark text-light p-2"><?php echo $eshtName; ?></div>
+                                        <div class="col-md-12 text-center bg-dark text-light font-weight-bold p-2"><?php echo $qeimat; ?></div>
+                                        <a onclick="return confirming2();"
+                                           href="profile.php?request=buyEshterak&ID=<?php echo $id; ?>"
+                                           class="col-md-12 text-center  btn btn-outline-success  p-2">خرید</a>
+                                    </div>
+                                    <?php
+                                }
                             }
                             ?>
                         </div>

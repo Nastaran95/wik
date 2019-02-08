@@ -63,6 +63,10 @@
                                     <input type="text" maxlength="900" class="form-control" id="address" placeholder="آدرس" name="address">
                                 </div>
                                 <div class="form-group col-md-10 m-auto text-right">
+                                    <label for="introducer" class="dark_text"><b>شماره معرف (اختیاری)</b></label>
+                                    <input type="text" maxlength="11" pattern="\d*" class="form-control" id="introducer" placeholder="شماره معرف" name="introducer" >
+                                </div>
+                                <div class="form-group col-md-10 m-auto text-right">
                                     <label for="pass" class="dark_text"><b>کلمه عبور</b></label>
                                     <input type="password" maxlength="90" class="form-control" id="pass" placeholder="کلمه عبور" name="pass" >
                                 </div>
@@ -154,7 +158,7 @@
                                 </div>
 
                             </form>
-                            <div class="m-auto"> <a href="/"> رمز عبور خود را فراموش کرده‌اید؟</a> </div>
+                            <div class="m-auto"> <a href="/loginRegister.php?getpassword=1"> رمز عبور خود را فراموش کرده‌اید؟</a> </div>
 
                         </div>
 

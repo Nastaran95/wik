@@ -72,17 +72,9 @@ if (file_exists($productXMLNAME)) {
                 include 'header.php';
                 ?>
                 <div class="container paddingtop">
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
-                            <div class="panel panel-login">
-                                <div class="row">
-                                    <div class="col-11 centeral">
-                                        <h4 class="centeral"> پیام امنیتی بدرستی وارد نشده است.
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="pt-3 col-md-9 text-danger text-center">
+                        <h4 class="centeral"> پیام امنیتی بدرستی وارد نشده است.
+                        </h4>
                     </div>
                     <?php
                     include 'MyIncludeLogin.php';
@@ -92,17 +84,9 @@ if (file_exists($productXMLNAME)) {
                     include 'header.php';
                     ?>
                     <div class="container paddingtop">
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-2">
-                                <div class="panel panel-login">
-                                    <div class="row">
-                                        <div class="col-11 centeral">
-                                            <h4 class="centeral"> پیام امنیتی بدرستی وارد نشده است.
-                                            </h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="pt-3 col-md-9 text-danger text-center">
+                            <h4 class="centeral"> پیام امنیتی بدرستی وارد نشده است.
+                            </h4>
                         </div>
                         <?php
                         include 'MyIncludeLogin.php';
@@ -142,17 +126,9 @@ if (file_exists($productXMLNAME)) {
                         $stmt->close();
                         ?>
                         <div class="container paddingtop">
-                            <div class="row">
-                                <div class="col-md-6 col-md-offset-3">
-                                    <div class="panel panel-login">
-                                        <div class="row">
-                                            <div class="col-11">
-                                                <h4>شماره موبایل وارد شده قبلا توسط فرد دیگری ثبت شده است.
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="pt-3 col-md-9 text-danger text-center">
+                                <h4>شماره موبایل وارد شده قبلا توسط فرد دیگری ثبت شده است.
+                                </h4>
                             </div>
                             <?php
                             include 'MyIncludeLogin.php';
@@ -161,55 +137,84 @@ if (file_exists($productXMLNAME)) {
                         include 'header.php';
                         ?>
                         <div class="container paddingtop">
-                            <div class="row">
-                                <div class="col-md-6 col-md-offset-3">
-                                    <div class="panel panel-login">
-                                        <div class="row">
-                                            <div class="col-11">
-                                                <h4>پسورد وارد شده حداقل باید 8 کاراکتر باشد.
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="pt-3 col-md-9 text-danger text-center">
+                                <h4>پسورد وارد شده حداقل باید 8 کاراکتر باشد.
+                                </h4>
                             </div>
                             <?php
                             include 'MyIncludeLogin.php';
+
                     }
                     else {
-                        try{
-                            $verificationcode=generateRandomString();
-                            $MobileNumber=$mobile;
-                            $Code=$verificationcode;
-                            // your text messages
-                            $Code = $verificationcode;
-                            $img = 'images/no-photo.png' ;
-                            include 'SMS/SmsIR_VerificationCode.php';
-                            $stmt  = $connection->prepare("INSERT INTO users (name,address,mobile,email,categoryID,pass,eshterakID,verified,verificationcode,codetime,attempt,passwordtime,image)  VALUES (?,?,?,?,?,?,4,0,?,CURRENT_TIMESTAMP,1,CURRENT_TIMESTAMP,?)");
-                            $stmt->bind_param("ssssssss", $name,$address,$mobile,$mail,$category,$pass,$verificationcode,$img);
-                            $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
-                            $stmt->close();
-                            $payam="<h4>ثبت نام شما با موفقیت انجام شد، برای تکمیل ثبت نام، کد ارسال شده به شماره موبایل خود را در بخش زیر وارد کنید.</h4>";
-                            include 'Verifyregister.php';
+                        $mark = 1;
+                        if (isset($_POST["introducer"]) && strlen($_POST["introducer"])>0){
+                            $introducer = $_POST["introducer"];
+                            $stmt  = $connection->prepare("SELECT email,name,eshterakID FROM Users WHERE (mobile=?)");
+                            $stmt->bind_param("s", $introducer);
+                            $result = $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
+                            $stmt->store_result();
+                            if ($stmt->num_rows > 0) {
+                                $stmt = $connection->prepare("INSERT INTO introducer (mobile1,mobile2)  VALUES (?,?)");
+                                $stmt->bind_param("ss", $mobile, $introducer);
+                                $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
+                                $stmt->close();
+                            }
+                            else{
+                                $mark = 0;
+                                include 'header.php';
+                                ?>
+                                <div class="container paddingtop">
+                                    <div class="pt-3 col-md-9 text-danger text-center">
+                                        <h4>شماره معرف وارد شده در حال حاضر عضو سایت نمی‌باشد.لطفا دوباره تلاش کنید.
+                                        </h4>
+                                    </div>
+                                    <?php
+                                    include 'MyIncludeLogin.php';
+                            }
                         }
-                        catch (mysqli_sql_exception $E){
+
+                        if($mark==1){
+
+                            try{
+                                date_default_timezone_set("Iran");
+                                $DATE = date('Y-m-d H:i:s');
+                                list($date, $time) = explode(" ", $DATE);
+                                list($year, $month, $day) = explode("-", $date);
+                                list($jyear, $jmonth, $jday) = gregorian_to_jalali($year, $month, $day);
+                                if (strlen($jmonth) == 1) {
+                                    $jmonth = "0" . $jmonth;
+                                }
+                                if (strlen($jday) == 1) {
+                                    $jday = "0" . $jday;
+                                }
+                                $modified_time = $jyear . '/' . $jmonth . '/' . $jday . ' ' . $time;
+
+                                $verificationcode = generateRandomString();
+                                $MobileNumber = $mobile;
+                                $Code = $verificationcode;
+                                // your text messages
+                                $Code = $verificationcode;
+                                $img = 'images/no-photo.png';
+                                include 'SMS/SmsIR_VerificationCode.php';
+                                $stmt = $connection->prepare("INSERT INTO users (name,address,mobile,email,categoryID,pass,eshterakID,verified,verificationcode,codetime,attempt,passwordtime,image,realtime)  VALUES (?,?,?,?,?,?,4,0,?,CURRENT_TIMESTAMP,1,CURRENT_TIMESTAMP,?,?)");
+                                $stmt->bind_param("sssssssss", $name, $address, $mobile, $mail, $category, $pass, $verificationcode, $img,$modified_time);
+                                $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
+                                $stmt->close();
+                                $payam = "<h4>ثبت نام شما با موفقیت انجام شد، برای تکمیل ثبت نام، کد ارسال شده به شماره موبایل خود را در بخش زیر وارد کنید.</h4>";
+                                include 'Verifyregister.php';
+                            }
+                            catch (mysqli_sql_exception $E){
                             include 'header.php';
                             ?>
                             <div class="container paddingtop">
-                                <div class="row">
-                                    <div class="col-md-6 col-md-offset-3">
-                                        <div class="panel panel-login">
-                                            <div class="row">
-                                                <div class="col-11">
-                                                    <h4>اطلاعات وارد شده دارای ایراد است، لطفا مجددا تلاش کنید.
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="pt-3 col-md-9 text-danger text-center">
+                                    <h4>اطلاعات وارد شده دارای ایراد است، لطفا مجددا تلاش کنید.
+                                    </h4>
                                 </div>
+
                                 <?php
                                 include 'MyIncludeLogin.php';
+                            }
                         }
                     }
                 }
@@ -217,17 +222,9 @@ if (file_exists($productXMLNAME)) {
                     include 'header.php';
                     ?>
                     <div class="container paddingtop">
-                        <div class="row">
-                            <div class="col-md-6 col-md-offset-3">
-                                <div class="panel panel-login">
-                                    <div class="row">
-                                        <div class="col-11">
-                                            <h4>اطلاعات به صورت کامل وارد نشده است. مجددا تلاش کنید.
-                                            </h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="pt-3 col-md-9 text-danger text-center">
+                            <h4>اطلاعات به صورت کامل وارد نشده است. مجددا تلاش کنید.
+                            </h4>
                         </div>
                         <?php
                         include 'MyIncludeLogin.php';
@@ -250,17 +247,9 @@ if (file_exists($productXMLNAME)) {
                 include 'header.php';
                 ?>
                 <div class="container paddingtop">
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
-                            <div class="panel panel-login">
-                                <div class="row">
-                                    <div class="col-11 centeral">
-                                        <h4 class="centeral"> پیام امنیتی بدرستی وارد نشده است.
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="pt-3 col-md-9 text-danger text-center">
+                        <h4 class="centeral"> پیام امنیتی بدرستی وارد نشده است.
+                        </h4>
                     </div>
                 <?php
                 include 'MyIncludeLogin.php';
@@ -272,17 +261,9 @@ if (file_exists($productXMLNAME)) {
                     include 'header.php';
                     ?>
                     <div class="container paddingtop">
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-2">
-                                <div class="panel panel-login">
-                                    <div class="row">
-                                        <div class="col-11 centeral">
-                                            <h4 class="centeral"> پیام امنیتی بدرستی وارد نشده است.
-                                            </h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="pt-3 col-md-9 text-danger text-center">
+                            <h4 class="centeral"> پیام امنیتی بدرستی وارد نشده است.
+                            </h4>
                         </div>
                     <?php
                     include 'MyIncludeLogin.php';
@@ -343,7 +324,7 @@ if (file_exists($productXMLNAME)) {
 //                                    if ($result->num_rows > 0) {
 //                                    $row = $result->fetch_assoc();
 //                                    include 'class-phpass.php';
-//                                    $hash = $row['Password'];
+//                                    $hash = $row['pass'];
 //                                    $wp_hasher = new PasswordHash(8, TRUE);
 //                                    $check = $wp_hasher->CheckPassword($password, $hash);
 //                                    if ($check) {
@@ -407,17 +388,9 @@ if (file_exists($productXMLNAME)) {
                         include 'header.php';
                         ?>
                         <div class="container paddingtop">
-                            <div class="row">
-                                <div class="col-md-6 col-md-offset-3">
-                                    <div class="panel panel-login">
-                                        <div class="row">
-                                            <div class="col-11">
-                                                <h4> نام کاربری و پسورد وارد شده اشتباه است مجددا تلاش کنید.
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="pt-3 col-md-9 text-danger text-center">
+                                <h4> نام کاربری و پسورد وارد شده اشتباه است مجددا تلاش کنید.
+                                </h4>
                             </div>
                             <?php
                             include 'MyIncludeLogin.php';
@@ -473,7 +446,7 @@ if (file_exists($productXMLNAME)) {
                         include 'Verifyregister.php';
                     }else {
                         $wait=120-$row['codetime'];
-                        $payam="برای دریافت مجدد کد باید ".$wait." ثانیه صبر کنید و مجددا دوباره تلاش کنید. در صورت عدم دریافت با شماره 09035675570 تماس حاصل فرمائید";
+                        $payam="برای دریافت مجدد کد باید ".$wait." ثانیه صبر کنید و مجددا دوباره تلاش کنید. در صورت عدم دریافت با شماره 02122850864 تماس حاصل فرمائید";
                         include 'notgetcode.php';
                     }
                 }else if ($row['attempt']==2){
@@ -490,7 +463,7 @@ if (file_exists($productXMLNAME)) {
                         include 'Verifyregister.php';
                     }else {
                         $wait=300-$row['codetime'];
-                        $payam="برای دریافت مجدد کد باید ".$wait." ثانیه صبر کنید و مجددا دوباره تلاش کنید. در صورت عدم دریافت با شماره 09035675570 تماس حاصل فرمائید";
+                        $payam="برای دریافت مجدد کد باید ".$wait." ثانیه صبر کنید و مجددا دوباره تلاش کنید. در صورت عدم دریافت با شماره 02122850864 تماس حاصل فرمائید";
                         include 'notgetcode.php';
                     }
                 }else if ($row['attempt']==3){
@@ -507,7 +480,7 @@ if (file_exists($productXMLNAME)) {
                         include 'Verifyregister.php';
                     }else {
                         $wait=600-$row['codetime'];
-                        $payam="برای دریافت مجدد کد باید ".$wait." ثانیه صبر کنید و مجددا دوباره تلاش کنید. در صورت عدم دریافت با شماره 09035675570 تماس حاصل فرمائید";
+                        $payam="برای دریافت مجدد کد باید ".$wait." ثانیه صبر کنید و مجددا دوباره تلاش کنید. در صورت عدم دریافت با شماره 02122850864 تماس حاصل فرمائید";
                         include 'notgetcode.php';
                     }
                 }else  if (($row['attempt']>3)&&($row['attempt']<10)){
@@ -524,7 +497,7 @@ if (file_exists($productXMLNAME)) {
                         include 'Verifyregister.php';
                     }else {
                         $wait=3600-$row['codetime'];
-                        $payam="برای دریافت مجدد کد باید ".$wait."  ثانیه صبر کنید و مجددا دوباره تلاش کنید.در صورت عدم دریافت با شماره 09035675570 تماس حاصل فرمائید";
+                        $payam="برای دریافت مجدد کد باید ".$wait."  ثانیه صبر کنید و مجددا دوباره تلاش کنید.در صورت عدم دریافت با شماره 02122850864 تماس حاصل فرمائید";
                         include 'notgetcode.php';
                     }
                 }else {
@@ -541,7 +514,7 @@ if (file_exists($productXMLNAME)) {
                         include 'Verifyregister.php';
                     }else {
                         $wait=3600*24-$row['codetime'];
-                        $payam="برای دریافت مجدد کد باید ".$wait." ثانیه صبر کنید و مجددا دوباره تلاش کنید.در صورت عدم دریافت با شماره 09035675570 تماس حاصل فرمائید";
+                        $payam="برای دریافت مجدد کد باید ".$wait." ثانیه صبر کنید و مجددا دوباره تلاش کنید.در صورت عدم دریافت با شماره 02122850864 تماس حاصل فرمائید";
                         include 'notgetcode.php';
                     }
                 }
@@ -554,16 +527,17 @@ if (file_exists($productXMLNAME)) {
             include 'notgetcode.php';
         }else if (isset($_POST['sendpassword'])){
             $mobile=$_POST['sendpassword'];
-            $stmt  = $connection->prepare("SELECT pass ,attemptgetpassword,UNIX_TIMESTAMP(CURRENT_TIMESTAMP)-UNIX_TIMESTAMP(passwordtime) as time FROM users WHERE (mobile=?)");
+            $stmt  = $connection->prepare("SELECT pass ,attemptgetpassword , UNIX_TIMESTAMP(CURRENT_TIMESTAMP)-UNIX_TIMESTAMP(passwordtime) as time FROM users WHERE (mobile=?)");
+//            $stmt  = $connection->prepare("SELECT pass ,attemptgetpassword,UNIX_TIMESTAMP(CURRENT_TIMESTAMP)-UNIX_TIMESTAMP(passwordtime) as time FROM users WHERE (mobile=?)");
             $stmt->bind_param("s", $mobile);
             $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
             $result = $stmt->get_result();
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
-                if ($row['time']>12){
+                if ($row['time']>12*3600){
                     $MobileNumbers = array($mobile);
                     // your text messages
-                    $Messages = array("پسورد شما در سایت ویکی‌درم:".$row['Password']);
+                    $Messages = array("پسورد شما در سایت ویکی‌درم:".$row['pass']);
                     include 'SMS/SendMessage.php';
                     $result = $connection->query("UPDATE users SET passwordtime=current_timestamp WHERE (mobile='$mobile')");
                     include 'header.php';
@@ -592,7 +566,7 @@ if (file_exists($productXMLNAME)) {
             ?>
             <div class="container paddingtop">
             <?php
-            //nothing show loginregister
+//            nothing show loginregister
             include 'MyIncludeLogin.php';
         }
     }
@@ -630,3 +604,36 @@ function generateToken2($length = 20)
     return bin2hex(openssl_random_pseudo_bytes($length));
 }
 
+function gregorian_to_jalali($gy,$gm,$gd,$mod=''){
+    list($gy,$gm,$gd)=explode('_',tr_num($gy.'_'.$gm.'_'.$gd));/* <= Extra :اين سطر ، جزء تابع اصلي نيست */
+    $g_d_m=array(0,31,59,90,120,151,181,212,243,273,304,334);
+    if($gy > 1600){
+        $jy=979;
+        $gy-=1600;
+    }else{
+        $jy=0;
+        $gy-=621;
+    }
+    $gy2=($gm > 2)?($gy+1):$gy;
+    $days=(365*$gy) +((int)(($gy2+3)/4)) -((int)(($gy2+99)/100)) +((int)(($gy2+399)/400)) -80 +$gd +$g_d_m[$gm-1];
+    $jy+=33*((int)($days/12053));
+    $days%=12053;
+    $jy+=4*((int)($days/1461));
+    $days%=1461;
+    $jy+=(int)(($days-1)/365);
+    if($days > 365)$days=($days-1)%365;
+    if($days < 186){
+        $jm=1+(int)($days/31);
+        $jd=1+($days%31);
+    }else{
+        $jm=7+(int)(($days-186)/30);
+        $jd=1+(($days-186)%30);
+    }
+    return($mod==='')?array($jy,$jm,$jd):$jy .$mod .$jm .$mod .$jd;
+}
+
+function tr_num($str,$mod='en',$mf='٫'){
+    $num_a=array('0','1','2','3','4','5','6','7','8','9','.');
+    $key_a=array('۰','۱','۲','۳','۴','۵','۶','۷','۸','۹',$mf);
+    return($mod=='fa')?str_replace($num_a,$key_a,$str):str_replace($key_a,$num_a,$str);
+}

@@ -28,6 +28,12 @@ while ($row=$result->fetch_assoc()) {
     }
     $today = $jyear . '/' . $jmonth . '/' . $jday . ' ' . $time;
 
+//    if($id==13){
+//        echo $today."<br>";
+//        echo $end."<br>";
+//        die();
+//    }
+
     if($end>$today) {
         ?>
 

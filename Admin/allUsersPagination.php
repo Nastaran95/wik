@@ -125,7 +125,7 @@ if (isset($_GET) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SER
 
     //Display records fetched from database.
     if ($type == 1)
-        echo '<table class="table user-list text-right">
+        echo '<table id="dtHorizontalExample" class="table table-bordered table-sm user-list text-center" cellspacing="0" width="100%">
                                 <thead>
                                 <tr>
                                     <th><input id="checkAll" type="checkbox"/></th>
