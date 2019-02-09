@@ -153,17 +153,12 @@ include 'header.php';
                             <?php
                             $page = 1;
                             $a = ($page-1)*7;
-                            $query = "SELECT * FROM Paper WHERE stat>0 ORDER by realtime DESC  LIMIT $a , 7;";
+                            $query = "SELECT Paper.name as name1,Paper.writerID,Paper.realtime,Paper.post_name,Paper.Mokhtasar,Paper.image,users.name as name2 FROM Paper INNER JOIN users on Paper.writerID = users.mobile WHERE (Paper.stat>0 AND users.eshterakID!=4) ORDER by Paper.realtime DESC  LIMIT $a , 7;";
                             $result = $connection->query($query);
                             while ($row=$result->fetch_assoc()) {
-                                $name = $row['name'];
+                                $name = $row['name1'];
                                 $writerID = $row['writerID'];
-                                $q = "SELECT * FROM users WHERE mobile=".$writerID.";";
-                                $res = $connection->query($q);
-                                if($rw=$res->fetch_assoc())
-                                    $writer = $rw['name'];
-                                else
-                                    $writer = 'ناشناس';
+                                $writer = $row['name2'];
                                 $time = $row['realtime'];
                                 $link = '/Paper/'.$row['post_name'];
                                 $mokhtasar = $row['Mokhtasar'];
@@ -207,7 +202,8 @@ include 'header.php';
 
                                 <?php
                             }
-                            $query = "SELECT * FROM Paper WHERE stat>0;" ;
+//                            $query = "SELECT * FROM Paper WHERE stat>0;" ;
+                            $query = "SELECT Paper.ID FROM Paper INNER JOIN users on Paper.writerID = users.mobile WHERE (Paper.stat>0 AND users.eshterakID!=4) ;";
                             $result = $connection->query($query);
                             $pagenum = $result->num_rows;
                             if ($pagenum>7) {
@@ -265,9 +261,9 @@ include 'header.php';
 
 
 
-<?php
-include 'footer.php';
-?>
+                                                                        <?php
+                                                                        include 'footer.php';
+                                                                        ?>
 <script src="js/classie.js"></script>
 <script src="js/uisearch.js"></script>
 <script>

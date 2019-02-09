@@ -77,7 +77,7 @@ function makeid() {
 }
 
 function confirming() {
-    return confirm('آیا از حذف بسته خود مطمعن هستید؟(حذف این مورد غیر قابل بازگشت است)');
+    return confirm('آیا از حذف مطمعن هستید؟(حذف این مورد غیر قابل بازگشت است)');
 }
 
 function confirming2() {

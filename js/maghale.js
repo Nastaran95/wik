@@ -22,3 +22,7 @@ $(document).ready(function () {
 
 
 });
+
+function confirming() {
+    return confirm('آیا از حذف این مورد مطمعن هستید؟');
+}

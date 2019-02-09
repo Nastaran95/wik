@@ -35,9 +35,34 @@ if (isset($_GET['ID'])) {
         if($rw=$res->fetch_assoc()) {
             $writer = $rw['name'];
             $eshterak = $rw["eshterakID"];
+            $endTime = $rw["endTime"];
+
+            date_default_timezone_set("Iran");
+            $DATE = date('Y-m-d H:i:s');
+            list($date, $time) = explode(" ", $DATE);
+            list($year, $month, $day) = explode("-", $date);
+            list($jyear, $jmonth, $jday) = gregorian_to_jalali($year, $month, $day);
+            if (strlen($jmonth) == 1) {
+                $jmonth = "0" . $jmonth;
+            }
+            if (strlen($jday) == 1) {
+                $jday = "0" . $jday;
+            }
+            $today = $jyear . '/' . $jmonth . '/' . $jday . ' ' . $time;
+
+            if($endTime<$today) {
+                $eshterak = 4;
+                $stmt = $connection->prepare("UPDATE users set eshterakID=4 WHERE (mobile=?)");
+                $stmt->bind_param("s", $writerID);
+                $result = $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
+                $stmt->store_result();
+                $result = $stmt->get_result();
+            }
         }
-        else
+        else {
             $writer = 'ناشناس';
+            $eshterak = 1;
+        }
         $time = $row['realtime'];
         $dastebandi = $row['dastebandi'];
         $xmlAdress = $row['XMLNAME'];
@@ -49,6 +74,12 @@ if (isset($_GET['ID'])) {
             $Description="";
         }
         $SEOTITLE=$row['name'];
+
+        $stmt = $connection->prepare("UPDATE Paper set mahbobiat=mahbobiat+1 WHERE (post_name=?)");
+        $stmt->bind_param("s", $ID);
+        $result = $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
+        $stmt->store_result();
+        $result = $stmt->get_result();
 
     } else{
         header('Location:/');
@@ -166,7 +197,7 @@ include 'header.php';
                                     ?>
                                     <a href="/profile.php?requestEdit=<?php echo $id; ?>" class="edit"><i
                                                 class="fas fa-edit"></i></a>
-                                    <a href="/profile.php?requestDelete=<?php echo $id; ?>" class="delete"><i
+                                    <a onClick="return confirming();"  href="/profile.php?requestDelete=<?php echo $id; ?>" class="delete"><i
                                                 class="fas fa-trash-alt"></i></a>
                                     <?php
                                 }
@@ -194,7 +225,8 @@ include 'header.php';
                     </div>
 
                     <?php
-                    $query = "SELECT * FROM Paper WHERE (writerID LIKE '%$writerID%' and stat>0)";
+//                    $query = "SELECT * FROM Paper WHERE (writerID LIKE '%$writerID%' and stat>0)";
+                    $query = "SELECT Paper.ID FROM Paper INNER JOIN users on Paper.writerID = users.mobile WHERE (Paper.stat>0 AND users.eshterakID!=4 AND Paper.writerID LIKE '%$writerID%' ) ;";
                     $result = $connection->query($query);
                     $pagenum = $result->num_rows;
                     if ($pagenum > 0) {
@@ -215,17 +247,19 @@ include 'header.php';
                                     <?php
                                     $page = 1;
                                     $a = ($page - 1) * 2;
-                                    $query = "SELECT * FROM Paper WHERE (writerID LIKE '%$writerID%' and stat>0) ORDER by ID DESC LIMIT $a , 2;";
+                                    $query = "SELECT Paper.name as name1, Paper.writerID, Paper.realtime, Paper.post_name, Paper.Mokhtasar, Paper.image,users.name as name2 FROM Paper INNER JOIN users on Paper.writerID = users.mobile WHERE (Paper.stat>0 AND users.eshterakID!=4 AND Paper.writerID LIKE '%$writerID%' ) ORDER by Paper.realtime DESC  LIMIT $a , 2;";
+//                                    $query = "SELECT * FROM Paper WHERE (writerID LIKE '%$writerID%' and stat>0) ORDER by ID DESC LIMIT $a , 2;";
                                     $result = $connection->query($query);
                                     while ($row = $result->fetch_assoc()) {
-                                        $name = $row['name'];
+                                        $name = $row['name1'];
                                         $writerID = $row['writerID'];
-                                        $q = "SELECT * FROM users WHERE mobile=" . $writerID . ";";
-                                        $res = $connection->query($q);
-                                        if ($rw = $res->fetch_assoc())
-                                            $writer = $rw['name'];
-                                        else
-                                            $writer = 'ناشناس';
+                                        $writer = $row['name2'];
+//                                        $q = "SELECT * FROM users WHERE mobile=" . $writerID . ";";
+//                                        $res = $connection->query($q);
+//                                        if ($rw = $res->fetch_assoc())
+//                                            $writer = $rw['name'];
+//                                        else
+//                                            $writer = 'ناشناس';
                                         $time = $row['realtime'];
                                         $link = '/Paper/' . $row['post_name'];
                                         $mokhtasar = $row['Mokhtasar'];
@@ -315,7 +349,8 @@ include 'header.php';
                 ?>
 
                 <?php
-                $query = "SELECT * FROM Paper WHERE (dastebandi='$dastebandi' and stat>0);";
+                $query = "SELECT Paper.ID FROM Paper INNER JOIN users on Paper.writerID = users.mobile WHERE (Paper.stat>0 AND users.eshterakID!=4 AND Paper.dastebandi='$dastebandi') ;";
+//                $query = "SELECT * FROM Paper WHERE (dastebandi='$dastebandi' and stat>0);";
                 $result = $connection->query($query) ;
                 $pagenum = $result->num_rows;
                 if($pagenum>0) {
@@ -336,17 +371,19 @@ include 'header.php';
                                 <?php
                                 $page = 1;
                                 $a = ($page - 1) * 2;
-                                $query = "SELECT * FROM Paper WHERE (dastebandi='$dastebandi' and stat>0) ORDER by ID DESC LIMIT $a , 2;";
+                                $query = "SELECT Paper.name as name1,Paper.writerID,Paper.realtime,Paper.post_name,Paper.Mokhtasar,Paper.image,users.name as name2 FROM Paper INNER JOIN users on Paper.writerID = users.mobile WHERE (Paper.stat>0 AND users.eshterakID!=4 AND Paper.dastebandi='$dastebandi') ORDER by Paper.realtime DESC  LIMIT $a , 2;";
+//                                $query = "SELECT * FROM Paper WHERE (dastebandi='$dastebandi' and stat>0) ORDER by ID DESC LIMIT $a , 2;";
                                 $result = $connection->query($query);
                                 while ($row = $result->fetch_assoc()) {
-                                    $name = $row['name'];
+                                    $name = $row['name1'];
                                     $writerID = $row['writerID'];
-                                    $q = "SELECT * FROM users WHERE mobile=".$writerID.";";
-                                    $res = $connection->query($q);
-                                    if($rw=$res->fetch_assoc())
-                                        $writer = $rw['name'];
-                                    else
-                                        $writer = 'ناشناس';
+                                    $writer = $row['name2'];
+//                                    $q = "SELECT * FROM users WHERE mobile=".$writerID.";";
+//                                    $res = $connection->query($q);
+//                                    if($rw=$res->fetch_assoc())
+//                                        $writer = $rw['name'];
+//                                    else
+//                                        $writer = 'ناشناس';
                                     $time = $row['realtime'];
                                     $link = '/Paper/' . $row['post_name'];
                                     $mokhtasar = $row['Mokhtasar'];
@@ -457,6 +494,39 @@ include 'header.php';
 
 <?php
 include 'footer.php';
+function gregorian_to_jalali($gy,$gm,$gd,$mod=''){
+    list($gy,$gm,$gd)=explode('_',tr_num($gy.'_'.$gm.'_'.$gd));/* <= Extra :اين سطر ، جزء تابع اصلي نيست */
+    $g_d_m=array(0,31,59,90,120,151,181,212,243,273,304,334);
+    if($gy > 1600){
+        $jy=979;
+        $gy-=1600;
+    }else{
+        $jy=0;
+        $gy-=621;
+    }
+    $gy2=($gm > 2)?($gy+1):$gy;
+    $days=(365*$gy) +((int)(($gy2+3)/4)) -((int)(($gy2+99)/100)) +((int)(($gy2+399)/400)) -80 +$gd +$g_d_m[$gm-1];
+    $jy+=33*((int)($days/12053));
+    $days%=12053;
+    $jy+=4*((int)($days/1461));
+    $days%=1461;
+    $jy+=(int)(($days-1)/365);
+    if($days > 365)$days=($days-1)%365;
+    if($days < 186){
+        $jm=1+(int)($days/31);
+        $jd=1+($days%31);
+    }else{
+        $jm=7+(int)(($days-186)/30);
+        $jd=1+(($days-186)%30);
+    }
+    return($mod==='')?array($jy,$jm,$jd):$jy .$mod .$jm .$mod .$jd;
+}
+
+function tr_num($str,$mod='en',$mf='٫'){
+    $num_a=array('0','1','2','3','4','5','6','7','8','9','.');
+    $key_a=array('۰','۱','۲','۳','۴','۵','۶','۷','۸','۹',$mf);
+    return($mod=='fa')?str_replace($num_a,$key_a,$str):str_replace($key_a,$num_a,$str);
+}
 ?>
 <script src="/js/classie.js"></script>
 <script src="/js/uisearch.js"></script>

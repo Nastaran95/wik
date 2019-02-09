@@ -17,26 +17,24 @@ if ($typ==1){
     $cat = $_GET['cat'];
     if ($page==-1)
         $page = 1;
-    $query = "SELECT * FROM Paper WHERE (stat>0 and dastebandi in (".$cat.") ) ORDER by realtime DESC " ;
+//    $query = "SELECT * FROM Paper WHERE (stat>0 and dastebandi in (".$cat.") ) ORDER by realtime DESC " ;
+    $query = "SELECT Paper.ID FROM Paper INNER JOIN users on Paper.writerID = users.mobile WHERE (Paper.stat>0 AND users.eshterakID!=4 AND dastebandi in (".$cat.")) ;";
     $result = $connection->query($query);
     $pagenum = $result->num_rows;
     if ($page==-2)
         $page = floor(($pagenum+6) / 7);
 
     $a = ($page-1)*7;
-    $query = "SELECT * FROM Paper WHERE (stat>0 and dastebandi in (".$cat.") )  ORDER by realtime DESC LIMIT $a , 7;";
+//    $query = "SELECT * FROM Paper WHERE (stat>0 and dastebandi in (".$cat.") )  ORDER by realtime DESC LIMIT $a , 7;";
+    $query = "SELECT Paper.name as name1,Paper.writerID,Paper.realtime,Paper.post_name,Paper.Mokhtasar,Paper.image,users.name as name2 FROM Paper INNER JOIN users on Paper.writerID = users.mobile WHERE (Paper.stat>0 AND users.eshterakID!=4 AND dastebandi in (".$cat.")) ORDER by Paper.realtime DESC  LIMIT $a , 7;";
+
     $result = $connection->query($query);
 
 
     while ($row=$result->fetch_assoc()) {
-        $name = $row['name'];
+        $name = $row['name1'];
         $writerID = $row['writerID'];
-        $q = "SELECT * FROM users WHERE mobile=".$writerID.";";
-        $res = $connection->query($q);
-        if($rw=$res->fetch_assoc())
-            $writer = $rw['name'];
-        else
-            $writer = 'ناشناس';
+        $writer = $row['name2'];
         $time = $row['realtime'];
         $link = '/paper/'.$row['post_name'];
         $mokhtasar = $row['Mokhtasar'];
@@ -118,26 +116,34 @@ else if ($typ==2){
     $writerID = $_GET['writer'];
     if ($page==-1)
         $page = 1;
-    $query = "SELECT * FROM Paper WHERE (writerID LIKE '%$writerID%' and stat>0 ) ORDER by realtime DESC " ;
+//    $query = "SELECT * FROM Paper WHERE (writerID LIKE '%$writerID%' and stat>0 )  ORDER by realtime DESC " ;
+    $query = "SELECT Paper.ID FROM Paper INNER JOIN users on Paper.writerID = users.mobile WHERE (Paper.stat>0 AND users.eshterakID!=4 AND Paper.writerID LIKE '%$writerID%' ) ;";
+//    echo $query;
     $result = $connection->query($query);
     $pagenum = $result->num_rows;
     if ($page==-2)
         $page = floor(($pagenum+1) / 2);
 
     $a = ($page-1)*2;
-    $query = "SELECT * FROM Paper WHERE (writerID LIKE '%$writerID%' and stat>0 ) ORDER by realtime DESC LIMIT $a , 2;";
+//    $query = "SELECT * FROM Paper WHERE (writerID LIKE '%$writerID%' and stat>0 ) ORDER by realtime DESC LIMIT $a , 2;";
+    $query = "SELECT Paper.name as name1, Paper.writerID, Paper.realtime, Paper.post_name, Paper.Mokhtasar, Paper.image,users.name as name2 FROM Paper INNER JOIN users on Paper.writerID = users.mobile WHERE (Paper.stat>0 AND users.eshterakID!=4 AND Paper.writerID LIKE '%$writerID%' ) ORDER by Paper.realtime DESC  LIMIT $a , 2;";
+
     $result = $connection->query($query);
 
 
     while ($row=$result->fetch_assoc()) {
-        $name = $row['name'];
+//        $name = $row['name'];
+//        $writerID = $row['writerID'];
+//        $q = "SELECT * FROM users WHERE mobile=".$writerID.";";
+//        $res = $connection->query($q);
+//        if($rw=$res->fetch_assoc())
+//            $writer = $rw['name'];
+//        else
+//            $writer = 'ناشناس';
+
+        $name = $row['name1'];
         $writerID = $row['writerID'];
-        $q = "SELECT * FROM users WHERE mobile=".$writerID.";";
-        $res = $connection->query($q);
-        if($rw=$res->fetch_assoc())
-            $writer = $rw['name'];
-        else
-            $writer = 'ناشناس';
+        $writer = $row['name2'];
         $time = $row['realtime'];
         $link = '/paper/'.$row['post_name'];
         $mokhtasar = $row['Mokhtasar'];
@@ -217,7 +223,8 @@ else if ($typ==3){
     $dastebandi = $_GET['daste'];
     if ($page==-1)
         $page = 1;
-    $query = "SELECT * FROM Paper WHERE (dastebandi='$dastebandi' and stat>0 ) ORDER by realtime DESC " ;
+    $query = "SELECT Paper.ID FROM Paper INNER JOIN users on Paper.writerID = users.mobile WHERE (Paper.stat>0 AND users.eshterakID!=4 AND Paper.dastebandi='$dastebandi' ) ;";
+//    $query = "SELECT * FROM Paper WHERE (dastebandi='$dastebandi' and stat>0 ) ORDER by realtime DESC " ;
     $result = $connection->query($query);
     $pagenum = $result->num_rows;
     if ($page==-2)
@@ -225,19 +232,15 @@ else if ($typ==3){
 
     $a = ($page-1)*2;
 
-    $query = "SELECT * FROM Paper WHERE (dastebandi='$dastebandi' and stat>0 ) ORDER by realtime DESC  LIMIT $a , 2;";
+    $query = "SELECT Paper.name as name1,Paper.writerID,Paper.realtime,Paper.post_name,Paper.Mokhtasar,Paper.image,users.name as name2 FROM Paper INNER JOIN users on Paper.writerID = users.mobile WHERE (Paper.stat>0 AND users.eshterakID!=4 AND Paper.dastebandi='$dastebandi') ORDER by Paper.realtime DESC  LIMIT $a , 2;";
+//    $query = "SELECT * FROM Paper WHERE (dastebandi='$dastebandi' and stat>0 ) ORDER by realtime DESC  LIMIT $a , 2;";
     $result = $connection->query($query);
 
 
     while ($row=$result->fetch_assoc()) {
-        $name = $row['name'];
+        $name = $row['name1'];
         $writerID = $row['writerID'];
-        $q = "SELECT * FROM users WHERE mobile=".$writerID.";";
-        $res = $connection->query($q);
-        if($rw=$res->fetch_assoc())
-            $writer = $rw['name'];
-        else
-            $writer = 'ناشناس';
+        $writer = $row['name2'];
         $time = $row['realtime'];
         $link = '/paper/'.$row['post_name'];
         $mokhtasar = $row['Mokhtasar'];
@@ -317,27 +320,24 @@ else if ($typ==4){
     $writerID = $_GET['writer'];
     if ($page==-1)
         $page = 1;
-    $query = "SELECT * FROM Paper WHERE (writerID LIKE '%$writerID%' and stat>0 ) ORDER by realtime DESC " ;
+//    $query = "SELECT * FROM Paper WHERE (writerID LIKE '%$writerID%' and stat>0 ) ORDER by realtime DESC " ;
+    $query = "SELECT Paper.ID FROM Paper INNER JOIN users on Paper.writerID = users.mobile WHERE (Paper.stat>0 AND users.eshterakID!=4 AND Paper.writerID LIKE '%$writerID%' ) ;";
     $result = $connection->query($query);
     $pagenum = $result->num_rows;
     if ($page==-2)
         $page = floor(($pagenum+1) / 2);
 
     $a = ($page-1)*2;
-    $query = "SELECT * FROM Paper WHERE (writerID LIKE '%$writerID%' and stat>0 ) ORDER by realtime DESC LIMIT $a , 2;";
+    $query = "SELECT Paper.ID,Paper.name as name1, Paper.writerID, Paper.realtime, Paper.post_name, Paper.Mokhtasar, Paper.image,users.name as name2 FROM Paper INNER JOIN users on Paper.writerID = users.mobile WHERE (Paper.stat>0 AND users.eshterakID!=4 AND Paper.writerID LIKE '%$writerID%' ) ORDER by Paper.realtime DESC  LIMIT $a , 2;";
+//    $query = "SELECT * FROM Paper WHERE (writerID LIKE '%$writerID%' and stat>0 ) ORDER by realtime DESC LIMIT $a , 2;";
     $result = $connection->query($query);
 
 
     while ($row=$result->fetch_assoc()) {
         $id = $row['ID'];
-        $name = $row['name'];
+        $name = $row['name1'];
         $writerID = $row['writerID'];
-        $q = "SELECT * FROM users WHERE mobile=".$writerID.";";
-        $res = $connection->query($q);
-        if($rw=$res->fetch_assoc())
-            $writer = $rw['name'];
-        else
-            $writer = 'ناشناس';
+        $writer = $row['name2'];
         $time = $row['realtime'];
         $link = '/paper/'.$row['post_name'];
         $mokhtasar = $row['Mokhtasar'];

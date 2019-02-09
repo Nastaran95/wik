@@ -686,6 +686,28 @@ include 'header.php';
                 $endTime = $row["endTime"];
                 $show = $row["showMobile"];
                 $useFree = $row["useFreeEshterak"];
+
+                date_default_timezone_set("Iran");
+                $DATE = date('Y-m-d H:i:s');
+                list($date, $time) = explode(" ", $DATE);
+                list($year, $month, $day) = explode("-", $date);
+                list($jyear, $jmonth, $jday) = gregorian_to_jalali($year, $month, $day);
+                if (strlen($jmonth) == 1) {
+                    $jmonth = "0" . $jmonth;
+                }
+                if (strlen($jday) == 1) {
+                    $jday = "0" . $jday;
+                }
+                $today = $jyear . '/' . $jmonth . '/' . $jday . ' ' . $time;
+
+                if($endTime<$today) {
+                    $eshterak = 4;
+                    $stmt = $connection->prepare("UPDATE users set eshterakID=4 WHERE (mobile=?)");
+                    $stmt->bind_param("s", $_SESSION["mobile"]);
+                    $result = $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
+                    $stmt->store_result();
+                    $result = $stmt->get_result();
+                }
 //                echo '<script>alert('.$startTime.')</script>';
 //                echo '<script>alert('.$endTime.')</script>';
 
