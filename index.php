@@ -152,6 +152,9 @@ include 'headerMainpage.php';
                 ?>
             </ul>
         </div>
+<!--        <div class="col-md-12 marQ">-->
+<!--            <marquee>ویکی‌درم</marquee>-->
+<!--        </div>-->
     </div>
 
     <div  id="main" class="home_main text-right row ">

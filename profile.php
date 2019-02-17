@@ -643,6 +643,62 @@ else if(isset($_GET['request']) && $_GET['request']=='backZarrin') {
 
     die();
 }
+else if(isset($_GET['request']) && $_GET['request']=='changePass'){
+
+    if(isset($_POST['lastPass']) && isset($_POST['newPass']) && isset($_POST['reNewPass'])) {
+        $lastPass = $_POST["lastPass"];
+        $newPass = $_POST["newPass"];
+        $reNewPass = $_POST["reNewPass"];
+
+        $stmt = $connection->prepare("SELECT pass FROM Users WHERE (mobile=? )");
+        $stmt->bind_param("s", $_SESSION["mobile"]);
+        $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $stmt->close();
+            $pass = $row["pass"];
+
+            if ($lastPass != $pass) {
+                echo "<script>alert('لطفا رمز قبلی خود را درست وارد کنید.')</script>>";
+                $tab = 6;
+            }
+            else if($newPass!=$reNewPass){
+                echo "<script>alert('عدم مطابقت رمز جدید و تکرار رمز جدید، لطفا دوباره تلاش کنید.')</script>>";
+                $tab = 6;
+            }
+            else if($lastPass==$newPass){
+                echo "<script>alert('رمز عبور وارد شده نباید برابر رمز قبلی شما باشد.')</script>>";
+                $tab = 6;
+            }
+            else if(strlen($newPass)<8){
+                echo "<script>alert('طول رمز جدید باید حداقل ۸ کاراکتر باشد. لطفا دوباره تلاش کنید.')</script>>";
+                $tab = 6;
+            }
+            else if($lastPass == $pass && $newPass==$reNewPass && $lastPass!=$newPass && strlen($newPass)>=8){
+                $stmt = $connection->prepare("UPDATE Users SET pass=? WHERE (mobile=? )");
+                $stmt->bind_param("ss", $newPass , $_SESSION["mobile"]);
+                $stmt->execute();
+                echo "<script>alert('رمز عبور شما با موفقیت تغییر کرد.')</script>>";
+                $tab = 1;
+            }
+            else{
+                echo "<script>alert('خطای نامشخص، لطفا دوباره تلاش کنید.')</script>>";
+                $tab = 6;
+            }
+
+        }
+        else{
+            echo "<script>alert('دسترسی غیر مجاز.')</script>>";
+            $tab = 1;
+        }
+
+    }
+    else{
+        echo "<script>alert('اطلاعات خواسته شده را با دقت پر کنید.')</script>>";
+        $tab = 6;
+    }
+}
 else{
     $titleshould='';
     $datashould = '';
@@ -738,6 +794,7 @@ include 'header.php';
                         <button class="tablinks <?php if($tab==3) echo "active";?>" onclick="openCity(event, 'posts')">پست‌ها</button>
                         <button class="tablinks <?php if($tab==4) echo "active";?>" onclick="openCity(event, 'newPost')">پست جدید</button>
                         <button class="tablinks <?php if($tab==5) echo "active";?>" onclick="openCity(event, 'eshterak')">مدیریت اشتراک</button>
+                        <button class="tablinks <?php if($tab==6) echo "active";?>" onclick="openCity(event, 'changePass')">تغییر رمز عبور</button>
                     </div>
 
                     <div id="personal" class="tabcontent pt-4 <?php if($tab==1) echo "d-block"; else echo "d-none";?>">
@@ -958,7 +1015,7 @@ include 'header.php';
                             ?>
 
                             <form action="profile.php?request=post<?php if (isset($_GET['requestEdit'])) echo "&paper=" . $_GET['requestEdit']; ?>"
-                                  method="post" class="row pt-5" id="userInfo" enctype="multipart/form-data">
+                                  method="post" class="row pt-5" id="newPost" enctype="multipart/form-data">
                                 <div class="form-group col-md-10 m-auto text-right">
                                     <label for="subject" class="dark_text"><b>عنوان مطلب</b></label>
                                     <input type="text" class="form-control" id="subject"
@@ -1086,6 +1143,37 @@ include 'header.php';
                             ?>
                         </div>
                         </div>
+                    </div>
+
+                    <div id="changePass" class="tabcontent  <?php if($tab==6) echo "d-block"; else echo "d-none";?>">
+                        <form action="profile.php?request=changePass" method="post" class="row pt-5" id="userPass" enctype="multipart/form-data">
+                            <div class="form-group col-md-8 m-auto text-right">
+                                <label for="lastPass" class="dark_text"><b>رمز فعلی</b></label>
+                                <input type="password" class="form-control" id="lastPass" name="lastPass">
+                            </div>
+
+                            <div class="form-group col-md-8 m-auto text-right">
+                                <label for="newPass" class="dark_text"><b>رمز جدید</b></label>
+                                <input type="password" class="form-control" id="newPass" name="newPass">
+                            </div>
+
+                            <div class="form-group col-md-8 m-auto text-right">
+                                <label for="reNewPass" class="dark_text"><b>تکرار رمز جدید</b></label>
+                                <input type="password" class="form-control" id="reNewPass" name="reNewPass">
+                            </div>
+
+
+                            <div class="form-group col-md-10 row mt-4 ml-auto mr-auto">
+                                <div class="col-md-5 col-12 mt-2 ml-auto mr-auto">
+                                    <button type="submit" class="btn btn-default col-md-12 col-12 btn-success"
+                                            id="okPass">ثبت
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </form>
+
                     </div>
                 </div>
                 <?php

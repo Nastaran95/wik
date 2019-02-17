@@ -189,6 +189,10 @@
     font-size: 16px;
 }
 
+.marQ{
+    top:35px;
+}
+
 /*tablet*/
 @media (min-width: 1800px) {
     /*.header .cover{*/
