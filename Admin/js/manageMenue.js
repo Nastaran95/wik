@@ -4,62 +4,234 @@ $(document).ready(function() {
 
     $(document).on('change keyup','.back',function(e){
         e.preventDefault();
-        orderID = $(this).attr("class");
-        r = document.getElementById("backR").value;
-        g = document.getElementById("backG").value;
-        b = document.getElementById("backB").value;
+        r = document.getElementById("hoverR").value;
+        g = document.getElementById("hoverG").value;
+        b = document.getElementById("hoverB").value;
         str = 'rgb('+r+','+g+','+b+')';
+
+        r2 = document.getElementById("backR").value;
+        g2 = document.getElementById("backG").value;
+        b2 = document.getElementById("backB").value;
+        str2 = 'rgb('+r2+','+g2+','+b2+')';
         // alert(str);
-        $('.grayBox').css('background-color', str);
+        $(".grayBox").hover(function() {
+            $(this).css("background-color",str)
+        },function() {
+            $( this ).css("background-color",str2)});
+
+
+        r3 = document.getElementById("texthoverR").value;
+        g3 = document.getElementById("texthoverG").value;
+        b3 = document.getElementById("texthoverB").value;
+        str3 = 'rgb('+r3+','+g3+','+b3+')';
+
+        r4 = document.getElementById("textR").value;
+        g4 = document.getElementById("textG").value;
+        b4 = document.getElementById("textB").value;
+        str4 = 'rgb('+r4+','+g4+','+b4+')';
+        // alert(str);
+        $(".grayBox").hover(function() {
+            $(this).css('color',str3)
+        },function() {
+            $( this ).css('color',str4)});
+
+        r5 = document.getElementById("borderrR").value;
+        g5 = document.getElementById("borderrG").value;
+        b5 = document.getElementById("borderrB").value;
+        str5 = 'rgb('+r5+','+g5+','+b5+')';
+        // alert(str);
+        $(".grayBox").hover(function() {
+            $(this).css("border-color",str5)
+        });
+
+        r6 = document.getElementById("backR").value;
+        g6 = document.getElementById("backG").value;
+        b6 = document.getElementById("backB").value;
+        str6 = 'rgb('+r6+','+g6+','+b6+')';
+        // alert(str);
+        $('.grayBox').css('background-color', str6);
     });
 
     $(document).on('change keyup','.text',function(e){
         e.preventDefault();
-        orderID = $(this).attr("class");
-        r = document.getElementById("textR").value;
-        g = document.getElementById("textG").value;
-        b = document.getElementById("textB").value;
-        str = 'rgb('+r+','+g+','+b+')';
-        // alert(str);
-        $('.grayBox').css('color', str);
-    });
 
-    $(document).on('change keyup','.border',function(e){
-        e.preventDefault();
-        orderID = $(this).attr("class");
-        r = document.getElementById("borderR").value;
-        g = document.getElementById("borderG").value;
-        b = document.getElementById("borderB").value;
+        r = document.getElementById("hoverR").value;
+        g = document.getElementById("hoverG").value;
+        b = document.getElementById("hoverB").value;
         str = 'rgb('+r+','+g+','+b+')';
+
+        r2 = document.getElementById("backR").value;
+        g2 = document.getElementById("backG").value;
+        b2 = document.getElementById("backB").value;
+        str2 = 'rgb('+r2+','+g2+','+b2+')';
         // alert(str);
         $(".grayBox").hover(function() {
-            $(this).css("border-color",str)
+            $(this).css("background-color",str)
+        },function() {
+            $( this ).css("background-color",str2)});
+
+
+        r3 = document.getElementById("texthoverR").value;
+        g3 = document.getElementById("texthoverG").value;
+        b3 = document.getElementById("texthoverB").value;
+        str3 = 'rgb('+r3+','+g3+','+b3+')';
+
+        r4 = document.getElementById("textR").value;
+        g4 = document.getElementById("textG").value;
+        b4 = document.getElementById("textB").value;
+        str4 = 'rgb('+r4+','+g4+','+b4+')';
+        // alert(str);
+        $(".grayBox").hover(function() {
+            $(this).css('color',str3)
+        },function() {
+            $( this ).css('color',str4)});
+
+        r5 = document.getElementById("borderrR").value;
+        g5 = document.getElementById("borderrG").value;
+        b5 = document.getElementById("borderrB").value;
+        str5 = 'rgb('+r5+','+g5+','+b5+')';
+        // alert(str);
+        $(".grayBox").hover(function() {
+            $(this).css("border-color",str5)
+        });
+
+        r6 = document.getElementById("textR").value;
+        g6 = document.getElementById("textG").value;
+        b6 = document.getElementById("textB").value;
+        str6 = 'rgb('+r6+','+g6+','+b6+')';
+        // alert(str);
+        $('.grayBox').css('color', str6);
+
+
+    });
+
+    $(document).on('change keyup','.borderr',function(e){
+        e.preventDefault();
+        r = document.getElementById("hoverR").value;
+        g = document.getElementById("hoverG").value;
+        b = document.getElementById("hoverB").value;
+        str = 'rgb('+r+','+g+','+b+')';
+
+        r2 = document.getElementById("backR").value;
+        g2 = document.getElementById("backG").value;
+        b2 = document.getElementById("backB").value;
+        str2 = 'rgb('+r2+','+g2+','+b2+')';
+        // alert(str);
+        $(".grayBox").hover(function() {
+            $(this).css("background-color",str)
+        },function() {
+            $( this ).css("background-color",str2)});
+
+
+        r3 = document.getElementById("texthoverR").value;
+        g3 = document.getElementById("texthoverG").value;
+        b3 = document.getElementById("texthoverB").value;
+        str3 = 'rgb('+r3+','+g3+','+b3+')';
+
+        r4 = document.getElementById("textR").value;
+        g4 = document.getElementById("textG").value;
+        b4 = document.getElementById("textB").value;
+        str4 = 'rgb('+r4+','+g4+','+b4+')';
+        // alert(str);
+        $(".grayBox").hover(function() {
+            $(this).css('color',str3)
+        },function() {
+            $( this ).css('color',str4)});
+
+        r5 = document.getElementById("borderrR").value;
+        g5 = document.getElementById("borderrG").value;
+        b5 = document.getElementById("borderrB").value;
+        str5 = 'rgb('+r5+','+g5+','+b5+')';
+        // alert(str);
+        $(".grayBox").hover(function() {
+            $(this).css("border-color",str5)
         });
     });
 
     $(document).on('change keyup','.hover',function(e){
         e.preventDefault();
-        orderID = $(this).attr("class");
         r = document.getElementById("hoverR").value;
         g = document.getElementById("hoverG").value;
         b = document.getElementById("hoverB").value;
         str = 'rgb('+r+','+g+','+b+')';
+
+        r2 = document.getElementById("backR").value;
+        g2 = document.getElementById("backG").value;
+        b2 = document.getElementById("backB").value;
+        str2 = 'rgb('+r2+','+g2+','+b2+')';
         // alert(str);
         $(".grayBox").hover(function() {
             $(this).css("background-color",str)
+        },function() {
+            $( this ).css("background-color",str2)});
+
+
+        r3 = document.getElementById("texthoverR").value;
+        g3 = document.getElementById("texthoverG").value;
+        b3 = document.getElementById("texthoverB").value;
+        str3 = 'rgb('+r3+','+g3+','+b3+')';
+
+        r4 = document.getElementById("textR").value;
+        g4 = document.getElementById("textG").value;
+        b4 = document.getElementById("textB").value;
+        str4 = 'rgb('+r4+','+g4+','+b4+')';
+        // alert(str);
+        $(".grayBox").hover(function() {
+            $(this).css('color',str3)
+        },function() {
+            $( this ).css('color',str4)});
+
+        r5 = document.getElementById("borderrR").value;
+        g5 = document.getElementById("borderrG").value;
+        b5 = document.getElementById("borderrB").value;
+        str5 = 'rgb('+r5+','+g5+','+b5+')';
+        // alert(str);
+        $(".grayBox").hover(function() {
+            $(this).css("border-color",str5)
         });
     });
 
     $(document).on('change keyup','.texthover',function(e){
         e.preventDefault();
         orderID = $(this).attr("class");
-        r = document.getElementById("texthoverR").value;
-        g = document.getElementById("texthoverG").value;
-        b = document.getElementById("texthoverB").value;
+        r = document.getElementById("hoverR").value;
+        g = document.getElementById("hoverG").value;
+        b = document.getElementById("hoverB").value;
         str = 'rgb('+r+','+g+','+b+')';
+
+        r2 = document.getElementById("backR").value;
+        g2 = document.getElementById("backG").value;
+        b2 = document.getElementById("backB").value;
+        str2 = 'rgb('+r2+','+g2+','+b2+')';
         // alert(str);
         $(".grayBox").hover(function() {
-            $(this).css("color",str)
+            $(this).css("background-color",str)
+        },function() {
+            $( this ).css("background-color",str2)});
+
+
+        r3 = document.getElementById("texthoverR").value;
+        g3 = document.getElementById("texthoverG").value;
+        b3 = document.getElementById("texthoverB").value;
+        str3 = 'rgb('+r3+','+g3+','+b3+')';
+
+        r4 = document.getElementById("textR").value;
+        g4 = document.getElementById("textG").value;
+        b4 = document.getElementById("textB").value;
+        str4 = 'rgb('+r4+','+g4+','+b4+')';
+        // alert(str);
+        $(".grayBox").hover(function() {
+            $(this).css('color',str3)
+        },function() {
+            $( this ).css('color',str4)});
+
+        r5 = document.getElementById("borderrR").value;
+        g5 = document.getElementById("borderrG").value;
+        b5 = document.getElementById("borderrB").value;
+        str5 = 'rgb('+r5+','+g5+','+b5+')';
+        // alert(str);
+        $(".grayBox").hover(function() {
+            $(this).css("border-color",str5)
         });
     });
 

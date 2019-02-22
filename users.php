@@ -110,7 +110,7 @@ include 'header.php';
 
                                 ?>
 
-                                <div class="col-md-4 float-right col-6 col-xs-6 p-3">
+                                <div class="col-md-4 float-right col-12 col-xs-6 p-3">
                                     <a href="<?php echo $link;?>">
 <!--                                        <img src="/--><?php //echo $img; ?><!--" width="100%" height="150px" alt="paperimg">-->
 <!--                                        <div class="col-md-12 text-center">--><?php //echo $name;?><!--</div>-->

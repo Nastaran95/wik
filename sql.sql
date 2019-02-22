@@ -231,3 +231,17 @@ CREATE TABLE grayBox(
   link VARCHAR(100),
   active int default 0,
   PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
+
+DROP table colors;
+CREATE TABLE colors(ID int NOT NULL AUTO_INCREMENT,
+                          name VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci,
+                          red int,
+                          green int,
+                          blue int ,
+  PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
+
+INSERT INTO colors(name,red,green,blue) VALUES ('GrayBoxBack','233','231','232');
+INSERT INTO colors(name,red,green,blue) VALUES ('GrayBoxText','20','10','255');
+INSERT INTO colors(name,red,green,blue) VALUES ('GrayBoxBorder','200','0','0');
+INSERT INTO colors(name,red,green,blue) VALUES ('GrayBoxBackHover','0','200','200');
+INSERT INTO colors(name,red,green,blue) VALUES ('GrayBoxTextHover','200','0','200');

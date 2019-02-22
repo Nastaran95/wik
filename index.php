@@ -19,6 +19,47 @@ if (file_exists($productXMLNAME)) {
     $SEOKEYWORDS="";
     $SEOTITLE="";
 }
+
+$query = "SELECT * FROM colors where name='GrayBoxBack';";
+$result = $connection->query($query);
+$row=$result->fetch_assoc();
+$r1 = $row['red'];
+$g1 = $row['green'];
+$b1 = $row['blue'];
+$str1 = 'rgb('.$r1.','.$g1.','.$b1.')';
+
+$query = "SELECT * FROM colors where name='GrayBoxText';";
+$result = $connection->query($query);
+$row=$result->fetch_assoc();
+$r2 = $row['red'];
+$g2 = $row['green'];
+$b2 = $row['blue'];
+$str2 = 'rgb('.$r2.','.$g2.','.$b2.')';
+
+$query = "SELECT * FROM colors where name='GrayBoxBorder';";
+$result = $connection->query($query);
+$row=$result->fetch_assoc();
+$r3 = $row['red'];
+$g3 = $row['green'];
+$b3 = $row['blue'];
+$str3 = 'rgb('.$r3.','.$g3.','.$b3.')';
+
+$query = "SELECT * FROM colors where name='GrayBoxBackHover';";
+$result = $connection->query($query);
+$row=$result->fetch_assoc();
+$r4 = $row['red'];
+$g4 = $row['green'];
+$b4 = $row['blue'];
+$str4 = 'rgb('.$r4.','.$g4.','.$b4.')';
+
+$query = "SELECT * FROM colors where name='GrayBoxTextHover';";
+$result = $connection->query($query);
+$row=$result->fetch_assoc();
+$r5 = $row['red'];
+$g5 = $row['green'];
+$b5 = $row['blue'];
+$str5 = 'rgb('.$r5.','.$g5.','.$b5.')';
+
 ?>
 
 <!DOCTYPE html>
@@ -48,6 +89,18 @@ if (file_exists($productXMLNAME)) {
     <link href="/css/font-awesome/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <script src="/js/modernizr.custom.js"></script>
+    <style>
+        .grayBox{
+            background-color: <?php echo $str1;?>;
+            color: <?php echo $str2;?>;
+        }
+
+        .grayBox:hover{
+            background-color: <?php echo $str4;?>;
+            border-color: <?php echo $str3;?>;
+            color: <?php echo $str5;?>;
+        }
+    </style>
 </head>
 <STYLE>A {text-decoration: none;} </STYLE>
 <body>

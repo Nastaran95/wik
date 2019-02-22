@@ -38,7 +38,9 @@ while ($row=$result->fetch_assoc()) {
         ?>
 
         <div class="col-md-12 add">
-            <img src="/<?php echo $image; ?>" width="100%" height="150px" alt="tabliq">
+            <a href="/addPage/<?php echo $id; ?>" title="<?php echo $name; ?>">
+                <img src="/<?php echo $image; ?>" width="100%" height="150px" alt="<?php echo $name; ?>">
+            </a>
         </div>
         <?php
     }

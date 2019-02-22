@@ -183,10 +183,10 @@ include 'header.php';
                                         </div>
 
                                         <div class="col-md-12 nametime col-12 row">
-                                            <div class="col-md-4 col-12 ">
+                                            <div class="col-md-6 col-12 ">
                                                 <?php echo $writer; ?>
                                             </div>
-                                            <div class="col-md-8 col-12 ">
+                                            <div class="col-md-6 col-12 ">
                                                 <?php echo $time; ?>
                                             </div>
 
