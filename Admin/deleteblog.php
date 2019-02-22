@@ -32,6 +32,8 @@ if (($_SESSION['typ'] == 10) || ($_SESSION['typ'] == 9)) {
             $query = "SELECT * FROM addCategory WHERE ID = $product";
         else if($type == 10)
             $query = "SELECT * FROM advertisement WHERE ID = $product";
+        else if($type == 11)
+            $query = "SELECT * FROM Pages WHERE ID = $product";
         $result = $connection->query($query);
         $row = $result->fetch_assoc();
         $name = $row['XMLNAME'];
@@ -56,6 +58,8 @@ if (($_SESSION['typ'] == 10) || ($_SESSION['typ'] == 9)) {
             $query = "DELETE FROM addCategory WHERE ID = $product";
         else if($type == 10)
             $query = "DELETE FROM advertisement WHERE ID = $product";
+        else if($type == 11)
+            $query = "DELETE FROM Pages WHERE ID = $product";
         $result = $connection->query($query);
         if($connection->error){
             echo '<script> alert("بدلایل امنیتی دسترسی به حذف داده نشد'.$connection->error.'."); </script> ';
@@ -81,6 +85,8 @@ if (($_SESSION['typ'] == 10) || ($_SESSION['typ'] == 9)) {
             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/manageAdd.php?nocache='.generateRandomString(10).'">';
         else if($type == 10)
             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/allAdvertisement.php?nocache='.generateRandomString(10).'">';
+        else if($type == 11)
+            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=/admin/allPages.php?nocache='.generateRandomString(10).'">';
 
 
     }

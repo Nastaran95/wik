@@ -30,13 +30,15 @@ if (($_SESSION['typ']>0)) {
                             مقاله
                         </a>
                     </div>
-                    <div id="collapseOne" class="collapse <?php if ($which == 2 || $which==3) echo "show"; ?> "  aria-labelledby="headingCollapseOne" role="tabpanel">
+                    <div id="collapseOne" class="collapse <?php if ($which == 2 || $which==3 || $which==8) echo "show"; ?> "  aria-labelledby="headingCollapseOne" role="tabpanel">
                         <div class="card-content">
                             <div class="card-body text-right">
                                 <li class="p-2 <?php if ($which == 2) echo "selected"; ?>"><a href="addPost.php"><i class="fa fa-tasks"></i>
                                         افزودن مقاله </a></li>
                                 <li class="p-2 <?php if ($which == 3) echo "selected"; ?>"><a href="allPosts.php?nocache=<?php echo generateRandomString(10)?>"><i class="fa fa-tasks"></i>
                                         همه مقاله‌ها </a></li>
+                                <li class="p-2 <?php if ($which == 8) echo "selected"; ?>"><a href="managePapersCategory.php"><i
+                                                class="fa fa-list-alt"></i> مدیریت دسته بندی مقالات </a></li>
                             </div>
                         </div>
                     </div>
@@ -46,7 +48,7 @@ if (($_SESSION['typ']>0)) {
                             کاربران
                         </a>
                     </div>
-                    <div id="collapseTwo" class="collapse <?php if ($which == 4 || $which==5 || $which==7 || $which==12) echo "show"; ?>"  aria-labelledby="headingCollapseTwo" role="tabpanel">
+                    <div id="collapseTwo" class="collapse <?php if ($which == 4 || $which==5 || $which==7 || $which==9 || $which==12 || $which==13) echo "show"; ?>"  aria-labelledby="headingCollapseTwo" role="tabpanel">
                         <div class="card-content">
                             <div class="card-body text-right">
                                 <li class="p-2 <?php if ($which == 4) echo "selected"; ?>"><a href="addUser.php"><i class="fa fa-globe"></i>
@@ -57,12 +59,16 @@ if (($_SESSION['typ']>0)) {
                                                 class="fa fa-list-ol"></i> مدیریت دسته بندی کاربران </a></li>
                                 <li class="p-2 <?php if ($which == 12) echo "selected"; ?>"><a href="allUsersRequest.php?nocache=<?php echo generateRandomString(10)?>">
                                         <i class="fas fa-question-circle"></i> همه درخواست های کاربران </a></li>
+                                <li class="p-2 <?php if ($which == 9) echo "selected"; ?>"><a href="manageUsersEshterak.php"><i
+                                                class="fa fa-file"></i> مدیریت اشتراک عضویت </a></li>
+                                <li class="p-2 <?php if ($which == 13) echo "selected"; ?>"><a href="allPardakht.php">
+                                        <i class="fas fa-hand-holding-usd"></i>تراکنش‌ها </a></li>
                             </div>
                         </div>
                     </div>
 
                     <div class="card-header text-right  border-warning" id="headingCollapseThree">
-                        <a class="card-title lead collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="true" aria-controls="collapseTwo"> <i class="fa fa-tasks"></i>
+                        <a class="card-title lead collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree"> <i class="fa fa-tasks"></i>
                             آگهی
                         </a>
                     </div>
@@ -84,6 +90,24 @@ if (($_SESSION['typ']>0)) {
                         </div>
                     </div>
 
+                    <div class="card-header text-right  border-warning" id="headingCollapseFour">
+                        <a class="card-title lead collapsed" data-toggle="collapse" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour"> <i class="fa fa-tasks"></i>
+                            صفحه ایستا
+                        </a>
+                    </div>
+                    <div id="collapseFour" class="collapse <?php if ($which == 20 || $which==21 ) echo "show"; ?>"  aria-labelledby="headingCollapseFour" role="tabpanel">
+                        <div class="card-content">
+                            <div class="card-body text-right">
+                                <li class="p-2 <?php if ($which == 20) echo "selected"; ?>"><a href="addPage.php"><i class="fa fa-tasks"></i>
+                                        افزودن صفحه ایستا </a></li>
+
+                                <li class="p-2 <?php if ($which == 21) echo "selected"; ?>"><a href="allPages.php"><i class="fa fa-tasks"></i>
+                                        همه صفحه‌های ایستا </a></li>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
 
 
@@ -94,17 +118,14 @@ if (($_SESSION['typ']>0)) {
                 <li class="p-2 <?php if ($which == 6) echo "selected"; ?>"><a href="manageMenue.php"><i
                                 class="fa fa-list-ol"></i>مدیریت منو</a></li>
 
-                <li class="p-2 <?php if ($which == 8) echo "selected"; ?>"><a href="managePapersCategory.php"><i
-                                class="fa fa-list-alt"></i> مدیریت دسته بندی مقالات </a></li>
-                <li class="p-2 <?php if ($which == 9) echo "selected"; ?>"><a href="manageUsersEshterak.php"><i
-                                class="fa fa-file"></i> مدیریت اشتراک عضویت </a></li>
+
+
                 <li class="p-2 <?php if ($which == 10) echo "selected"; ?>"><a href="manageSlider.php"><i
                                 class="fa fa-list-alt"></i> اسلایدر صفحه اصلی </a></li>
                 <li class="p-2 <?php if ($which == 11) echo "selected"; ?>"><a href="manageGrayBox.php"><i
                                 class="fa fa-file"></i> مدیریت مربع‌های طوسی </a></li>
 
-                <li class="p-2 <?php if ($which == 13) echo "selected"; ?>"><a href="allPardakht.php">
-                        <i class="fas fa-hand-holding-usd"></i>تراکنش‌ها </a></li>
+
 
                 <li class="p-2 <?php if ($which == 14) echo "selected"; ?>"><a href="aboutUsSetting.php">
                         <i class="fas fa-cogs"></i>تنظیمات در باره ما </a></li>

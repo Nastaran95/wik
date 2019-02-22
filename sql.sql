@@ -245,3 +245,16 @@ INSERT INTO colors(name,red,green,blue) VALUES ('GrayBoxText','20','10','255');
 INSERT INTO colors(name,red,green,blue) VALUES ('GrayBoxBorder','200','0','0');
 INSERT INTO colors(name,red,green,blue) VALUES ('GrayBoxBackHover','0','200','200');
 INSERT INTO colors(name,red,green,blue) VALUES ('GrayBoxTextHover','200','0','200');
+
+
+DROP table Pages;
+CREATE TABLE Pages(ID int NOT NULL AUTO_INCREMENT,
+                   XMLNAME VARCHAR(300),
+                   name VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci,
+                   link VARCHAR(300) DEFAULT "",
+                   time TIMESTAMP,
+                   realtime VARCHAR(200),
+                   mahbobiat int DEFAULT 0,
+  PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
+
+
