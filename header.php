@@ -7,15 +7,6 @@
  */
 ?>
 
-<?php
-/**
- * Created by PhpStorm.
- * User: Nastaran
- * Date: 8/2/18
- * Time: 7:54 PM
- */
-?>
-
 <div class="header col-lg-12 col-md-12 headerfix hidden-xs hidden-sm hiddenthisxs">
     <div class="headerall">
         <div class="row">
@@ -56,7 +47,7 @@
             <div class="col-md-12 search">
 
                 <div id="sb-search" class="sb-search float-left">
-                    <form class="float-left">
+                    <form method="get" action="/search.php" class="float-left">
                         <input class="sb-search-input" placeholder="جستجو" type="search" value="" name="search" id="search">
                         <button class="sb-search-submit sb-icon-search" type="submit" value=""><i class="fa fa-search"></i></button>
                     </form>

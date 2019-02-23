@@ -257,4 +257,13 @@ CREATE TABLE Pages(ID int NOT NULL AUTO_INCREMENT,
                    mahbobiat int DEFAULT 0,
   PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
 
+DROP table marquees;
+CREATE TABLE marquees(ID int NOT NULL AUTO_INCREMENT,
+                    sentence VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci,
+                    active int DEFAULT 0,
+  red int DEFAULT 0,
+  green int DEFAULT 0,
+  blue int DEFAULT 0,
+  PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
+
 

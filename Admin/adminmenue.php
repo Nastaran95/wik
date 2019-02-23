@@ -133,6 +133,9 @@ if (($_SESSION['typ']>0)) {
                 <li class="p-2 <?php if ($which == 15) echo "selected"; ?>"><a href="contactUsSetting.php">
                         <i class="fas fa-cogs"></i>تنظیمات تماس‌ با ما </a></li>
 
+                <li class="p-2 <?php if ($which == 22) echo "selected"; ?>"><a href="manageMarquees.php">
+                        <i class="fas fa-cogs"></i>تنظیمات جمله در حال حرکت </a></li>
+
 
 
 

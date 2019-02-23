@@ -1,0 +1,57 @@
+
+
+.log_reg_block{
+    /*padding-top: 35px;*/
+    font-size: 18px;
+}
+
+.papers{
+    margin-top: 20px;
+}
+
+.papsub h1{
+    font-size: 20px;
+}
+
+
+.Paperdiv{
+    height: auto;
+    color: black;
+    text-align: justify;
+    margin: 20px 0;
+}
+
+.papname{
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+.nametime{
+    font-size: 12px;
+    color: rgb(87,87,87);
+}
+
+.summ{
+    color: rgb(129,125,124);
+    font-size: 14px;
+
+}
+
+.caption{
+    height: 150px;
+}
+
+
+.fontDiam{
+    font-size: 40px;
+}
+
+@media (max-width: 900px) {
+    .icon img{
+        width: 80%;
+    }
+    .navnavbarlink{
+        font-size: 10px;
+        padding-bottom: 5px;
+    }
+}

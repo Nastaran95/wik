@@ -100,6 +100,19 @@ $str5 = 'rgb('.$r5.','.$g5.','.$b5.')';
             border-color: <?php echo $str3;?>;
             color: <?php echo $str5;?>;
         }
+        <?php
+        $query = "SELECT * FROM marquees where active>0;";
+        $result = $connection->query($query);
+        while ($row = $result->fetch_assoc()) {
+            $cls = 'marQ'.$row['ID'];
+            $rr = $row['red'];
+            $gg = $row['green'];
+            $bb = $row['blue'];
+            $col = 'rgb('.$rr.','.$gg.','.$bb.')';
+            echo ".".$cls."{color:".$col.";} ";
+        }
+
+?>
     </style>
 </head>
 <STYLE>A {text-decoration: none;} </STYLE>
@@ -205,9 +218,42 @@ include 'headerMainpage.php';
                 ?>
             </ul>
         </div>
-<!--        <div class="col-md-12 marQ">-->
-<!--            <marquee>ویکی‌درم</marquee>-->
-<!--        </div>-->
+
+        <?php
+        $query = "SELECT * FROM marquees where active>0;";
+        $result = $connection->query($query);
+        if($result->num_rows>0) {
+            ?>
+            <marquee direction="right" scrollamount="10" bgcolor="#FFD5D5" class="p-2 mt-2" behavior="scroll">
+                <b>
+                    <?php
+
+                    while ($row = $result->fetch_assoc()) {
+                        $sent = $row['sentence'];
+                        $id = $row['ID'];
+                        echo "<b class='marQ".$id."'>".$sent."</b>"; ?>
+                        <span></span>
+                        <?php
+                    }
+                    ?>
+                </b>
+            </marquee>
+            <?php
+        }
+        ?>
+
+<!--        <table width="100%"  class="mt-2">-->
+<!--            <tbody>-->
+<!--                <tr>-->
+<!--                    <td>-->
+<!--                        -->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--            </tbody>-->
+<!---->
+<!--        </table>-->
+
+
     </div>
 
     <div  id="main" class="home_main text-right row ">
@@ -215,7 +261,7 @@ include 'headerMainpage.php';
         <div class="col-md-12 search">
 
             <div id="sb-search" class="sb-search">
-                <form class="float-left">
+                <form method="get" action="/search.php" class="float-left">
                     <input class="sb-search-input" placeholder="جستجو" type="search" value="" name="search" id="search">
                     <button class="sb-search-submit sb-icon-search" type="submit" value=""><i class="fa fa-search"></i></button>
                 </form>
@@ -264,6 +310,11 @@ include 'headerMainpage.php';
                             ?>
 
                             <div class="offset-1 col-md-5 cat float-right col-12 <?php if($x==1) echo 'cat-on';?>" id="<?php echo $idd;?>">
+                                <span class="checkmark <?php if($x!=1) echo 'd-none';?>">
+                                    <div class="checkmark_circle"></div>
+                                    <div class="checkmark_stem"></div>
+                                    <div class="checkmark_kick"></div>
+                                </span>
                                 <?php echo $name; ?>
                                 <span class="float-left">
                                     <?php
@@ -279,6 +330,11 @@ include 'headerMainpage.php';
                         ?>
 
                         <div class="offset-1 col-md-5 cat float-right col-12 " id="cat0">
+                            <span class="checkmark d-none">
+                                    <div class="checkmark_circle"></div>
+                                    <div class="checkmark_stem"></div>
+                                    <div class="checkmark_kick"></div>
+                                </span>
                             همه دسته‌ها
                             <span class="float-left">
                                 <?php
@@ -301,9 +357,19 @@ include 'headerMainpage.php';
                     </div>
                     <div class="col-md-11 float-left">
                         <div class="offset-1 col-md-5 srt float-right text-center col-12 " id="srt1">
+                            <span class="checkmark d-none">
+                                    <div class="checkmark_circle"></div>
+                                    <div class="checkmark_stem"></div>
+                                    <div class="checkmark_kick"></div>
+                                </span>
                             محبوب‌ترین
                         </div>
                         <div class="offset-1 col-md-5 srt float-right text-center srt-on col-12 " id="srt2">
+                            <span class="checkmark ">
+                                    <div class="checkmark_circle"></div>
+                                    <div class="checkmark_stem"></div>
+                                    <div class="checkmark_kick"></div>
+                                </span>
                             جدیدترین
                         </div>
                     </div>
@@ -317,9 +383,9 @@ include 'headerMainpage.php';
 
                 <div class="col-md-12 float-left ">
                     <div class="col-md-11 float-left">
-                        <h1> <span class="fontDiam"> &#9830; </span>
+                        <h2> <span class="fontDiam"> &#9830; </span>
                             مقالات
-                        </h1>
+                        </h2>
                     </div>
 
                     <div class="hrline float-left"></div>

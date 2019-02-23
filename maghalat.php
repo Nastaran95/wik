@@ -91,6 +91,11 @@ include 'header.php';
                             ?>
 
                             <div class="col-md-12 cat float-right col-12 cat-on" id="<?php echo $idd;?>">
+                                <span class="checkmark ">
+                                    <div class="checkmark_circle"></div>
+                                    <div class="checkmark_stem"></div>
+                                    <div class="checkmark_kick"></div>
+                                </span>
                                 <?php echo $name; ?>
                                 <span class="float-left">
                                     <?php
@@ -106,6 +111,11 @@ include 'header.php';
                         ?>
 
                         <div class="col-md-12 cat float-right col-12 cat-on" id="cat0">
+                            <span class="checkmark ">
+                                <div class="checkmark_circle"></div>
+                                <div class="checkmark_stem"></div>
+                                <div class="checkmark_kick"></div>
+                            </span>
                             همه دسته‌ها
                             <span class="float-left">
                                 <?php
@@ -128,9 +138,19 @@ include 'header.php';
                     </div>
                     <div class="col-md-11 float-left">
                         <div class="col-md-12 srt float-right text-center col-12 " id="srt1">
+                            <span class="checkmark d-none">
+    <div class="checkmark_circle"></div>
+    <div class="checkmark_stem"></div>
+    <div class="checkmark_kick"></div>
+</span>
                             محبوب‌ترین
                         </div>
                         <div class="col-md-12 srt float-right text-center srt-on col-12 " id="srt2">
+                            <span class="checkmark ">
+    <div class="checkmark_circle"></div>
+    <div class="checkmark_stem"></div>
+    <div class="checkmark_kick"></div>
+</span>
                             جدیدترین
                         </div>
                     </div>

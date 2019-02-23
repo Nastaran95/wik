@@ -521,6 +521,58 @@ function myFunction7() {
         "                            </form>";
 }
 
+function myFunction8() {
+    x++;
+    y++;
+    var table = document.getElementById("menuTable");
+    var row = table.insertRow(y);
+    row.innerHTML = "<form action=\"manageMarquees.php?request=-1\" method=\"post\"  class=\"form-row mt-5\" id=\""+x+"\">\n" +
+        "                            <tr class=\""+x+"\">\n" +
+        "                            <td  style=\"width: 55%;\">\n" +
+        "                                <div dir=\"rtl\" >\n" +
+        "                                    <input type=\"text\" maxlength=\"100\" class=\"form-control w-100\"\n" +
+        "                                            name=\"name\"  form=\""+x+"\">\n" +
+        "                                </div>\n" +
+        "                            </td>\n" +
+        "                            <td style=\"width: 10%;\">\n" +
+        "                                <div class=\"form-check-inline\">\n" +
+        "                                    <label class=\"form-check-label\">\n" +
+        "                                        <input type=\"radio\" class=\"form-check-input\" name=\"status\" value=\"0\" checked form=\""+x+"\">غیر فعال\n" +
+        "                                    </label>\n" +
+        "                                </div>\n" +
+        "                                <div class=\"form-check-inline\">\n" +
+        "                                    <label class=\"form-check-label\">\n" +
+        "                                        <input type=\"radio\" class=\"form-check-input\" name=\"status\" value=\"1\" form=\""+x+"\">فعال\n" +
+        "                                    </label>\n" +
+        "                                </div>\n" +
+        "                            </td>\n" +
+        "<td  style=\"width: 10%;\">\n" +
+        "                                    <div dir=\"rtl\" >\n" +
+        "                                        <input type=\"number\" class=\"form-control w-100 text-danger\"\n" +
+        "                                               name=\"red\" value=\"0\" form=\""+x+"\">\n" +
+        "                                    </div>\n" +
+        "                                </td>\n" +
+        "                                <td  style=\"width: 10%;\">\n" +
+        "                                    <div dir=\"rtl\" >\n" +
+        "                                        <input type=\"number\" class=\"form-control w-100 text-success\"\n" +
+        "                                               name=\"green\" value=\"0\" form=\""+x+"\">\n" +
+        "                                    </div>\n" +
+        "                                </td>\n" +
+        "                                <td  style=\"width: 10%;\">\n" +
+        "                                    <div dir=\"rtl\" >\n" +
+        "                                        <input type=\"number\" class=\"form-control w-100 text-primary\"\n" +
+        "                                               name=\"blue\" value=\"0\" form=\""+x+"\">\n" +
+        "                                    </div>\n" +
+        "                                </td>"+
+        "                            <td style=\"width: 5%;\">\n" +
+        "                                <div class=\"m-auto\">\n" +
+        "                                    <button type=\"submit\" class=\"btn btn-default \" onclick=\"return confirming3();\" form=\""+x+"\" >ذخیره</button>\n" +
+        "                                </div>\n" +
+        "                            </td>\n" +
+        "                            </tr>\n" +
+        "                        </form>";
+}
+
 
 function confirming() {
     return confirm('آیا از حذف این مورد مطمعن هستید؟(حذف این مورد غیر قابل بازگشت است)');
@@ -528,6 +580,10 @@ function confirming() {
 
 function confirming2() {
     return confirm('آیا از درست بودن موارد لینک و نام و وضعیت این سطر اطمینان دارید؟');
+}
+
+function confirming3() {
+    return confirm('آیا از درست بودن موارد جمله و وضعیت این سطر اطمینان دارید؟');
 }
 
 function makeid() {

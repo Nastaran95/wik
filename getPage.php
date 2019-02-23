@@ -15,6 +15,11 @@ $typ = $_GET['typ'];
 
 if ($typ==1){
     $cat = $_GET['cat'];
+    if(isset($_GET['sort']) && $_GET['sort']==1)
+        $srt = 'mahbobiat';
+    else
+        $srt = 'realtime';
+
     if ($page==-1)
         $page = 1;
 //    $query = "SELECT * FROM Paper WHERE (stat>0 and dastebandi in (".$cat.") ) ORDER by realtime DESC " ;
@@ -26,7 +31,7 @@ if ($typ==1){
 
     $a = ($page-1)*7;
 //    $query = "SELECT * FROM Paper WHERE (stat>0 and dastebandi in (".$cat.") )  ORDER by realtime DESC LIMIT $a , 7;";
-    $query = "SELECT Paper.name as name1,Paper.writerID,Paper.realtime,Paper.post_name,Paper.Mokhtasar,Paper.image,users.name as name2 FROM Paper INNER JOIN users on Paper.writerID = users.mobile WHERE (Paper.stat>0 AND users.eshterakID!=4 AND dastebandi in (".$cat.")) ORDER by Paper.realtime DESC  LIMIT $a , 7;";
+    $query = "SELECT Paper.name as name1,Paper.writerID,Paper.realtime,Paper.post_name,Paper.Mokhtasar,Paper.image,users.name as name2 FROM Paper INNER JOIN users on Paper.writerID = users.mobile WHERE (Paper.stat>0 AND users.eshterakID!=4 AND dastebandi in (".$cat.")) ORDER by Paper.".$srt." DESC  LIMIT $a , 7;";
 
     $result = $connection->query($query);
 
