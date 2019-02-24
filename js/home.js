@@ -70,11 +70,11 @@ $(document).ready(function () {
             $("#srt1").addClass('srt-on');
             $("#srt2").removeClass('srt-on');
 
-            $("#srt1 .checkmark").addClass('d-inline-block');
-            $("#srt2 .checkmark").removeClass('d-inline-block');
+            $("#srt1 .checkmarkk").addClass('d-inline-block');
+            $("#srt2 .checkmarkk").removeClass('d-inline-block');
 
-            $("#srt2 .checkmark").addClass('d-none');
-            $("#srt1 .checkmark").removeClass('d-none');
+            $("#srt2 .checkmarkk").addClass('d-none');
+            $("#srt1 .checkmarkk").removeClass('d-none');
             srt = 1;
             var category = cat.join();
             $.get("/getPage.php", {page:1 , typ:1 , cat :category ,sort:srt }, function (res) {
@@ -84,11 +84,11 @@ $(document).ready(function () {
             $("#srt2").addClass('srt-on');
             $("#srt1").removeClass('srt-on');
 
-            $("#srt2 .checkmark").addClass('d-inline-block');
-            $("#srt1 .checkmark").removeClass('d-inline-block');
+            $("#srt2 .checkmarkk").addClass('d-inline-block');
+            $("#srt1 .checkmarkk").removeClass('d-inline-block');
 
-            $("#srt1 .checkmark").addClass('d-none');
-            $("#srt2 .checkmark").removeClass('d-none');
+            $("#srt1 .checkmarkk").addClass('d-none');
+            $("#srt2 .checkmarkk").removeClass('d-none');
             srt = 0;
             var category = cat.join();
             $.get("/getPage.php", {page:1 , typ:1 , cat :category ,sort:srt }, function (res) {
@@ -97,10 +97,19 @@ $(document).ready(function () {
         }
     });
 
+    $(document).on('click touchstart',".check",function (event) {
+        // alert('yes');
+        iddd = $(this).attr("id");
+        idd= iddd.substr(5);
+        sel = '#'+idd;
+        $(sel).click();
+
+    });
+
     $(document).on('click touchstart',".cat",function (event) {
         iddd = event.target.id;
         idd= iddd.substr(3);
-        sel = '#cat'+idd+' .checkmark';
+        sel = '#cat'+idd+' .checkmarkk';
         el=event.target.classList;
         if(el.contains('cat-on')){
             $(event.target).removeClass('cat-on');
@@ -110,11 +119,11 @@ $(document).ready(function () {
                 $('.cat').removeClass('cat-on');
                 $('#cat1').addClass('cat-on');
 
-                $('.cat .checkmark').removeClass('d-inline-block');
-                $('#cat1 .checkmark').addClass('d-inline-block');
+                $('.cat .checkmarkk').removeClass('d-inline-block');
+                $('#cat1 .checkmarkk').addClass('d-inline-block');
 
-                $('.cat .checkmark').addClass('d-none');
-                $('#cat1 .checkmark').removeClass('d-none');
+                $('.cat .checkmarkk').addClass('d-none');
+                $('#cat1 .checkmarkk').removeClass('d-none');
                 cat = [1];
             }
             else {
@@ -126,8 +135,8 @@ $(document).ready(function () {
             }
             if(cat.length==0){
                 $('#cat1').addClass('cat-on');
-                $('#cat1 .checkmark').addClass('d-inline-block');
-                $('#cat1 .checkmark').removeClass('d-none');
+                $('#cat1 .checkmarkk').addClass('d-inline-block');
+                $('#cat1 .checkmarkk').removeClass('d-none');
                 cat = [1];
             }
             var category = cat.join();
@@ -142,8 +151,8 @@ $(document).ready(function () {
             $(sel).addClass('d-inline-block');
             if(event.target.id=='cat0'){
                 $('.cat').addClass('cat-on');
-                $('.cat .checkmark').addClass('d-inline-block');
-                $('.cat .checkmark').removeClass('d-none');
+                $('.cat .checkmarkk').addClass('d-inline-block');
+                $('.cat .checkmarkk').removeClass('d-none');
                 cat = [1,2,3,4,5,6,7,8,9,10,11];
             }
             else

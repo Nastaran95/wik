@@ -307,13 +307,12 @@ include 'headerMainpage.php';
                             $name = $row['name'];
                             $x = $x+1;
                             $idd = 'cat'.$id;
+                            $idd2 = 'checkcat'.$id;
                             ?>
 
                             <div class="offset-1 col-md-5 cat float-right col-12 <?php if($x==1) echo 'cat-on';?>" id="<?php echo $idd;?>">
-                                <span class="checkmark <?php if($x!=1) echo 'd-none';?>">
-                                    <div class="checkmark_circle"></div>
-                                    <div class="checkmark_stem"></div>
-                                    <div class="checkmark_kick"></div>
+                                <span class="fa-stack check checkmarkk <?php if($x!=1) echo 'd-none';?>" id="<?php echo $idd2;?>">
+                                    <i class="far fa-check-square fa-stack-0x fa-inverse bg-success"></i>
                                 </span>
                                 <?php echo $name; ?>
                                 <span class="float-left">
@@ -330,11 +329,9 @@ include 'headerMainpage.php';
                         ?>
 
                         <div class="offset-1 col-md-5 cat float-right col-12 " id="cat0">
-                            <span class="checkmark d-none">
-                                    <div class="checkmark_circle"></div>
-                                    <div class="checkmark_stem"></div>
-                                    <div class="checkmark_kick"></div>
-                                </span>
+                            <span class="fa-stack check checkmarkk d-none" id="checkcat0">
+                                <i class="far fa-check-square fa-stack-0x fa-inverse bg-success"></i>
+                            </span>
                             همه دسته‌ها
                             <span class="float-left">
                                 <?php
@@ -357,19 +354,15 @@ include 'headerMainpage.php';
                     </div>
                     <div class="col-md-11 float-left">
                         <div class="offset-1 col-md-5 srt float-right text-center col-12 " id="srt1">
-                            <span class="checkmark d-none">
-                                    <div class="checkmark_circle"></div>
-                                    <div class="checkmark_stem"></div>
-                                    <div class="checkmark_kick"></div>
-                                </span>
+                            <span class="fa-stack check checkmarkk  d-none" id="checksrt1">
+                                <i class="far fa-check-square fa-stack-0x fa-inverse bg-success"></i>
+                            </span>
                             محبوب‌ترین
                         </div>
                         <div class="offset-1 col-md-5 srt float-right text-center srt-on col-12 " id="srt2">
-                            <span class="checkmark ">
-                                    <div class="checkmark_circle"></div>
-                                    <div class="checkmark_stem"></div>
-                                    <div class="checkmark_kick"></div>
-                                </span>
+                            <span class="fa-stack check checkmarkk" id="checksrt2">
+                                <i class="far fa-check-square fa-stack-0x fa-inverse bg-success"></i>
+                            </span>
                             جدیدترین
                         </div>
                     </div>

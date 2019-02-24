@@ -130,6 +130,7 @@ if(isset($_GET) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERV
         echo '<table class="table user-list">
                                 <thead>
                                 <tr>
+                                    <th><span>نام کاربر</span></th>
                                     <th><span>شماره موبایل کاربر</span></th>
                                     <th><span>نوع بسته</span></th>
                                     <th><span>مبلغ(تومان)</span></th>
@@ -150,10 +151,24 @@ if(isset($_GET) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERV
         echo "<script>alert('".$eshterak."')</script>";
 
     while($row = $results->fetch_assoc()){ //fetch values
+        $writerID = $row['mobile'];
+        $q = "SELECT * FROM users WHERE mobile=".$writerID.";";
+        $res = $connection->query($q);
+        if ($res->num_rows > 0) {
+            $rw = mysqli_fetch_assoc($res);
+            $writer = $rw['name'];
+        }
+        else
+            $writer = 'ناشناس';
+
+
 //echo $row['topic'];
         echo '<tr>';
 //        if ($type==1){
-
+            echo "   
+                                        <td style=\"width: 10%;\">                                                                                                               
+                                            <span>".$writer."</span>
+                                        </td>";
             echo "   
                                     <td style=\"width: 10%;\">                                                                                                               
                                         <span>".$row['mobile']."</span>

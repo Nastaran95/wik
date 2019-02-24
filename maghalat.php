@@ -88,13 +88,12 @@ include 'header.php';
                             $name = $row['name'];
                             $x = $x+1;
                             $idd = 'cat'.$id;
+                            $idd2 = 'checkcat'.$id;
                             ?>
 
                             <div class="col-md-12 cat float-right col-12 cat-on" id="<?php echo $idd;?>">
-                                <span class="checkmark ">
-                                    <div class="checkmark_circle"></div>
-                                    <div class="checkmark_stem"></div>
-                                    <div class="checkmark_kick"></div>
+                                <span class="fa-stack check checkmarkk" id="<?php echo $idd2;?>">
+                                    <i class="far fa-check-square fa-stack-0x fa-inverse bg-success"></i>
                                 </span>
                                 <?php echo $name; ?>
                                 <span class="float-left">
@@ -111,10 +110,8 @@ include 'header.php';
                         ?>
 
                         <div class="col-md-12 cat float-right col-12 cat-on" id="cat0">
-                            <span class="checkmark ">
-                                <div class="checkmark_circle"></div>
-                                <div class="checkmark_stem"></div>
-                                <div class="checkmark_kick"></div>
+                            <span class="fa-stack check checkmarkk" id="checkcat0">
+                                <i class="far fa-check-square fa-stack-0x fa-inverse bg-success"></i>
                             </span>
                             همه دسته‌ها
                             <span class="float-left">
@@ -138,19 +135,15 @@ include 'header.php';
                     </div>
                     <div class="col-md-11 float-left">
                         <div class="col-md-12 srt float-right text-center col-12 " id="srt1">
-                            <span class="checkmark d-none">
-    <div class="checkmark_circle"></div>
-    <div class="checkmark_stem"></div>
-    <div class="checkmark_kick"></div>
-</span>
+                            <span class="fa-stack check checkmarkk  d-none" id="checksrt1">
+                                <i class="far fa-check-square fa-stack-0x fa-inverse bg-success"></i>
+                            </span>
                             محبوب‌ترین
                         </div>
                         <div class="col-md-12 srt float-right text-center srt-on col-12 " id="srt2">
-                            <span class="checkmark ">
-    <div class="checkmark_circle"></div>
-    <div class="checkmark_stem"></div>
-    <div class="checkmark_kick"></div>
-</span>
+                            <span class="fa-stack check checkmarkk" id="checksrt2">
+                                <i class="far fa-check-square fa-stack-0x fa-inverse bg-success"></i>
+                            </span>
                             جدیدترین
                         </div>
                     </div>

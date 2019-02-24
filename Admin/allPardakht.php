@@ -53,7 +53,7 @@ if (($_SESSION['typ']>0)) {
             <table class="table user-list " id="menuTable">
                 <thead>
                 <tr>
-
+                    <th><span>نام کاربر</span></th>
                     <th><span>شماره موبایل کاربر</span></th>
                     <th><span>نوع بسته</span></th>
                     <th><span>مبلغ(تومان)</span></th>
@@ -81,11 +81,22 @@ if (($_SESSION['typ']>0)) {
                 $result = $connection->query($query);
                 echo "<script>x=0; y =0;</script>";
                 while ($row=$result->fetch_assoc()) {
-                    $name = $row['name'];
-                    $Mokhtasar = $row['Mokhtasar'];
-                    $id = $row['ID'];
-                    $link = $row['link'];
-                    $isActive = $row['active'];
+
+
+                    $writerID = $row['mobile'];
+                    $q = "SELECT * FROM users WHERE mobile=".$writerID.";";
+                    $res = $connection->query($q);
+                    if ($res->num_rows > 0) {
+                        $rw = mysqli_fetch_assoc($res);
+                        $writer = $rw['name'];
+                    }
+                    else
+                        $writer = 'ناشناس';
+
+                    echo "   
+                                        <td style=\"width: 10%;\">                                                                                                               
+                                            <span>".$writer."</span>
+                                        </td>";
                     echo "   
                                     <td style=\"width: 10%;\">                                                                                                               
                                         <span>".$row['mobile']."</span>
