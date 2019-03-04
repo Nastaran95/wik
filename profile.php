@@ -44,8 +44,6 @@ if (file_exists($productXMLNAME)) {
     <script src="/js/bootstrap.js" ></script>
     <link rel="stylesheet" href="/css/global.css"/>
     <link rel="stylesheet" href="/css/profile.css"/>
-    <link rel="canonical" href="https://www.wikiderm.ir/">
-    <link rel="alternate" href="https://www.wikiderm.ir/" hreflang="fa-IR" />
     <link href="/css/font-awesome/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <script src="/js/modernizr.custom.js"></script>
