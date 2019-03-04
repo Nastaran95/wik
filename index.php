@@ -89,6 +89,7 @@ $str5 = 'rgb('.$r5.','.$g5.','.$b5.')';
     <link href="/css/font-awesome/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <script src="/js/modernizr.custom.js"></script>
+    <meta name="enamad" content="385671"/>
     <style>
         .grayBox{
             background-color: <?php echo $str1;?>;
@@ -280,8 +281,14 @@ include 'headerMainpage.php';
                     $act = $row['active'];
                     if($act>0) {
                         ?>
-                        <a href="<?php echo $link?>">
-                            <div class="col-md-11 grayBox col-10"><?php echo $name;?></div>
+                        <a href="<?php echo $link?>" >
+                            <div class="row">
+                                <div class="col-md-11 grayBox col-10 d-table">
+                                    <div class=" d-table-cell align-middle">
+                                        <?php echo $name;?>
+                                    </div>
+                                </div>
+                            </div>
                         </a>
                         <?php
                     }
@@ -479,7 +486,7 @@ include 'headerMainpage.php';
                 </div>
             </div>
 
-            <div class="leftDiv col-md-3 col-12">
+            <div class="leftDiv col-12">
                 <div class="col-md-12 text-center addSub float-left">
                     <h3>
                         تبلیغات

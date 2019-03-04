@@ -77,7 +77,7 @@ if ($_SESSION['typ']>8) {
     if ((isset($_POST['editor1'])) && (isset($_POST['subject'])) && (isset($_POST['link'])) && (strlen($_POST['editor1']) > 0) && (strlen($_POST['link']) > 0) && (strlen($_POST['subject']) > 0)) {
         $query = "SELECT * FROM Pages WHERE link='".$_POST['link']."'";
         $result = $connection->query($query);
-        if ($result->num_rows > 0) {
+        if ($result->num_rows > 0 && $product === "all") {
             $row = mysqli_fetch_assoc($result);
             echo "<script>alert('لینک وارد شده تکراری است، لطفا مجددا تلاش کنید.');</script>";
             $titleshould = $_POST['subject'];
@@ -98,7 +98,6 @@ if ($_SESSION['typ']>8) {
                 $row = mysqli_fetch_assoc($result);
                 $filename = $row['XMLNAME'];
                 $filenameAdmin = '../' . $row['XMLNAME'];
-                $englishtopic = 'page' . $row['link'];
             }
             $writer->openMemory();
             $writer->setIndent(true);
@@ -163,7 +162,14 @@ if ($_SESSION['typ']>8) {
                 echo '<META HTTP-EQUIV="Refresh" Content="0; URL=allPages.php">';
             }
         }
-    } else {
+    } else if ((isset($_POST['editor1'])) || (isset($_POST['subject'])) || (isset($_POST['link']))){
+        $titleshould = $_POST['subject'];
+        $titleshould2 = $_POST['link'];
+        $datashould = $_POST['editor1'];
+        echo "<script>alert('لطفااطلاعات خواسته شده را کامل کنید.');</script>";
+        $setMark = 1;
+    }
+    else {
 
         $movafagh = '';
 //        $titleshould = $_POST['subject'];

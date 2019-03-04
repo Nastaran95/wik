@@ -491,41 +491,43 @@ else if(isset($_GET['request']) && $_GET['request']=='buyEshterak') {
             echo '<script>alert(' . $str . ')</script>';
         }
     }
-    else if ($id==1){
+    else {
+        $str = 'خطا: ' . $result->Status . 'لطفا دوباره تلاش کنید.';
+        echo '<script>alert(' . $str . ')</script>';
 
-        date_default_timezone_set("Iran");
-        $DATE = date('Y-m-d H:i:s');
-        list($date, $time) = explode(" ", $DATE);
-        list($year, $month, $day) = explode("-", $date);
-        list($jyear, $jmonth, $jday) = gregorian_to_jalali($year, $month, $day);
-        if (strlen($jmonth) == 1) {
-            $jmonth = "0" . $jmonth;
-        }
-        if (strlen($jday) == 1) {
-            $jday = "0" . $jday;
-        }
-        $start = $jyear . '/' . $jmonth . '/' . $jday . ' ' . $time;
-
-
-        date_default_timezone_set("Iran");
-        $str = "+".$t." days";
-        $DATE2 = date('Y-m-d H:i:s' , strtotime($str));
-        list($date, $time) = explode(" ", $DATE2);
-        list($year, $month, $day) = explode("-", $date);
-        list($jyear, $jmonth, $jday) = gregorian_to_jalali($year, $month, $day);
-        if (strlen($jmonth) == 1) {
-            $jmonth = "0" . $jmonth;
-        }
-        if (strlen($jday) == 1) {
-            $jday = "0" . $jday;
-        }
-        $modified_time = $jyear . '/' . $jmonth . '/' . $jday . ' ' . $time;
-        $end = $modified_time;
-
-        $stmt = $connection->prepare("UPDATE users SET eshterakID=? , startTime=? , endTime=?,useFreeEshterak=1 WHERE (mobile=?)");
-        $stmt->bind_param("ssss", $id,$start, $end,$_SESSION["mobile"] );
-        $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
-        $stmt->close();
+//        date_default_timezone_set("Iran");
+//        $DATE = date('Y-m-d H:i:s');
+//        list($date, $time) = explode(" ", $DATE);
+//        list($year, $month, $day) = explode("-", $date);
+//        list($jyear, $jmonth, $jday) = gregorian_to_jalali($year, $month, $day);
+//        if (strlen($jmonth) == 1) {
+//            $jmonth = "0" . $jmonth;
+//        }
+//        if (strlen($jday) == 1) {
+//            $jday = "0" . $jday;
+//        }
+//        $start = $jyear . '/' . $jmonth . '/' . $jday . ' ' . $time;
+//
+//
+//        date_default_timezone_set("Iran");
+//        $str = "+".$t." days";
+//        $DATE2 = date('Y-m-d H:i:s' , strtotime($str));
+//        list($date, $time) = explode(" ", $DATE2);
+//        list($year, $month, $day) = explode("-", $date);
+//        list($jyear, $jmonth, $jday) = gregorian_to_jalali($year, $month, $day);
+//        if (strlen($jmonth) == 1) {
+//            $jmonth = "0" . $jmonth;
+//        }
+//        if (strlen($jday) == 1) {
+//            $jday = "0" . $jday;
+//        }
+//        $modified_time = $jyear . '/' . $jmonth . '/' . $jday . ' ' . $time;
+//        $end = $modified_time;
+//
+//        $stmt = $connection->prepare("UPDATE users SET eshterakID=? , startTime=? , endTime=?,useFreeEshterak=1 WHERE (mobile=?)");
+//        $stmt->bind_param("ssss", $id,$start, $end,$_SESSION["mobile"] );
+//        $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
+//        $stmt->close();
     }
     $tab=5;
 
@@ -989,7 +991,7 @@ include 'header.php';
                         }
                         else{?>
                             <div class="m-5">
-                                در حال حاضر پستی از شما وجود ندارد. برای ارسال پست به تب آخر در قسمت پروفایل کاربری مراجعه کنید.
+                                در حال حاضر پستی از شما وجود ندارد. برای ارسال پست به تب پست جدید در قسمت پروفایل کاربری مراجعه کنید.
                             </div>
                         <?php
                         }
@@ -1004,13 +1006,13 @@ include 'header.php';
                              برای ارسال پست باید از تب مدیریت اشتراک، بسته مورد نظر خود را فعال کنید.
                             </div>
                             <?php
-                            if($useFree!=1){
-                                ?>
-                                <div class="p-2 text-danger text-center col-md-12">
-                                   شما برای بار اول می‌توانید از بسته دو ماهه رایگان استفاده کنید. برای فعال سازی به تب مدیریت اشتراک مراجعه کنید.
-                                </div>
-                                <?php
-                            }
+//                            if($useFree!=1){
+//                                ?>
+<!--                                <div class="p-2 text-danger text-center col-md-12">-->
+<!--                                   شما برای بار اول می‌توانید از بسته دو ماهه رایگان استفاده کنید. برای فعال سازی به تب مدیریت اشتراک مراجعه کنید.-->
+<!--                                </div>-->
+<!--                                --><?php
+//                            }
                         }else {
                             ?>
 
@@ -1128,7 +1130,7 @@ include 'header.php';
                                 $eshtName = 'بسته اشتراک '.$row['name'];
                                 $qeimat = $row['qeimat'].' تومان';
                                 $id = $row['ID'];
-                                if($id!=1 || $useFree!=1 ) {
+//                                if($id!=1 || $useFree!=1 ) {
                                     ?>
                                     <div class="col-md-5 col-10 mb-4 mr-auto ml-auto">
                                         <div class="col-md-12 text-center bg-dark text-light p-2"><?php echo $eshtName; ?></div>
@@ -1138,7 +1140,7 @@ include 'header.php';
                                            class="col-md-12 text-center  btn btn-outline-success  p-2">خرید</a>
                                     </div>
                                     <?php
-                                }
+//                                }
                             }
                             ?>
                         </div>

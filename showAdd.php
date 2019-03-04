@@ -5,7 +5,7 @@
  * Date: 2/1/19
  * Time: 5:07 AM
  */
-$query = "SELECT * FROM advertisement WHERE (active>0 and stat>0);";
+$query = "SELECT * FROM advertisement WHERE (active>0 and stat>0) ORDER by ID DESC ;";
 $result = $connection->query($query);
 $x = 0;
 while ($row=$result->fetch_assoc()) {
@@ -39,7 +39,7 @@ while ($row=$result->fetch_assoc()) {
 
         <div class="col-md-12 add">
             <a href="/addPage/<?php echo $id; ?>" title="<?php echo $name; ?>">
-                <img src="/<?php echo $image; ?>" width="100%" height="150px" alt="<?php echo $name; ?>">
+                <img src="/<?php echo $image; ?>" width="100%"  alt="<?php echo $name; ?>">
             </a>
         </div>
         <?php

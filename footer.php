@@ -19,9 +19,9 @@
         <img src="/images/wikiderm-logo-180-544-invers--300x100.png" class="d-block mx-auto">
     </div>
     <div class="footInfo mt-4 mb-4 mr-auto ml-auto">
-        <p class="text-center footCol">
-            info@wikiderm.ir
-        </p>
+<!--        <p class="text-center footCol">-->
+<!--            info@wikiderm.ir-->
+<!--        </p>-->
     </div>
 
 </div>

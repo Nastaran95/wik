@@ -115,9 +115,9 @@ if ($_SESSION['typ'] >0) {
         $end = $modified_time;
 
         $use = 0;
-        if ($status==1){
-            $use = 1;
-        }
+//        if ($status==1){
+//            $use = 1;
+//        }
 
 
         $query = "update users set eshterakID=".$status." ,startTime = '".$start."' , endTime = '".$end."'  , useFreeEshterak = ".$use." WHERE ID = ".$product;

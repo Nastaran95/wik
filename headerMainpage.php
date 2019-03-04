@@ -178,6 +178,72 @@
             }
             ?>
         </div>
+    </div>
+    <div class="cover ">
+
+        <div id="myCarousel2" class="carousel slide" data-ride="carousel">
+
+            <!-- Indicators -->
+            <ul class="carousel-indicators">
+
+                <?php
+                $query2 = "SELECT * FROM slider ;" ;
+                $result2 = $connection->query($query2);
+                $num = $result2->num_rows;
+                $x = 0;
+                while ($row=$result2->fetch_assoc()){
+                    $act = $row['active'];
+                    if($act>0) {
+                        ?>
+                        <li data-target="#myCarousel2" data-slide-to="<?php echo $x; ?>"
+                            class="<?php if ($x == 0) echo 'active'; ?>"></li>
+                        <?php
+                        $x = $x + 1;
+                    }
+                }
+                ?>
+            </ul>
+
+
+            <!-- The slideshow -->
+            <div class="carousel-inner">
+                <?php
+                $query = "SELECT * FROM slider;";
+                $result = $connection->query($query);
+                $x = 0 ;
+                while ($row=$result->fetch_assoc()) {
+                    $name = $row['headerName'];
+                    $mokhtasar = $row['Mokhtasar'];
+                    $img = $row['image'];
+                    $alt = $row['alt'];
+                    $act = $row['active'];
+                    if($act>0) {
+                        ?>
+                        <div class="carousel-item <?php if ($x == 0) echo 'active'; ?>">
+                            <img src="<?php echo $img; ?>" alt="<?php echo $alt; ?>" width="100%">
+                            <div class="carousel-caption">
+                                <h3><?php echo $name; ?></h3>
+                                <p><?php echo $mokhtasar; ?></p>
+                            </div>
+                        </div>
+                        <?php
+                        $x = $x + 1;
+                    }
+                }
+                ?>
+
+            </div>
+
+
+            <!-- Left and right controls -->
+            <a class="carousel-control-prev" href="#myCarousel2" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel2" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+
+        </div>
 
     </div>
 </div>

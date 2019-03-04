@@ -77,13 +77,14 @@
     margin: auto;
     margin-top: 7%;
     min-height: 80px;
-    line-height: 80px;
+    /*line-height: 80px;*/
     /*background-color: rgb(233,231,232);*/
     border-radius: 2px;
     box-shadow: 6px 5px 10px #888888;
     text-align: center;
     font-size: 22px;
     /*color: darkblue;*/
+    font-size: 14px;
 }
 
 .grayBox:hover{
@@ -240,7 +241,6 @@ marquee span {
     /*.header .cover{*/
         /*height: 50vh;*/
     /*}*/
-
 }
 @media (max-width: 900px) {
     .icon img{
@@ -282,7 +282,7 @@ marquee span {
 
 @media (max-width: 992px) {
     .search , .test{
-        top: 0;
+        top: 20px;
         padding: 0;
     }
 }
@@ -293,13 +293,24 @@ marquee span {
         width: 100%;
         padding: 0;
     }
-
 }
 
 
 
 /*mobile*/
-@media (max-width: 768px) {
-
+@media (max-width: 995px) {
+    .carousel-inner > .carousel-item > img,
+    .carousel-inner > .carousel-item > a > img {
+        height: 350px;
+    }
+    .header .cover {
+        top: 54px;
+    }
 }
 
+@media (max-width: 680px) {
+    .carousel-inner > .carousel-item > img,
+    .carousel-inner > .carousel-item > a > img {
+        height: 150px;
+    }
+}
