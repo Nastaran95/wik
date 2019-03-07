@@ -279,7 +279,7 @@ if (isset($_GET['request']) && $_GET['request']=='message') {
                     $Description = 'پرداخت هزینه آگهی'.$baste.' ویکی‌درم'; // Required
 //    $Email = 'UserEmail@Mail.Com'; // Optional
 //                        $Mobile = $write; // Optional
-                    $CallbackURL = 'http://www.wikidermi.com/advertisement.php?request=backZarrin&zarrin='.$insertID; // Required
+                    $CallbackURL = 'http://www.wikiderm.ir/advertisement.php?request=backZarrin&zarrin='.$insertID; // Required
 
                     $client = new SoapClient('https://www.zarinpal.com/pg/services/WebGate/wsdl', ['encoding' => 'UTF-8']);
 
@@ -385,7 +385,7 @@ if (isset($_GET['request']) && $_GET['request']=='message') {
 //    $stmt->bind_param("s",$insertID );
 //    $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
 //    $result = $stmt->get_result();
-    echo '<a href="/index.php">بازگشت به صفحه اصلی </a>';
+    echo '<a href="/">بازگشت به صفحه اصلی </a>';
     die();
 
 }
@@ -529,7 +529,7 @@ if (file_exists($productXMLNAME)) {
             <div class="leftDiv col-md-3 col-12">
                 <div class="col-md-12 text-center addSub float-left">
                     <h3>
-                        تبلیغات
+                        ویکی تبلیغ
                     </h3>
                 </div>
                 <?php

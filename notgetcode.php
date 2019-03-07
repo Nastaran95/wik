@@ -45,7 +45,7 @@ if (isset($payam)) {
                 <div class="leftDiv col-md-3 col-12">
                     <div class="col-md-12 text-center addSub float-left">
                         <h3>
-                            تبلیغات
+                            ویکی تبلیغ
                         </h3>
                     </div>
                     <?php

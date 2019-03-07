@@ -166,12 +166,12 @@ if ((isset($_GET['search']))&&(strlen($_GET['search'])>1)){
                 ?>
                 <div class="col-md-11 float-left text-info">
                     <h2> <span class="fontDiam"> &#9830; </span>
-                        تبلیغات موجود
+                        ویکی تبلیغ موجود
                     </h2>
                 </div>
 
                 <div class="hrline float-left"></div>
-                <div class="col-md-12 text-danger text-center float-right mb-5">تبلیغاتی پیدا نشد.</div>
+                <div class="col-md-12 text-danger text-center float-right mb-5">ویکی تبلیغی پیدا نشد.</div>
                 <?php
                 }
             $x = 0;
@@ -180,7 +180,7 @@ if ((isset($_GET['search']))&&(strlen($_GET['search'])>1)){
                         ?>
                         <div class="col-md-11 float-left text-info">
                             <h2><span class="fontDiam"> &#9830; </span>
-                                تبلیغات موجود
+                                ویکی تبلیغ موجود
                             </h2>
                         </div>
 

@@ -268,6 +268,14 @@ include 'headerMainpage.php';
         </div>
         <div class="col-md-12 test">
             <div class="rightDiv  col-12">
+                <div class="col-md-12 text-center addSub float-left">
+                    <h3>
+                        ویکی تدبیر
+                    </h3>
+                </div>
+                <br/>
+                <br/>
+
                 <?php
                 $query = "SELECT * FROM grayBox;";
                 $result = $connection->query($query);
@@ -298,9 +306,10 @@ include 'headerMainpage.php';
                 <div class="subjects col-md-12 float-left ">
                     <div class="col-md-11 float-left">
                         <h4>
-                            موضوعات
+                            ویکی تحریر
                         </h4>
                     </div>
+                    <div class="hrline float-left"></div>
                     <div class="col-md-11 float-left">
 
                         <?php
@@ -487,7 +496,7 @@ include 'headerMainpage.php';
             <div class="leftDiv col-12">
                 <div class="col-md-12 text-center addSub float-left">
                     <h3>
-                        تبلیغات
+                        ویکی تبلیغ
                     </h3>
                 </div>
 

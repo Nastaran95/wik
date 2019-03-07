@@ -144,7 +144,7 @@ include 'header.php';
                         }
                         if(strlen($link2)>0){
                             ?>
-                            <a class="text-center col-md-12 m-auto d-table" href="<?php echo $link2; ?>" >
+                            <a class="text-center col-md-12 m-auto d-table" href="<?php echo $link2; ?>" target="_blank">
                                 <div class="col-md-6 col-12 btn btn-success">
                                     کلیک کنید
                                 </div>
@@ -165,7 +165,7 @@ include 'header.php';
             <div class="leftDiv col-md-3 col-12">
                 <div class="col-md-12 text-center addSub float-left">
                     <h3>
-                        تبلیغات
+                        ویکی تبلیغ
                     </h3>
                 </div>
                 <?php

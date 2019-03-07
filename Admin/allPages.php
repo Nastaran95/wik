@@ -76,7 +76,7 @@ if (($_SESSION['typ']>0)) {
 
                     echo "<td dir='ltr' >
                                         <span><a href='http://wikiderm.ir/Page/".$row['link']."'>
-                                        http://wikiderm.ir/Page/".$row['link']."
+                                        http://www.wikiderm.ir/Page/".$row['link']."
                                         </a></span>
                                     </td>";
 

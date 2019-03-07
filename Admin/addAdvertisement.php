@@ -215,7 +215,7 @@ if ($_SESSION['typ']>8) {
                 $stmt = $connection->prepare("INSERT INTO advertisement(name, matn, number,link,address, image, startTime, endTime, active, addType, writerID,stat,pardakht)  VALUES (?,?,?,?,?,?,?,?,1,?,?,1,1)");
                 $stmt->bind_param("ssssssssss", $name, $msg,$number,$link,$address, $target_file, $startTime, $endTime, $timeAdd, $write);
             } else {
-                $stmt = $connection->prepare("UPDATE advertisement set name=?, matn=?, number=?,link=?,address=?, image=? , startTime=?,endTime=?,addType=? WHERE (ID=?)");
+                $stmt = $connection->prepare("UPDATE advertisement set name=?, matn=?, number=?,link=?,address=?, image=? , startTime=?,endTime=?,addType=?,active=1 WHERE (ID=?)");
                 $stmt->bind_param("ssssssssss", $name, $msg,$number,$link,$address, $target_file,$startTime,$endTime,$timeAdd, $product);
             }
             $result = $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
