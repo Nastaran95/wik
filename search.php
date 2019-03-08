@@ -73,7 +73,7 @@ if ((isset($_GET['search']))&&(strlen($_GET['search'])>1)){
         <meta http-equiv="content-language" content="fa">
         <meta charset="UTF-8">
         <meta property="og:type" content="website">
-        <meta property="og:url" content="http://www.wikiderm.ir/">
+        <meta property="og:url" content="https://wikiderm.ir/">
         <meta property="og:site_name" content="ویکی‌درم">
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">

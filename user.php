@@ -55,7 +55,7 @@ if (isset($_GET['ID'])) {
     <meta property="og:type" content="website">
     <meta property="og:title" content="<?php echo $SEOTITLE?>">
     <meta property="og:description" content="<?php echo $SEOdescription;?>">
-    <meta property="og:url" content="http://www.wikiderm.ir/">
+    <meta property="og:url" content="https://wikiderm.ir/">
     <meta property="og:site_name" content="ویکی‌درم">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -322,11 +322,11 @@ include 'footer.php';
     {
     "@context":"http://schema.org",
     "@type":"Organization",
-    "url":"http://www.wikiderm.ir/",
+    "url":"https://wikiderm.ir/",
     "sameAs":["https://www.instagram.com/wikiderm/"],
     "@id":"#organization",
     "name":"ویکی‌درم",
-    "logo":"http://www.wikiderm.ir/<?php echo $XMLFile->logo->url;?>"}
+    "logo":"https://wikiderm.ir/<?php echo $XMLFile->logo->url;?>"}
 </script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 </body>

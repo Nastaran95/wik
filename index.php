@@ -73,7 +73,7 @@ $str5 = 'rgb('.$r5.','.$g5.','.$b5.')';
     <meta property="og:type" content="website">
     <meta property="og:title" content="<?php echo $SEOTITLE?>">
     <meta property="og:description" content="<?php echo $SEOdescription;?>">
-    <meta property="og:url" content="http://www.wikiderm.ir/">
+    <meta property="og:url" content="https://wikiderm.ir/">
     <meta property="og:site_name" content="ویکی‌درم">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -84,7 +84,7 @@ $str5 = 'rgb('.$r5.','.$g5.','.$b5.')';
     <script src="/js/home.js" ></script>
     <link rel="stylesheet" href="/css/global.css"/>
     <link rel="stylesheet" href="/css/home.css"/>
-    <link href="/css/font-awesome/font-awesome.min.css" rel="stylesheet" type="text/css">
+<!--    <link href="/css/font-awesome/font-awesome.min.css" rel="stylesheet" type="text/css">-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <script src="/js/modernizr.custom.js"></script>
     <meta name="enamad" content="385671"/>
@@ -223,7 +223,7 @@ include 'headerMainpage.php';
         $result = $connection->query($query);
         if($result->num_rows>0) {
             ?>
-            <marquee direction="right" scrollamount="10" bgcolor="#FFD5D5" class="p-2 mt-2" behavior="scroll">
+            <marquee direction="right" scrollamount="12" bgcolor="#FFD5D5" class="p-2 mt-2 text-indent-<?php echo $result->num_rows;?>" behavior="scroll">
                 <b>
                     <?php
 
@@ -235,24 +235,41 @@ include 'headerMainpage.php';
                         <?php
                     }
                     ?>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </b>
             </marquee>
+<!--            <div id="mmmm">-->
+<!--                <b>-->
+<!--                    --><?php
+//
+//        while ($row = $result->fetch_assoc()) {
+//            $sent = $row['sentence'];
+//            $id = $row['ID'];
+//            echo "<b class='marQ".$id."'>".$sent."</b>"; ?>
+<!--                        <span></span>-->
+<!--                        --><?php
+//        }
+//        ?>
+<!--                </b>-->
+<!--            </div>-->
+<!--            <div class="marqPar">-->
+<!--                <div class="marquee">-->
+<!--                    --><?php
+//                    while ($row = $result->fetch_assoc()) {
+//                        $sent = $row['sentence'];
+//                        $id = $row['ID'];
+//                        echo "<div class='marQ".$id." marqChild'>".$sent."</div>";
+//                    }?>
+<!--                </div>-->
+<!--            </div>-->
+
+
             <?php
         }
         ?>
-
-<!--        <table width="100%"  class="mt-2">-->
-<!--            <tbody>-->
-<!--                <tr>-->
-<!--                    <td>-->
-<!--                        -->
-<!--                    </td>-->
-<!--                </tr>-->
-<!--            </tbody>-->
-<!---->
-<!--        </table>-->
-
-
     </div>
 
     <div  id="main" class="home_main text-right row ">
@@ -525,11 +542,11 @@ include 'footer.php';
     {
     "@context":"http://schema.org",
     "@type":"Organization",
-    "url":"http://www.wikiderm.ir/",
+    "url":"https://wikiderm.ir/",
     "sameAs":["https://www.instagram.com/wikiderm/"],
     "@id":"#organization",
     "name":"ویکی‌درم",
-    "logo":"http://www.wikiderm.ir/<?php echo $XMLFile->logo->url;?>"}
+    "logo":"https://wikiderm.ir/<?php echo $XMLFile->logo->url;?>"}
 </script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 </body>

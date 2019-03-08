@@ -34,7 +34,7 @@ if (file_exists($productXMLNAME)) {
     <meta property="og:type" content="website">
     <meta property="og:title" content="<?php echo $SEOTITLE?>">
     <meta property="og:description" content="<?php echo $SEOdescription;?>">
-    <meta property="og:url" content="http://www.wikiderm.ir/">
+    <meta property="og:url" content="https://wikiderm.ir/">
     <meta property="og:site_name" content="ویکی‌درم">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -279,7 +279,7 @@ if (isset($_GET['request']) && $_GET['request']=='message') {
                     $Description = 'پرداخت هزینه آگهی'.$baste.' ویکی‌درم'; // Required
 //    $Email = 'UserEmail@Mail.Com'; // Optional
 //                        $Mobile = $write; // Optional
-                    $CallbackURL = 'http://www.wikiderm.ir/advertisement.php?request=backZarrin&zarrin='.$insertID; // Required
+                    $CallbackURL = 'https://wikiderm.ir/advertisement.php?request=backZarrin&zarrin='.$insertID; // Required
 
                     $client = new SoapClient('https://www.zarinpal.com/pg/services/WebGate/wsdl', ['encoding' => 'UTF-8']);
 
@@ -591,11 +591,11 @@ function tr_num($str,$mod='en',$mf='٫'){
     {
     "@context":"http://schema.org",
     "@type":"Organization",
-    "url":"http://www.wikiderm.ir/",
+    "url":"https://wikiderm.ir/",
     "sameAs":["https://www.instagram.com/wikiderm/"],
     "@id":"#organization",
     "name":"ویکی‌درم",
-    "logo":"http://www.wikiderm.ir/<?php echo $XMLFile->logo->url;?>"}
+    "logo":"https://wikiderm.ir/<?php echo $XMLFile->logo->url;?>"}
 </script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 </body>

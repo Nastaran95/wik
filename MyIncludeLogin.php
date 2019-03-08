@@ -200,11 +200,11 @@
     {
     "@context":"http://schema.org",
     "@type":"Organization",
-    "url":"http://www.wikiderm.ir/",
+    "url":"https://wikiderm.ir/",
     "sameAs":["https://www.instagram.com/wikiderm/"],
     "@id":"#organization",
     "name":"ویکی‌درم",
-    "logo":"http://www.wikiderm.ir/<?php echo $XMLFile->logo->url;?>"}
+    "logo":"https://wikiderm.ir/<?php echo $XMLFile->logo->url;?>"}
 </script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 </body>

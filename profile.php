@@ -34,7 +34,7 @@ if (file_exists($productXMLNAME)) {
     <meta property="og:type" content="website">
     <meta property="og:title" content="<?php echo $SEOTITLE?>">
     <meta property="og:description" content="<?php echo $SEOdescription;?>">
-    <meta property="og:url" content="http://www.wikiderm.ir/">
+    <meta property="og:url" content="https://wikiderm.ir/">
     <meta property="og:site_name" content="ویکی‌درم">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -464,7 +464,7 @@ else if(isset($_GET['request']) && $_GET['request']=='buyEshterak') {
         $Description = 'خرید بسته اشتراک ' . $name . ' ویکی‌درم'; // Required
 //    $Email = 'UserEmail@Mail.Com'; // Optional
         $Mobile = $_SESSION["mobile"]; // Optional
-        $CallbackURL = 'http://www.wikidermi.com/profile.php?request=backZarrin&zarrin=' . $insertID; // Required
+        $CallbackURL = 'https://wikiderm.ir/profile.php?request=backZarrin&zarrin=' . $insertID; // Required
 
         $client = new SoapClient('https://www.zarinpal.com/pg/services/WebGate/wsdl', ['encoding' => 'UTF-8']);
 
@@ -928,9 +928,9 @@ include 'header.php';
                                                         <div class="col-md-1 col-12" >
                                                             <a href="/profile.php?requestEdit=<?php echo $id;?>" class="edit"><i class="fas fa-edit"></i></a>
                                                         </div>
-                                                        <div class="col-md-1 col-12">
-                                                            <a  href="/profile.php?requestDelete=<?php echo $id;?>" class="delete"><i class="fas fa-trash-alt"></i></a>
-                                                        </div>
+<!--                                                        <div class="col-md-1 col-12">-->
+<!--                                                            <a  href="/profile.php?requestDelete=--><?php //echo $id;?><!--" class="delete"><i class="fas fa-trash-alt"></i></a>-->
+<!--                                                        </div>-->
                                                     </div>
                                                     <div class="col-md-12 summ col-12 ">
                                                         <?php echo $mokhtasar; ?>
@@ -1299,11 +1299,11 @@ function get_error($id){
     {
     "@context":"http://schema.org",
     "@type":"Organization",
-    "url":"http://www.wikiderm.ir/",
+    "url":"https://wikiderm.ir/",
     "sameAs":["https://www.instagram.com/wikiderm/"],
     "@id":"#organization",
     "name":"ویکی‌درم",
-    "logo":"http://www.wikiderm.ir/<?php echo $XMLFile->logo->url;?>"}
+    "logo":"https://wikiderm.ir/<?php echo $XMLFile->logo->url;?>"}
 </script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 

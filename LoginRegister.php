@@ -32,7 +32,7 @@ if (file_exists($productXMLNAME)) {
     <meta property="og:type" content="website">
     <meta property="og:title" content="<?php echo $SEOTITLE?>">
     <meta property="og:description" content="<?php echo $SEOdescription;?>">
-    <meta property="og:url" content="http://www.wikiderm.ir/">
+    <meta property="og:url" content="https://wikiderm.ir/">
     <meta property="og:site_name" content="ویکی‌درم">
 
     <link rel="icon" type="image/x-icon" href="/images/wikiderm-icon--300x300.png" />
