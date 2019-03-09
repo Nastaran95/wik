@@ -217,13 +217,16 @@
                     $img = $row['image'];
                     $alt = $row['alt'];
                     $act = $row['active'];
+                    $link = $row['link'];
                     if($act>0) {
                         ?>
                         <div class="carousel-item <?php if ($x == 0) echo 'active'; ?>">
+                            <a href="<?php echo $link?>" title="<?php echo $name;?>">
                             <img src="<?php echo $img; ?>" alt="<?php echo $alt; ?>" width="100%">
+                            </a>
                             <div class="carousel-caption">
-                                <h3><?php echo $name; ?></h3>
-                                <p><?php echo $mokhtasar; ?></p>
+                            <h3><?php echo $name; ?></h3>
+                            <p><?php echo $mokhtasar; ?></p>
                             </div>
                         </div>
                         <?php

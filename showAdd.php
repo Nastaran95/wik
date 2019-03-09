@@ -5,6 +5,51 @@
  * Date: 2/1/19
  * Time: 5:07 AM
  */
+$query = "SELECT users.name as name,newUsers.name as msg,newUsers.days ,newUsers.ID, newUsers.startTime,users.stat  FROM newUsers INNER JOIN users on newUsers.mobile=users.mobile ;";
+$result = $connection->query($query);
+
+while ($row=$result->fetch_assoc()) {
+    $id = $row['ID'];
+    if($id==1){
+        $days = $row['days'];
+        $msg = $row['msg'];
+    }
+    else if($row['stat']>0) {
+
+        $name = $row['name'];
+        $start = $row['startTime'];
+
+        $welcome = $name.' '.$msg;
+
+        date_default_timezone_set("Iran");
+        $str = $start." + ".$days." days";
+        $end = date('Y-m-d H:i:s' , strtotime($str));
+
+        date_default_timezone_set("Iran");
+        $now = date('Y-m-d H:i:s');
+
+        if ($now < $end) {
+            ?>
+            <div class="col-md-12 welcome text-center bg-info text-light d-table mb-2">
+                <div class=" d-table-cell align-middle">
+                    <?php echo $welcome;?>
+                </div>
+            </div>
+            <?php
+        }
+    }
+}
+
+date_default_timezone_set("Iran");
+$str = " - ".$days." days";
+$date = date('Y-m-d H:i:s' , strtotime($str));
+
+$stmt = $connection->prepare("delete from newUsers WHERE (startTime<? and ID>1)");
+$stmt->bind_param("s", $date);
+$result = $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
+echo $connection->error;
+
+
 $query = "SELECT * FROM advertisement WHERE (active>0 and stat>0) ORDER by ID DESC ;";
 $result = $connection->query($query);
 $x = 0;

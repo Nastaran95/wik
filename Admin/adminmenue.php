@@ -63,6 +63,8 @@ if (($_SESSION['typ']>0)) {
                                                 class="fa fa-file"></i> مدیریت اشتراک عضویت </a></li>
                                 <li class="p-2 <?php if ($which == 13) echo "selected"; ?>"><a href="allPardakht.php">
                                         <i class="fas fa-hand-holding-usd"></i>تراکنش‌ها </a></li>
+                                <li class="p-2 <?php if ($which == 23) echo "selected"; ?>"><a href="welcome.php">
+                                        <i class="fas fa-hand-holding-usd"></i>پیام خوش آمدگویی </a></li>
                             </div>
                         </div>
                     </div>

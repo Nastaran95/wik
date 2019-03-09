@@ -267,3 +267,10 @@ CREATE TABLE marquees(ID int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
 
 
+CREATE TABLE newUsers(ID int NOT NULL AUTO_INCREMENT,
+                   days INT  DEFAULT 1,
+                   mobile VARCHAR(100)  ,
+                   name VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT "",
+                   startTime VARCHAR(200),
+  FOREIGN KEY (mobile) REFERENCES users(mobile),
+  PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;

@@ -162,15 +162,20 @@ include 'headerMainpage.php';
                         $img = $row['image'];
                         $alt = $row['alt'];
                         $act = $row['active'];
+                        $link = $row['link'];
                         if($act>0) {
                             ?>
+
                             <div class="carousel-item <?php if ($x == 0) echo 'active'; ?>">
+                                <a href="<?php echo $link?>" title="<?php echo $name;?>">
                                 <img src="<?php echo $img; ?>" alt="<?php echo $alt; ?>" width="100%">
-                                <div class="carousel-caption">
+                                </a>
+                                    <div class="carousel-caption">
                                     <h3><?php echo $name; ?></h3>
                                     <p><?php echo $mokhtasar; ?></p>
                                 </div>
                             </div>
+
                             <?php
                             $x = $x + 1;
                         }
@@ -304,7 +309,7 @@ include 'headerMainpage.php';
                     $act = $row['active'];
                     if($act>0) {
                         ?>
-                        <a href="<?php echo $link?>" >
+                        <a href="<?php echo $link?>" title="<?php echo $Mokhtasar;?>">
                             <div class="row">
                                 <div class="col-md-11 grayBox col-10 d-table">
                                     <div class=" d-table-cell align-middle">
@@ -388,13 +393,13 @@ include 'headerMainpage.php';
                             <span class="fa-stack check checkmarkk  d-none" id="checksrt1">
                                 <i class="far fa-check-square fa-stack-0x fa-inverse bg-success"></i>
                             </span>
-                            محبوب‌ترین
+                            محبوب‌ترین‌ها
                         </div>
                         <div class="offset-1 col-md-5 srt float-right text-center srt-on col-12 " id="srt2">
                             <span class="fa-stack check checkmarkk" id="checksrt2">
                                 <i class="far fa-check-square fa-stack-0x fa-inverse bg-success"></i>
                             </span>
-                            جدیدترین
+                            جدیدترین‌ها
                         </div>
                     </div>
 

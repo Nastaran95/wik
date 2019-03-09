@@ -149,17 +149,25 @@ if ($_SESSION['typ']>8) {
                     if ($product === "all") {
                         $stmt = $connection->prepare("INSERT INTO users (name,address,mobile,email,categoryID,pass,eshterakID,verified,verificationcode,codetime,attempt,passwordtime,image,realtime,showMobile,stat)  VALUES (?,?,?,?,?,?,4,0,?,CURRENT_TIMESTAMP,1,CURRENT_TIMESTAMP,?,?,?,1)");
                         $stmt->bind_param("ssssssssss", $name, $address, $mobile, $mail, $category, $pass, $verificationcode, $img, $modified_time,$showMobile);
+                        $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
+                        $stmt->close();
+
+                        $stmt2 = $connection->prepare("INSERT INTO newUsers (mobile,startTime)  VALUES (?,?)");
+                        $stmt2->bind_param("ss",  $mobile,$DATE);
+                        $stmt2->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
+                        $stmt2->close();
+
                     } else {
                         $stmt = $connection->prepare("UPDATE users SET name=? ,  stat=1 ,address=? , email=? , categoryID=? , pass=?,showMobile=? WHERE (ID=?)");
                         $stmt->bind_param("sssssss", $name, $address, $mail, $category,$pass,$showMobile, $product);
+                        $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
+                        $stmt->close();
                     }
 
 
     //                $img = 'images/no-photo.png' ;
     //                $stmt  = $connection->prepare("INSERT INTO users (name,address,mobile,email,categoryID,pass,eshterakID,verified,verificationcode,codetime,attempt,passwordtime,image)  VALUES (?,?,?,?,?,?,4,0,?,CURRENT_TIMESTAMP,1,CURRENT_TIMESTAMP,?)");
     //                $stmt->bind_param("ssssssss", $name,$address,$mobile,$mail,$category,$pass,$verificationcode,$img);
-                    $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
-                    $stmt->close();
 
                     if ($product === "all") {
                         $product = $connection->insert_id;

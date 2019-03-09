@@ -198,6 +198,12 @@ if (file_exists($productXMLNAME)) {
                                 $stmt->bind_param("sssssssss", $name, $address, $mobile, $mail, $category, $pass, $verificationcode, $img,$modified_time);
                                 $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
                                 $stmt->close();
+
+                                $stmt2 = $connection->prepare("INSERT INTO newUsers (mobile,startTime)  VALUES (?,?)");
+                                $stmt2->bind_param("ss",  $mobile,$DATE);
+                                $stmt2->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
+                                $stmt2->close();
+
                                 $payam = "<h4>ثبت نام شما با موفقیت انجام شد، برای تکمیل ثبت نام، کد ارسال شده به شماره موبایل خود را در بخش زیر وارد کنید.</h4>";
                                 include 'Verifyregister.php';
                             }

@@ -136,13 +136,13 @@ include 'header.php';
                             <span class="fa-stack check checkmarkk  d-none" id="checksrt1">
                                 <i class="far fa-check-square fa-stack-0x fa-inverse bg-success"></i>
                             </span>
-                            محبوب‌ترین
+                            محبوب‌ترین‌ها
                         </div>
                         <div class="col-md-12 srt float-right text-center srt-on col-12 " id="srt2">
                             <span class="fa-stack check checkmarkk" id="checksrt2">
                                 <i class="far fa-check-square fa-stack-0x fa-inverse bg-success"></i>
                             </span>
-                            جدیدترین
+                            جدیدترین‌ها
                         </div>
                     </div>
                 </div>
