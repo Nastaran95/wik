@@ -85,6 +85,7 @@ while ($row=$result->fetch_assoc()) {
         <div class="col-md-12 add">
             <a href="/addPage/<?php echo $id; ?>" title="<?php echo $name; ?>">
                 <img src="/<?php echo $image; ?>" width="100%"  alt="<?php echo $name; ?>">
+                <div class="text-justify text-center bg-dark text-light small"> <?php echo $name; ?> </div>
             </a>
         </div>
         <?php

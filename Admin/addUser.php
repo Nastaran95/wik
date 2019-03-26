@@ -314,11 +314,11 @@ if ($_SESSION['typ']>8) {
             </div>
             <div class="form-group col-md-10 m-auto text-right">
                 <label for="pass" class="dark_text"><b>کلمه عبور</b></label>
-                <input type="password" maxlength="90" class="form-control" id="pass" placeholder="کلمه عبور" name="pass"  value="<?php echo $pass;?>" >
+                <input type="text" maxlength="90" class="form-control" id="pass" placeholder="کلمه عبور" name="pass"  value="<?php echo $pass;?>" >
             </div>
             <div class="form-group col-md-10 m-auto text-right">
                 <label for="repass" class="dark_text"><b>تایید کلمه عبور</b></label>
-                <input type="password" maxlength="90" class="form-control" id="repass" placeholder="تایید کلمه عبور" name="repass"  value="<?php echo $pass;?>" >
+                <input type="text" maxlength="90" class="form-control" id="repass" placeholder="تایید کلمه عبور" name="repass"  value="<?php echo $pass;?>" >
             </div>
             <div class="form-group col-md-10 m-auto text-right">
                 <label for="category" class="dark_text"><b>دسته‌بندی</b></label>

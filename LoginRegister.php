@@ -50,7 +50,7 @@ if (file_exists($productXMLNAME)) {
 <body dir="rtl">
     <?php
     if (isset($_SESSION["logged_in"])&& $_SESSION["logged_in"]){
-        echo "<meta http-equiv=\"refresh\" content=\"0;url=/\">";
+        echo "<meta http-equiv=\"refresh\" content=\"0;url=/profile.php\">";
         exit();
     }else {
         if (isset($_POST['mobile'])){

@@ -201,12 +201,12 @@ if (($_SESSION['typ']>0)) {
                                 </td>
                                 <td  >
                                     <div dir="rtl" >
-                                        <textarea rows="8" maxlength="300" name="tozihat" class="form-control w-100" form="<?php echo $id;?>"><?php echo $Mokhtasar; ?> </textarea>
+                                        <textarea rows="3" maxlength="300" name="tozihat" class="form-control w-100" form="<?php echo $id;?>"><?php echo $Mokhtasar; ?> </textarea>
                                     </div>
                                 </td>
 
                                 <td  >
-                                    <div dir="rtl" >
+                                    <div dir="ltr" >
                                         <input type="text" maxlength="100" class="form-control w-100"
                                                name="link" value="<?php echo $link; ?>"  form="<?php echo $id;?>">
                                     </div>

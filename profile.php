@@ -490,42 +490,42 @@ else if(isset($_GET['request']) && $_GET['request']=='buyEshterak') {
         }
     }
     else {
-        $str = 'خطا: ' . $result->Status . 'لطفا دوباره تلاش کنید.';
+        $str = 'خطا: لطفا دوباره تلاش کنید.';
         echo '<script>alert(' . $str . ')</script>';
 
-//        date_default_timezone_set("Iran");
-//        $DATE = date('Y-m-d H:i:s');
-//        list($date, $time) = explode(" ", $DATE);
-//        list($year, $month, $day) = explode("-", $date);
-//        list($jyear, $jmonth, $jday) = gregorian_to_jalali($year, $month, $day);
-//        if (strlen($jmonth) == 1) {
-//            $jmonth = "0" . $jmonth;
-//        }
-//        if (strlen($jday) == 1) {
-//            $jday = "0" . $jday;
-//        }
-//        $start = $jyear . '/' . $jmonth . '/' . $jday . ' ' . $time;
-//
-//
-//        date_default_timezone_set("Iran");
-//        $str = "+".$t." days";
-//        $DATE2 = date('Y-m-d H:i:s' , strtotime($str));
-//        list($date, $time) = explode(" ", $DATE2);
-//        list($year, $month, $day) = explode("-", $date);
-//        list($jyear, $jmonth, $jday) = gregorian_to_jalali($year, $month, $day);
-//        if (strlen($jmonth) == 1) {
-//            $jmonth = "0" . $jmonth;
-//        }
-//        if (strlen($jday) == 1) {
-//            $jday = "0" . $jday;
-//        }
-//        $modified_time = $jyear . '/' . $jmonth . '/' . $jday . ' ' . $time;
-//        $end = $modified_time;
-//
-//        $stmt = $connection->prepare("UPDATE users SET eshterakID=? , startTime=? , endTime=?,useFreeEshterak=1 WHERE (mobile=?)");
-//        $stmt->bind_param("ssss", $id,$start, $end,$_SESSION["mobile"] );
-//        $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
-//        $stmt->close();
+        date_default_timezone_set("Iran");
+        $DATE = date('Y-m-d H:i:s');
+        list($date, $time) = explode(" ", $DATE);
+        list($year, $month, $day) = explode("-", $date);
+        list($jyear, $jmonth, $jday) = gregorian_to_jalali($year, $month, $day);
+        if (strlen($jmonth) == 1) {
+            $jmonth = "0" . $jmonth;
+        }
+        if (strlen($jday) == 1) {
+            $jday = "0" . $jday;
+        }
+        $start = $jyear . '/' . $jmonth . '/' . $jday . ' ' . $time;
+
+
+        date_default_timezone_set("Iran");
+        $str = "+".$t." days";
+        $DATE2 = date('Y-m-d H:i:s' , strtotime($str));
+        list($date, $time) = explode(" ", $DATE2);
+        list($year, $month, $day) = explode("-", $date);
+        list($jyear, $jmonth, $jday) = gregorian_to_jalali($year, $month, $day);
+        if (strlen($jmonth) == 1) {
+            $jmonth = "0" . $jmonth;
+        }
+        if (strlen($jday) == 1) {
+            $jday = "0" . $jday;
+        }
+        $modified_time = $jyear . '/' . $jmonth . '/' . $jday . ' ' . $time;
+        $end = $modified_time;
+
+        $stmt = $connection->prepare("UPDATE users SET eshterakID=? , startTime=? , endTime=? WHERE (mobile=?)");
+        $stmt->bind_param("ssss", $id,$start, $end,$_SESSION["mobile"] );
+        $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
+        $stmt->close();
     }
     $tab=5;
 
@@ -575,9 +575,50 @@ else if(isset($_GET['request']) && $_GET['request']=='backZarrin') {
         );
 
         if ($result->Status == 100) { //successfull
-            echo 'با تشکر از شما . سفارش شما با موفقیت پرداخت شد. شماره پیگیری: '.$result->RefID;
+            $code = $result->RefID;
+            include 'header.php';
+            ?>
+            <div class="container">
+                <div  id="main" class="home_main row">
+
+                    <div class="col-md-12 search hiddenthisoverxs">
+
+                        <div id="sb-search2" class="sb-search">
+                            <form class="float-left">
+                                <input class="sb-search-input" placeholder="جستجو" type="search" value="" name="search" id="search2">
+                                <button class="sb-search-submit sb-icon-search" type="submit" value=""><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+
+                        <div class="mainDiv col-md-9 col-12 text-right h-100">
+
+                            <div class="col-11 text-center m-5">
+                                <h4 class="text-success">با تشکر از شما . سفارش شما با موفقیت پرداخت شد. شماره پیگیری:
+                                    <?php echo $code; ?>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="leftDiv col-md-3 col-12">
+                            <div class="col-md-12 text-center addSub float-left">
+                                <h3>
+                                    ویکی تبلیغ
+                                </h3>
+                            </div>
+                            <?php
+                            include 'showAdd.php';
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
+            include 'footer.php';
+
             $stmt = $connection->prepare("update  allpardakht set status=2 , code=?  where ID=?");
-            $stmt->bind_param("ss",$result->RefID , $insertID);
+            $stmt->bind_param("ss",$code , $insertID);
             $stmt->execute();
             $stmt->close();
 
@@ -610,7 +651,7 @@ else if(isset($_GET['request']) && $_GET['request']=='backZarrin') {
             $modified_time = $jyear . '/' . $jmonth . '/' . $jday . ' ' . $time;
             $end = $modified_time;
 
-            echo $start.'<br>'.$end.'<br>';
+//            echo $start.'<br>'.$end.'<br>';
 
             $stmt = $connection->prepare("UPDATE users SET eshterakID=? , startTime=? , endTime=? WHERE (mobile=?)");
             $stmt->bind_param("ssss", $id,$start, $end,$_SESSION["mobile"] );
@@ -619,7 +660,49 @@ else if(isset($_GET['request']) && $_GET['request']=='backZarrin') {
 
         } else { //onsuccesful
             $code = get_error($result->Status);
-            echo 'پرداخت شما ناموفق بوده است . لطفا مجددا تلاش نمایید یا در صورت بروز اشکال با مدیر سایت تماس بگیرید. وضعیت:'.$result->Status;
+
+            include 'header.php';
+            ?>
+            <div class="container">
+                <div  id="main" class="home_main row">
+
+                    <div class="col-md-12 search hiddenthisoverxs">
+
+                        <div id="sb-search2" class="sb-search">
+                            <form class="float-left">
+                                <input class="sb-search-input" placeholder="جستجو" type="search" value="" name="search" id="search2">
+                                <button class="sb-search-submit sb-icon-search" type="submit" value=""><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+
+                        <div class="mainDiv col-md-9 col-12 text-right h-100">
+
+                            <div class="col-11 text-center m-5">
+                                <h4 class="text-danger">پرداخت شما ناموفق بوده است . لطفا مجددا تلاش نمایید یا در صورت بروز اشکال با مدیریت سایت تماس بگیرید. وضعیت:
+                                    <?php echo $code;  ?>
+                                </h4>
+                                <a href="/profile.php" title="پروفایل"> مجددا تلاش کنید.</a>
+                            </div>
+                        </div>
+                        <div class="leftDiv col-md-3 col-12">
+                            <div class="col-md-12 text-center addSub float-left">
+                                <h3>
+                                    ویکی تبلیغ
+                                </h3>
+                            </div>
+                            <?php
+                            include 'showAdd.php';
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
+            include 'footer.php';
+
             $stmt = $connection->prepare("update  allpardakht set status=1 ,code=? where ID=?");
             $stmt->bind_param("ss",$code,$insertID);
             $stmt->execute();
@@ -627,7 +710,48 @@ else if(isset($_GET['request']) && $_GET['request']=='backZarrin') {
         }
     } else { //canceled
         $code = 'canceled';
-        echo 'پرداخت توسط شما لغو گردید.';
+
+        include 'header.php';
+        ?>
+
+        <div class="container">
+            <div  id="main" class="home_main row">
+
+                <div class="col-md-12 search hiddenthisoverxs">
+
+                    <div id="sb-search2" class="sb-search">
+                        <form class="float-left">
+                            <input class="sb-search-input" placeholder="جستجو" type="search" value="" name="search" id="search2">
+                            <button class="sb-search-submit sb-icon-search" type="submit" value=""><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+
+                    <div class="mainDiv col-md-9 col-12 text-right h-100">
+
+                        <div class="col-11 text-center m-5">
+                            <h4 class="text-danger">پرداخت توسط شما لغو گردید.</h4>
+                            <a href="/profile.php" title="پروفایل"> مجددا تلاش کنید.</a>
+                        </div>
+                    </div>
+                    <div class="leftDiv col-md-3 col-12">
+                        <div class="col-md-12 text-center addSub float-left">
+                            <h3>
+                                ویکی تبلیغ
+                            </h3>
+                        </div>
+                        <?php
+                        include 'showAdd.php';
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+        include 'footer.php';
+
         $stmt = $connection->prepare("update allpardakht set status=0 ,code=?  where ID=?");
         $stmt->bind_param("ss",$code,$insertID);
         $stmt->execute();
@@ -637,9 +761,7 @@ else if(isset($_GET['request']) && $_GET['request']=='backZarrin') {
 //    $stmt->bind_param("s",$insertID );
 //    $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
 //    $result = $stmt->get_result();
-    echo '<a href="/profile.php">بازگشت به صفحه پروفایل </a>';
-
-
+//    echo '<a href="/profile.php">بازگشت به صفحه پروفایل </a>';
 
     die();
 }
@@ -1126,7 +1248,10 @@ include 'header.php';
                             $result = $connection->query($query);
                             while($row = $result->fetch_assoc()){
                                 $eshtName = 'بسته اشتراک '.$row['name'];
-                                $qeimat = $row['qeimat'].' تومان';
+                                if($row['qeimat']>99)
+                                    $qeimat = $row['qeimat'].' تومان';
+                                else
+                                    $qeimat = ' رایگان';
                                 $id = $row['ID'];
 //                                if($id!=1 || $useFree!=1 ) {
                                     ?>

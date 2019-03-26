@@ -299,27 +299,24 @@ include 'headerMainpage.php';
                 <br/>
 
                 <?php
-                $query = "SELECT * FROM grayBox;";
+                $query = "SELECT * FROM grayBox where active>0 ORDER BY orderby;";
                 $result = $connection->query($query);
                 while ($row=$result->fetch_assoc()) {
                     $name = $row['name'];
                     $Mokhtasar = $row['Mokhtasar'];
                     $id = $row['ID'];
                     $link = $row['link'];
-                    $act = $row['active'];
-                    if($act>0) {
-                        ?>
-                        <a href="<?php echo $link?>" title="<?php echo $Mokhtasar;?>">
-                            <div class="row">
-                                <div class="col-md-11 grayBox col-10 d-table">
-                                    <div class=" d-table-cell align-middle">
-                                        <?php echo $name;?>
-                                    </div>
+                    ?>
+                    <a href="<?php echo $link?>" title="<?php echo $Mokhtasar;?>">
+                        <div class="row">
+                            <div class="col-md-11 grayBox col-10 d-table">
+                                <div class=" d-table-cell align-middle">
+                                    <?php echo $name;?>
                                 </div>
                             </div>
-                        </a>
-                        <?php
-                    }
+                        </div>
+                    </a>
+                    <?php
                 }
                 ?>
             </div>

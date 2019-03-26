@@ -6,15 +6,16 @@
  * Time: 2:14 PM
  */
 ?>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-136361261-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-<?php
-/**
- * Created by PhpStorm.
- * User: Nastaran
- * Date: 8/2/18
- * Time: 7:54 PM
- */
-?>
+    gtag('config', 'UA-136361261-1');
+</script>
+
 
 <div class="header col-lg-12 col-md-12 hiddenthisxs ">
     <div class="fixed fix fixed1 headerall">

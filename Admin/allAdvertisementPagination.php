@@ -167,7 +167,7 @@
                                     </td>
                                     <td>
                                         <div class=\"info\">
-                                            <a target='_blank' href='' class=\"user-link\">" . $row['name'] . "</a>
+                                            <a target='_blank' href=\"/addPage/".$row['ID']."\" class=\"user-link\">" . $row['name'] . "</a>
                                         </div>
                                     </td>";
                 $writerID = $row['writerID'];

@@ -10,10 +10,15 @@ session_start();
 include 'Settings.php'; //harja khasti DB estefade koni ino bezan faghat
 
 
-
 if (isset($_GET['ID'])) {
     $ID = $_GET['ID'];
-    $query = "SELECT * FROM users WHERE (ID='$ID' and stat>0);";
+
+    if(isset($_SESSION["typ"]))
+        $typ = $_SESSION["typ"];
+    else
+        $typ = 0;
+
+    $query = "SELECT * FROM users WHERE ( (ID='$ID' and stat>0) or (ID='$ID' and ".$typ."='10'));";
     $result = $connection->query($query);
     if ($row = $result->fetch_assoc()) {
 
@@ -35,6 +40,7 @@ if (isset($_GET['ID'])) {
         $nm =$row['name'];
 
     } else{
+        echo 'no';
         header('Location:/');
     }
     $tab = 1;

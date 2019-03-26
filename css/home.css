@@ -76,8 +76,8 @@
 .grayBox{
     margin: auto;
     margin-top: 7%;
+    height: 95px;
     min-height: 95px;
-    /*line-height: 80px;*/
     /*background-color: rgb(233,231,232);*/
     border-radius: 2px;
     box-shadow: 6px 5px 10px #888888;
@@ -264,6 +264,10 @@ marquee span {
 }
 .text-indent-10{
     text-indent: -3000px;
+}
+
+.carousel-caption {
+    color: mediumvioletred;
 }
 
 /*tablet*/

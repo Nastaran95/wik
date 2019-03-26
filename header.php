@@ -6,6 +6,15 @@
  * Time: 2:14 PM
  */
 ?>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-136361261-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-136361261-1');
+</script>
 
 <div class="header col-lg-12 col-md-12 headerfix hidden-xs hidden-sm hiddenthisxs">
     <div class="headerall">

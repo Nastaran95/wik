@@ -19,18 +19,19 @@ if (($_SESSION['typ']>0)) {
         $tozih = $_POST['tozihat'];
         $link = $_POST['link'];
         $act = $_POST['status'];
+        $orderby = $_POST['orderby'];
 
 
         if($_GET['request']>=0) {
             $id = $_GET['request'];
-            $stmt = $connection->prepare("UPDATE grayBox SET name=? ,Mokhtasar=? , link=? ,active=?  WHERE (ID=?)");
-            $stmt->bind_param("sssss", $name,$tozih,$link,$act, $id);
+            $stmt = $connection->prepare("UPDATE grayBox SET name=? ,Mokhtasar=? , link=? ,active=? ,orderby=? WHERE (ID=?)");
+            $stmt->bind_param("ssssss", $name,$tozih,$link,$act,$orderby, $id);
 
 
         }
         else if( $_GET['request']==-1){
-            $stmt = $connection->prepare("INSERT INTO grayBox (name,Mokhtasar,link,active) VALUES (?,?,?,?)");
-            $stmt->bind_param("ssss", $name, $tozih,$link,$act);
+            $stmt = $connection->prepare("INSERT INTO grayBox (name,Mokhtasar,link,active,orderby) VALUES (?,?,?,?,?)");
+            $stmt->bind_param("sssss", $name, $tozih,$link,$act,$orderby);
         }
 
         $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failure.
@@ -182,6 +183,7 @@ if (($_SESSION['typ']>0)) {
                     <th class="text-center"><span>عنوان</span></th>
                     <th class="text-center"><span>توضیحات</span></th>
                     <th class="text-center"><span>لینک</span></th>
+                    <th class="text-center"><span>ترتیب نمایش</span></th>
                     <th class="text-center"><span>نمایش</span></th>
 
                 </tr>
@@ -193,6 +195,7 @@ if (($_SESSION['typ']>0)) {
             <?php
                 $query = "SELECT * FROM grayBox;";
                 $result = $connection->query($query);
+                $num = $result->num_rows;
             echo "<script>x=0; y =0;</script>";
                 while ($row=$result->fetch_assoc()) {
                     $name = $row['name'];
@@ -213,14 +216,29 @@ if (($_SESSION['typ']>0)) {
                                 </td>
                                 <td  >
                                     <div dir="rtl" >
-                                        <textarea rows="8" maxlength="300" name="tozihat" class="form-control w-100" form="<?php echo $id;?>"><?php echo $Mokhtasar; ?> </textarea>
+                                        <textarea rows="3" maxlength="300" name="tozihat" class="form-control w-100" form="<?php echo $id;?>"><?php echo $Mokhtasar; ?> </textarea>
+                                    </div>
+                                </td>
+
+                                <td  >
+                                    <div dir="ltr" >
+                                        <input type="text" maxlength="100" class="form-control w-100"
+                                               name="link" value="<?php echo $link; ?>"  form="<?php echo $id;?>">
                                     </div>
                                 </td>
 
                                 <td  >
                                     <div dir="rtl" >
-                                        <input type="text" maxlength="100" class="form-control w-100"
-                                               name="link" value="<?php echo $link; ?>"  form="<?php echo $id;?>">
+                                        <select id="orderby" name="orderby" class="form-control input-lg" form="<?php echo $id;?>" >
+                                            <?php
+                                            for ($i=1 ; $i<=$num ; $i++){
+                                                ?>
+                                            <option value="<?php echo $i;?>"
+                                                 <?php if ($row['orderby'] == $i) echo "selected" ?> > <?php echo $i;?>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
                                     </div>
                                 </td>
 
@@ -267,8 +285,11 @@ if (($_SESSION['typ']>0)) {
                 </div>
             </div>
 
+
+
             <div class="col-md-12 col-12 m-5 floatright">
                 <form action="manageGrayBox.php?colorset=1" method="post"  class="form-inline" >
+                    <label for="back" class="dark_text col-md-6 float-right m-auto text-danger"><b>بازه رنگ‌ها باید بین صفر تا ۲۵۵ باشد.</b></label>
                     <div dir="rtl" class="col-md-12 m-3">
                         <label for="back" class="dark_text col-md-6 float-right"><b>رنگ پس زمینه</b></label>
                         <div class="col-md-6 float-right">

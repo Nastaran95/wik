@@ -365,7 +365,7 @@ a{
 
 
 .add{
-    margin: 10px 0px 10px 0px;
+    margin: 10px 0px 30px 0px;
 }
 
 .hrline{
@@ -459,9 +459,13 @@ a{
 }
 
 .welcome{
+    height: 100px;
     min-height:100px;
 }
 
+#TYhwCW3YkMbHuJKp{
+    cursor: pointer;
+}
 
 /*.add img{*/
     /*height: 150px;*/

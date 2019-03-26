@@ -256,9 +256,6 @@ if (isset($_GET['request']) && $_GET['request']=='message') {
                     echo '<META HTTP-EQUIV="Refresh" Content="0; URL=advertisement.php?result=unsuccessful">';
                 } else {
 
-                    echo "<script>alert('here');</script>";
-
-
                     $MerchantID = '3c5b10c6-6c1f-11e6-9549-005056a205be'; //Required
                     $Amount = $price; //Amount will be based on Toman - Required
 
@@ -274,7 +271,6 @@ if (isset($_GET['request']) && $_GET['request']=='message') {
                         echo "<script>alert('خطایی رخ داد. لطفا دوباره تلاش کنید.')</script>>";
                         die();
                     }
-                    echo "<script>alert('here2');</script>";
 
                     $Description = 'پرداخت هزینه آگهی'.$baste.' ویکی‌درم'; // Required
 //    $Email = 'UserEmail@Mail.Com'; // Optional
@@ -302,8 +298,6 @@ if (isset($_GET['request']) && $_GET['request']=='message') {
 //برای استفاده از زرین گیت باید ادرس به صورت زیر تغییر کند:
 //Header('Location: https://www.zarinpal.com/pg/StartPay/'.$result->Authority.'/ZarinGate');
                     } else {
-                        echo "<script>alert('here4');</script>";
-
                         $str = 'خطا: '.$result->Status.'لطفا دوباره تلاش کنید.';
                         echo '<script>alert('.$str.')</script>';
                     }
@@ -354,9 +348,51 @@ if (isset($_GET['request']) && $_GET['request']=='message') {
         );
 
         if ($result->Status == 100) { //successfull
-            echo 'با تشکر از شما . سفارش شما با موفقیت پرداخت شد. شماره پیگیری: '.$result->RefID;
+            $code = $result->RefID;
+            include 'header.php';
+            ?>
+            <div class="container">
+                <div  id="main" class="home_main row">
+
+                    <div class="col-md-12 search hiddenthisoverxs">
+
+                        <div id="sb-search2" class="sb-search">
+                            <form class="float-left">
+                                <input class="sb-search-input" placeholder="جستجو" type="search" value="" name="search" id="search2">
+                                <button class="sb-search-submit sb-icon-search" type="submit" value=""><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+
+                        <div class="mainDiv col-md-9 col-12 text-right h-100">
+
+                            <div class="col-11 text-center m-5">
+                                <h4 class="text-success">با تشکر از شما . سفارش شما با موفقیت پرداخت شد. شماره پیگیری:
+                                    <?php echo $code; ?>
+                                    <br/>برای نمایش آگهی باید منتظر تایید ادمین باشید.
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="leftDiv col-md-3 col-12">
+                            <div class="col-md-12 text-center addSub float-left">
+                                <h3>
+                                    ویکی تبلیغ
+                                </h3>
+                            </div>
+                            <?php
+                            include 'showAdd.php';
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
+            include 'footer.php';
+
             $stmt = $connection->prepare("update  allpardakhtAdd set status=2 , code=?  where ID=?");
-            $stmt->bind_param("ss",$result->RefID , $insertID);
+            $stmt->bind_param("ss",$code , $insertID);
             $stmt->execute();
             $stmt->close();
 
@@ -367,7 +403,47 @@ if (isset($_GET['request']) && $_GET['request']=='message') {
 
         } else { //onsuccesful
             $code = get_error($result->Status);
-            echo 'پرداخت شما ناموفق بوده است . لطفا مجددا تلاش نمایید یا در صورت بروز اشکال با مدیر سایت تماس بگیرید. وضعیت:'.$result->Status;
+            include 'header.php';
+            ?>
+            <div class="container">
+                <div  id="main" class="home_main row">
+
+                    <div class="col-md-12 search hiddenthisoverxs">
+
+                        <div id="sb-search2" class="sb-search">
+                            <form class="float-left">
+                                <input class="sb-search-input" placeholder="جستجو" type="search" value="" name="search" id="search2">
+                                <button class="sb-search-submit sb-icon-search" type="submit" value=""><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+
+                        <div class="mainDiv col-md-9 col-12 text-right h-100">
+
+                            <div class="col-11 text-center m-5">
+                                <h4 class="text-danger">پرداخت شما ناموفق بوده است . لطفا مجددا تلاش نمایید یا در صورت بروز اشکال با مدیریت سایت تماس بگیرید. وضعیت:
+                                    <?php echo $code; ?>
+                                </h4>
+                                <a href="/advertisement.php" title="آگهی"> مجددا تلاش کنید.</a>
+                            </div>
+                        </div>
+                        <div class="leftDiv col-md-3 col-12">
+                            <div class="col-md-12 text-center addSub float-left">
+                                <h3>
+                                    ویکی تبلیغ
+                                </h3>
+                            </div>
+                            <?php
+                            include 'showAdd.php';
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
+            include 'footer.php';
             $stmt = $connection->prepare("update  allpardakhtAdd set status=1 ,code=? where ID=?");
             $stmt->bind_param("ss",$code,$insertID);
             $stmt->execute();
@@ -375,7 +451,47 @@ if (isset($_GET['request']) && $_GET['request']=='message') {
         }
     } else { //canceled
         $code = 'canceled';
-        echo 'پرداخت توسط شما لغو گردید.';
+
+        include 'header.php';
+        ?>
+
+        <div class="container">
+            <div  id="main" class="home_main row">
+
+                <div class="col-md-12 search hiddenthisoverxs">
+
+                    <div id="sb-search2" class="sb-search">
+                        <form class="float-left">
+                            <input class="sb-search-input" placeholder="جستجو" type="search" value="" name="search" id="search2">
+                            <button class="sb-search-submit sb-icon-search" type="submit" value=""><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+
+                    <div class="mainDiv col-md-9 col-12 text-right h-100">
+
+                        <div class="col-11 text-center m-5">
+                            <h4 class="text-danger">پرداخت توسط شما لغو گردید.</h4>
+                            <a href="/advertisement.php" title="آگهی"> مجددا تلاش کنید.</a>
+                        </div>
+                    </div>
+                    <div class="leftDiv col-md-3 col-12">
+                        <div class="col-md-12 text-center addSub float-left">
+                            <h3>
+                                ویکی تبلیغ
+                            </h3>
+                        </div>
+                        <?php
+                        include 'showAdd.php';
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+        include 'footer.php';
         $stmt = $connection->prepare("update allpardakhtAdd set status=0 ,code=?  where ID=?");
         $stmt->bind_param("ss",$code,$insertID);
         $stmt->execute();
@@ -385,28 +501,13 @@ if (isset($_GET['request']) && $_GET['request']=='message') {
 //    $stmt->bind_param("s",$insertID );
 //    $stmt->execute(); //execute() tries to fetch a result set. Returns true on succes, false on failu
 //    $result = $stmt->get_result();
-    echo '<a href="/">بازگشت به صفحه اصلی </a>';
+//    echo '<a href="/">بازگشت به صفحه اصلی </a>';
     die();
 
 }
 else{
     include 'header.php';
 }
-
-$productXMLNAME = "XMLs/contactUs.xml";
-if (file_exists($productXMLNAME)) {
-    $XMLFile = simplexml_load_file($productXMLNAME);
-    $SEOdescription=$XMLFile->description;
-    $SEOKEYWORDS=$XMLFile->kewords;
-    $SEOTITLE=$XMLFile->seotitle;
-}else{
-    $SEOdescription="";
-    $SEOKEYWORDS="";
-    $SEOTITLE="";
-}
-
-
-
 ?>
 
 
@@ -579,6 +680,61 @@ function tr_num($str,$mod='en',$mf='٫'){
     $num_a=array('0','1','2','3','4','5','6','7','8','9','.');
     $key_a=array('۰','۱','۲','۳','۴','۵','۶','۷','۸','۹',$mf);
     return($mod=='fa')?str_replace($num_a,$key_a,$str):str_replace($key_a,$num_a,$str);
+}
+function get_error($id){
+    switch ($id) {
+        case '-1':
+            return 'اطلاعات ارسال شده ناقص است.';
+            break;
+        case '-2':
+            return 'آی پی یا مرچنت کد پذیرنده صحیح نیست';
+            break;
+        case '-3':
+            return 'با توجه به محدودیت های شاپرک امکان پرداخت با رقم درخواست شده میسر نمی باشد.';
+            break;
+        case '-4':
+            return 'سطح تایید پذیرنده پایین تر از صطح نقره ای است.';
+            break;
+        case '-11':
+            return 'درخواست مورد نظر یافت نشد.';
+            break;
+        case '-12':
+            return 'امکان ویرایش درخواست میسر نمی باشد.';
+            break;
+        case '-21':
+            return 'هیچ نوع عملیات مالی برای این تراکنش یافت نشد.';
+            break;
+        case '-22':
+            return 'تراکنش نا موفق می باشد.';
+            break;
+        case '-33':
+            return 'رقم تراکنش با رقم پرداخت شده مطابقت ندارد.';
+            break;
+        case '-34':
+            return 'سقف تقسیم تراکنش از لحاظ تعداد با رقم عبور نموده است.';
+            break;
+        case '-40':
+            return 'اجازه دسترسی به متد مربوطه وجود ندارد.';
+            break;
+        case '-41':
+            return 'اطلاعات ارسال شده مربوط به AdditionalData غیر معتر می باشد.';
+            break;
+        case '-42':
+            return 'مدت زمان معتبر طول عمر شناسه پرداخت بین 30 دقیقه تا 40 روز می باشد.';
+            break;
+        case '-54':
+            return 'درخواست مورد نظر آرشیو شده است.';
+            break;
+        case '100':
+            return 'عملیات با موفقیت انجام گردیده است.';
+            break;
+        case '101':
+            return 'عملیات پرداخت موفق بوده و قبلا Payment Verification تراکنش انجام شده است';
+            break;
+        default:
+            return $id;
+            break;
+    }
 }
 ?>
 <script src="js/classie.js"></script>

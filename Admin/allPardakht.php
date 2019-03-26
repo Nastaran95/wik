@@ -59,6 +59,7 @@ if (($_SESSION['typ']>0)) {
                     <th><span>مبلغ(تومان)</span></th>
                     <th><span>وضعیت</span></th>
                     <th><span>کد</span></th>
+                    <th><span>تاریخ</span></th>
 
                 </tr>
                 </thead>
@@ -139,7 +140,10 @@ if (($_SESSION['typ']>0)) {
                                         <span>".$row['code']."</span>
                                     </td>";
 
-
+                    echo "   
+                                    <td style=\"width: 10%;\">                                                                                                               
+                                        <span>".$row['time']."</span>
+                                    </td>";
 
                     echo '</tr>';
 

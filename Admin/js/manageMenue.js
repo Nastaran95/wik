@@ -387,7 +387,7 @@ function myFunction5() {
         "                                </td>\n" +
         "                                <td  >\n" +
         "                                    <div dir=\"rtl\" >\n" +
-        "                                        <textarea rows=\"8\" maxlength=\"300\" name=\"tozihat\" class=\"form-control w-100\" form=\""+x+"\">  </textarea>\n" +
+        "                                        <textarea rows=\"3\" maxlength=\"300\" name=\"tozihat\" class=\"form-control w-100\" form=\""+x+"\">  </textarea>\n" +
         "                                    </div>\n" +
         "                                </td>\n" +
         "\n" +
@@ -446,7 +446,7 @@ function myFunction6() {
         "                                </td>\n" +
         "                                <td  >\n" +
         "                                    <div dir=\"rtl\" >\n" +
-        "                                        <textarea rows=\"8\" maxlength=\"300\" name=\"tozihat\" class=\"form-control w-100\" form=\""+x+"\">  </textarea>\n" +
+        "                                        <textarea rows=\"3\" maxlength=\"300\" name=\"tozihat\" class=\"form-control w-100\" form=\""+x+"\">  </textarea>\n" +
         "                                    </div>\n" +
         "                                </td>\n" +
         "\n" +
@@ -457,6 +457,14 @@ function myFunction6() {
         "                                    </div>\n" +
         "                                </td>\n" +
         "\n" +
+        "<td  >\n" +
+        "                                    <div dir=\"rtl\" >\n" +
+        "                                        <select id=\"orderby\" name=\"orderby\" class=\"form-control input-lg\" form=\""+x+"\" >\n" +
+        "                                            <option value=\""+y+"\"\n" +
+        "                                                 selected > "+y+"\n" +
+        "                                        </select>\n" +
+        "                                    </div>\n" +
+        "                                </td>"+
         "                                <td >\n" +
         "                                    <div class=\"form-check-inline\">\n" +
         "                                        <label class=\"form-check-label\">\n" +

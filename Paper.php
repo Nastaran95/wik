@@ -22,7 +22,13 @@ if (file_exists($productXMLNAME)) {
 
 if (isset($_GET['ID'])) {
     $ID = $_GET['ID'];
-    $query = "SELECT * FROM Paper WHERE (post_name='$ID' and stat>0);";
+
+    if(isset($_SESSION["typ"]))
+        $typ = $_SESSION["typ"];
+    else
+        $typ = 0;
+
+    $query = "SELECT * FROM Paper WHERE ((post_name='$ID' and stat>0) or (post_name='$ID' and ".$typ."='10'));";
     $result = $connection->query($query);
 //    echo $connection->error;
     if ($row = $result->fetch_assoc()) {

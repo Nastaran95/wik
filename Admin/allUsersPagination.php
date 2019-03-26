@@ -164,6 +164,8 @@ if (isset($_GET) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SER
             $address = $row['address'];
             $typ = $row['typ'];
 
+            $link = '/user/'.$IDOA;
+
 
 
             echo "                     <td>
@@ -183,7 +185,7 @@ if (isset($_GET) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SER
 
             echo "                  <td>
                                         <div class=\"info\">
-                                            <a target='_blank' href='/' class=\"user-link\">" . $name . "</a>
+                                            <a target='_blank' href='".$link."' class=\"user-link\">" . $name . "</a>
                                         </div>
                                     </td>  
                                     <td>                                                                                                               

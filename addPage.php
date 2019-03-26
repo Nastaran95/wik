@@ -25,7 +25,13 @@ $SEOKEYWORDS="تبلیغ";
 
 if (isset($_GET['ID'])) {
     $ID = $_GET['ID'];
-    $query = "SELECT * FROM advertisement WHERE (ID='$ID' and active>0 and stat>0);";
+
+    if(isset($_SESSION["typ"]))
+        $typ = $_SESSION["typ"];
+    else
+        $typ = 0;
+
+    $query = "SELECT * FROM advertisement WHERE ((ID='$ID' and active>0 and stat>0) or (ID='$ID' and ".$typ."='10'));";
     $result = $connection->query($query);
 //    echo $connection->error;
     if ($row = $result->fetch_assoc()) {
