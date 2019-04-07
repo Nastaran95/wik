@@ -6,9 +6,9 @@
  * Time: 11:51 PM
  */
 include "Settings.php";
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 $page = $_GET['page'];
 $typ = $_GET['typ'];
 

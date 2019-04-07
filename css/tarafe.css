@@ -1,0 +1,63 @@
+.leftDiv{
+    float: right;
+    padding-top: 20px;
+}
+
+.mainDiv{
+    border-style: solid;
+    border-width: 0px 0px 0px 2px;
+    border-color: rgb(239,134,131);
+    margin: 10px 0px;
+    padding-top: 50px;
+    float: right;
+    color: rgb(239,134,131);
+    height: 100%;
+}
+
+h1{
+    font-size: 22px;
+}
+
+.fontDiam{
+    font-size: 40px;
+}
+
+
+.box{
+    border-style: solid;
+    border-width: 2px 0px 0px 0px;
+    border-color: rgb(239,134,131);
+    margin-bottom: 30px;
+    width: 92%;
+    margin-right: 4%;
+    margin-left: 4%;
+    padding: 25px;
+}
+
+
+.typeTable th{
+    border: 1px solid rgb(233,144,139);
+    width: 33%;
+    height: 50px;
+    text-align: center;
+}
+
+.login {
+    background-color: rgb(240,135,132);
+    /*height: 50px;*/
+    color: black;
+}
+
+.register{
+    background-color: rgb(255,212,213);
+    /*height: 50px;*/
+    color: black;
+}
+
+@media (max-width: 990px) {
+    .mainDiv{
+        border-width: 0;
+        padding: 0;
+        top: 20px;
+    }
+}

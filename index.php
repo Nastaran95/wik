@@ -340,6 +340,7 @@ include 'headerMainpage.php';
                             $name = $row['name'];
                             $x = $x+1;
                             $idd = 'cat'.$id;
+                            $idd3 = 'name'.$id;
                             $idd2 = 'checkcat'.$id;
                             ?>
 
@@ -347,6 +348,7 @@ include 'headerMainpage.php';
                                 <span class="fa-stack check checkmarkk <?php if($x!=1) echo 'd-none';?>" id="<?php echo $idd2;?>">
                                     <i class="far fa-check-square fa-stack-0x fa-inverse bg-success"></i>
                                 </span>
+                                <span class="d-none" id="<?php echo $idd3;?>"> <?php echo $name; ?> </span>
                                 <?php echo $name; ?>
                                 <span class="float-left">
                                     <?php
@@ -365,6 +367,7 @@ include 'headerMainpage.php';
                             <span class="fa-stack check checkmarkk d-none" id="checkcat0">
                                 <i class="far fa-check-square fa-stack-0x fa-inverse bg-success"></i>
                             </span>
+                            <span class="d-none" id="name0">  همه دسته‌ها </span>
                             همه دسته‌ها
                             <span class="float-left">
                                 <?php
@@ -410,7 +413,7 @@ include 'headerMainpage.php';
                 <div class="col-md-12 float-left ">
                     <div class="col-md-11 float-left">
                         <h2> <span class="fontDiam"> &#9830; </span>
-                            مقالات
+                            <span id="tit">مقالات</span>
                         </h2>
                     </div>
 

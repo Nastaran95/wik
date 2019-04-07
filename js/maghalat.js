@@ -52,6 +52,7 @@ $(document).ready(function () {
         iddd = $(this).attr("id");
         idd= iddd.substr(5);
         sel = '#'+idd;
+        // alert(sel);
         $(sel).click();
 
     });
@@ -59,60 +60,71 @@ $(document).ready(function () {
     $(document).on('click touchstart',".cat",function (event) {
         iddd = event.target.id;
         idd= iddd.substr(3);
+        // alert(idd);
         sel = '#cat'+idd+' .checkmarkk';
+        sel2 = '#name'+idd;
         // alert(sel);
         el=event.target.classList;
-        if(el.contains('cat-on')){
-            $(event.target).removeClass('cat-on');
-            $(sel).removeClass('d-inline-block');
-            $(sel).addClass('d-none');
-            if(event.target.id=='cat0' ){
-                $('.cat').removeClass('cat-on');
-                $('#cat1').addClass('cat-on');
-
-                $('.cat .checkmarkk').removeClass('d-inline-block');
-                $('#cat1 .checkmarkk').addClass('d-inline-block');
-
-                $('.cat .checkmarkk').addClass('d-none');
-                $('#cat1 .checkmarkk').removeClass('d-none');
-                cat = [1];
-            }
-            else {
-                for (var i = 0; i < cat.length ; i++) {
-                    // alert(i);
-                    if (cat[i] == idd) {
-                        cat.splice(i, 1);
-                    }
-                }
-            }
-            if(cat.length==0){
-                $('#cat1').addClass('cat-on');
-                $('#cat1 .checkmarkk').addClass('d-inline-block');
-                $('#cat1 .checkmarkk').removeClass('d-none');
-                cat = [1];
-            }
-            var category = cat.join();
-            $.get("/getPage.php", {page:1 , typ:1 , cat :category ,sort:srt}, function (res) {
-                $("#replacepagination").html(res);
-            });
-
-        }else if(el.contains('cat')){
-            $(event.target).addClass('cat-on');
-            $(sel).removeClass('d-none');
-            $(sel).addClass('d-inline-block');
-            if(event.target.id=='cat0'){
+        // if(el.contains('cat-on')){
+        //     $(event.target).removeClass('cat-on');
+        //     $(sel).removeClass('d-inline-block');
+        //     $(sel).addClass('d-none');
+        //     if(event.target.id=='cat0' ){
+        //         $('.cat').removeClass('cat-on');
+        //         $('#cat1').addClass('cat-on');
+        //
+        //         $('.cat .checkmarkk').removeClass('d-inline-block');
+        //         $('#cat1 .checkmarkk').addClass('d-inline-block');
+        //
+        //         $('.cat .checkmarkk').addClass('d-none');
+        //         $('#cat1 .checkmarkk').removeClass('d-none');
+        //         cat = [1];
+        //     }
+        //     else {
+        //         for (var i = 0; i < cat.length ; i++) {
+        //             // alert(i);
+        //             if (cat[i] == idd) {
+        //                 cat.splice(i, 1);
+        //             }
+        //         }
+        //     }
+        //     if(cat.length==0){
+        //         $('#cat1').addClass('cat-on');
+        //         $('#cat1 .checkmarkk').addClass('d-inline-block');
+        //         $('#cat1 .checkmarkk').removeClass('d-none');
+        //         cat = [1];
+        //     }
+        //     var category = cat.join();
+        //     $.get("/getPage.php", {page:1 , typ:1 , cat :category ,sort:srt}, function (res) {
+        //         $("#replacepagination").html(res);
+        //     });
+        //
+        // }else if(el.contains('cat')){
+        if(idd.length>0) {
+            if (event.target.id == 'cat0') {
                 $('.cat').addClass('cat-on');
                 $('.cat .checkmarkk').addClass('d-inline-block');
                 $('.cat .checkmarkk').removeClass('d-none');
-                cat = [1,2,3,4,5,6,7,8,9,10,11];
+                cat = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
             }
-            else
-                cat.push(idd);
+            else {
+                $('.cat').removeClass('cat-on');
+                $('.cat .checkmarkk').removeClass('d-inline-block');
+                $('.cat .checkmarkk').addClass('d-none');
+                // cat.push(idd);
+                cat = [idd];
+            }
+            $(event.target).addClass('cat-on');
+            $(sel).removeClass('d-none');
+            $(sel).addClass('d-inline-block');
             var category = cat.join();
-            $.get("/getPage.php", {page:1 , typ:1 , cat :category ,sort:srt}, function (res) {
+            $.get("/getPage.php", {page: 1, typ: 1, cat: category, sort: srt}, function (res) {
                 $("#replacepagination").html(res);
             });
+            $('#tit').html (  "مقالات ("+$(sel2).html()+")" );
         }
+        // }
+
 
     });
 
