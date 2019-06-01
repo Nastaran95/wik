@@ -1,8 +1,14 @@
 var range, page, category;
 $(document).ready(function() {
+    searchdata=$('#sarching').val();
+    if (searchdata==""){
+        searchdata="=====+++=====";
+    }
     range = $("#limit").find(":selected").text();
     type=$("input[name='type']").val();
-    $.get("allPostsPagination.php", {page:1, limit:range,type:type,query:"=====+++=====",category:"all", TMP:makeid()}, function (data, status) {
+    category = $("#category").find(":selected").val();
+    status = $("#status").find(":selected").val();
+    $.get("allPostsPagination.php", {page:1, limit:range,type:type,query:searchdata,category:category,status:status, TMP:makeid()}, function (data, status) {
         $("#results").html(data);
     });
     //executes code below when user click on pagination links
@@ -10,7 +16,7 @@ $(document).ready(function() {
         e.preventDefault();
         $(".loading-div").show(); //show loading element
         page = $(this).attr("data-page"); //get page number from link
-        $.get("allPostsPagination.php", {page:page, limit:range,type:type,query:"=====+++=====",category:"all", TMP:makeid()}, function (data, status) {
+        $.get("allPostsPagination.php", {page:page, limit:range,type:type,query:searchdata,category:category,status:status, TMP:makeid()}, function (data, status) {
             $(".loading-div").hide(); //show loading element
             $("#results").html(data);
         });
@@ -20,7 +26,7 @@ $(document).ready(function() {
         e.preventDefault();
         $(".loading-div").show(); //show loading element
         range = $("#limit").find(":selected").text();
-        $.get("allPostsPagination.php", {page:1, limit:range,type:type,query:"=====+++=====",category:"all", TMP:makeid()}, function (data, status) {
+        $.get("allPostsPagination.php", {page:1, limit:range,type:type,query:searchdata,category:category,status:status, TMP:makeid()}, function (data, status) {
             $(".loading-div").hide(); //show loading element
             $("#results").html(data);
         });
@@ -34,7 +40,7 @@ $(document).ready(function() {
         e.preventDefault();
         $(".loading-div").show(); //show loading element
         range = $("#limit").find(":selected").text();
-        $.get("allPostsPagination.php", {page:1, limit:range,type:type,query:searchdata,category:"all", TMP:makeid()}, function (data, status) {
+        $.get("allPostsPagination.php", {page:1, limit:range,type:type,query:searchdata,category:category,status:status, TMP:makeid()}, function (data, status) {
             $(".loading-div").hide(); //show loading element
             $("#results").html(data);
         });
@@ -79,6 +85,22 @@ $(document).ready(function() {
                 }
             });
         }
+    });
+    $(document).on('change','#category',function(e){
+        e.preventDefault();
+        $(".loading-div").show(); //show loading element
+        category = $("#category").find(":selected").val();
+        $.get("allPostsPagination.php", {page:1, limit:range,type:type,query:searchdata,category:category,status:status, TMP:makeid()}, function (data, status) {
+            $("#results").html(data);
+        });
+    });
+    $(document).on('change','#status',function(e){
+        e.preventDefault();
+        $(".loading-div").show(); //show loading element
+        status = $("#status").find(":selected").val();
+        $.get("allPostsPagination.php", {page:1, limit:range,type:type,query:searchdata,category:category,status:status, TMP:makeid()}, function (data, status) {
+            $("#results").html(data);
+        });
     });
 });
 

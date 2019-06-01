@@ -14,11 +14,50 @@ if (isset($_GET) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SER
     $item_per_page = $_GET["limit"];
     $type = $_GET["type"];
     $query = $_GET["query"];
+
     if (isset($_GET["category"])) {
         $dastebandi = $_GET["category"];
     } else {
         $dastebandi = "all";
     }
+
+    $command2 = "";
+    if (isset($_GET["eshterakID"])) {
+        $eshterakID = $_GET["eshterakID"];
+        if ($eshterakID == 'all') {
+            $command2 = $command2." eshterakID < 5  ";
+        } else {
+            $command2 = $command2." eshterakID='$eshterakID' ";
+        }
+    } else {
+        $eshterakID = "all";
+        $command2 = $command2." eshterakID < 5  ";
+    }
+
+    if (isset($_GET["status"])) {
+        $status = $_GET["status"];
+        if ($status == 'all') {
+            $command2 = $command2." and stat < 2  ";
+        } else {
+            $command2 = $command2." and stat='$status' ";
+        }
+    } else {
+        $status = "all";
+        $command2 = $command2." and stat < 2  ";
+    }
+
+    if (isset($_GET["verify"])) {
+        $verify = $_GET["verify"];
+        if ($verify == 'all') {
+            $command2 = $command2." and verified < 2  ";
+        } else {
+            $command2 = $command2." and verified='$verify' ";
+        }
+    } else {
+        $verify = "all";
+        $command2 = $command2." and verified < 2  ";
+    }
+
     if (isset($_GET["page"])) {
         $page_number = filter_var($_GET["page"], FILTER_SANITIZE_NUMBER_INT, FILTER_FLAG_STRIP_HIGH); //filter number
         if (!is_numeric($page_number)) {
@@ -31,44 +70,19 @@ if (isset($_GET) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SER
     if ($query === "=====+++=====") {
         if ($dastebandi == 'all') {
             if ($type == 1)
-                $results = $connection->query("SELECT COUNT(*) FROM users");
+                $results = $connection->query("SELECT COUNT(*) FROM users WHERE ".$command2);
         } else {
-//            if ($type == 1)
-//                $results = $connection->query("SELECT COUNT(*) FROM users WHERE dastebandi='$dastebandi'");
+            if ($type == 1)
+                $results = $connection->query("SELECT COUNT(*) FROM users WHERE categoryID='$dastebandi' and ".$command2);
         }
     } else {
-        $D = 0;
-        $command = "WHERE";
-        $command2 = "WHERE";
-        $X = mbsplit(" ", $query);
-        for ($II = 0; $II < count($X); $II = $II + 1) {
-            if (strlen($X[$II]) > 0) {
-                if ($D === 0) {
-                    $command2 = $command2 . " name LIKE '%" . $X[$II] . "%' OR email LIKE '%" . $X[$II] . "%' OR address LIKE '%" . $X[$II] . "%'";
-                    $command = $command . " name LIKE '%" . $X[$II] . "%'  OR email LIKE '%" . $X[$II] . "%' OR address LIKE '%" . $X[$II] . "%'";
-                } else {
-                    $command2 = $command2 . "OR name LIKE '%" . $X[$II] . "%'  OR email LIKE '%" . $X[$II] . "%' OR address LIKE '%" . $X[$II] . "%'";
-                    $command = $command . "OR name LIKE '%" . $X[$II] . "%'  OR email LIKE '%" . $X[$II] . "%' OR address LIKE '%" . $X[$II] . "%'";
-                }
-                $D = $D + 1;
-            }
-        }
-        if ($D === 0) {
-            if ($dastebandi == 'all') {
-                if ($type == 1)
-                    $results = $connection->query("SELECT COUNT(*) FROM users");
-            } else {
-//                if ($type == 1)
-//                    $results = $connection->query("SELECT COUNT(*) FROM users WHERE dastebandi='$dastebandi'");
-            }
+        $command = "WHERE (name LIKE '%" . $query . "%'" . " OR address LIKE '%" . $query . "%' OR email Like '%" . $query . "%' or mobile like '%".$query."%' )";
+        if ($dastebandi == 'all') {
+            if ($type == 1)
+                $results = $connection->query("SELECT COUNT(*) FROM users ". $command . " and ".$command2);
         } else {
-            if ($dastebandi == 'all') {
-                if ($type == 1)
-                    $results = $connection->query("SELECT COUNT(*) FROM users " . $command);
-            } else {
-//                if ($type == 1)
-//                    $results = $connection->query("SELECT COUNT(*) FROM users " . $command . " and dastebandi='$dastebandi'");
-            }
+            if ($type == 1)
+                $results = $connection->query("SELECT COUNT(*) FROM users ".$command." and categoryID='$dastebandi' and".$command2);
         }
     }
 
@@ -78,48 +92,21 @@ if (isset($_GET) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SER
 
     //get starting position to fetch the records
     $page_position = (($page_number - 1) * $item_per_page);
-    $D = 0;
     if ($query === "=====+++=====") {
-        $D = 1;
         if ($dastebandi == 'all') {
             if ($type == 1)
-                $results = $connection->query("SELECT * FROM users ORDER BY ID DESC  LIMIT $page_position, $item_per_page ");
+                $results = $connection->query("SELECT * FROM users where ".$command2." ORDER BY ID DESC  LIMIT $page_position, $item_per_page ");
         } else {
-//            if ($type == 1)
-//                $results = $connection->query("SELECT * FROM users WHERE dastebandi='$dastebandi' ORDER BY ID DESC  LIMIT $page_position, $item_per_page ");
+            if ($type == 1)
+                $results = $connection->query("SELECT * FROM users WHERE categoryID='$dastebandi' and ".$command2." ORDER BY ID DESC  LIMIT $page_position, $item_per_page ");
         }
     } else {
-        $command = "WHERE";
-        $command2 = "WHERE";
-        $X = mbsplit(" ", $query);
-        for ($II = 0; $II < count($X); $II = $II + 1) {
-            if (strlen($X[$II]) > 0) {
-                if ($D === 0) {
-//                    $command=$command." name LIKE '%".$X[$II]."%' OR Mokhtasar LIKE '%".$X[$II]."%'";
-                    $command2 = $command2 . " name LIKE '%" . $X[$II] . "%'";
-                } else {
-//                    $command=$command."OR name LIKE '%".$X[$II]."%' OR Mokhtasar LIKE '%".$X[$II]."%'";
-                    $command2 = $command2 . "OR name LIKE '%" . $X[$II] . "%'";
-                }
-                $D = $D + 1;
-            }
-        }
-        if ($D === 0) {
-            if ($dastebandi == 'all') {
-                if ($type == 1)
-                    $results = $connection->query("SELECT * FROM users ORDER BY ID DESC  LIMIT $page_position, $item_per_page ");
-            } else {
-//                if ($type == 1)
-//                    $results = $connection->query("SELECT * FROM users  WHERE dastebandi='$dastebandi' ORDER BY ID DESC  LIMIT $page_position, $item_per_page ");
-            }
+        if ($dastebandi == 'all') {
+            if ($type == 1)
+                $results = $connection->query("SELECT * FROM users " . $command . " and ".$command2." ORDER BY ID DESC LIMIT $page_position, $item_per_page ");
         } else {
-            if ($dastebandi == 'all') {
-                if ($type == 1)
-                    $results = $connection->query("SELECT * FROM users " . $command . " ORDER BY ID DESC LIMIT $page_position, $item_per_page ");
-            } else {
-//                if ($type == 1)
-//                    $results = $connection->query("SELECT * FROM users " . $command . "and dastebandi='$dastebandi'" . " ORDER BY ID DESC LIMIT $page_position, $item_per_page ");
-            }
+            if ($type == 1)
+                $results = $connection->query("SELECT * FROM users " . $command . " and categoryID='$dastebandi' and ".$command2 . " ORDER BY ID DESC LIMIT $page_position, $item_per_page ");
         }
     }
 
@@ -164,15 +151,14 @@ if (isset($_GET) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SER
             $address = $row['address'];
             $typ = $row['typ'];
 
-            $link = '/user/'.$IDOA;
-
+            $link = '/user/' . $IDOA;
 
 
             echo "                     <td>
                                         <input type=\"checkbox\"/>
                                     </td>
                                     <td>                                                                                                               
-                                        <span> <img src=\"../".$img."\" width='50px' height='50px' class='img" .$IDOA . "' ></span>
+                                        <span> <img src=\"../" . $img . "\" width='50px' height='50px' class='img" . $IDOA . "' ></span>
                                         <a onClick=\"return confirming();\"  href='allUsers.php' class=\"" . $IDOA . "\" id='deleteImage'>
                                             <span class=\"fa-stack\">
                                                 <i class=\"fa fa-square fa-stack-2x text-danger\" ></i>
@@ -182,10 +168,9 @@ if (isset($_GET) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SER
                                     </td>";
 
 
-
             echo "                  <td>
                                         <div class=\"info\">
-                                            <a target='_blank' href='".$link."' class=\"user-link\">" . $name . "</a>
+                                            <a target='_blank' href='" . $link . "' class=\"user-link\">" . $name . "</a>
                                         </div>
                                     </td>  
                                     <td>                                                                                                               
@@ -202,7 +187,7 @@ if (isset($_GET) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SER
             } else {
                 $tp = "نمایش ";
                 echo "<td dir='ltr'>                                                                                                               
-                                        <span class='status" .$IDOA . "' style=\"color: green;\" >" . $tp . "</span>
+                                        <span class='status" . $IDOA . "' style=\"color: green;\" >" . $tp . "</span>
                                      ";
             }
 
@@ -223,7 +208,7 @@ if (isset($_GET) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SER
                                     </td> ";
             ?>
 
-            <td >
+            <td>
                 <select id="category" name="category" class="status form-control input-lg">
                     <?php
                     $query = "SELECT * FROM userCategory;";
@@ -241,7 +226,7 @@ if (isset($_GET) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SER
                 </select>
 
             </td>
-            <td >
+            <td>
                 <select id="eshterak" name="eshterak" class="eshterak form-control input-lg">
                     <?php
                     $query = "SELECT * FROM userEshterak;";
@@ -260,7 +245,6 @@ if (isset($_GET) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SER
 
             </td>
             <?php
-
 
 
             echo "<td dir='ltr'>                                                                                                               

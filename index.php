@@ -114,7 +114,7 @@ $str5 = 'rgb('.$r5.','.$g5.','.$b5.')';
 ?>
     </style>
 </head>
-<STYLE>A {text-decoration: none;} </STYLE>
+
 <body>
 
 <?php
@@ -228,24 +228,27 @@ include 'headerMainpage.php';
         $result = $connection->query($query);
         if($result->num_rows>0) {
             ?>
-            <marquee direction="right" scrollamount="12" bgcolor="#FFD5D5" class="p-2 mt-2 text-indent-<?php echo $result->num_rows;?>" behavior="scroll">
-                <b>
-                    <?php
 
+            <marquee direction="right" scrollamount="12" bgcolor="#FFD5D5" class="p-2 mt-2 text-indent-<?php echo $result->num_rows;?>" behavior="scroll">
+                <b class="marqueeB<?php echo $result->num_rows;?>">
+                    <?php
+                    $x = 0 ;
                     while ($row = $result->fetch_assoc()) {
+                        if($x>0) {
+                            ?>
+                            <span></span>
+                            <?php
+                        }
                         $sent = $row['sentence'];
                         $id = $row['ID'];
-                        echo "<b class='marQ".$id."'>".$sent."</b>"; ?>
-                        <span></span>
-                        <?php
+                        echo "<b class='marQ".$id."'>".$sent."</b>";
+                        $x = $x + 1 ;
                     }
                     ?>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
                 </b>
             </marquee>
+
+
 <!--            <div id="mmmm">-->
 <!--                <b>-->
 <!--                    --><?php

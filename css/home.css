@@ -76,8 +76,8 @@
 .grayBox{
     margin: auto;
     margin-top: 7%;
-    height: 95px;
-    min-height: 95px;
+    height: 35px;
+    min-height: 35px;
     /*background-color: rgb(233,231,232);*/
     border-radius: 2px;
     box-shadow: 6px 5px 10px #888888;
@@ -235,36 +235,39 @@ marquee span {
     left:8px;
     top:12px;
 }
+
+
 .text-indent-1{
-    text-indent: 0px;
+    text-indent: -100%;
 }
 .text-indent-2{
-    text-indent: -300px;
+    text-indent: -100%;
 }
 .text-indent-3{
-    text-indent: -900px;
+    text-indent: -100%;
 }
 .text-indent-4{
-    text-indent: -1200px;
+    text-indent: -100%;
 }
 .text-indent-5{
-    text-indent: -1500px;
+    text-indent: -110%;
 }
 .text-indent-6{
-    text-indent: -1800px;
+    text-indent: -130%;
 }
 .text-indent-7{
-    text-indent: -2100px;
+    text-indent: -150%;
 }
 .text-indent-8{
-    text-indent: -2400px;
+    text-indent: -170%;
 }
 .text-indent-9{
-    text-indent: -2700px;
+    text-indent: -190%;
 }
 .text-indent-10{
-    text-indent: -3000px;
+    text-indent: -200%;
 }
+
 
 .carousel-caption {
     color: mediumvioletred;
@@ -346,5 +349,22 @@ marquee span {
     .carousel-inner > .carousel-item > img,
     .carousel-inner > .carousel-item > a > img {
         height: 150px;
+    }
+}
+
+@-moz-document url-prefix() {
+    .text-indent-1, .text-indent-2, .text-indent-3, .text-indent-4, .text-indent-5, .text-indent-6, .text-indent-7, .text-indent-8, .text-indent-9, .text-indent-10 {
+        text-indent: 0;
+    }
+    .marqueeB4{
+        width: 150%;
+        float: left;
+    }
+    .marqueeB5{
+        width: 140%;
+        float: left;
+    }
+    marquee span {
+        margin-right: 5%;
     }
 }

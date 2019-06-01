@@ -1,8 +1,17 @@
 var range, page, category;
 $(document).ready(function() {
+    searchdata=$('#sarching').val();
+    if (searchdata==""){
+        searchdata="=====+++=====";
+    }
     range = $("#limit").find(":selected").text();
     type=$("input[name='type']").val();
-    $.get("allUsersPagination.php", {page:1, limit:range,type:type,query:"=====+++=====",category:"all", TMP:makeid()}, function (data, status) {
+    category = $("#category1").find(":selected").val();
+    eshterakID = $("#eshterakID").find(":selected").val();
+    status = $("#status").find(":selected").val();
+    verify = $("#verify").find(":selected").val();
+
+    $.get("allUsersPagination.php", {page:1, limit:range,type:type,query:searchdata,category:category,eshterakID:eshterakID,status:status,verify:verify, TMP:makeid()}, function (data, status) {
         $("#results").html(data);
     });
     //executes code below when user click on pagination links
@@ -10,7 +19,7 @@ $(document).ready(function() {
         e.preventDefault();
         $(".loading-div").show(); //show loading element
         page = $(this).attr("data-page"); //get page number from link
-        $.get("allUsersPagination.php", {page:page, limit:range,type:type,query:"=====+++=====",category:"all", TMP:makeid()}, function (data, status) {
+        $.get("allUsersPagination.php", {page:page, limit:range,type:type,query:searchdata,category:category,eshterakID:eshterakID,status:status,verify:verify, TMP:makeid()}, function (data, status) {
             $(".loading-div").hide(); //show loading element
             $("#results").html(data);
         });
@@ -20,12 +29,13 @@ $(document).ready(function() {
         e.preventDefault();
         $(".loading-div").show(); //show loading element
         range = $("#limit").find(":selected").text();
-        $.get("allUsersPagination.php", {page:1, limit:range,type:type,query:"=====+++=====",category:"all", TMP:makeid()}, function (data, status) {
+        $.get("allUsersPagination.php", {page:1, limit:range,type:type,query:searchdata,category:category,eshterakID:eshterakID,status:status,verify:verify, TMP:makeid()}, function (data, status) {
             $(".loading-div").hide(); //show loading element
             $("#results").html(data);
         });
 
     });
+
     $('#sarching').bind("enterKey",function(e){
         searchdata=$('#sarching').val();
         if (searchdata==""){
@@ -34,11 +44,12 @@ $(document).ready(function() {
         e.preventDefault();
         $(".loading-div").show(); //show loading element
         range = $("#limit").find(":selected").text();
-        $.get("allUsersPagination.php", {page:1, limit:range,type:type,query:searchdata,category:"all", TMP:makeid()}, function (data, status) {
+        $.get("allUsersPagination.php", {page:1, limit:range,type:type,query:searchdata,category:category,eshterakID:eshterakID,status:status,verify:verify, TMP:makeid()}, function (data, status) {
             $(".loading-div").hide(); //show loading element
             $("#results").html(data);
         });
     });
+
     $('#sarching').keyup(function(e){
         if(e.keyCode == 13)
         {
@@ -166,6 +177,41 @@ $(document).ready(function() {
                 }
             });
         }
+    });
+
+    $(document).on('change','#category1',function(e){
+        e.preventDefault();
+        $(".loading-div").show(); //show loading element
+        category = $("#category1").find(":selected").val();
+        $.get("allUsersPagination.php", {page:1, limit:range,type:type,query:searchdata,category:category,eshterakID:eshterakID,status:status,verify:verify, TMP:makeid()}, function (data, status) {
+            $("#results").html(data);
+        });
+    });
+    $(document).on('change','#eshterakID',function(e){
+        e.preventDefault();
+        $(".loading-div").show(); //show loading element
+        eshterakID = $("#eshterakID").find(":selected").val();
+        $.get("allUsersPagination.php", {page:1, limit:range,type:type,query:searchdata,category:category,eshterakID:eshterakID,status:status,verify:verify, TMP:makeid()}, function (data, status) {
+            $("#results").html(data);
+        });
+    });
+
+    $(document).on('change','#status',function(e){
+        e.preventDefault();
+        $(".loading-div").show(); //show loading element
+        status = $("#status").find(":selected").val();
+        $.get("allUsersPagination.php", {page:1, limit:range,type:type,query:searchdata,category:category,eshterakID:eshterakID,status:status,verify:verify, TMP:makeid()}, function (data, status) {
+            $("#results").html(data);
+        });
+    });
+
+    $(document).on('change','#verify',function(e){
+        e.preventDefault();
+        $(".loading-div").show(); //show loading element
+        verify = $("#verify").find(":selected").val();
+        $.get("allUsersPagination.php", {page:1, limit:range,type:type,query:searchdata,category:category,eshterakID:eshterakID,status:status,verify:verify, TMP:makeid()}, function (data, status) {
+            $("#results").html(data);
+        });
     });
 
     // $('#dtHorizontalExample').DataTable({

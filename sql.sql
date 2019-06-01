@@ -19,6 +19,33 @@ CREATE TABLE Paper(ID int NOT NULL AUTO_INCREMENT,
   FOREIGN KEY (dastebandi) REFERENCES category(ID),
   PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
 
+drop TABLE users;
+CREATE TABLE users(ID int NOT NULL AUTO_INCREMENT,
+                   mobile VARCHAR(100) UNIQUE ,
+                   name VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci,
+                   address VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci,
+                   image VARCHAR(1000),
+                   email VARCHAR(300),
+                   categoryID int DEFAULT 0,
+                   eshterakID int DEFAULT 4,
+                   startTime VARCHAR(200),
+                   endTime VARCHAR(200),
+                   realtime VARCHAR(200),
+                   pass VARCHAR(100),
+                   verified int,
+                   verificationcode VARCHAR(100),
+                   codetime TIMESTAMP,
+                   attempt int,
+                   attemptgetpassword int DEFAULT 1,
+                   passwordtime int,
+                   stat int DEFAULT 0,
+                   typ int DEFAULT 0,
+                   showMobile int DEFAULT 0,
+  FOREIGN KEY (categoryID) REFERENCES userCategory(ID),
+  FOREIGN KEY (eshterakID) REFERENCES userEshterak(ID),
+  PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
+
+
 DROP TABLE advertisement;
 CREATE TABLE advertisement(ID int NOT NULL AUTO_INCREMENT,
                    name VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci,
@@ -105,31 +132,6 @@ CREATE TABLE allpardakhtAdd(ID int NOT NULL AUTO_INCREMENT,
   FOREIGN KEY (addID) REFERENCES advertisement(ID),
   PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
 
-                   drop TABLE users;
-CREATE TABLE users(ID int NOT NULL AUTO_INCREMENT,
-                  mobile VARCHAR(100) UNIQUE ,
-                  name VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_general_ci,
-                  address VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci,
-                  image VARCHAR(1000),
-                  email VARCHAR(300),
-                  categoryID int DEFAULT 0,
-                  eshterakID int DEFAULT 4,
-                  startTime VARCHAR(200),
-                  endTime VARCHAR(200),
-                  realtime VARCHAR(200),
-                  pass VARCHAR(100),
-                  verified int,
-                  verificationcode VARCHAR(100),
-                  codetime TIMESTAMP,
-                  attempt int,
-                  attemptgetpassword int DEFAULT 1,
-                  passwordtime int,
-                  stat int DEFAULT 0,
-                  typ int DEFAULT 0,
-  showMobile int DEFAULT 0,
-  FOREIGN KEY (categoryID) REFERENCES userCategory(ID),
-  FOREIGN KEY (eshterakID) REFERENCES userEshterak(ID),
-  PRIMARY KEY (ID)) DEFAULT CHARSET=utf8;
 
 
 

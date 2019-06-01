@@ -6,7 +6,8 @@
  * Time: 10:59 AM
  */
 session_start();
-if (($_SESSION['typ']>0)) {
+include '../Settings.php';
+if (($_SESSION['typ'] > 0)) {
     if (isset($_REQUEST['cat1']))
         $cat1 = true;
     else
@@ -28,42 +29,68 @@ if (($_SESSION['typ']>0)) {
         <title>همه مقاله‌ها</title>
 
         <link rel="stylesheet" href="/css/bootstrap.css"/>
-        <script src="/js/jQuery.js" ></script>
-        <script src="/js/bootstrap.js" ></script>
-        <link rel="stylesheet" type="text/css" href="css/local.css" />
+        <script src="/js/jQuery.js"></script>
+        <script src="/js/bootstrap.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/local.css"/>
         <link href="css/allproduct.css" rel="stylesheet">
         <link href="css/addblog.css" rel="stylesheet">
         <script src="js/allPosts.js"></script>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+              integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+              crossorigin="anonymous">
 
     </head>
     <body dir="rtl">
     <div id="wrapper">
         <?php
-        $which=3;
+        $which = 3;
         include 'adminmenue.php';
         ?>
         <div id="page-wrapper">
 
             <div class="row">
-                <div class="col-sm-4">
-                    <div class="col-md-6 dataTables_length" id="dataTables-example_length">
-                        <label>نمایش
-                            <select id="limit" name="dataTables-example_length" aria-controls="dataTables-example"
-                                    class="form-control input-sm">
-                                <option value="10">10</option>
-                                <option value="25">25</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select>
-                            آیتم
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-4">
 
+                <div class="col-md-2 dataTables_length" id="dataTables-example_length">
+                    <label>نمایش
+                        <select id="limit" name="dataTables-example_length" aria-controls="dataTables-example"
+                                class="form-control input-sm">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                        آیتم
+                    </label>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-md-5 " id="dataTables-example_length">
+                    <label> فیلتر بر اساس
+                        <select id="category" name="category1_select" aria-controls="dataTables-example"
+                                class="form-control input-sm">
+                            <option value="all">همه دسته بندی ها</option>
+                            <?php
+                            $query = "SELECT ID, name FROM category";
+                            $result = $connection->query($query);
+                            if ($result->num_rows > 0) {
+                                echo "<ul class='children nav-child unstyled small collapse' id='sub-item-1'>";
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<option value=" . $row['ID'] . ">" . $row['name'] . "</option>";
+                                }
+                            }
+                            ?>
+                        </select>
+                    </label>
+                </div>
+                <div class="col-md-2 " id="dataTables-example_length">
+                    <label> نمایش تایید
+                        <select id="status" name="status_select" aria-controls="dataTables-example"
+                                class="form-control input-sm">
+                            <option value="all">همه</option>
+                            <option value="0"> نشده‌ها</option>
+                            <option value="1"> شده‌ها</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="col-md-3">
                     <div id="dataTables-example_filter" class="dataTables_filter"><label>جستجو:<input type="search"
                                                                                                       id="sarching"
                                                                                                       class="form-control input-sm"
@@ -71,6 +98,8 @@ if (($_SESSION['typ']>0)) {
                                                                                                       aria-controls="dataTables-example"></label>
                     </div>
                 </div>
+
+
             </div>
             <input type="text" name="type" class="hidden" value="<?php echo $type; ?>"/>
             <div class="row">
@@ -91,40 +120,42 @@ if (($_SESSION['typ']>0)) {
 
     </html>
     <?php
-}else{
+} else {
     header('Location:/');
 }
 
-function gregorian_to_jalali($gy,$gm,$gd,$mod=''){
-    list($gy,$gm,$gd)=explode('_',tr_num($gy.'_'.$gm.'_'.$gd));/* <= Extra :اين سطر ، جزء تابع اصلي نيست */
-    $g_d_m=array(0,31,59,90,120,151,181,212,243,273,304,334);
-    if($gy > 1600){
-        $jy=979;
-        $gy-=1600;
-    }else{
-        $jy=0;
-        $gy-=621;
+function gregorian_to_jalali($gy, $gm, $gd, $mod = '')
+{
+    list($gy, $gm, $gd) = explode('_', tr_num($gy . '_' . $gm . '_' . $gd));/* <= Extra :اين سطر ، جزء تابع اصلي نيست */
+    $g_d_m = array(0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334);
+    if ($gy > 1600) {
+        $jy = 979;
+        $gy -= 1600;
+    } else {
+        $jy = 0;
+        $gy -= 621;
     }
-    $gy2=($gm > 2)?($gy+1):$gy;
-    $days=(365*$gy) +((int)(($gy2+3)/4)) -((int)(($gy2+99)/100)) +((int)(($gy2+399)/400)) -80 +$gd +$g_d_m[$gm-1];
-    $jy+=33*((int)($days/12053));
-    $days%=12053;
-    $jy+=4*((int)($days/1461));
-    $days%=1461;
-    $jy+=(int)(($days-1)/365);
-    if($days > 365)$days=($days-1)%365;
-    if($days < 186){
-        $jm=1+(int)($days/31);
-        $jd=1+($days%31);
-    }else{
-        $jm=7+(int)(($days-186)/30);
-        $jd=1+(($days-186)%30);
+    $gy2 = ($gm > 2) ? ($gy + 1) : $gy;
+    $days = (365 * $gy) + ((int)(($gy2 + 3) / 4)) - ((int)(($gy2 + 99) / 100)) + ((int)(($gy2 + 399) / 400)) - 80 + $gd + $g_d_m[$gm - 1];
+    $jy += 33 * ((int)($days / 12053));
+    $days %= 12053;
+    $jy += 4 * ((int)($days / 1461));
+    $days %= 1461;
+    $jy += (int)(($days - 1) / 365);
+    if ($days > 365) $days = ($days - 1) % 365;
+    if ($days < 186) {
+        $jm = 1 + (int)($days / 31);
+        $jd = 1 + ($days % 31);
+    } else {
+        $jm = 7 + (int)(($days - 186) / 30);
+        $jd = 1 + (($days - 186) % 30);
     }
-    return($mod==='')?array($jy,$jm,$jd):$jy .$mod .$jm .$mod .$jd;
+    return ($mod === '') ? array($jy, $jm, $jd) : $jy . $mod . $jm . $mod . $jd;
 }
 
-function tr_num($str,$mod='en',$mf='٫'){
-    $num_a=array('0','1','2','3','4','5','6','7','8','9','.');
-    $key_a=array('۰','۱','۲','۳','۴','۵','۶','۷','۸','۹',$mf);
-    return($mod=='fa')?str_replace($num_a,$key_a,$str):str_replace($key_a,$num_a,$str);
+function tr_num($str, $mod = 'en', $mf = '٫')
+{
+    $num_a = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.');
+    $key_a = array('۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹', $mf);
+    return ($mod == 'fa') ? str_replace($num_a, $key_a, $str) : str_replace($key_a, $num_a, $str);
 }

@@ -48,7 +48,7 @@ if (($_SESSION['typ']>0)) {
                             کاربران
                         </a>
                     </div>
-                    <div id="collapseTwo" class="collapse <?php if ($which == 4 || $which==5 || $which==7 || $which==9 || $which==12 || $which==13) echo "show"; ?>"  aria-labelledby="headingCollapseTwo" role="tabpanel">
+                    <div id="collapseTwo" class="collapse <?php if ($which == 4 || $which==5 || $which==7 || $which==9 || $which==12 || $which==13 || $which==23) echo "show"; ?>"  aria-labelledby="headingCollapseTwo" role="tabpanel">
                         <div class="card-content">
                             <div class="card-body text-right">
                                 <li class="p-2 <?php if ($which == 4) echo "selected"; ?>"><a href="addUser.php"><i class="fa fa-globe"></i>

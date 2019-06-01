@@ -243,7 +243,7 @@ if (isset($_GET['request']) && $_GET['request']=='message') {
                     $write = "no acount";
 
 //                    active = 0 yani pardakht nashode , active = 1 yani pardakht shode
-                $stmt = $connection->prepare("INSERT INTO advertisement(name, matn, number,link,address, image, startTime, endTime, active, addType, writerID)  VALUES (?,?,?,?,?,?,?,?,1,?,?)");
+                $stmt = $connection->prepare("INSERT INTO advertisement(name, matn, number,link,address, image, startTime, endTime, active, addType, writerID)  VALUES (?,?,?,?,?,?,?,?,0,?,?)");
                 $stmt->bind_param("ssssssssss", $name, $msg,$number,$link,$address, $target_file, $startTime, $endTime, $timeAdd, $write);
                 $result = $stmt->execute();
                 $addID = $connection->insert_id;

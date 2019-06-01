@@ -6,6 +6,7 @@
  * Time: 10:59 AM
  */
 session_start();
+include '../Settings.php';
 if (($_SESSION['typ']>0)) {
     if (isset($_REQUEST['cat1']))
         $cat1 = true;
@@ -46,24 +47,80 @@ if (($_SESSION['typ']>0)) {
         <div id="page-wrapper">
 
             <div class="row">
-                <div class="col-sm-4">
-                    <div class="col-md-6 dataTables_length" id="dataTables-example_length">
-                        <label>نمایش
-                            <select id="limit" name="dataTables-example_length" aria-controls="dataTables-example"
-                                    class="form-control input-sm">
-                                <option value="10">10</option>
-                                <option value="25">25</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select>
-                            آیتم
-                        </label>
-                    </div>
+                <div class="m-auto dataTables_length" id="dataTables-example_length">
+                    <label>تعداد:
+                        <select id="limit" name="dataTables-example_length" aria-controls="dataTables-example"
+                                class="form-control input-sm">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </label>
                 </div>
-                <div class="col-sm-4">
 
+                <div class=" m-auto" id="dataTables-example_length">
+                    <label>دسته‌بندی:
+                        <select id="category1" name="category1_select" aria-controls="dataTables-example"
+                                class="form-control input-sm">
+                            <option value="all">همه دسته بندی ها</option>
+                            <?php
+                            $query = "SELECT ID, name FROM userCategory";
+                            $result = $connection->query($query);
+                            if ($result->num_rows > 0) {
+                                echo "<ul class='children nav-child unstyled small collapse' id='sub-item-1'>";
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<option value=" . $row['ID'] . ">" . $row['name'] . "</option>";
+                                }
+                            }
+                            ?>
+                        </select>
+                    </label>
                 </div>
-                <div class="col-sm-4">
+
+                <div class="m-auto" id="dataTables-example_length">
+                    <label>اشتراک:
+                        <select id="eshterakID" name="eshterak_select" aria-controls="dataTables-example"
+                                class="form-control input-sm">
+                            <option value="all">همه</option>
+                            <?php
+                            $query = "SELECT ID, name FROM userEshterak";
+                            $result = $connection->query($query);
+                            if ($result->num_rows > 0) {
+                                echo "<ul class='children nav-child unstyled small collapse' id='sub-item-1'>";
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<option value=" . $row['ID'] . ">" . $row['name'] . "</option>";
+                                }
+                            }
+                            ?>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="m-auto" id="dataTables-example_length">
+                    <label>وضعیت:
+                        <select id="status" name="status_select" aria-controls="dataTables-example"
+                                class="form-control input-sm">
+                            <option value="all">همه</option>
+                            <option value="1">نمایش</option>
+                            <option value="0">عدم نمایش</option>
+                        </select>
+                    </label>
+                </div>
+
+
+                <div class="m-auto" id="dataTables-example_length">
+                    <label>عضویت:
+                        <select id="verify" name="verify_select" aria-controls="dataTables-example"
+                                class="form-control input-sm">
+                            <option value="all">همه</option>
+                            <option value="1">تایید شده</option>
+                            <option value="0">تایید نشده</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="m-auto">
                     <div id="dataTables-example_filter" class="dataTables_filter"><label>جستجو:<input type="search"
                                                                                                       id="sarching"
                                                                                                       class="form-control input-sm"
